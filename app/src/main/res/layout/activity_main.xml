@@ -39,6 +39,7 @@
             android:layout_marginStart="@dimen/marginSmall"
             android:layout_marginEnd="@dimen/marginSmall"
             android:layout_weight="1"
+            android:fontFamily="@font/gobold_bold"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/titleText"
             tools:text="Username" />
@@ -78,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/marginLarge"
+                android:fontFamily="@font/gobold_bold"
                 android:gravity="center"
                 android:text="@string/my_team"
                 android:textAllCaps="true"
@@ -85,7 +87,7 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"/>
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
