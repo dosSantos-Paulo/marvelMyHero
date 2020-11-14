@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MarvelMyHero</string>
+    <string name="user_icon">User icon</string>
+    <string name="logo_marvel_my_hero">Logo Marvel My Hero</string>
+    <string name="exit_icon">exit icon</string>
+    <string name="collection">Collection</string>
+    <string name="my_team">My Team</string>
+    <string name="my_deck">My Deck</string>
+    <string name="share_icon">Share icon</string>
+    <string name="card_image">card image</string>
 </resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="borderPadding">12dp</dimen>
+
+    <dimen name="userIconPic">50dp</dimen>
+    <dimen name="userIconRadius">25dp</dimen>
+    <dimen name="icon">40dp</dimen>
+
+    <dimen name="titleText">22sp</dimen>
+    <dimen name="superText">28sp</dimen>
+
+    <dimen name="marginSmall">8dp</dimen>
+    <dimen name="marginMedium">26dp</dimen>
+    <dimen name="marginLarge">32dp</dimen>
+    <dimen name="marginExtraLarge">100dp</dimen>
+
+    <dimen name="logoWidth">300dp</dimen>
+    <dimen name="logoHeight">70dp</dimen>
+
+    <dimen name="cardBoxWidth">300dp</dimen>
+    <dimen name="cardBoxHeight">200dp</dimen>
+    <dimen name="strokeWidth">1dp</dimen>
+    <dimen name="boxRadius">12dp</dimen>
+
+    <dimen name="buttonWidth">300dp</dimen>
+    <dimen name="defaultRadius">25dp</dimen>
+</resources>
