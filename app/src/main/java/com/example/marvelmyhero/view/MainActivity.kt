@@ -2,8 +2,11 @@ package com.example.marvelmyhero.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.Toast
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.UserFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
@@ -11,8 +14,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<ImageView>(R.id.ic_exit_main).setOnClickListener {
+        val userButton = findViewById<ImageView>(R.id.img_userIcon_main)
+        val exitButton = findViewById<ImageView>(R.id.ic_exit_main)
+
+        userButton.setOnClickListener {
+            newUserFragment()
+        }
+
+        exitButton.setOnClickListener {
             exitDialog()
+        }
+    }
+
+    private fun newUserFragment() {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.frameLayout_userDetail_main, UserFragment())
+            commit()
         }
     }
 
