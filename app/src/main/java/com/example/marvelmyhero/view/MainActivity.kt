@@ -27,8 +27,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun newUserFragment() {
+
         supportFragmentManager.beginTransaction().apply {
+            setCustomAnimations(
+                R.anim.from_left_user_card,
+                R.anim.to_left_user_card,
+                R.anim.from_left_user_card,
+                R.anim.to_left_user_card
+            )
             replace(R.id.frameLayout_userDetail_main, UserFragment())
+            addToBackStack(null)
             commit()
         }
     }
