@@ -8,7 +8,7 @@
     tools:context=".view.MainActivity"
     android:orientation="vertical"
     android:padding="@dimen/borderPadding"
-    android:background="@color/colorPrimaryDark">
+    android:background="@drawable/shape_background">
 
     <LinearLayout
         android:id="@+id/linearLayout"
