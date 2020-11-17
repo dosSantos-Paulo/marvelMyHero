@@ -24,4 +24,5 @@
 
     <dimen name="buttonWidth">300dp</dimen>
     <dimen name="defaultRadius">25dp</dimen>
+    <dimen name="userPic_userCard">200dp</dimen>
 </resources>

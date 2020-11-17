@@ -47,7 +47,7 @@
                 android:fontFamily="@font/gobold_bold"
                 android:textColor="@color/textPrimary"
                 android:textSize="@dimen/titleText"
-                tools:text="Username" />
+                android:text="@string/username" />
 
             <ImageView
                 android:id="@+id/ic_exit_main"
