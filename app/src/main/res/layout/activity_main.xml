@@ -119,8 +119,8 @@
 
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/materialCardView2"
-                                android:layout_width="110dp"
-                                android:layout_height="150dp"
+                                android:layout_width="@dimen/cardMini_width"
+                                android:layout_height="@dimen/cardMini_height"
                                 android:rotation="5"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -131,18 +131,18 @@
                                 app:strokeColor="@color/textPrimary"
                                 app:strokeWidth="@dimen/strokeWidth">
 
-                                <ImageView
-                                    android:id="@+id/img_teamCard1_main"
-                                    android:layout_width="110dp"
-                                    android:layout_height="150dp"
+                                <FrameLayout
+                                    android:id="@+id/frameLayout_teamCard3_main"
+                                    android:layout_width="@dimen/cardMini_width"
+                                    android:layout_height="@dimen/cardMini_height"
                                     android:background="@color/colorPrimaryDark"
                                     android:contentDescription="@string/card_image" />
 
                             </com.google.android.material.card.MaterialCardView>
 
                             <com.google.android.material.card.MaterialCardView
-                                android:layout_width="110dp"
-                                android:layout_height="150dp"
+                                android:layout_width="@dimen/cardMini_width"
+                                android:layout_height="@dimen/cardMini_height"
                                 android:layout_marginStart="16dp"
                                 android:rotation="-5"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -152,10 +152,10 @@
                                 app:strokeColor="@color/textPrimary"
                                 app:strokeWidth="@dimen/strokeWidth">
 
-                                <ImageView
-                                    android:id="@+id/img_teamCard2_main"
-                                    android:layout_width="110dp"
-                                    android:layout_height="150dp"
+                                <FrameLayout
+                                    android:id="@+id/frameLayout_teamCard1_main"
+                                    android:layout_width="@dimen/cardMini_width"
+                                    android:layout_height="@dimen/cardMini_height"
                                     android:background="@color/colorPrimaryDark"
                                     android:contentDescription="@string/card_image" />
 
@@ -163,8 +163,8 @@
 
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/materialCardView3"
-                                android:layout_width="110dp"
-                                android:layout_height="150dp"
+                                android:layout_width="@dimen/cardMini_width"
+                                android:layout_height="@dimen/cardMini_height"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -172,10 +172,10 @@
                                 app:strokeColor="@color/textPrimary"
                                 app:strokeWidth="@dimen/strokeWidth">
 
-                                <ImageView
-                                    android:id="@+id/img_teamCard3_main"
-                                    android:layout_width="110dp"
-                                    android:layout_height="150dp"
+                                <FrameLayout
+                                    android:id="@+id/frameLayout_teamCard2_main"
+                                    android:layout_width="@dimen/cardMini_width"
+                                    android:layout_height="@dimen/cardMini_height"
                                     android:background="@color/colorPrimaryDark"
                                     android:contentDescription="@string/card_image" />
 

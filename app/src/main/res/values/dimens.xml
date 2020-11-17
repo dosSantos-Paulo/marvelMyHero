@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="borderPadding">12dp</dimen>
+    <dimen name="borderPadding_miniCard">6dp</dimen>
 
     <dimen name="userIconPic">50dp</dimen>
     <dimen name="userIconRadius">25dp</dimen>
@@ -25,4 +26,8 @@
     <dimen name="buttonWidth">300dp</dimen>
     <dimen name="defaultRadius">25dp</dimen>
     <dimen name="userPic_userCard">200dp</dimen>
+    <dimen name="cardMini_width">110dp</dimen>
+    <dimen name="cardMini_height">150dp</dimen>
+    <dimen name="logoHeight_cardMini">20dp</dimen>
+    <dimen name="textMin">12sp</dimen>
 </resources>
