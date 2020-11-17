@@ -228,10 +228,10 @@
         android:id="@+id/frameLayout_userDetail_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/marginSmall"
-        android:layout_marginBottom="@dimen/marginLarge"
         android:layout_marginRight="@dimen/marginLarge"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/marginLarge"
+        android:layout_marginLeft="-20dp"
+        android:layout_marginTop="@dimen/marginSmall"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

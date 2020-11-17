@@ -22,8 +22,7 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val animation = AnimationUtils.loadAnimation(view.context , R.anim.from_left)
+        val animation = AnimationUtils.loadAnimation(view.context , R.anim.from_left_user_card)
         view.startAnimation(animation)
-
     }
 }
