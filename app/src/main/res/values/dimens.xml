@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="borderPadding">12dp</dimen>
-    <dimen name="borderPadding_miniCard">6dp</dimen>
 
     <dimen name="userIconPic">50dp</dimen>
     <dimen name="userIconRadius">25dp</dimen>

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MarvelMyHero</string>
     <string name="user_icon">User icon</string>
     <string name="logo_marvel_my_hero">Logo Marvel My Hero</string>
@@ -21,4 +21,11 @@
     <string name="heroname">Hero Name</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="commumCardColor" tools:ignore="ReferenceType">@color/commumCardColor</string>
+    <string name="bronzeCardColor" tools:ignore="ReferenceType">@color/bronzeCardColor</string>
+    <string name="silverCardColor" tools:ignore="ReferenceType">@color/silverCardColor</string>
+    <string name="goldCardColor" tools:ignore="ReferenceType">@color/goldCardColor</string>
+    <string name="diamondCardColor" tools:ignore="ReferenceType">@color/diamondCardColor</string>
+    <string name="background_name">background Name</string>
 </resources>

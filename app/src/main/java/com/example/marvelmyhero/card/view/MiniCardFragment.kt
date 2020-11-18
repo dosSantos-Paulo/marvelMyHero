@@ -35,7 +35,8 @@ class MiniCardFragment(
         val cardName = view.findViewById<TextView>(R.id.txt_heroName_cardMini)
         val cardImage = view.findViewById<ImageView>(R.id.img_heroPic_cardMini)
 
-        cardColor.setBackgroundColor(getColor(cardClassification))
+
+        cardColor.setBackgroundColor(Color.parseColor(getString(getColor(cardClassification))))
         cardName.text = name
         Picasso.get().load(imageUrl).into(cardImage)
     }
@@ -45,10 +46,10 @@ class MiniCardFragment(
             var color = R.color.commumCardColor
 
             when (classification) {
-                in 0.1..2.9 -> color = R.color.bronzeCardColor
-                in 3.0..4.5 -> color = R.color.silverCardColor
-                in 4.6..5.9 -> color = R.color.goldCardColor
-                in 6.0..7.0 -> color = R.color.diamondCardColor
+                in 0.1..2.9 -> color = R.string.bronzeCardColor
+                in 3.0..4.5 -> color = R.string.silverCardColor
+                in 4.6..5.9 -> color = R.string.goldCardColor
+                in 6.0..7.0 -> color = R.string.diamondCardColor
             }
 
             return color
