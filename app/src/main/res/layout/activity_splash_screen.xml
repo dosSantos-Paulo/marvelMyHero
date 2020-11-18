@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_background"
+    tools:context=".view.SplashScreen">
+
+    <ImageView
+        android:id="@+id/img_splash_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:contentDescription="@string/logo_marvel_my_hero"
+        android:src="@drawable/ic_my_hero_logo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
