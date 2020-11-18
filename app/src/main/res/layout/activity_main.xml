@@ -118,7 +118,6 @@
                             tools:layout_editor_absoluteY="0dp">
 
                             <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/materialCardView2"
                                 android:layout_width="@dimen/cardMini_width"
                                 android:layout_height="@dimen/cardMini_height"
                                 android:rotation="5"
@@ -128,14 +127,15 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintVertical_bias="0.68"
+                                app:cardBackgroundColor="@color/textPrimary"
                                 app:strokeColor="@color/textPrimary"
-                                app:strokeWidth="@dimen/strokeWidth">
+                                app:strokeWidth="@dimen/strokeWidth"
+                                >
 
                                 <FrameLayout
                                     android:id="@+id/frameLayout_teamCard3_main"
                                     android:layout_width="@dimen/cardMini_width"
                                     android:layout_height="@dimen/cardMini_height"
-                                    android:background="@color/colorPrimaryDark"
                                     android:contentDescription="@string/card_image" />
 
                             </com.google.android.material.card.MaterialCardView>
@@ -149,6 +149,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintVertical_bias="0.68"
+                                app:cardBackgroundColor="@color/textPrimary"
                                 app:strokeColor="@color/textPrimary"
                                 app:strokeWidth="@dimen/strokeWidth">
 
@@ -156,7 +157,6 @@
                                     android:id="@+id/frameLayout_teamCard1_main"
                                     android:layout_width="@dimen/cardMini_width"
                                     android:layout_height="@dimen/cardMini_height"
-                                    android:background="@color/colorPrimaryDark"
                                     android:contentDescription="@string/card_image" />
 
                             </com.google.android.material.card.MaterialCardView>
@@ -169,6 +169,7 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
+                                app:cardBackgroundColor="@color/textPrimary"
                                 app:strokeColor="@color/textPrimary"
                                 app:strokeWidth="@dimen/strokeWidth">
 
@@ -176,7 +177,6 @@
                                     android:id="@+id/frameLayout_teamCard2_main"
                                     android:layout_width="@dimen/cardMini_width"
                                     android:layout_height="@dimen/cardMini_height"
-                                    android:background="@color/colorPrimaryDark"
                                     android:contentDescription="@string/card_image" />
 
                             </com.google.android.material.card.MaterialCardView>

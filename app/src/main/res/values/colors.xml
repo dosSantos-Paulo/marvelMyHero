@@ -8,11 +8,13 @@
     <color name="backGroundIcon">#FFFFFF</color>
     <color name="translucentBoxColor">#22FFFFFF</color>
     <color name="translucentBoxColorDark">#F01B1B1B</color>
+    <color name="totalTranslucent">#00FFFFFF</color>
 
     <color name="commumCardColor">#860012</color>
-    <color name="bronzeCardColor">#945d41</color>
-    <color name="silverCardColor">#737373</color>
-    <color name="goldCardColor">#C1A300</color>
-    <color name="diamondCardColor">#009ABD</color>
+    <color name="bronzeCardColor">#AE3B00</color>
+    <color name="silverCardColor">#818181</color>
+    <color name="goldCardColor">#DCD800</color>
+    <color name="diamondCardColor">#00AF78</color>
+    <color name="background_card">#1b1b1b</color>
 
 </resources>
