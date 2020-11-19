@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".login.view.SignUpFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome"
+        android:textColorHint="#8492A6"
+        app:boxBackgroundColor="#fff"
+        app:hintTextColor="#8492A6"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:background="@android:color/transparent"
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textColor="#3F51B5" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textColorHint="#8492A6"
+        app:boxBackgroundColor="#fff"
+        app:hintTextColor="#8492A6"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:background="@android:color/transparent"
+            android:id="@+id/filledTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textColor="#3F51B5" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:hint="Password"
+    android:textColorHint="#8492A6"
+    app:boxBackgroundColor="#fff"
+    app:hintTextColor="#8492A6">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:background="@android:color/transparent"
+        android:id="@+id/txtSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:textColor="#3F51B5" />
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Repeat password"
+        android:textColorHint="#8492A6"
+        app:boxBackgroundColor="#fff"
+        app:hintTextColor="#8492A6">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:background="@android:color/transparent"
+            android:id="@+id/txtRepetSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="#3F51B5" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="SIGN UP"
+        app:cornerRadius="20dp"/>
+
+</LinearLayout>
