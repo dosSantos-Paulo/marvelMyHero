@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.card.view.CardFrontFragment
 import com.example.marvelmyhero.model.Hero
+import com.google.android.material.card.MaterialCardView
 
 class MyDeckActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +18,7 @@ class MyDeckActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_deck)
 
         val arrowBack = findViewById<ImageView>(R.id.img_arrowBack_myDeck)
+        val materialCardView = findViewById<MaterialCardView>(R.id.materialCard_myDeck)
 
         arrowBack.setOnClickListener {
             finish()
@@ -24,6 +27,20 @@ class MyDeckActivity : AppCompatActivity() {
         val cardRecyclerView = findViewById<RecyclerView>(R.id.recyclerView_myDeck)
         val cardManager = GridLayoutManager(this, DECK_COLLUMN)
         val cardAdapter = MyDeckAdapter(testCardColection(10)) {
+
+
+            supportFragmentManager.beginTransaction().apply {
+
+                setCustomAnimations(
+                    R.anim.from_left_user_card,
+                    R.anim.to_left_user_card,
+                    R.anim.from_left_user_card,
+                    R.anim.to_left_user_card
+                )
+                replace(R.id.frameLayout_myDeck, CardFrontFragment())
+                addToBackStack(null)
+                commit()
+            }
         }
 
         cardRecyclerView.apply {
