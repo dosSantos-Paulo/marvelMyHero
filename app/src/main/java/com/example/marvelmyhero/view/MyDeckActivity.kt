@@ -2,7 +2,9 @@ package com.example.marvelmyhero.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
@@ -21,7 +23,8 @@ class MyDeckActivity : AppCompatActivity() {
 
         val cardRecyclerView = findViewById<RecyclerView>(R.id.recyclerView_myDeck)
         val cardManager = GridLayoutManager(this, DECK_COLLUMN)
-        val cardAdapter = MyDeckAdapter(testCardColection(16))
+        val cardAdapter = MyDeckAdapter(testCardColection(10)) {
+        }
 
         cardRecyclerView.apply {
             setHasFixedSize(true)
