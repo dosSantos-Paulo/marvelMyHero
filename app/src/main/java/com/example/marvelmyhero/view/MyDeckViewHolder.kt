@@ -6,7 +6,6 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
@@ -23,26 +22,29 @@ class MyDeckViewHolder(
     private val _cardColor = _view.findViewById<ConstraintLayout>(R.id.boderColor_cardMini)
     private val _favorite = _view.findViewById<ImageView>(R.id.ic_fav_cardMini)
 
-//    init {
-//        itemView.setOnLongClickListener { v: View ->
-//            if (_favorite.visibility == VISIBLE) {
-//                _favorite.visibility = INVISIBLE
-//            } else if (_favorite.visibility == INVISIBLE){
-//                _favorite.visibility = VISIBLE
-//            }
-//
-//            adapterPosition
-//
-//            true
-//        }
-//    }
-
     fun bind(card: Hero) {
+
         if (card.favorite){
             _favorite.visibility = VISIBLE
         } else if (!card.favorite) {
             _favorite.visibility = INVISIBLE
         }
+
+        itemView.setOnLongClickListener { v: View ->
+            when (card.favorite){
+                true -> {
+                    card.favorite = false
+                    _favorite.visibility = INVISIBLE
+                }
+                false -> {
+                    card.favorite = true
+                    _favorite.visibility = VISIBLE
+                }
+            }
+            true
+        }
+
+        val isFav = card.favorite
 
         _name.text = card.heroName
         _cardColor.setBackgroundColor(Color.parseColor(_view.context.getString(getColor(card.classification))))
