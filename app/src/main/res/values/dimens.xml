@@ -7,6 +7,7 @@
     <dimen name="icon">40dp</dimen>
 
     <dimen name="titleText">22sp</dimen>
+    <dimen name="cardNameText">16sp</dimen>
     <dimen name="superText">28sp</dimen>
 
     <dimen name="marginSmall">8dp</dimen>
@@ -16,6 +17,9 @@
 
     <dimen name="logoWidth">300dp</dimen>
     <dimen name="logoHeight">70dp</dimen>
+
+    <dimen name="logoWidthMed">150dp</dimen>
+    <dimen name="logoHeightMed">35dp</dimen>
 
     <dimen name="cardBoxWidth">300dp</dimen>
     <dimen name="cardBoxHeight">200dp</dimen>
@@ -30,4 +34,13 @@
     <dimen name="logoHeight_cardMini">20dp</dimen>
     <dimen name="textMin">12sp</dimen>
     <dimen name="borderPaddinSmall">4dp</dimen>
+
+    <dimen name="cardPadding">20dp</dimen>
+    <dimen name="cardPaddingTop">45dp</dimen>
+    <dimen name="cardPaddingPlus">28dp</dimen>
+
+
+    <dimen name="textCardTitle">28sp</dimen>
+    <dimen name="heroNameLimit">50dp</dimen>
+    <dimen name="textCard">14sp</dimen>
 </resources>

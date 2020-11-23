@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="530dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".card.view.CardFrontFragment"
+    android:background="@color/totalTranslucent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/boxRadius"
+        app:cardBackgroundColor="@color/totalTranslucent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/borderColor_Card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background_card"
+            android:paddingStart="@dimen/cardPadding"
+            android:paddingEnd="@dimen/cardPadding"
+            android:paddingBottom="@dimen/cardPadding"
+            android:paddingTop="@dimen/cardPaddingTop">
+
+            <ImageView
+                android:id="@+id/img_heroPic_cardFront"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/captain_america"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/cardPadding"
+            android:background="@drawable/shape_name_card"
+            android:contentDescription="@string/background_name"/>
+
+        <TextView
+            android:id="@+id/txt_heroName_cardFront"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/heroNameLimit"
+            android:layout_marginEnd="@dimen/heroNameLimit"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/cardPaddingPlus"
+            android:ellipsize="end"
+            android:fontFamily="@font/gobold_bold"
+            android:maxLines="1"
+            android:text="@string/heroname"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/textCardTitle"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginTop="@dimen/cardPadding"
+            android:background="@drawable/shape_logo_card"
+            android:contentDescription="@string/background_name"/>
+
+        <ImageView
+            android:layout_margin="@dimen/marginSmall"
+            android:layout_width="@dimen/logoWidthMed"
+            android:layout_height="@dimen/logoHeightMed"
+            android:src="@drawable/ic_my_hero_logo"
+            android:layout_gravity="bottom|center"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:id="@+id/txt_heroRealName_cardFront"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gobold_bold"
+                android:textColor="@color/textDark"
+                android:textSize="@dimen/cardNameText"
+                tools:text="Steeve Rogers"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/txt_classification_cardFront"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/gobold_bold"
+                android:textColor="@color/textDark"
+                android:textSize="@dimen/cardNameText"
+                tools:text="@string/classificationStar" />
+        </LinearLayout>
+
+
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>
