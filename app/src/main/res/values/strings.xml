@@ -28,4 +28,5 @@
     <string name="goldCardColor" tools:ignore="ReferenceType">@color/goldCardColor</string>
     <string name="diamondCardColor" tools:ignore="ReferenceType">@color/diamondCardColor</string>
     <string name="background_name">background Name</string>
+    <string name="classificationStar">★</string>
 </resources>
