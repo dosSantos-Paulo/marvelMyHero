@@ -18,4 +18,11 @@
     <color name="diamondCardColor">#00AF78</color>
     <color name="background_card">#1b1b1b</color>
 
+    <color name="durabilityColor">#8BC34A</color>
+    <color name="energyColor">#9C27B0</color>
+    <color name="FightingColor">#2196F3</color>
+    <color name="IntelligenceColor">#CDDC39</color>
+    <color name="speedColor">#F44336</color>
+    <color name="stregnthColor">#FF9800</color>
+
 </resources>

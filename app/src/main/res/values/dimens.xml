@@ -42,4 +42,5 @@
 
     <dimen name="textCardTitle">28sp</dimen>
     <dimen name="heroNameLimit">50dp</dimen>
+    <dimen name="textCard">14sp</dimen>
 </resources>

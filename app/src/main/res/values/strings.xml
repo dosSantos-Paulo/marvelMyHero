@@ -29,4 +29,11 @@
     <string name="diamondCardColor" tools:ignore="ReferenceType">@color/diamondCardColor</string>
     <string name="background_name">background Name</string>
     <string name="classificationStar">★</string>
+    <string name="durability">Durability</string>
+    <string name="energy">Energy</string>
+    <string name="fighting_skills">Fighting Skills</string>
+    <string name="inteligence">Inteligence</string>
+    <string name="speed">Speed</string>
+    <string name="strength">Strength</string>
+    <string name="loremIpsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo justo odio, a consequat velit ultricies sit amet. Aliquam erat volutpat. Duis interdum arcu est, eu viverra nibh semper in. In posuere mauris in aliquam luctus. Aliquam laoreet libero non nibh mattis posuere sit amet eu nulla. Maecenas bibendum, odio in semper dignissim, turpis enim rutrum erat, at porttitor est ex eu turpis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam et nulla ut urna viverra euismod eget pretium diam.</string>
 </resources>
