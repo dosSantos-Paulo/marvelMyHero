@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
@@ -28,16 +29,14 @@ class MyDeckActivity : AppCompatActivity() {
         val cardManager = GridLayoutManager(this, DECK_COLLUMN)
         val cardAdapter = MyDeckAdapter(testCardColection(10)) {
 
-
             supportFragmentManager.beginTransaction().apply {
-
                 setCustomAnimations(
-                    R.anim.from_left_user_card,
-                    R.anim.to_left_user_card,
-                    R.anim.from_left_user_card,
-                    R.anim.to_left_user_card
+                    R.anim.show_card,
+                    R.anim.hide_card,
+                    R.anim.show_card,
+                    R.anim.hide_card,
                 )
-                replace(R.id.frameLayout_myDeck, CardFrontFragment())
+                replace(R.id.frameLayout_myDeck, CardFrontFragment(it))
                 addToBackStack(null)
                 commit()
             }
