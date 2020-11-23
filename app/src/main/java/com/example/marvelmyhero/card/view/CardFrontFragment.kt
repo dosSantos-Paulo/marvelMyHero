@@ -1,14 +1,18 @@
 package com.example.marvelmyhero.card.view
 
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.model.Hero
+import com.example.marvelmyhero.view.MainActivity
 import com.squareup.picasso.Picasso
 
 
@@ -21,22 +25,38 @@ class CardFrontFragment(private val _card: Hero) : Fragment() {
         return inflater.inflate(R.layout.fragment_card_front, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cardName = view.findViewById<TextView>(R.id.txt_heroName_cardFront)
+        val _cardName = view.findViewById<TextView>(R.id.txt_heroName_cardFront)
         val cardRealName = view.findViewById<TextView>(R.id.txt_heroRealName_cardFront)
         val cardClassification = view.findViewById<TextView>(R.id.txt_classification_cardFront)
         val cardImage = view.findViewById<ImageView>(R.id.img_heroPic_cardFront)
 
-        cardName.text = _card.heroName
+        _cardName.text = _card.heroName
         cardRealName.text = _card.name
         cardClassification.text = getClassification(_card.classification, view)
         Picasso.get().load(_card.imageUrl).into(cardImage)
+
+        view.setOnClickListener {
+            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.beginTransaction().apply {
+//                setCustomAnimations(
+//                    R.anim.show_card,
+//                    R.anim.hide_card,
+//                    R.anim.show_card,
+//                    R.anim.hide_card,
+//                )
+                replace(R.id.frameLayout_myDeck, CardBackFragment(_card))
+                commit()
+            }
+
+        }
     }
 
     companion object {
-        fun getClassification (value: Double, view: View):String {
+        fun getClassification(value: Double, view: View):String {
             var getStars:String = ""
             val starValue = view.context.getString(R.string.classificationStar)
 
