@@ -52,6 +52,23 @@ class MyDeckActivity : AppCompatActivity() {
                         "Nothing"
                     )
                 )
+
+                cardList.add(
+                    Hero(
+                        2,
+                        "Captain America",
+                        "Steve Rogers",
+                        R.drawable.captain_america,
+                        3,
+                        1,
+                        6,
+                        3,
+                        2,
+                        3,
+                        "Cap"
+                    )
+
+                )
             }
             return cardList
         }
