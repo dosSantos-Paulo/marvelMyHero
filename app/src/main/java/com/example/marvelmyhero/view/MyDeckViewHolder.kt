@@ -44,8 +44,6 @@ class MyDeckViewHolder(
             true
         }
 
-        val isFav = card.favorite
-
         _name.text = card.heroName
         _cardColor.setBackgroundColor(Color.parseColor(_view.context.getString(getColor(card.classification))))
 
