@@ -15,7 +15,7 @@ data class Hero (
 
     val history: String,
 ){
-    val favorite = false
+    var favorite = false
     val averageDivider = 6.0
     val classification: Double = (durability + energy + fightingSkills + inteligence + speed + strength) / averageDivider
 }

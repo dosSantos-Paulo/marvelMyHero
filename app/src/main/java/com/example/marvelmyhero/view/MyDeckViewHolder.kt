@@ -23,21 +23,27 @@ class MyDeckViewHolder(
     private val _cardColor = _view.findViewById<ConstraintLayout>(R.id.boderColor_cardMini)
     private val _favorite = _view.findViewById<ImageView>(R.id.ic_fav_cardMini)
 
-    init {
-        itemView.setOnLongClickListener { v: View ->
-            if (_favorite.visibility == VISIBLE) {
-                _favorite.visibility = INVISIBLE
-            } else if (_favorite.visibility == INVISIBLE){
-                _favorite.visibility = VISIBLE
-            }
-
-            adapterPosition
-
-            true
-        }
-    }
+//    init {
+//        itemView.setOnLongClickListener { v: View ->
+//            if (_favorite.visibility == VISIBLE) {
+//                _favorite.visibility = INVISIBLE
+//            } else if (_favorite.visibility == INVISIBLE){
+//                _favorite.visibility = VISIBLE
+//            }
+//
+//            adapterPosition
+//
+//            true
+//        }
+//    }
 
     fun bind(card: Hero) {
+        if (card.favorite){
+            _favorite.visibility = VISIBLE
+        } else if (!card.favorite) {
+            _favorite.visibility = INVISIBLE
+        }
+
         _name.text = card.heroName
         _cardColor.setBackgroundColor(Color.parseColor(_view.context.getString(getColor(card.classification))))
 
