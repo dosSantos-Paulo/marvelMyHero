@@ -11,7 +11,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.marvelmyhero.R
-import com.google.android.material.card.MaterialCardView
 import com.squareup.picasso.Picasso
 
 class MiniCardFragment(

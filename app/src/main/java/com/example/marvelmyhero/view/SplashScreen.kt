@@ -7,7 +7,6 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
 import com.example.marvelmyhero.R
-import kotlinx.coroutines.delay
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

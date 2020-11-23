@@ -1,10 +1,12 @@
 package com.example.marvelmyhero.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.view.MiniCardFragment
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val userButton = findViewById<ImageView>(R.id.img_userIcon_main)
         val exitButton = findViewById<ImageView>(R.id.ic_exit_main)
+        val deckButton = findViewById<MaterialButton>(R.id.btn_myDeck_main)
 
         miniCardFragment(
             "Dr. Strange",
@@ -39,6 +42,11 @@ class MainActivity : AppCompatActivity() {
 
         exitButton.setOnClickListener {
             exitDialog()
+        }
+
+        deckButton.setOnClickListener {
+            val intent = Intent(this, MyDeckActivity::class.java)
+            startActivity(intent)
         }
     }
 

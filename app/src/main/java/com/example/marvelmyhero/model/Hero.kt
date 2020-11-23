@@ -4,6 +4,7 @@ data class Hero (
     val id: Int,
     val heroName: String,
     val name: String,
+    val imageUrl: Int,
 
     val durability: Int,
     val energy: Int,
@@ -14,6 +15,7 @@ data class Hero (
 
     val history: String,
 ){
+    var favorite = false
     val averageDivider = 6.0
     val classification: Double = (durability + energy + fightingSkills + inteligence + speed + strength) / averageDivider
 }
