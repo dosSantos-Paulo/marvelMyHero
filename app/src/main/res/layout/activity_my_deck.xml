@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.MyDeckActivity"
-    android:padding="@dimen/borderPadding"
+    android:paddingTop="@dimen/borderPadding"
     android:background="@drawable/shape_background">
 
     <ImageView
         android:id="@+id/img_arrowBack_myDeck"
         android:layout_width="@dimen/icon"
         android:layout_height="@dimen/icon"
+        android:layout_marginStart="@dimen/marginSmall"
         android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,8 +35,8 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/marginSmall"
         app:cardBackgroundColor="@color/translucentBoxColor"
+        android:layout_marginTop="@dimen/marginMedium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +46,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_myDeck"
             android:layout_margin="@dimen/marginSmall"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
