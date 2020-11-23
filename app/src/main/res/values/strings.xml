@@ -1,11 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MarvelMyHero</string>
     <string name="user_icon">User icon</string>
     <string name="logo_marvel_my_hero">Logo Marvel My Hero</string>
     <string name="exit_icon">exit icon</string>
     <string name="collection">Collection</string>
     <string name="my_team">My Team</string>
-    <string name="my_deck">Deck</string>
+    <string name="my_deck">My Deck</string>
     <string name="share_icon">Share icon</string>
     <string name="card_image">card image</string>
 
@@ -21,4 +21,19 @@
     <string name="heroname">Hero Name</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="commumCardColor" tools:ignore="ReferenceType">@color/commumCardColor</string>
+    <string name="bronzeCardColor" tools:ignore="ReferenceType">@color/bronzeCardColor</string>
+    <string name="silverCardColor" tools:ignore="ReferenceType">@color/silverCardColor</string>
+    <string name="goldCardColor" tools:ignore="ReferenceType">@color/goldCardColor</string>
+    <string name="diamondCardColor" tools:ignore="ReferenceType">@color/diamondCardColor</string>
+    <string name="background_name">background Name</string>
+    <string name="classificationStar">★</string>
+    <string name="durability">Durability</string>
+    <string name="energy">Energy</string>
+    <string name="fighting_skills">Fighting Skills</string>
+    <string name="inteligence">Inteligence</string>
+    <string name="speed">Speed</string>
+    <string name="strength">Strength</string>
+    <string name="loremIpsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo justo odio, a consequat velit ultricies sit amet. Aliquam erat volutpat. Duis interdum arcu est, eu viverra nibh semper in. In posuere mauris in aliquam luctus. Aliquam laoreet libero non nibh mattis posuere sit amet eu nulla. Maecenas bibendum, odio in semper dignissim, turpis enim rutrum erat, at porttitor est ex eu turpis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam et nulla ut urna viverra euismod eget pretium diam.</string>
 </resources>
