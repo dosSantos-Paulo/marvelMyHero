@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_background"
+    android:paddingTop="@dimen/borderPadding"
+    tools:context=".view.MyTeamActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="12dp">
+
+        <ImageView
+            android:id="@+id/img_arrowBack_myTeam"
+            android:layout_width="@dimen/icon"
+            android:layout_height="@dimen/icon"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/textPrimary" />
+
+        <TextView
+            android:id="@+id/textView_MyTeam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginMedium"
+            android:fontFamily="@font/gobold_bold"
+            android:gravity="center"
+            android:text="@string/my_team"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/titleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/marginSmall"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="160dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView6"
+                android:layout_width="@dimen/cardMini_width"
+                android:layout_height="@dimen/cardMini_height"
+                android:layout_marginTop="120dp"
+                android:layout_marginEnd="3dp"
+                app:layout_constraintEnd_toStartOf="@+id/materialCardView2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView_dragCards_myTeam">
+
+                <FrameLayout
+                    android:id="@+id/frameLayout_teamCard1_myTeam"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/card_image" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView2"
+                android:layout_width="@dimen/cardMini_width"
+                android:layout_height="@dimen/cardMini_height"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="120dp"
+                android:layout_marginEnd="3dp"
+                app:layout_constraintEnd_toStartOf="@+id/materialCardView5"
+                app:layout_constraintStart_toEndOf="@+id/materialCardView6"
+                app:layout_constraintTop_toTopOf="@+id/textView_dragCards_myTeam">
+
+                <FrameLayout
+                    android:id="@+id/frameLayout_teamCard2_myTeam"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/card_image" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView5"
+                android:layout_width="@dimen/cardMini_width"
+                android:layout_height="@dimen/cardMini_height"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="120dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/materialCardView2"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <FrameLayout
+                    android:id="@+id/frameLayout_teamCard3_myTeam"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/card_image" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/textView_dragCards_myTeam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="350dp"
+                android:text="@string/drag_and_drop"
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView_scroll_to_the"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="370dp"
+                android:text="@string/scroll_to_the"
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold"
+                tools:ignore="MissingConstraints" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal_scroll_myTeam"
+                style="@android:style/Widget.Material.Light.HorizontalScrollView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fadeScrollbars="false"
+                android:scrollbarSize="8dp"
+                android:scrollbarStyle="outsideInset"
+                app:layout_constraintEnd_toEndOf="@+id/textView_dragCards_myTeam"
+                app:layout_constraintStart_toStartOf="@+id/textView_dragCards_myTeam"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_myTeam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="140dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/textView_dragCards_myTeam"
+                    app:layout_constraintStart_toStartOf="@+id/textView_dragCards_myTeam"
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView2"
+                    tools:listitem="@layout/fragment_mini_card" />
+
+            </HorizontalScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

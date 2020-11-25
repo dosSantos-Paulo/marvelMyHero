@@ -95,7 +95,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView"
+                    android:id="@+id/materialCardView_main"
                     android:layout_width="@dimen/cardBoxWidth"
                     android:layout_height="@dimen/cardBoxHeight"
                     android:layout_marginTop="@dimen/marginSmall"
@@ -200,7 +200,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+                    app:layout_constraintTop_toBottomOf="@+id/materialCardView_main"
                     app:strokeColor="@color/textPrimary" />
 
                 <ImageView

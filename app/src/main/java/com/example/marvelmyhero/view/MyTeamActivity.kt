@@ -2,22 +2,21 @@ package com.example.marvelmyhero.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.card.view.CardFrontFragment
+import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.model.Hero
-import com.example.marvelmyhero.view.MainActivity.Companion.USER_KEY
-import com.google.android.material.card.MaterialCardView
+import com.example.marvelmyhero.view.MyDeckActivity.Companion.testCardColection
+import com.google.android.material.button.MaterialButton
 
-class MyDeckActivity : AppCompatActivity() {
+class MyTeamActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_deck)
+        setContentView(R.layout.activity_my_team)
 
 //        criando novo deck ** a resolver
 
@@ -95,79 +94,60 @@ class MyDeckActivity : AppCompatActivity() {
         )
 
         val deck = mutableListOf(thanos, strange, captain, nickFury, ironMan)
+        val team = mutableListOf(thanos, captain, ironMan)
 
-        val arrowBack = findViewById<ImageView>(R.id.img_arrowBack_myDeck)
-        val materialCardView = findViewById<MaterialCardView>(R.id.materialCard_myDeck)
+        val backArrowButton = findViewById<ImageView>(R.id.img_arrowBack_myTeam)
 
-        arrowBack.setOnClickListener {
+        val recyclerViewMyTeam = findViewById<RecyclerView>(R.id.recyclerView_myTeam)
+        val viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        val adapterMyTeam = MyTeamAdapter(deck) {
+            Toast.makeText(this, getString(R.string.text_inserir_cards), Toast.LENGTH_LONG).show()
+        }
+
+        recyclerViewMyTeam.apply {
+            setHasFixedSize(true)
+            layoutManager = viewManagerMyTeam
+            adapter = adapterMyTeam
+
+        }
+
+        miniCardFragment(
+            team[0].heroName,
+            team[0].imageUrl,
+            team[0].classification,
+            R.id.frameLayout_teamCard1_myTeam
+        )
+
+        miniCardFragment(
+            team[1].heroName,
+            team[1].imageUrl,
+            team[1].classification,
+            R.id.frameLayout_teamCard2_myTeam
+        )
+
+        miniCardFragment(
+            team[2].heroName,
+            team[2].imageUrl,
+            team[2].classification,
+            R.id.frameLayout_teamCard3_myTeam
+        )
+
+        backArrowButton.setOnClickListener {
             finish()
         }
 
-        val cardRecyclerView = findViewById<RecyclerView>(R.id.recyclerView_myDeck)
-        val cardManager = GridLayoutManager(this, DECK_COLLUMN)
-        val cardAdapter = MyDeckAdapter(deck) {
-
-            supportFragmentManager.beginTransaction().apply {
-                setCustomAnimations(
-                    R.anim.show_card,
-                    R.anim.hide_card,
-                    R.anim.show_card,
-                    R.anim.hide_card,
-                )
-                replace(R.id.frameLayout_myDeck, CardFrontFragment(it))
-                addToBackStack(null)
-                commit()
-            }
-        }
-
-        cardRecyclerView.apply {
-            setHasFixedSize(true)
-            layoutManager = cardManager
-            adapter = cardAdapter
-        }
-
     }
 
-    companion object {
-        const val DECK_COLLUMN = 3
-
-        fun testCardColection (quantidade: Int) :MutableList<Hero> {
-            val cardList: MutableList<Hero> = mutableListOf()
-            for (i in 0 until quantidade) {
-                cardList.add(
-                    Hero(
-                        1,
-                        "Dr. Strange",
-                        "Stephen Strange",
-                        R.drawable.dr_strange,
-                        3,
-                        6,
-                        3,
-                        4,
-                        7,
-                        2,
-                        "Nothing"
-                    )
-                )
-
-                cardList.add(
-                    Hero(
-                        2,
-                        "Captain America",
-                        "Steve Rogers",
-                        R.drawable.captain_america,
-                        3,
-                        1,
-                        6,
-                        3,
-                        2,
-                        3,
-                        "Cap"
-                    )
-                )
-            }
-            return cardList
+    private fun miniCardFragment(
+        name: String,
+        imageUrl: Int,
+        classification: Double,
+        frame: Int
+    ) {
+        val newCard = MiniCardFragment(name, imageUrl, classification)
+        supportFragmentManager.beginTransaction().apply {
+            replace(frame, newCard)
+            commit()
         }
     }
-
 }

@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/materialCardView"
+        android:id="@+id/materialCardView_main"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardElevation="0dp"
         android:layout_width="0dp"
