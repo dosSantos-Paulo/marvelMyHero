@@ -193,4 +193,8 @@ class MainActivity : AppCompatActivity() {
             }
             .show()
     }
+
+    companion object {
+        const val USER_KEY = "USER"
+    }
 }
