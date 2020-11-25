@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.card.view.CardFrontFragment.Companion.getClassification
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.model.Hero
 import com.example.marvelmyhero.model.User
@@ -102,6 +103,8 @@ class MainActivity : AppCompatActivity() {
             R.drawable.stan_lee,
         )
 
+        newCardAlert(mutableListOf(thanos, strange, captain, nickFury, ironMan))
+
 //        Modificar apos o Alerta de novas cartas
 
         val getDeck = mutableListOf<Hero>()
@@ -160,6 +163,55 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MyTeamActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun newCardAlert(cardList: MutableList<Hero>) {
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("New Cards")
+            .setMessage("You won a new cards, would you like to see them?")
+            .setPositiveButton("Yes") { _, _ ->
+
+                showNewCard(cardList)
+
+            }
+            .setNegativeButton("No") { _, _ ->
+                closeContextMenu()
+            }
+            .show()
+    }
+
+
+    fun showNewCard(cardList: MutableList<Hero>){
+
+        for (i in 0..4) {
+            var getStars:String = ""
+            val starValue = getString(R.string.classificationStar)
+
+            when (cardList[i].classification) {
+                in 0.1..2.9 -> {
+                    getStars = starValue
+                }
+                in 3.0..4.5 -> {
+                    getStars = "$starValue $starValue"
+                }
+                in 4.6..5.9 -> {
+                    getStars = "$starValue $starValue $starValue"
+                }
+                in 6.0..7.0 -> {
+                    getStars = "$starValue $starValue $starValue $starValue"
+                }
+            }
+
+            MaterialAlertDialogBuilder(this)
+
+                .setMessage("Name : ${cardList[i].heroName} \n Classification: $getStars ")
+                .setNeutralButton("OK"){_, _ ->
+                    closeContextMenu()
+                }
+                .show()
+        }
+
     }
 
     private fun miniCardFragment(
