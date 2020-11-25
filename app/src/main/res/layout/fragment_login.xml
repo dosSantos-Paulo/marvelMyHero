@@ -54,6 +54,7 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login_loginFragment"
         app:strokeWidth="2dp"
         app:strokeColor="#fff"
         android:layout_width="match_parent"
