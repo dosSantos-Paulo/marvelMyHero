@@ -86,7 +86,6 @@ class MyDeckActivity : AppCompatActivity() {
                         3,
                         "Cap"
                     )
-
                 )
             }
             return cardList
