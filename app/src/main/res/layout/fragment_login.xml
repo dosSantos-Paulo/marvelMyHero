@@ -9,6 +9,7 @@
     tools:context=".login.view.LoginFragment">
 
     <com.google.android.material.textfield.TextInputLayout
+        app:boxStrokeColor="#C0CCDA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
@@ -18,6 +19,7 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:backgroundTint="#C0CCDA"
             android:background="@android:color/transparent"
             android:id="@+id/filledTextField"
             android:layout_width="match_parent"
@@ -28,6 +30,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:boxStrokeColor="#C0CCDA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -48,11 +51,13 @@
 
 
     <com.google.android.material.button.MaterialButton
+        app:strokeWidth="2dp"
+        app:strokeColor="#fff"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginTop="40dp"
         android:text="LOGIN"
-        app:cornerRadius="20dp"/>
+        app:cornerRadius="25dp"/>
 
 
     <LinearLayout
@@ -75,6 +80,7 @@
         android:layout_gravity="center"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
+        android:textColor="#fff"
         android:text="OR" />
 
     <View
@@ -89,18 +95,24 @@
 
 
     <com.google.android.material.button.MaterialButton
+      app:strokeWidth="2dp"
+        app:strokeColor="#fff"
+        app:icon="@drawable/ic_google"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginTop="40dp"
         android:text="CONTINUAR COM GOOGLE"
-        app:cornerRadius="20dp"/>
+        app:cornerRadius="25dp"/>
 
     <com.google.android.material.button.MaterialButton
+        app:strokeWidth="2dp"
+        app:strokeColor="#fff"
+        app:icon="@drawable/ic_facebook"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginTop="40dp"
         android:text="CONTINUAR COM FACEBOOK"
-        app:cornerRadius="20dp"/>
+        app:cornerRadius="25dp"/>
 
 
 
