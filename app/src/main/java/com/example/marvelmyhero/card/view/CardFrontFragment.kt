@@ -49,6 +49,7 @@ class CardFrontFragment(private val _card: Hero) : Fragment() {
 //                    R.anim.hide_card,
 //                )
                 replace(R.id.frameLayout_myDeck, CardBackFragment(_card))
+                addToBackStack(null)
                 commit()
             }
 
