@@ -45,6 +45,7 @@
         <com.google.android.material.tabs.TabLayout
             app:tabTextColor="#FFFFFF"
            app:tabIndicatorColor="#8190A5"
+         app:tabIndicatorFullWidth="false"
             android:id="@+id/layoutLogin"
             android:background="@android:color/transparent"
             android:layout_width="wrap_content"

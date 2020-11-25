@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".login.view.SignUpFragment">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtNomeSignUp"
         app:boxStrokeColor="#C0CCDA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +21,6 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:background="@android:color/transparent"
-            android:id="@+id/nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -28,6 +29,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtEmailSignUp"
         app:boxStrokeColor="#C0CCDA"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
@@ -49,6 +51,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtPasswordSignUp"
         app:boxStrokeColor="#C0CCDA"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -60,7 +63,6 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:background="@android:color/transparent"
-        android:id="@+id/txtSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -70,6 +72,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtRepeatPassword"
         app:boxStrokeColor="#C0CCDA"
         android:background="@android:color/transparent"
         android:layout_width="match_parent"
@@ -82,7 +85,6 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:background="@android:color/transparent"
-            android:id="@+id/txtRepetSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"

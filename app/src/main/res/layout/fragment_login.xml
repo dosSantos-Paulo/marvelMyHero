@@ -9,6 +9,7 @@
     tools:context=".login.view.LoginFragment">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtEmailLogin"
         app:boxStrokeColor="#C0CCDA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,6 +21,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:backgroundTint="#C0CCDA"
+            android:textColorHint="#C0CCDA"
             android:background="@android:color/transparent"
             android:id="@+id/filledTextField"
             android:layout_width="match_parent"
@@ -30,6 +32,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtSenhaLogin"
         app:boxStrokeColor="#C0CCDA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -97,7 +100,7 @@
     <com.google.android.material.button.MaterialButton
       app:strokeWidth="2dp"
         app:strokeColor="#fff"
-        app:icon="@drawable/ic_google"
+        android:drawableLeft="@drawable/ic_google"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="40dp"
@@ -107,7 +110,7 @@
     <com.google.android.material.button.MaterialButton
         app:strokeWidth="2dp"
         app:strokeColor="#fff"
-        app:icon="@drawable/ic_facebook"
+        android:drawableLeft="@drawable/ic_facebook"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="40dp"
