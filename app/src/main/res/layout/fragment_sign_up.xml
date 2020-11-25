@@ -5,35 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".login.view.SignUpFragment">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtNomeSignUp"
+        app:boxStrokeColor="#C0CCDA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nome"
-        android:textColorHint="#8492A6"
+        android:textColorHint="#fff"
         app:boxBackgroundColor="#fff"
-        app:hintTextColor="#8492A6"
+        app:hintTextColor="#fff"
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
             android:background="@android:color/transparent"
-            android:id="@+id/nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:textColor="#3F51B5" />
+            android:textColor="#fff" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtEmailSignUp"
+        app:boxStrokeColor="#C0CCDA"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
-        android:textColorHint="#8492A6"
+        android:textColorHint="#fff"
         app:boxBackgroundColor="#fff"
-        app:hintTextColor="#8492A6"
+        app:hintTextColor="#fff"
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -42,56 +46,60 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:textColor="#3F51B5" />
+            android:textColor="#fff" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtPasswordSignUp"
+        app:boxStrokeColor="#C0CCDA"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
     android:hint="Password"
-    android:textColorHint="#8492A6"
+    android:textColorHint="#fff"
     app:boxBackgroundColor="#fff"
-    app:hintTextColor="#8492A6">
+    app:hintTextColor="#fff">
 
     <com.google.android.material.textfield.TextInputEditText
         android:background="@android:color/transparent"
-        android:id="@+id/txtSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:textColor="#3F51B5" />
+        android:textColor="#fff" />
 
 </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtRepeatPassword"
+        app:boxStrokeColor="#C0CCDA"
         android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Repeat password"
-        android:textColorHint="#8492A6"
+        android:textColorHint="#fff"
         app:boxBackgroundColor="#fff"
-        app:hintTextColor="#8492A6">
+        app:hintTextColor="#fff">
 
         <com.google.android.material.textfield.TextInputEditText
             android:background="@android:color/transparent"
-            android:id="@+id/txtRepetSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:textColor="#3F51B5" />
+            android:textColor="#fff" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.button.MaterialButton
+        app:strokeWidth="2dp"
+        app:strokeColor="#fff"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginTop="40dp"
         android:text="SIGN UP"
-        app:cornerRadius="20dp"/>
+        app:cornerRadius="25dp"/>
 
 </LinearLayout>
