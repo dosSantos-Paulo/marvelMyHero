@@ -10,6 +10,7 @@ import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.model.Hero
 import com.example.marvelmyhero.model.User
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
 
@@ -111,6 +112,9 @@ class MainActivity : AppCompatActivity() {
         val userButton = findViewById<ImageView>(R.id.img_userIcon_main)
         val exitButton = findViewById<ImageView>(R.id.ic_exit_main)
         val deckButton = findViewById<MaterialButton>(R.id.btn_myDeck_main)
+        val materialCardView = findViewById<MaterialCardView>(R.id.materialCardView_main)
+
+
         val userImage = findViewById<ImageView>(R.id.img_userIcon_main)
         val userName = findViewById<TextView>(R.id.txt_userName_main)
 
@@ -149,6 +153,11 @@ class MainActivity : AppCompatActivity() {
 
         deckButton.setOnClickListener {
             val intent = Intent(this, MyDeckActivity::class.java)
+            startActivity(intent)
+        }
+
+        materialCardView.setOnClickListener {
+            val intent = Intent(this, MyTeamActivity::class.java)
             startActivity(intent)
         }
     }
