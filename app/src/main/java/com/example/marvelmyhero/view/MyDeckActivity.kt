@@ -6,12 +6,15 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.view.CardFrontFragment
+import com.example.marvelmyhero.data.repository.CharacterRepository
 import com.example.marvelmyhero.model.Hero
 import com.example.marvelmyhero.view.MainActivity.Companion.USER_KEY
+import com.example.marvelmyhero.viewmodel.CharacterViewModel
 import com.google.android.material.card.MaterialCardView
 
 class MyDeckActivity : AppCompatActivity() {
@@ -19,13 +22,15 @@ class MyDeckActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_deck)
 
+
+
 //        criando novo deck ** a resolver
 
         val thanos = Hero(
             1,
             "Thanos",
             "The Mad Titan",
-            R.drawable.thanos,
+            "null",
             6,
             6,
             4,
@@ -45,7 +50,7 @@ class MyDeckActivity : AppCompatActivity() {
             2,
             "Dr. Strange",
             "Stephen Strange",
-            R.drawable.dr_strange,
+            "null",
             3,
             6,
             3,
@@ -60,7 +65,7 @@ class MyDeckActivity : AppCompatActivity() {
             3,
             "Captain America",
             "Steve Rogers",
-            R.drawable.captain_america,
+            "null",
             3, 1, 6, 3, 2, 3,
             "From the dark days of world war to the explosive challenges of " +
                     "today, Super-Soldier Captain America stands ready as a shining sentinel " +
@@ -71,7 +76,7 @@ class MyDeckActivity : AppCompatActivity() {
             4,
             "Nick Fury",
             "Nicholas Joseph Fury Jr.",
-            R.drawable.fury,
+            "null",
             2, 1, 6, 3, 2, 2,
             "Raised by a single mother and living a normal life as a U.S. Army Ranger, " +
                     "Marcus Johnson only began using his current moniker when he discovered that his " +
@@ -84,7 +89,7 @@ class MyDeckActivity : AppCompatActivity() {
             5,
             "Tony Stark",
             "Anthony Edward Stark",
-            R.drawable.iron_man,
+            "null",
             6, 6, 4, 6, 5, 6,
             "Tony Stark is the wealthy son of industrialist and weapons manufacturer " +
                     "Howard Stark and his wife, Maria. Tony grew up a genius with a brilliant " +
@@ -139,7 +144,7 @@ class MyDeckActivity : AppCompatActivity() {
                         1,
                         "Dr. Strange",
                         "Stephen Strange",
-                        R.drawable.dr_strange,
+                        "null",
                         3,
                         6,
                         3,
@@ -155,7 +160,7 @@ class MyDeckActivity : AppCompatActivity() {
                         2,
                         "Captain America",
                         "Steve Rogers",
-                        R.drawable.captain_america,
+                        "null",
                         3,
                         1,
                         6,

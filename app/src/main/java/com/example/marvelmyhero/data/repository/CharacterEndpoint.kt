@@ -8,9 +8,9 @@ import retrofit2.http.Query
 
 interface CharacterEndpoint {
 
-    @GET("/v1/public/characters/{characterId}")
+    @GET("/v1/public/characters")
     suspend fun getCharacter(
-            @Path("characterId") id: Int,
+            @Path("id") id: Int,
             @Query("ts") ts: String?,
             @Query("hash") hash: String?,
             @Query("apikey") apikey: String?

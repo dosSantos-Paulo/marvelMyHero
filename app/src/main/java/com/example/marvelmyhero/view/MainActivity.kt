@@ -5,27 +5,47 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.view.CardFrontFragment.Companion.getClassification
 import com.example.marvelmyhero.card.view.MiniCardFragment
+import com.example.marvelmyhero.data.repository.CharacterRepository
+import com.example.marvelmyhero.model.CharacterModel
 import com.example.marvelmyhero.model.Hero
 import com.example.marvelmyhero.model.User
+import com.example.marvelmyhero.viewmodel.CharacterViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var deck = mutableListOf<CharacterModel>()
+
+
+
+        val viewModel = ViewModelProvider(
+            this,
+            CharacterViewModel.CharacterViewModelFactory(CharacterRepository())
+        ).get(CharacterViewModel::class.java)
+
+        viewModel.getCharacter(1009652).observe(this) {
+            deck.add(it)
+        }
+
+
 //        Novos Cards
         val thanos = Hero(
-            1,
-            "Thanos",
+            deck[0].id,
+            deck[0].name,
             "The Mad Titan",
-            R.drawable.thanos,
+            "${deck[0].thumbnail[0].path}portrait_uncanny.${deck[0].thumbnail[0].extension}",
             6,
             6,
             4,
@@ -45,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             2,
             "Dr. Strange",
             "Stephen Strange",
-            R.drawable.dr_strange,
+            "${deck[0].thumbnail[0].path}portrait_uncanny.${deck[0].thumbnail[0].extension}",
             3,
             6,
             3,
@@ -60,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             3,
             "Captain America",
             "Steve Rogers",
-            R.drawable.captain_america,
+            "${deck[0].thumbnail[0].path}portrait_uncanny.${deck[0].thumbnail[0].extension}",
             3, 1, 6, 3, 2, 3,
             "From the dark days of world war to the explosive challenges of " +
                     "today, Super-Soldier Captain America stands ready as a shining sentinel " +
@@ -71,7 +91,7 @@ class MainActivity : AppCompatActivity() {
             4,
             "Nick Fury",
             "Nicholas Joseph Fury Jr.",
-            R.drawable.fury,
+            "${deck[0].thumbnail[0].path}portrait_uncanny.${deck[0].thumbnail[0].extension}",
             2, 1, 6, 3, 2, 2,
             "Raised by a single mother and living a normal life as a U.S. Army Ranger, " +
                     "Marcus Johnson only began using his current moniker when he discovered that his " +
@@ -84,7 +104,7 @@ class MainActivity : AppCompatActivity() {
             5,
             "Tony Stark",
             "Anthony Edward Stark",
-            R.drawable.iron_man,
+            "${deck[0].thumbnail[0].path}portrait_uncanny.${deck[0].thumbnail[0].extension}",
             6, 6, 4, 6, 5, 6,
             "Tony Stark is the wealthy son of industrialist and weapons manufacturer " +
                     "Howard Stark and his wife, Maria. Tony grew up a genius with a brilliant " +
@@ -182,10 +202,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun showNewCard(cardList: MutableList<Hero>){
+    fun showNewCard(cardList: MutableList<Hero>) {
 
         for (i in 0..4) {
-            var getStars:String = ""
+            var getStars: String = ""
             val starValue = getString(R.string.classificationStar)
 
             when (cardList[i].classification) {
@@ -206,7 +226,7 @@ class MainActivity : AppCompatActivity() {
             MaterialAlertDialogBuilder(this)
 
                 .setMessage("Name : ${cardList[i].heroName} \n Classification: $getStars ")
-                .setNeutralButton("OK"){_, _ ->
+                .setNeutralButton("OK") { _, _ ->
                     closeContextMenu()
                 }
                 .show()
@@ -216,7 +236,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun miniCardFragment(
         name: String,
-        imageUrl: Int,
+        imageUrl: String,
         classification: Double,
         frame: Int
     ) {

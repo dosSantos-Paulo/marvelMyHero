@@ -1,126 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
-    tools:context=".login.view.LoginFragment">
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtEmailLogin"
-        app:boxStrokeColor="#C0CCDA"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:textColorHint="#fff"
-        app:boxBackgroundColor="#fff"
-        app:hintTextColor="#fff"
-        tools:ignore="MissingConstraints">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:backgroundTint="#C0CCDA"
-            android:textColorHint="#C0CCDA"
-            android:background="@android:color/transparent"
-            android:id="@+id/filledTextField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textColor="#fff" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtSenhaLogin"
-        app:boxStrokeColor="#C0CCDA"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Password"
-        android:textColorHint="#fff"
-        app:boxBackgroundColor="#fff"
-        app:hintTextColor="#fff">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:background="@android:color/transparent"
-            android:id="@+id/txtSenha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textColor="#fff" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_login_loginFragment"
-        app:strokeWidth="2dp"
-        app:strokeColor="#fff"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="40dp"
-        android:text="LOGIN"
-        app:cornerRadius="25dp"/>
-
+    android:layout_height="wrap_content">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:context=".login.view.LoginFragment">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="1dp"
-        android:layout_marginTop="7dp"
-        android:background="#C0CCDA"
-        tools:ignore="MissingConstraints" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtEmailLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textColorHint="#fff"
+            app:boxBackgroundColor="#fff"
+            app:boxStrokeColor="#C0CCDA"
+            app:hintTextColor="#fff"
+            tools:ignore="MissingConstraints">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:textColor="#fff"
-        android:text="OR" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/filledTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:backgroundTint="#C0CCDA"
+                android:inputType="textEmailAddress"
+                android:textColor="#fff"
+                android:textColorHint="#C0CCDA" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="1dp"
-        android:layout_marginTop="7dp"
-        android:background="#C0CCDA"
-        tools:ignore="MissingConstraints" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtSenhaLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Password"
+            android:textColorHint="#fff"
+            app:boxBackgroundColor="#fff"
+            app:boxStrokeColor="#C0CCDA"
+            app:hintTextColor="#fff">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:inputType="textPassword"
+                android:textColor="#fff" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_login_loginFragment"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="40dp"
+            android:text="LOGIN"
+            app:cornerRadius="25dp"
+            app:strokeColor="#fff"
+            app:strokeWidth="2dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="7dp"
+                android:layout_weight="1"
+                android:background="#C0CCDA"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="OR"
+                android:textColor="#fff" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="7dp"
+                android:layout_weight="1"
+                android:background="#C0CCDA"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="40dp"
+            android:drawableLeft="@drawable/ic_google"
+            android:text="CONTINUAR COM GOOGLE"
+            app:cornerRadius="25dp"
+            app:strokeColor="#fff"
+            app:strokeWidth="2dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="40dp"
+            android:drawableLeft="@drawable/ic_facebook"
+            android:text="CONTINUAR COM FACEBOOK"
+            app:cornerRadius="25dp"
+            app:strokeColor="#fff"
+            app:strokeWidth="2dp" />
+
 
     </LinearLayout>
-
-
-    <com.google.android.material.button.MaterialButton
-      app:strokeWidth="2dp"
-        app:strokeColor="#fff"
-        android:drawableLeft="@drawable/ic_google"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="40dp"
-        android:text="CONTINUAR COM GOOGLE"
-        app:cornerRadius="25dp"/>
-
-    <com.google.android.material.button.MaterialButton
-        app:strokeWidth="2dp"
-        app:strokeColor="#fff"
-        android:drawableLeft="@drawable/ic_facebook"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="40dp"
-        android:text="CONTINUAR COM FACEBOOK"
-        app:cornerRadius="25dp"/>
-
-
-
-
-
-
-</LinearLayout>
+</ScrollView>
