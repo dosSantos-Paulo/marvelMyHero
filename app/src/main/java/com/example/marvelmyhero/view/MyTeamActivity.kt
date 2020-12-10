@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.model.Hero
-import com.example.marvelmyhero.view.MyDeckActivity.Companion.testCardColection
 import com.google.android.material.button.MaterialButton
 
 class MyTeamActivity : AppCompatActivity() {

@@ -13,7 +13,7 @@ data class Hero (
     val speed: Int,
     val strength: Int,
 
-    val history: String,
+    val description: String,
 ){
     var favorite = false
     val averageDivider = 6.0
