@@ -13,13 +13,11 @@ class CharacterViewModel(
 ) : ViewModel() {
 
     var characterList: MutableList<CharacterModel> = mutableListOf()
-    lateinit var _hero: CharacterModel
 
     fun getCharacter(id: Int) = liveData(Dispatchers.IO) {
         try {
             val result = _repository.getCharacter(id).data.results[0]
             characterList.add(result)
-            _hero = result
             emit(result)
         } catch (ex: Exception) {
             println(ex.message)

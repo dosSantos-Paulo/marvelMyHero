@@ -10,7 +10,7 @@ interface CharacterEndpoint {
 
     @GET("/v1/public/characters")
     suspend fun getCharacter(
-            @Path("id") id: Int,
+            @Query("id") id: Int,
             @Query("ts") ts: String?,
             @Query("hash") hash: String?,
             @Query("apikey") apikey: String?
