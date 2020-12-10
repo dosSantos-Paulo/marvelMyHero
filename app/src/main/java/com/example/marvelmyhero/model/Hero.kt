@@ -4,7 +4,7 @@ data class Hero (
     val id: Int,
     val heroName: String,
     val name: String,
-    val imageUrl: Int,
+    val imageUrl: String,
 
     val durability: Int,
     val energy: Int,
