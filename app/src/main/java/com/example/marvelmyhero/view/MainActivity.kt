@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var deck = mutableListOf<CharacterModel>()
+
+        val allCharId = listOf<Int>(1009652, 1017300, 1009220, 1009471, 1009368)
 
 
         val viewModel = ViewModelProvider(
@@ -34,80 +35,62 @@ class MainActivity : AppCompatActivity() {
             CharacterViewModel.CharacterViewModelFactory(CharacterRepository())
         ).get(CharacterViewModel::class.java)
 
-        viewModel.getCharacter(1009652).observe(this) {
-            deck.add(it)
+        viewModel.getCharacter(allCharId).observe(this) {
+            val deck = it
 
             val thanos = Hero(
                 3,
                 deck[0].name,
                 "The Mad Titan",
-                "https://${deck[0].thumbnail.path}.${deck[0].thumbnail.extension}",
+                "${deck[0].thumbnail.path}.${deck[0].thumbnail.extension}",
                 6,
                 6,
                 4,
                 6,
                 7,
                 7,
-                "He is perhaps the most evil, bloodthirsty, and powerful villain in the universe—so " +
-                        "powerful that religious sects have worshipped him as a god. His enemies include nearly " +
-                        "every Super Hero in existence. He is obsessed with Goddess Death and has waged genocidal " +
-                        "campaigns in an attempt to placate her. Most famously, he has attempted to conquer the " +
-                        "universe by wielding the Infinity Gauntlet. He is the Mad Titan.\n" +
-                        "\n" +
-                        "He is Thanos."
+                deck[0].description
             )
 
             val strange = Hero(
                 2,
-                "Dr. Strange",
+                deck[1].name,
                 "Stephen Strange",
-                "${deck[0].thumbnail.path}.${deck[0].thumbnail.extension}",
+                "${deck[1].thumbnail.path}.${deck[1].thumbnail.extension}",
                 3,
                 6,
                 3,
                 4,
                 7,
                 2,
-                "As Earth’s Sorcerer Supreme, Doctor Strange wields arcane " +
-                        "spells and mystical artifacts to defend the planet against malevolent threats."
+                deck[1].description
             )
 
             val captain = Hero(
                 3,
-                "Captain America",
+                deck[2].name,
                 "Steve Rogers",
-                "${deck[0].thumbnail.path}.${deck[0].thumbnail.extension}",
+                "${deck[2].thumbnail.path}.${deck[2].thumbnail.extension}",
                 3, 1, 6, 3, 2, 3,
-                "From the dark days of world war to the explosive challenges of " +
-                        "today, Super-Soldier Captain America stands ready as a shining sentinel " +
-                        "of liberty to shield the oppressed and fight for freedom everywhere."
+                deck[2].description
             )
 
             val nickFury = Hero(
                 4,
-                "Nick Fury",
+                deck[3].name,
                 "Nicholas Joseph Fury Jr.",
-                "${deck[0].thumbnail.path}.${deck[0].thumbnail.extension}",
+                "${deck[3].thumbnail.path}.${deck[3].thumbnail.extension}",
                 2, 1, 6, 3, 2, 2,
-                "Raised by a single mother and living a normal life as a U.S. Army Ranger, " +
-                        "Marcus Johnson only began using his current moniker when he discovered that his " +
-                        "birth father was none other than legendary super-spy Nick Fury. Already a trained " +
-                        "combat veteran with a host of covert experiences under his belt, Nick Fury Jr. claimed " +
-                        "his birthright and started a new life in espionage, following in his old man’s footsteps as an agent of S.H.I.E.L.D."
+                deck[3].description
             )
 
             val ironMan = Hero(
                 5,
-                "Tony Stark",
+                deck[4].name,
                 "Anthony Edward Stark",
-                "${deck[0].thumbnail.path}.${deck[0].thumbnail.extension}",
+                "${deck[4].thumbnail.path}.${deck[4].thumbnail.extension}",
                 6, 6, 4, 6, 5, 6,
-                "Tony Stark is the wealthy son of industrialist and weapons manufacturer " +
-                        "Howard Stark and his wife, Maria. Tony grew up a genius with a brilliant " +
-                        "mind for technology and inventions and, naturally, followed in his father’s " +
-                        "footsteps, inheriting Stark Industries upon his parents’ untimely death. " +
-                        "Tony designed many weapons of war for Stark Industries, far beyond what any " +
-                        "other company was creating, while living the lifestyle of a bon vivant."
+                deck[4].description
             )
 
             val user = User(

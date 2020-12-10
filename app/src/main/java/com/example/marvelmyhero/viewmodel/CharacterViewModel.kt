@@ -14,11 +14,15 @@ class CharacterViewModel(
 
     var characterList: MutableList<CharacterModel> = mutableListOf()
 
-    fun getCharacter(id: Int) = liveData(Dispatchers.IO) {
+    fun getCharacter(idList: List<Int>) = liveData(Dispatchers.IO) {
         try {
-            val result = _repository.getCharacter(id).data.results[0]
-            characterList.add(result)
-            emit(result)
+            for (i in idList.indices) {
+                val result = _repository.getCharacter(idList[i]).data.results[0]
+                characterList.add(result)
+            }
+
+            emit(characterList)
+
         } catch (ex: Exception) {
             println(ex.message)
         }
