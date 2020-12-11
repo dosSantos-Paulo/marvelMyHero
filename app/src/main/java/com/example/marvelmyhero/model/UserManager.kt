@@ -1,7 +1,7 @@
 package com.example.marvelmyhero.model
 
 class UserManager {
-    private val _listOfUsers = mutableMapOf<String, User>()
+    private val _listOfUsers = mutableListOf<User>()
 
     fun createNewUser(
         nickName: String,
@@ -12,10 +12,15 @@ class UserManager {
     ) {
         val newUser = User(nickName, name, email, password, imageUrl)
 
-        _listOfUsers[newUser.stringId] = newUser
+        _listOfUsers.add(newUser)
     }
 
-    fun getUserById(id: String): User? {
-        return _listOfUsers[id]
+    fun getUser(user: User): User? {
+        _listOfUsers.forEach {
+            if (user == it){
+                return it
+            }
+        }
+        return null
     }
 }
