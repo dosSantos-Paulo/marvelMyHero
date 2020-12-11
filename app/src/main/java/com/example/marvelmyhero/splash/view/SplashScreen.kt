@@ -77,20 +77,25 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun animation() {
+        val gifSplash = findViewById<GifImageView>(R.id.gif_marvel)
+        val logoSplash = findViewById<ImageView>(R.id.img_splash_screen)
 
-        val splash1 = findViewById<GifImageView>(R.id.gif_marvel)
+        Handler(Looper.getMainLooper()).postDelayed({
 
-                splash1.animate().apply{
-                    duration = 5000
-                    alpha(0f)
-                }
-
-        val splash2 = findViewById<ImageView>(R.id.img_splash_screen)
-            splash2.animate().apply {
-                duration = 2500
-                scaleX(1.10f)
-                scaleY(1.10f)
+            gifSplash.animate().apply {
+                duration = 3000
+                alpha(0f)
             }
+
+            logoSplash.animate().apply {
+                duration = 3000
+                alpha(1f)
+                scaleX(0.80f)
+                scaleY(0.80f)
+            }
+
+        }, 5000)
+
     }
 
     private fun preferencesLogin() {
