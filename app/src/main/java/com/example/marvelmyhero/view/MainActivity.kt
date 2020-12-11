@@ -1,179 +1,103 @@
 package com.example.marvelmyhero.view
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.card.view.CardFrontFragment.Companion.getClassification
 import com.example.marvelmyhero.card.view.MiniCardFragment
-import com.example.marvelmyhero.data.repository.CharacterRepository
 import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.EMAIL_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTED_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
-import com.example.marvelmyhero.model.CharacterModel
 import com.example.marvelmyhero.model.Hero
 import com.example.marvelmyhero.model.User
-import com.example.marvelmyhero.viewmodel.CharacterViewModel
+import com.example.marvelmyhero.utils.CardUtils.Companion.CARD_MANAGER
+import com.example.marvelmyhero.utils.UserUtils
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
-import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val exitButton = findViewById<ImageView>(R.id.ic_exit_main)
+        val deckButton = findViewById<MaterialButton>(R.id.btn_myDeck_main)
+        val materialCardView = findViewById<MaterialCardView>(R.id.materialCardView_main)
 
-        val allCharId = listOf<Int>(1009652, 1017300, 1009220, 1009471, 1009368)
+        val keepConnectedPreferences =
+            getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
+        val user = getUser(keepConnectedPreferences)
 
-
-        val viewModel = ViewModelProvider(
-            this,
-            CharacterViewModel.CharacterViewModelFactory(CharacterRepository())
-        ).get(CharacterViewModel::class.java)
-
-        viewModel.getCharacter(allCharId).observe(this) {
-            val deck = it
-
-            val thanos = Hero(
-                3,
-                deck[0].name,
-                "The Mad Titan",
-                "${deck[0].thumbnail.path}.${deck[0].thumbnail.extension}",
-                6,
-                6,
-                4,
-                6,
-                7,
-                7,
-                deck[0].description
-            )
-
-            val strange = Hero(
-                2,
-                deck[1].name,
-                "Stephen Strange",
-                "${deck[1].thumbnail.path}.${deck[1].thumbnail.extension}",
-                3,
-                6,
-                3,
-                4,
-                7,
-                2,
-                deck[1].description
-            )
-
-            val captain = Hero(
-                3,
-                deck[2].name,
-                "Steve Rogers",
-                "${deck[2].thumbnail.path}.${deck[2].thumbnail.extension}",
-                3, 1, 6, 3, 2, 3,
-                deck[2].description
-            )
-
-            val nickFury = Hero(
-                4,
-                deck[3].name,
-                "Nicholas Joseph Fury Jr.",
-                "${deck[3].thumbnail.path}.${deck[3].thumbnail.extension}",
-                2, 1, 6, 3, 2, 2,
-                deck[3].description
-            )
-
-            val ironMan = Hero(
-                5,
-                deck[4].name,
-                "Anthony Edward Stark",
-                "${deck[4].thumbnail.path}.${deck[4].thumbnail.extension}",
-                6, 6, 4, 6, 5, 6,
-                deck[4].description
-            )
-
-            val user = User(
-                "Stan Lee",
-                "Stanley Martin Lieber",
-                "stanlee@gmail.com",
-                "marvel",
-                R.drawable.stan_lee,
-            )
-            newCardAlert(mutableListOf(thanos, strange, captain, nickFury, ironMan))
-            user.deck = mutableListOf(thanos, strange, captain, nickFury, ironMan)
-            user.team = mutableListOf(thanos, captain, ironMan)
-
-            val getDeck = mutableListOf<Hero>()
+        toolBarItems(user)
 
 
-            val userButton = findViewById<ImageView>(R.id.img_userIcon_main)
-            val exitButton = findViewById<ImageView>(R.id.ic_exit_main)
-            val deckButton = findViewById<MaterialButton>(R.id.btn_myDeck_main)
-            val materialCardView = findViewById<MaterialCardView>(R.id.materialCardView_main)
+//      --> Substituir por método de get Aleatorio
+        user.deck = CARD_MANAGER.getAllCards()
+        user.team = mutableListOf(user.deck[0], user.deck[4], user.deck[8])
+
+        showTeamCards(user)
 
 
-            val userImage = findViewById<ImageView>(R.id.img_userIcon_main)
-            val userName = findViewById<TextView>(R.id.txt_userName_main)
+        exitButton.setOnClickListener {
+            exitDialog(keepConnectedPreferences)
+        }
 
-            Picasso.get().load(user.imageUrl).into(userImage)
-            userName.text = user.nickName
+        deckButton.setOnClickListener {
+            val intent = Intent(this, MyDeckActivity::class.java)
+            startActivity(intent)
+        }
 
-
-            miniCardFragment(
-                user.team[0].heroName,
-                user.team[0].imageUrl,
-                user.team[0].classification,
-                R.id.frameLayout_teamCard1_main
-            )
-
-            miniCardFragment(
-                user.team[1].heroName,
-                user.team[1].imageUrl,
-                user.team[1].classification,
-                R.id.frameLayout_teamCard2_main
-            )
-
-            miniCardFragment(
-                user.team[2].heroName,
-                user.team[2].imageUrl,
-                user.team[2].classification,
-                R.id.frameLayout_teamCard3_main
-            )
-
-            userButton.setOnClickListener {
-                newUserFragment(user)
-            }
-
-            exitButton.setOnClickListener {
-                exitDialog()
-            }
-
-            deckButton.setOnClickListener {
-                val intent = Intent(this, MyDeckActivity::class.java)
-                startActivity(intent)
-            }
-
-            materialCardView.setOnClickListener {
-                val intent = Intent(this, MyTeamActivity::class.java)
-                startActivity(intent)
-            }
+        materialCardView.setOnClickListener {
+            val intent = Intent(this, MyTeamActivity::class.java)
+            startActivity(intent)
         }
 
 
-//        Novos Cards
+    }
+
+    private fun showTeamCards(user: User) {
 
 
-//        Modificar para usuário que virá do login
+        for (i in user.team.indices) {
+            var frameLayout = R.id.frameLayout_teamCard1_main
+            when (i) {
+                1 -> frameLayout = R.id.frameLayout_teamCard2_main
 
+                2 -> frameLayout = R.id.frameLayout_teamCard3_main
+            }
 
-//        Modificar apos o Alerta de novas cartas
+            miniCardFragment(
+                user.team[i].heroName,
+                user.team[i].imageUrl,
+                user.team[i].classification,
+                frameLayout
+            )
+        }
+    }
 
+    private fun toolBarItems(user: User) {
+        val userImage = findViewById<ImageView>(R.id.img_userIcon_main)
+        val userName = findViewById<TextView>(R.id.txt_userName_main)
 
+        Picasso.get().load(user.imageUrl).into(userImage)
+        userName.text = user.nickName
+
+        userImage.setOnClickListener {
+            newUserFragment(user)
+        }
+    }
+
+    private fun getUser(keepConnectedPreferences: SharedPreferences): User {
+        val email = keepConnectedPreferences.getString(EMAIL_PREFS, "")
+        val password = keepConnectedPreferences.getString(PASS_PREFS, "")
+        return UserUtils.USER_MANAGER.login(email, password)!!
     }
 
     private fun newCardAlert(cardList: MutableList<Hero>) {
@@ -253,7 +177,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun exitDialog() {
+    private fun exitDialog(keepConnectedPreferences: SharedPreferences) {
         MaterialAlertDialogBuilder(this)
             .setTitle(getString(R.string.exitDialog_title))
             .setMessage(getString(R.string.exitDialog_message))
@@ -261,8 +185,6 @@ class MainActivity : AppCompatActivity() {
                 closeContextMenu()
             }
             .setPositiveButton(getString(R.string.exitDialog_positiveButton)) { _, _ ->
-                val keepConnectedPreferences =
-                    getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
 
                 keepConnectedPreferences.edit()
                     .putString(EMAIL_PREFS, "")
