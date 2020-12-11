@@ -53,4 +53,5 @@
     <string name="passwordLengthError">Must be 4 to 14 characters</string>
     <string name="repeatPasswordCompareError">Passwords must be the same</string>
     <string name="invalidLoginError">Invalid Login</string>
+    <string name="backButton">Botão de voltar</string>
 </resources>
