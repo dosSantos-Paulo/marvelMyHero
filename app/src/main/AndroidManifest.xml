@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".splash.view.SplashScreenGif"></activity>
         <activity android:name=".team.view.MyTeamActivity" />
         <activity android:name=".deck.view.MyDeckActivity" />
         <activity android:name=".login.view.LoginActivity" />
