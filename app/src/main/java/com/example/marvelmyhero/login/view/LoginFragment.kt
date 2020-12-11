@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.login.viewmodel.IMudarTab
 import com.example.marvelmyhero.view.MainActivity
@@ -44,6 +45,11 @@ class LoginFragment : Fragment() {
                 val intent = Intent(view.context, MainActivity::class.java)
                 startActivity(intent)
             }
+
+        view.findViewById<Button>(R.id.btn_login_loginFragment).setOnClickListener {
+            val intent = Intent(view.context, MainActivity::class.java)
+            startActivity(intent)
+
         }
     }
 

@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso
 
 class MiniCardFragment(
     private val name: String,
-    private val imageUrl: Int,
+    private val imageUrl: String,
     private val cardClassification: Double
 ) : Fragment() {
 

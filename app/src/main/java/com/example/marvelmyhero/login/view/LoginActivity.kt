@@ -38,6 +38,11 @@ class LoginActivity : AppCompatActivity(), IMudarTab {
         )
     }
 
+    override fun onStop() {
+        super.onStop()
+        finish()
+    }
+
     override fun mudarTab(posicaoAtual: Int) {
         val novaPosicao = if (posicaoAtual == LOGIN_FRAGMENT) {
             SIGN_UP_FRAGMENT

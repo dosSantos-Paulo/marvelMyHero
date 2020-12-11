@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.model.Hero
-import org.w3c.dom.Text
 
 
 class CardBackFragment(private val _card: Hero) : Fragment() {
@@ -44,7 +43,7 @@ class CardBackFragment(private val _card: Hero) : Fragment() {
 
         cardName.text = _card.heroName
         cardRealName.text = _card.name
-        cardHistory.text = _card.history
+        cardHistory.text = _card.description
 
         durability.text = _card.durability.toString()
         energy.text = _card.energy.toString()

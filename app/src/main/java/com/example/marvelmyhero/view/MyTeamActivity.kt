@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.model.Hero
-import com.example.marvelmyhero.view.MyDeckActivity.Companion.testCardColection
 import com.google.android.material.button.MaterialButton
 
 class MyTeamActivity : AppCompatActivity() {
@@ -24,7 +23,7 @@ class MyTeamActivity : AppCompatActivity() {
             1,
             "Thanos",
             "The Mad Titan",
-            R.drawable.thanos,
+            "null",
             6,
             6,
             4,
@@ -44,7 +43,7 @@ class MyTeamActivity : AppCompatActivity() {
             2,
             "Dr. Strange",
             "Stephen Strange",
-            R.drawable.dr_strange,
+            "null",
             3,
             6,
             3,
@@ -59,7 +58,7 @@ class MyTeamActivity : AppCompatActivity() {
             3,
             "Captain America",
             "Steve Rogers",
-            R.drawable.captain_america,
+            "null",
             3, 1, 6, 3, 2, 3,
             "From the dark days of world war to the explosive challenges of " +
                     "today, Super-Soldier Captain America stands ready as a shining sentinel " +
@@ -70,7 +69,7 @@ class MyTeamActivity : AppCompatActivity() {
             4,
             "Nick Fury",
             "Nicholas Joseph Fury Jr.",
-            R.drawable.fury,
+            "null",
             2, 1, 6, 3, 2, 2,
             "Raised by a single mother and living a normal life as a U.S. Army Ranger, " +
                     "Marcus Johnson only began using his current moniker when he discovered that his " +
@@ -83,7 +82,7 @@ class MyTeamActivity : AppCompatActivity() {
             5,
             "Tony Stark",
             "Anthony Edward Stark",
-            R.drawable.iron_man,
+            "null",
             6, 6, 4, 6, 5, 6,
             "Tony Stark is the wealthy son of industrialist and weapons manufacturer " +
                     "Howard Stark and his wife, Maria. Tony grew up a genius with a brilliant " +
@@ -140,7 +139,7 @@ class MyTeamActivity : AppCompatActivity() {
 
     private fun miniCardFragment(
         name: String,
-        imageUrl: Int,
+        imageUrl: String,
         classification: Double,
         frame: Int
     ) {

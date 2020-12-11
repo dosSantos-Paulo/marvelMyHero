@@ -42,13 +42,14 @@ class CardFrontFragment(private val _card: Hero) : Fragment() {
         view.setOnClickListener {
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             fragmentManager.beginTransaction().apply {
-//                setCustomAnimations(
-//                    R.anim.show_card,
-//                    R.anim.hide_card,
-//                    R.anim.show_card,
-//                    R.anim.hide_card,
-//                )
+                setCustomAnimations(
+                    R.anim.card_flip_left_in,
+                    R.anim.card_flip_left_out,
+                    R.anim.card_flip_left_in,
+                    R.anim.card_flip_left_out,
+                )
                 replace(R.id.frameLayout_myDeck, CardBackFragment(_card))
+                addToBackStack(null)
                 commit()
             }
 
