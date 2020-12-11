@@ -1,6 +1,4 @@
-package com.example.marvelmyhero.model
-
-import com.example.marvelmyhero.utils.UserUtils
+package com.example.marvelmyhero.login.model
 
 class AllUsersManager {
     private val _listOfUsers = mutableListOf<User>()

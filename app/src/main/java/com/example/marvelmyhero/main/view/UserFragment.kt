@@ -1,4 +1,4 @@
-package com.example.marvelmyhero.view
+package com.example.marvelmyhero.main.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.model.User
+import com.example.marvelmyhero.login.model.User
 import com.squareup.picasso.Picasso
 
 

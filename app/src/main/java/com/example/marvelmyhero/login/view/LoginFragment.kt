@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.model.User
-import com.example.marvelmyhero.view.MainActivity
+import com.example.marvelmyhero.main.view.MainActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import com.example.marvelmyhero.utils.UserUtils.Companion.USER_MANAGER

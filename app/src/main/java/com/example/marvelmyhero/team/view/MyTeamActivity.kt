@@ -1,4 +1,4 @@
-package com.example.marvelmyhero.view
+package com.example.marvelmyhero.team.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.view.MiniCardFragment
-import com.example.marvelmyhero.model.Hero
+import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 
 class MyTeamActivity : AppCompatActivity() {

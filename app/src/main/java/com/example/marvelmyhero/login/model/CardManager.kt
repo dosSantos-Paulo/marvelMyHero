@@ -1,4 +1,6 @@
-package com.example.marvelmyhero.model
+package com.example.marvelmyhero.login.model
+
+import com.example.marvelmyhero.card.model.Hero
 
 class CardManager {
     private val _cardList = mutableMapOf<Int, Hero>()

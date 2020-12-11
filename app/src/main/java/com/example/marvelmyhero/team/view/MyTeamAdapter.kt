@@ -1,13 +1,11 @@
-package com.example.marvelmyhero.view
+package com.example.marvelmyhero.team.view
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.card.view.MiniCardFragment
-import com.example.marvelmyhero.model.Hero
+import com.example.marvelmyhero.card.model.Hero
 
 class MyTeamAdapter(
     private val _cardListMyTeam: MutableList<Hero>,

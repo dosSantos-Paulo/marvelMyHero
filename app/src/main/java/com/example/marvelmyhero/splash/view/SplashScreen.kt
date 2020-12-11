@@ -1,4 +1,4 @@
-package com.example.marvelmyhero.view
+package com.example.marvelmyhero.splash.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -14,12 +14,10 @@ import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.EMAIL_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTED_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
-import com.example.marvelmyhero.model.User
 import com.example.marvelmyhero.utils.CardUtils
 import com.example.marvelmyhero.utils.CardUtils.Companion.BLACK_PANTHER
 import com.example.marvelmyhero.utils.CardUtils.Companion.BLACK_WIDOW
 import com.example.marvelmyhero.utils.CardUtils.Companion.CAPTAIN
-import com.example.marvelmyhero.utils.CardUtils.Companion.CARD_MANAGER
 import com.example.marvelmyhero.utils.CardUtils.Companion.IRON_MAN
 import com.example.marvelmyhero.utils.CardUtils.Companion.LOKI
 import com.example.marvelmyhero.utils.CardUtils.Companion.NICK_FURY
@@ -27,8 +25,8 @@ import com.example.marvelmyhero.utils.CardUtils.Companion.SPIDER_MAN
 import com.example.marvelmyhero.utils.CardUtils.Companion.STRANGE
 import com.example.marvelmyhero.utils.CardUtils.Companion.THANOS
 import com.example.marvelmyhero.utils.CardUtils.Companion.THOR
-import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
-import com.example.marvelmyhero.viewmodel.CharacterViewModel
+import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
+import com.example.marvelmyhero.main.view.MainActivity
 
 class SplashScreen : AppCompatActivity() {
 

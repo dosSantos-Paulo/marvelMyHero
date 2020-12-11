@@ -1,7 +1,7 @@
 package com.example.marvelmyhero.utils
 
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.model.AllUsersManager
+import com.example.marvelmyhero.login.model.AllUsersManager
 
 class UserUtils {
 

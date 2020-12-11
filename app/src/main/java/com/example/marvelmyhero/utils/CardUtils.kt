@@ -1,11 +1,7 @@
 package com.example.marvelmyhero.utils
 
-import android.view.View
-import androidx.lifecycle.ViewModelProvider
-import com.example.marvelmyhero.data.repository.CharacterRepository
-import com.example.marvelmyhero.model.CardManager
-import com.example.marvelmyhero.model.CharacterModel
-import com.example.marvelmyhero.viewmodel.CharacterViewModel
+import com.example.marvelmyhero.login.model.CardManager
+import com.example.marvelmyhero.card.model.CharacterModel
 
 class CardUtils () {
 

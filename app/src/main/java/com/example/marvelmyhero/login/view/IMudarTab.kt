@@ -1,4 +1,4 @@
-package com.example.marvelmyhero.login.viewmodel
+package com.example.marvelmyhero.login.view
 
 interface IMudarTab {
     fun mudarTab(posicaoAtual: Int)

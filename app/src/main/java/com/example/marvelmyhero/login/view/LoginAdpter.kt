@@ -1,4 +1,4 @@
-package com.example.marvelmyhero.login.viewmodel
+package com.example.marvelmyhero.login.view
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -1,6 +1,6 @@
 package com.example.marvelmyhero.utils
 
-import com.example.marvelmyhero.model.UserManager
+import com.example.marvelmyhero.login.model.UserManager
 
 class UserCardUtils {
     fun deckSorty(){

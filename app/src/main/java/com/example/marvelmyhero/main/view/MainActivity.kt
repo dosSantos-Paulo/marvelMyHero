@@ -1,4 +1,4 @@
-package com.example.marvelmyhero.view
+package com.example.marvelmyhero.main.view
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -12,11 +12,13 @@ import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.EMAIL_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTED_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
-import com.example.marvelmyhero.model.Hero
-import com.example.marvelmyhero.model.User
+import com.example.marvelmyhero.card.model.Hero
+import com.example.marvelmyhero.deck.view.MyDeckActivity
+import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.utils.CardUtils.Companion.CARD_MANAGER
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.example.marvelmyhero.utils.UserUtils
+import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
