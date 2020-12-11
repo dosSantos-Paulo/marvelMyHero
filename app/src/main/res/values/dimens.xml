@@ -33,6 +33,7 @@
     <dimen name="cardMini_height">150dp</dimen>
     <dimen name="logoHeight_cardMini">20dp</dimen>
     <dimen name="textMin">12sp</dimen>
+    <dimen name="textExtraMin">10sp</dimen>
     <dimen name="borderPaddinSmall">4dp</dimen>
 
     <dimen name="cardPadding">20dp</dimen>
@@ -43,4 +44,6 @@
     <dimen name="textCardTitle">28sp</dimen>
     <dimen name="heroNameLimit">50dp</dimen>
     <dimen name="textCard">14sp</dimen>
+
+    <dimen name="loginButtonHeight">55dp</dimen>
 </resources>

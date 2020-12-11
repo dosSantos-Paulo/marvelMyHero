@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.login.viewmodel.IMudarTab
 import com.example.marvelmyhero.login.viewmodel.LoginAdapter
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 
 const val LOGIN_FRAGMENT = 0
@@ -20,6 +21,10 @@ class LoginActivity : AppCompatActivity(), IMudarTab {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        showTab()
+    }
+
+    private fun showTab() {
         val pager = findViewById<ViewPager>(R.id.viewPagerLogin)
 
         tab.setupWithViewPager(pager)

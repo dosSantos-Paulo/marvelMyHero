@@ -1,105 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
+    tools:background="@color/colorPrimary"
     tools:context=".login.view.SignUpFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtNomeSignUp"
-        app:boxStrokeColor="#C0CCDA"
+        android:id="@+id/editText_name_signUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome"
-        android:textColorHint="#fff"
-        app:boxBackgroundColor="#fff"
-        app:hintTextColor="#fff"
-        tools:ignore="MissingConstraints">
+        android:hint="@string/name"
+        android:textColorHint="@color/textPrimary"
+        app:boxBackgroundColor="@color/textPrimary"
+        app:boxStrokeColor="@color/textPrimary"
+        app:hintTextColor="@color/textPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textColor="#fff" />
+            android:background="@color/totalTranslucent"
+            android:inputType="text"
+            android:textColor="@color/textPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtEmailSignUp"
-        app:boxStrokeColor="#C0CCDA"
-        android:layout_marginTop="16dp"
+        android:id="@+id/editText_email_signUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:textColorHint="#fff"
-        app:boxBackgroundColor="#fff"
-        app:hintTextColor="#fff"
-        tools:ignore="MissingConstraints">
+        android:layout_marginTop="@dimen/marginSmall"
+        android:hint="@string/email"
+        android:textColorHint="@color/textPrimary"
+        app:boxBackgroundColor="@color/textPrimary"
+        app:boxStrokeColor="@color/textPrimary"
+        app:hintTextColor="@color/textPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:background="@android:color/transparent"
-            android:id="@+id/filledTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/totalTranslucent"
             android:inputType="textEmailAddress"
-            android:textColor="#fff" />
+            android:textColor="@color/textPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtPasswordSignUp"
-        app:boxStrokeColor="#C0CCDA"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    android:hint="Password"
-    android:textColorHint="#fff"
-    app:boxBackgroundColor="#fff"
-    app:hintTextColor="#fff">
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:background="@android:color/transparent"
+        android:id="@+id/editText_password_signUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:textColor="#fff" />
-
-</com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtRepeatPassword"
-        app:boxStrokeColor="#C0CCDA"
-        android:background="@android:color/transparent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Repeat password"
-        android:textColorHint="#fff"
-        app:boxBackgroundColor="#fff"
-        app:hintTextColor="#fff">
+        android:layout_marginTop="@dimen/marginSmall"
+        android:hint="@string/password"
+        android:textColorHint="@color/textPrimary"
+        app:boxBackgroundColor="@color/textPrimary"
+        app:boxStrokeColor="@color/textPrimary"
+        app:hintTextColor="@color/textPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/totalTranslucent"
             android:inputType="textPassword"
-            android:textColor="#fff" />
+            android:textColor="@color/textPrimary" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editText_repeatPassword_signUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginSmall"
+        android:background="@color/totalTranslucent"
+        android:hint="@string/repeat_password"
+        android:textColorHint="@color/textPrimary"
+        app:boxBackgroundColor="@color/textPrimary"
+        app:boxStrokeColor="@color/textPrimary"
+        app:hintTextColor="@color/textPrimary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/totalTranslucent"
+            android:inputType="textPassword"
+            android:textColor="@color/textPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.button.MaterialButton
-        app:strokeWidth="2dp"
-        app:strokeColor="#fff"
+        android:id="@+id/btn_signup_signup"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/loginButtonHeight"
+        android:backgroundTint="@color/totalTranslucent"
         android:layout_marginTop="40dp"
-        android:text="SIGN UP"
-        app:cornerRadius="25dp"/>
+        android:text="@string/sign_up"
+        app:cornerRadius="@dimen/defaultRadius"
+        app:strokeColor="@color/textPrimary"
+        app:strokeWidth="1dp" />
 
 </LinearLayout>
