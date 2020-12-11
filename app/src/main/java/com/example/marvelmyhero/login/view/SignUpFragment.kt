@@ -1,60 +1,68 @@
 package com.example.marvelmyhero.login.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.view.MainActivity
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputLayout
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SignUpFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SignUpFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SignUpFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SignUpFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val signupButton = view.findViewById<MaterialButton>(R.id.btn_signup_signup)
+
+        val name = view.findViewById<TextInputLayout>(R.id.editText_name_signUp).editText
+        val email = view.findViewById<TextInputLayout>(R.id.editText_email_signUp).editText
+        val password = view.findViewById<TextInputLayout>(R.id.editText_password_signUp).editText
+        val repeatPassword =
+            view.findViewById<TextInputLayout>(R.id.editText_repeatPassword_signUp).editText
+
+        signupButton.setOnClickListener {
+            if (name?.text?.trim().isNullOrEmpty()) {
+                name?.error = getString(R.string.nameSignupError)
             }
+            if (email?.text?.trim().isNullOrEmpty()) {
+                email?.error = getString(R.string.email_error)
+            }
+            if (password?.text?.trim().isNullOrEmpty()) {
+                password?.error = getString(R.string.password)
+            } else if (password?.text?.trim()?.length!! !in 4..14) {
+                password.error = getString(R.string.passwordLengthError)
+            }
+            if (repeatPassword?.text?.trim().isNullOrEmpty()) {
+                repeatPassword?.error = getString(R.string.password)
+            } else if (repeatPassword?.text?.trim() != password?.text?.trim()) {
+                repeatPassword?.error = getString(R.string.repeatPasswordCompareError)
+            }
+
+            if (!name?.text?.trim().isNullOrEmpty() &&
+                !email?.text?.trim().isNullOrEmpty() &&
+                !password?.text?.trim().isNullOrEmpty() &&
+                !repeatPassword?.text?.trim().isNullOrEmpty() &&
+                password?.text?.trim()?.length!! in 4..14 &&
+                repeatPassword?.text?.trim() == password?.text?.trim()
+            ) {
+
+                val intent = Intent(view.context, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
+
 }

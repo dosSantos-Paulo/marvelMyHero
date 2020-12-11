@@ -48,4 +48,9 @@
     <string name="name">Name</string>
     <string name="repeat_password">Repeat password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="email_error">Need an email</string>
+    <string name="password_error">Need a password</string>
+    <string name="nameSignupError">Need a name</string>
+    <string name="passwordLengthError">Must be 4 to 14 characters</string>
+    <string name="repeatPasswordCompareError">Passwords must be the same</string>
 </resources>
