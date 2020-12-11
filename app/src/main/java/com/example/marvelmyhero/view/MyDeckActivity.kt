@@ -14,11 +14,8 @@ import com.example.marvelmyhero.card.view.CardFrontFragment
 import com.example.marvelmyhero.data.repository.CharacterRepository
 import com.example.marvelmyhero.model.CardManager
 import com.example.marvelmyhero.model.Hero
+import com.example.marvelmyhero.utils.CardUtils.Companion.CARD_MANAGER
 import com.example.marvelmyhero.view.MainActivity.Companion.USER_KEY
-import com.example.marvelmyhero.view.SplashScreen.Companion.CAPTAIN
-import com.example.marvelmyhero.view.SplashScreen.Companion.CARD_MANAGER
-import com.example.marvelmyhero.view.SplashScreen.Companion.STRANGE
-import com.example.marvelmyhero.view.SplashScreen.Companion.THANOS
 import com.example.marvelmyhero.viewmodel.CharacterViewModel
 import com.google.android.material.card.MaterialCardView
 

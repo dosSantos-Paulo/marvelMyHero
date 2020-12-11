@@ -9,4 +9,5 @@ data class User (
 ){
     var team: MutableList<Hero> = mutableListOf()
     var deck: MutableList<Hero> = mutableListOf()
+    val stringId = email + password
 }
