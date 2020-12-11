@@ -11,6 +11,10 @@ import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.view.CardFrontFragment.Companion.getClassification
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.data.repository.CharacterRepository
+import com.example.marvelmyhero.login.view.LoginActivity
+import com.example.marvelmyhero.login.view.LoginFragment.Companion.EMAIL_PREFS
+import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTED_PREFS
+import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
 import com.example.marvelmyhero.model.CharacterModel
 import com.example.marvelmyhero.model.Hero
 import com.example.marvelmyhero.model.User
@@ -257,6 +261,17 @@ class MainActivity : AppCompatActivity() {
                 closeContextMenu()
             }
             .setPositiveButton(getString(R.string.exitDialog_positiveButton)) { _, _ ->
+                val keepConnectedPreferences =
+                    getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
+
+                keepConnectedPreferences.edit()
+                    .putString(EMAIL_PREFS, "")
+                    .putString(PASS_PREFS, "")
+                    .apply()
+
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+
                 finish()
             }
             .show()

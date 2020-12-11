@@ -1,5 +1,6 @@
 package com.example.marvelmyhero.login.view
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -45,11 +46,22 @@ class LoginFragment : Fragment() {
 
                 val newEmail = email!!.text.trim().toString()
                 val newPassword = password!!.text.trim().toString()
-                val userLogin = findUser(newEmail, newPassword)
+                val userLogin = USER_MANAGER.login(newEmail, newPassword)
 
                 if (userLogin != null) {
+
+                    val keepConnectedPreference = view.context.getSharedPreferences(
+                        KEEP_CONNECTED_PREFS, MODE_PRIVATE
+                    )
+
+                    keepConnectedPreference.edit()
+                        .putString(EMAIL_PREFS, newEmail)
+                        .putString(PASS_PREFS, newPassword)
+                        .apply()
+
                     val intent = Intent(view.context, MainActivity::class.java)
                     startActivity(intent)
+
                 } else {
                     Toast.makeText(
                         view.context,
@@ -63,9 +75,10 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun findUser(email: String, password: String): User? {
-        val testUser = User("", "", email, password, 0)
 
-        return USER_MANAGER.getUser(testUser)
+    companion object {
+        const val KEEP_CONNECTED_PREFS = "SAVE_LOGIN_PREFERENCES"
+        const val EMAIL_PREFS = "EMAIL"
+        const val PASS_PREFS = "PASSWORD"
     }
 }

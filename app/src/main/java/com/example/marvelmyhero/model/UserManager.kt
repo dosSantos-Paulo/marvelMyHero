@@ -1,5 +1,7 @@
 package com.example.marvelmyhero.model
 
+import com.example.marvelmyhero.utils.UserUtils
+
 class UserManager {
     private val _listOfUsers = mutableListOf<User>()
 
@@ -22,5 +24,18 @@ class UserManager {
             }
         }
         return null
+    }
+
+    fun login(email: String?, password: String?): User? {
+        var testUser: User?
+        if (email == null || password == null) {
+            testUser = null
+        } else {
+            testUser = User("", "", email, password, 0)
+        }
+
+
+
+        return testUser?.let { getUser(it) }
     }
 }

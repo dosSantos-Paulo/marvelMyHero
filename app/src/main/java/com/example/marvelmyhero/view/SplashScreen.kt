@@ -11,6 +11,9 @@ import com.example.marvelmyhero.R
 import com.example.marvelmyhero.utils.UserUtils
 import com.example.marvelmyhero.data.repository.CharacterRepository
 import com.example.marvelmyhero.login.view.LoginActivity
+import com.example.marvelmyhero.login.view.LoginFragment.Companion.EMAIL_PREFS
+import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTED_PREFS
+import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
 import com.example.marvelmyhero.utils.CardUtils
 import com.example.marvelmyhero.utils.CardUtils.Companion.BLACK_PANTHER
 import com.example.marvelmyhero.utils.CardUtils.Companion.BLACK_WIDOW
@@ -37,11 +40,28 @@ class SplashScreen : AppCompatActivity() {
         animation()
 
         Handler(Looper.getMainLooper()).postDelayed({
+
+            preferencesLogin()
+
+        }, HANDLER_TIME)
+
+    }
+
+    private fun preferencesLogin() {
+        val keepConnectedPreferences = getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
+        val email = keepConnectedPreferences.getString(EMAIL_PREFS, "")
+        val password = keepConnectedPreferences.getString(PASS_PREFS, "")
+        val userLogin = UserUtils.USER_MANAGER.login(email, password)
+
+        if (userLogin == null) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-        }, HANDLER_TIME)
-
+        } else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun getViewModel() {

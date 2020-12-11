@@ -10,7 +10,7 @@
     <string name="card_image">card image</string>
 
     <string name="exitDialog_title">Exit</string>
-    <string name="exitDialog_message">Would you like to exit ?</string>
+    <string name="exitDialog_message">Would you like to logout ?</string>
     <string name="exitDialog_negativeButton">No</string>
     <string name="exitDialog_positiveButton">Yes</string>
 
