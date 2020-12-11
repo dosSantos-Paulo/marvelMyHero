@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.data.repository.CharacterRepository
+import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.model.CardManager
 import com.example.marvelmyhero.model.CharacterModel
 import com.example.marvelmyhero.viewmodel.CharacterViewModel
@@ -25,7 +26,7 @@ class SplashScreen : AppCompatActivity() {
         animation()
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MyDeckActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }, timeSplashScreen)

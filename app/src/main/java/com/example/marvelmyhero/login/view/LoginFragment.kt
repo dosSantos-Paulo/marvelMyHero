@@ -35,10 +35,10 @@ class LoginFragment : Fragment() {
         val password = view.findViewById<TextInputLayout>(R.id.editText_password_login).editText
 
         loginButton.setOnClickListener {
-            if (email?.text?.trim().isNullOrEmpty()){
+            if (email?.text?.trim().isNullOrEmpty()) {
                 email?.error = getString(R.string.email_error)
             }
-            if (password?.text?.trim().isNullOrEmpty()){
+            if (password?.text?.trim().isNullOrEmpty()) {
                 password?.error = getString(R.string.password_error)
             }
             if (!email?.text?.trim().isNullOrEmpty() && !password?.text?.trim().isNullOrEmpty()) {
@@ -46,12 +46,13 @@ class LoginFragment : Fragment() {
                 startActivity(intent)
             }
 
-        view.findViewById<Button>(R.id.btn_login_loginFragment).setOnClickListener {
-            val intent = Intent(view.context, MainActivity::class.java)
-            startActivity(intent)
+            view.findViewById<MaterialButton>(R.id.btn_login_login).setOnClickListener {
+                val intent = Intent(view.context, MainActivity::class.java)
+                startActivity(intent)
 
+            }
         }
+
+
     }
-
-
 }

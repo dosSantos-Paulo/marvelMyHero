@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -28,8 +27,7 @@
             android:inputType="textEmailAddress"
             android:textColor="@color/textPrimary" />
 
-
-    <LinearLayout
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -102,7 +100,6 @@
     </LinearLayout>
 
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_googleLogin_login"
         android:layout_width="match_parent"
@@ -122,8 +119,8 @@
         android:layout_height="@dimen/loginButtonHeight"
         android:layout_marginTop="@dimen/marginSmall"
         android:backgroundTint="@color/totalTranslucent"
-        android:padding="5dp"
         android:drawableLeft="@drawable/ic_facebook"
+        android:padding="5dp"
         android:text="@string/continuar_com_facebook"
         app:cornerRadius="@dimen/defaultRadius"
         app:strokeColor="@color/textPrimary"
