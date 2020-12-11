@@ -7,12 +7,25 @@
     android:background="@drawable/shape_background"
     tools:context=".splash.view.SplashScreen">
 
-    <ImageView
-        android:id="@+id/img_splash_screen"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif_marvel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gifmarvel" />
+
+    <ImageView
+        android:id="@+id/img_splash_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:alpha="0"
         android:contentDescription="@string/logo_marvel_my_hero"
-        android:src="@drawable/ic_my_hero_logo" />
+        android:src="@drawable/ic_my_hero_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/gif_marvel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
