@@ -39,4 +39,13 @@
     <string name="drag_and_drop">DRAG AND DROP CARDS TO BUILD YOUR TEAM</string>
     <string name="text_inserir_cards">Deve inserir cards no time</string>
     <string name="scroll_to_the">SCROLL TO SEE YOUR CARDS</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="continuar_com_o_google">Continue with Google</string>
+    <string name="continuar_com_facebook">Continue with Facebook</string>
+    <string name="or">OR</string>
+    <string name="name">Name</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

@@ -5,52 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/shape_background"
+    android:padding="@dimen/borderPadding"
     tools:context=".login.view.LoginActivity">
 
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="@dimen/logoWidth"
-        android:layout_height="@dimen/logoHeight"
+        android:layout_width="@dimen/logoWidthMed"
+        android:layout_height="@dimen/logoHeightMed"
         android:layout_gravity="center"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="@dimen/marginSmall"
+        android:layout_marginBottom="24dp"
         android:contentDescription="@string/logo_marvel_my_hero"
         android:src="@drawable/ic_my_hero_logo"
+        app:layout_constraintBottom_toTopOf="@+id/materialCardView_main"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView_main"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardElevation="0dp"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/translucentBoxColor"
+        app:cardCornerRadius="@dimen/boxRadius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:strokeColor="@color/textPrimary"
+        app:strokeWidth="0.5dp">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagerLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="228dp">
-
-        <com.google.android.material.tabs.TabLayout
-            app:tabTextColor="#FFFFFF"
-           app:tabIndicatorColor="#8190A5"
-         app:tabIndicatorFullWidth="false"
-            android:id="@+id/layoutLogin"
-            android:background="@android:color/transparent"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPagerLogin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </androidx.viewpager.widget.ViewPager>
-    </androidx.cardview.widget.CardView>
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/layoutLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/totalTranslucent"
+                app:tabIndicatorColor="@color/colorAccent"
+                app:tabIndicatorFullWidth="false"
+                app:tabTextColor="@color/textPrimary" />
+        </androidx.viewpager.widget.ViewPager>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,125 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
+    tools:background="@color/colorPrimary"
     tools:context=".login.view.LoginFragment">
 
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtEmailLogin"
-        app:boxStrokeColor="#C0CCDA"
+        android:id="@+id/editText_email_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:textColorHint="#fff"
-        app:boxBackgroundColor="#fff"
-        app:hintTextColor="#fff"
-        tools:ignore="MissingConstraints">
+        android:hint="@string/email"
+        android:textColorHint="@color/textPrimary"
+        app:boxBackgroundColor="@color/textPrimary"
+        app:boxStrokeColor="@color/textPrimary"
+        app:hintTextColor="@color/textPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:backgroundTint="#C0CCDA"
-            android:textColorHint="#C0CCDA"
-            android:background="@android:color/transparent"
-            android:id="@+id/filledTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/totalTranslucent"
             android:inputType="textEmailAddress"
-            android:textColor="#fff" />
+            android:textColor="@color/textPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtSenhaLogin"
-        app:boxStrokeColor="#C0CCDA"
+        android:id="@+id/editText_password_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Password"
-        android:textColorHint="#fff"
-        app:boxBackgroundColor="#fff"
-        app:hintTextColor="#fff">
+        android:layout_marginTop="@dimen/marginSmall"
+        android:hint="@string/password"
+        android:textColorHint="@color/textPrimary"
+        app:boxBackgroundColor="@color/textPrimary"
+        app:boxStrokeColor="@color/textPrimary"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/textPrimary"
+        app:hintTextColor="@color/textPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:background="@android:color/transparent"
-            android:id="@+id/txtSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/totalTranslucent"
             android:inputType="textPassword"
-            android:textColor="#fff" />
+            android:textColor="@color/textPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.button.MaterialButton
-        app:strokeWidth="2dp"
-        app:strokeColor="#fff"
+        android:id="@+id/btn_login_login"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="40dp"
-        android:text="LOGIN"
-        app:cornerRadius="25dp"/>
+        android:layout_height="@dimen/loginButtonHeight"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/marginLarge"
+        android:layout_marginBottom="@dimen/marginLarge"
+        android:backgroundTint="@color/totalTranslucent"
+        android:text="@string/login"
+        app:cornerRadius="@dimen/defaultRadius"
+        app:strokeColor="@color/textPrimary"
+        app:strokeWidth="1dp" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
         android:orientation="horizontal">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="1dp"
-        android:layout_marginTop="7dp"
-        android:background="#C0CCDA"
-        tools:ignore="MissingConstraints" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="7dp"
+            android:layout_weight="1"
+            android:background="@color/textPrimary"
+            tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:textColor="#fff"
-        android:text="OR" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/or"
+            android:textColor="@color/textPrimary" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="1dp"
-        android:layout_marginTop="7dp"
-        android:background="#C0CCDA"
-        tools:ignore="MissingConstraints" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="7dp"
+            android:layout_weight="1"
+            android:background="@color/textPrimary"
+            tools:ignore="MissingConstraints" />
 
     </LinearLayout>
 
 
+
     <com.google.android.material.button.MaterialButton
-      app:strokeWidth="2dp"
-        app:strokeColor="#fff"
+        android:id="@+id/btn_googleLogin_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/loginButtonHeight"
+        android:layout_marginTop="@dimen/marginLarge"
+        android:backgroundTint="@color/totalTranslucent"
         android:drawableLeft="@drawable/ic_google"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="40dp"
-        android:text="CONTINUAR COM GOOGLE"
-        app:cornerRadius="25dp"/>
+        android:padding="5dp"
+        android:text="@string/continuar_com_o_google"
+        app:cornerRadius="@dimen/defaultRadius"
+        app:strokeColor="@color/textPrimary"
+        app:strokeWidth="1dp" />
 
     <com.google.android.material.button.MaterialButton
-        app:strokeWidth="2dp"
-        app:strokeColor="#fff"
-        android:drawableLeft="@drawable/ic_facebook"
+        android:id="@+id/btn_facebookLogin_login"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="40dp"
-        android:text="CONTINUAR COM FACEBOOK"
-        app:cornerRadius="25dp"/>
-
-
-
-
-
+        android:layout_height="@dimen/loginButtonHeight"
+        android:layout_marginTop="@dimen/marginSmall"
+        android:backgroundTint="@color/totalTranslucent"
+        android:padding="5dp"
+        android:drawableLeft="@drawable/ic_facebook"
+        android:text="@string/continuar_com_facebook"
+        app:cornerRadius="@dimen/defaultRadius"
+        app:strokeColor="@color/textPrimary"
+        app:strokeWidth="1dp" />
 
 </LinearLayout>
