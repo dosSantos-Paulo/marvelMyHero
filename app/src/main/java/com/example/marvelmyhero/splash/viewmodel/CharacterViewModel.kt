@@ -1,10 +1,10 @@
-package com.example.marvelmyhero.viewmodel
+package com.example.marvelmyhero.splash.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.example.marvelmyhero.data.repository.CharacterRepository
-import com.example.marvelmyhero.model.CharacterModel
+import com.example.marvelmyhero.card.model.CharacterModel
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 

@@ -1,4 +1,4 @@
-package com.example.marvelmyhero.model
+package com.example.marvelmyhero.card.model
 
 data class Hero (
     val id: Int,

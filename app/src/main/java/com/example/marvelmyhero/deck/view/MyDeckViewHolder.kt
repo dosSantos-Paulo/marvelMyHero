@@ -1,4 +1,4 @@
-package com.example.marvelmyhero.view
+package com.example.marvelmyhero.deck.view
 
 import android.graphics.Color
 import android.view.View
@@ -10,7 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.view.MiniCardFragment.Companion.getColor
-import com.example.marvelmyhero.model.Hero
+import com.example.marvelmyhero.card.model.Hero
 import com.squareup.picasso.Picasso
 
 class MyDeckViewHolder(

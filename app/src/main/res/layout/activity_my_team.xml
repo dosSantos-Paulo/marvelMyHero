@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/shape_background"
     android:paddingTop="@dimen/borderPadding"
-    tools:context=".view.MyTeamActivity">
+    tools:context=".team.view.MyTeamActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

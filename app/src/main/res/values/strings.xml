@@ -10,7 +10,7 @@
     <string name="card_image">card image</string>
 
     <string name="exitDialog_title">Exit</string>
-    <string name="exitDialog_message">Would you like to exit ?</string>
+    <string name="exitDialog_message">Would you like to logout ?</string>
     <string name="exitDialog_negativeButton">No</string>
     <string name="exitDialog_positiveButton">Yes</string>
 
@@ -53,4 +53,5 @@
     <string name="nameSignupError">Need a name</string>
     <string name="passwordLengthError">Must be 4 to 14 characters</string>
     <string name="repeatPasswordCompareError">Passwords must be the same</string>
+    <string name="invalidLoginError">Invalid Login</string>
 </resources>

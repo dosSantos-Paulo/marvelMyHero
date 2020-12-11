@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.model.Hero
+import com.example.marvelmyhero.card.model.Hero
 
 
 class CardBackFragment(private val _card: Hero) : Fragment() {
