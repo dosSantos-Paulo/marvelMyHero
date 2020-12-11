@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".splash.view.SplashScreenGif">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gifmarvel" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,4 +15,11 @@
         android:contentDescription="@string/logo_marvel_my_hero"
         android:src="@drawable/ic_my_hero_logo" />
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif_marvel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gifmarvel" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

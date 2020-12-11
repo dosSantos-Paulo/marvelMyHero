@@ -27,6 +27,7 @@ import com.example.marvelmyhero.utils.CardUtils.Companion.THANOS
 import com.example.marvelmyhero.utils.CardUtils.Companion.THOR
 import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.main.view.MainActivity
+import pl.droidsonroids.gif.GifImageView
 
 class SplashScreen : AppCompatActivity() {
 
@@ -75,10 +76,17 @@ class SplashScreen : AppCompatActivity() {
 
     }
 
-
     private fun animation() {
-        findViewById<ImageView>(R.id.img_splash_screen)
-            .animate().apply {
+
+        val splash1 = findViewById<GifImageView>(R.id.gif_marvel)
+
+                splash1.animate().apply{
+                    duration = 5000
+                    alpha(0f)
+                }
+
+        val splash2 = findViewById<ImageView>(R.id.img_splash_screen)
+            splash2.animate().apply {
                 duration = 2500
                 scaleX(1.10f)
                 scaleY(1.10f)
