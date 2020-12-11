@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.login.view.LoginActivity
@@ -16,6 +15,7 @@ import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
 import com.example.marvelmyhero.model.Hero
 import com.example.marvelmyhero.model.User
 import com.example.marvelmyhero.utils.CardUtils.Companion.CARD_MANAGER
+import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.example.marvelmyhero.utils.UserUtils
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -23,6 +23,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,16 +35,13 @@ class MainActivity : AppCompatActivity() {
         val keepConnectedPreferences =
             getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
         val user = getUser(keepConnectedPreferences)
-
         toolBarItems(user)
 
+        NEW_USER.setUser(user)
 
-//      --> Substituir por método de get Aleatorio
-        user.deck = CARD_MANAGER.getAllCards()
-        user.team = mutableListOf(user.deck[0], user.deck[4], user.deck[8])
+        NEW_USER.addOnDeck(CARD_MANAGER.getAllCards())
 
-        showTeamCards(user)
-
+        showTeamCards(NEW_USER.getTeam())
 
         exitButton.setOnClickListener {
             exitDialog(keepConnectedPreferences)
@@ -51,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         deckButton.setOnClickListener {
             val intent = Intent(this, MyDeckActivity::class.java)
+
             startActivity(intent)
         }
 
@@ -62,10 +61,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun showTeamCards(user: User) {
+    private fun showTeamCards(team: MutableList<Hero>) {
 
 
-        for (i in user.team.indices) {
+        for (i in team.indices) {
             var frameLayout = R.id.frameLayout_teamCard1_main
             when (i) {
                 1 -> frameLayout = R.id.frameLayout_teamCard2_main
@@ -74,9 +73,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             miniCardFragment(
-                user.team[i].heroName,
-                user.team[i].imageUrl,
-                user.team[i].classification,
+                team[i].heroName,
+                team[i].imageUrl,
+                team[i].classification,
                 frameLayout
             )
         }

@@ -15,6 +15,7 @@ import com.example.marvelmyhero.data.repository.CharacterRepository
 import com.example.marvelmyhero.model.CardManager
 import com.example.marvelmyhero.model.Hero
 import com.example.marvelmyhero.utils.CardUtils.Companion.CARD_MANAGER
+import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.example.marvelmyhero.view.MainActivity.Companion.USER_KEY
 import com.example.marvelmyhero.viewmodel.CharacterViewModel
 import com.google.android.material.card.MaterialCardView
@@ -25,7 +26,7 @@ class MyDeckActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_deck)
 
-        val deck = CARD_MANAGER.getAllCards()
+        val deck = NEW_USER.getDeck()
 
         val arrowBack = findViewById<ImageView>(R.id.img_arrowBack_myDeck)
         val materialCardView = findViewById<MaterialCardView>(R.id.materialCard_myDeck)

@@ -1,41 +1,26 @@
 package com.example.marvelmyhero.model
 
-import com.example.marvelmyhero.utils.UserUtils
-
 class UserManager {
-    private val _listOfUsers = mutableListOf<User>()
+    private lateinit var _user: User
+    private var _isChangeTeam = false
 
-    fun createNewUser(
-        nickName: String,
-        name: String,
-        email: String,
-        password: String,
-        imageUrl: Int
-    ) {
-        val newUser = User(nickName, name, email, password, imageUrl)
-
-        _listOfUsers.add(newUser)
+    fun setUser(user: User) {
+        _user = user
     }
 
-    fun getUser(user: User): User? {
-        _listOfUsers.forEach {
-            if (user == it){
-                return it
-            }
-        }
-        return null
-    }
-
-    fun login(email: String?, password: String?): User? {
-        var testUser: User?
-        if (email == null || password == null) {
-            testUser = null
-        } else {
-            testUser = User("", "", email, password, 0)
+    fun addOnDeck (list: MutableList<Hero>) {
+        _user.deck.addAll(list)
+        if (!_isChangeTeam) {
+            _user.team = mutableListOf(_user.deck[0],_user.deck[1],_user.deck[2])
         }
 
-
-
-        return testUser?.let { getUser(it) }
     }
+
+    fun setNewTeam(card1: Hero, card2: Hero, card3: Hero){
+        _isChangeTeam = true
+        _user.team = mutableListOf(card1, card2, card3)
+    }
+
+    fun getDeck () = _user.deck
+    fun getTeam () = _user.team
 }

@@ -1,7 +1,7 @@
 package com.example.marvelmyhero.utils
 
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.model.UserManager
+import com.example.marvelmyhero.model.AllUsersManager
 
 class UserUtils {
 
@@ -29,6 +29,6 @@ class UserUtils {
     }
 
     companion object {
-        val USER_MANAGER = UserManager()
+        val USER_MANAGER = AllUsersManager()
     }
 }

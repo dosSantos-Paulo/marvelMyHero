@@ -14,10 +14,12 @@ import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.EMAIL_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTED_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
+import com.example.marvelmyhero.model.User
 import com.example.marvelmyhero.utils.CardUtils
 import com.example.marvelmyhero.utils.CardUtils.Companion.BLACK_PANTHER
 import com.example.marvelmyhero.utils.CardUtils.Companion.BLACK_WIDOW
 import com.example.marvelmyhero.utils.CardUtils.Companion.CAPTAIN
+import com.example.marvelmyhero.utils.CardUtils.Companion.CARD_MANAGER
 import com.example.marvelmyhero.utils.CardUtils.Companion.IRON_MAN
 import com.example.marvelmyhero.utils.CardUtils.Companion.LOKI
 import com.example.marvelmyhero.utils.CardUtils.Companion.NICK_FURY
@@ -25,6 +27,7 @@ import com.example.marvelmyhero.utils.CardUtils.Companion.SPIDER_MAN
 import com.example.marvelmyhero.utils.CardUtils.Companion.STRANGE
 import com.example.marvelmyhero.utils.CardUtils.Companion.THANOS
 import com.example.marvelmyhero.utils.CardUtils.Companion.THOR
+import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.example.marvelmyhero.viewmodel.CharacterViewModel
 
 class SplashScreen : AppCompatActivity() {
@@ -45,23 +48,6 @@ class SplashScreen : AppCompatActivity() {
 
         }, HANDLER_TIME)
 
-    }
-
-    private fun preferencesLogin() {
-        val keepConnectedPreferences = getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
-        val email = keepConnectedPreferences.getString(EMAIL_PREFS, "")
-        val password = keepConnectedPreferences.getString(PASS_PREFS, "")
-        val userLogin = UserUtils.USER_MANAGER.login(email, password)
-
-        if (userLogin == null) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        } else {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
     }
 
     private fun getViewModel() {
@@ -99,6 +85,24 @@ class SplashScreen : AppCompatActivity() {
                 scaleX(1.10f)
                 scaleY(1.10f)
             }
+    }
+
+    private fun preferencesLogin() {
+        val keepConnectedPreferences = getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
+        val email = keepConnectedPreferences.getString(EMAIL_PREFS, "")
+        val password = keepConnectedPreferences.getString(PASS_PREFS, "")
+        val userLogin = UserUtils.USER_MANAGER.login(email, password)
+
+        if (userLogin == null) {
+
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     companion object {
