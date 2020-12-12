@@ -190,12 +190,10 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="@dimen/buttonWidth"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/marginExtraLarge"
-                    android:layout_marginBottom="@dimen/marginLarge"
+                    android:layout_marginTop="30dp"
                     android:text="@string/my_deck"
                     android:textColor="@color/textPrimary"
                     app:cornerRadius="@dimen/defaultRadius"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/materialCardView_main"
@@ -215,6 +213,18 @@
                     app:layout_constraintVertical_bias="0.0"
                     app:tint="@color/textPrimary" />
 
+                <ImageView
+                    android:id="@+id/img_developers"
+                    android:layout_width="60dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_height="70dp"
+                    android:contentDescription="@string/button_developers"
+                    android:src="@mipmap/ic_developers_foreground"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_myDeck_main"
+                    app:tint="@color/textPrimary" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

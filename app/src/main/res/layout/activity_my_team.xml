@@ -28,7 +28,7 @@
             android:id="@+id/textView_MyTeam"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginMedium"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/gobold_bold"
             android:gravity="center"
             android:text="@string/my_team"

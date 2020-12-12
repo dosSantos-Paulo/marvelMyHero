@@ -10,7 +10,6 @@ import android.widget.TextView
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
 
-
 class CardBackFragment(private val _card: Hero) : Fragment() {
 
     override fun onCreateView(
@@ -68,6 +67,4 @@ class CardBackFragment(private val _card: Hero) : Fragment() {
             translationXBy(getValue)
         }
     }
-
-
 }

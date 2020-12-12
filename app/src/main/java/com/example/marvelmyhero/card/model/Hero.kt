@@ -1,6 +1,6 @@
 package com.example.marvelmyhero.card.model
 
-data class Hero (
+data class Hero(
     val id: Int,
     val heroName: String,
     val name: String,
@@ -14,8 +14,9 @@ data class Hero (
     val strength: Int,
 
     val description: String,
-){
+) {
     var favorite = false
     val averageDivider = 6.0
-    val classification: Double = (durability + energy + fightingSkills + inteligence + speed + strength) / averageDivider
+    val classification: Double =
+        (durability + energy + fightingSkills + inteligence + speed + strength) / averageDivider
 }

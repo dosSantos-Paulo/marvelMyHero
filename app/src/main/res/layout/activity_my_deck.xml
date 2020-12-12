@@ -27,7 +27,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginMedium"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/gobold_bold"
             android:gravity="center"
             android:text="@string/my_deck"
@@ -36,6 +36,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ic_exit_main"
+            android:layout_width="@dimen/icon"
+            android:layout_height="@dimen/icon"
+            android:layout_marginStart="230dp"
+            android:contentDescription="@string/exit_icon"
+            android:src="@drawable/ic_baseline_help_outline_24"
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintStart_toEndOf="@id/img_arrowBack_myDeck"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/textPrimary" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCard_myDeck"
