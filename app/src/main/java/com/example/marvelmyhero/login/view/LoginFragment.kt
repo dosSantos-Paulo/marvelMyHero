@@ -14,7 +14,6 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import com.example.marvelmyhero.utils.UserUtils.Companion.USER_MANAGER
 
-
 class LoginFragment : Fragment() {
 
     override fun onCreateView(
@@ -70,10 +69,7 @@ class LoginFragment : Fragment() {
                 }
             }
         }
-
-
     }
-
 
     companion object {
         const val KEEP_CONNECTED_PREFS = "SAVE_LOGIN_PREFERENCES"

@@ -33,16 +33,14 @@ class MainActivity : AppCompatActivity() {
         val exitButton = findViewById<ImageView>(R.id.ic_exit_main)
         val deckButton = findViewById<MaterialButton>(R.id.btn_myDeck_main)
         val materialCardView = findViewById<MaterialCardView>(R.id.materialCardView_main)
-
         val keepConnectedPreferences =
             getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
         val user = getUser(keepConnectedPreferences)
+
         toolBarItems(user)
 
         NEW_USER.setUser(user)
-
         NEW_USER.addOnDeck(CARD_MANAGER.getAllCards())
-
         showTeamCards(NEW_USER.getTeam())
 
         exitButton.setOnClickListener {
@@ -59,12 +57,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MyTeamActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
-
 
         for (i in team.indices) {
             var frameLayout = R.id.frameLayout_teamCard1_main
@@ -109,14 +104,12 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton("Yes") { _, _ ->
 
                 showNewCard(cardList)
-
             }
             .setNegativeButton("No") { _, _ ->
                 closeContextMenu()
             }
             .show()
     }
-
 
     fun showNewCard(cardList: MutableList<Hero>) {
 
@@ -147,7 +140,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 .show()
         }
-
     }
 
     private fun miniCardFragment(

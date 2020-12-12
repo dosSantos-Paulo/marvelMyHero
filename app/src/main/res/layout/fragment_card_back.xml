@@ -379,18 +379,17 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <ScrollView
-                        android:layout_marginTop="@dimen/marginSmall"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/marginSmall">
 
                         <TextView
                             android:id="@+id/txt_history_cardBack"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            tools:text="@string/loremIpsum"/>
+                            tools:text="@string/loremIpsum" />
 
                     </ScrollView>
-
 
                 </LinearLayout>
 

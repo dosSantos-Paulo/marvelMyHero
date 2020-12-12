@@ -15,7 +15,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".developers.view.DevelopersActivity"></activity>
-        <activity android:name=".splash.view.SplashScreenGif" />
         <activity android:name=".team.view.MyTeamActivity" />
         <activity android:name=".deck.view.MyDeckActivity" />
         <activity android:name=".login.view.LoginActivity" />
@@ -28,5 +27,4 @@
         </activity>
         <activity android:name=".main.view.MainActivity" />
     </application>
-
 </manifest>

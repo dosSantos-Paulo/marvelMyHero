@@ -3,7 +3,7 @@ package com.example.marvelmyhero.utils
 import com.example.marvelmyhero.login.model.CardManager
 import com.example.marvelmyhero.card.model.CharacterModel
 
-class CardUtils () {
+class CardUtils() {
 
     fun addCardOnManager(list: MutableList<CharacterModel>) {
 
@@ -171,17 +171,12 @@ class CardUtils () {
                         list[i].description
                     )
                 }
-
             }
         }
-
     }
-
-
 
     companion object {
         val CARD_MANAGER = CardManager()
-
         const val THANOS = 1009652
         const val STRANGE = 1017300
         const val CAPTAIN = 1009220

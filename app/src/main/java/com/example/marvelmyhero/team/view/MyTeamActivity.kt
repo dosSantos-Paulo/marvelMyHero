@@ -18,7 +18,6 @@ class MyTeamActivity : AppCompatActivity() {
 
         val backArrowButton = findViewById<ImageView>(R.id.img_arrowBack_myTeam)
         val deck = NEW_USER.getDeck()
-
         val recyclerViewMyTeam = findViewById<RecyclerView>(R.id.recyclerView_myTeam)
         val viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val adapterMyTeam = MyTeamAdapter(deck) {
@@ -29,7 +28,6 @@ class MyTeamActivity : AppCompatActivity() {
             setHasFixedSize(true)
             layoutManager = viewManagerMyTeam
             adapter = adapterMyTeam
-
         }
 
         showTeamCards(NEW_USER.getTeam())
@@ -37,11 +35,9 @@ class MyTeamActivity : AppCompatActivity() {
         backArrowButton.setOnClickListener {
             finish()
         }
-
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
-
 
         for (i in team.indices) {
             var frameLayout = R.id.frameLayout_teamCard1_myTeam

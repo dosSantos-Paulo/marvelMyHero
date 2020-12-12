@@ -3,7 +3,7 @@ package com.example.marvelmyhero.utils
 import com.example.marvelmyhero.login.model.UserManager
 
 class UserCardUtils {
-    fun deckSorty(){
+    fun deckSorty() {
         TODO("Deve adicionar função que sorteia")
     }
 

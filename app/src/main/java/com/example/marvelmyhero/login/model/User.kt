@@ -29,6 +29,4 @@ data class User(
         result = 31 * result + password.hashCode()
         return result
     }
-
-
 }

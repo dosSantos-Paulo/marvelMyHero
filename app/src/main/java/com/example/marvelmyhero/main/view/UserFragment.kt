@@ -11,11 +11,9 @@ import com.example.marvelmyhero.R
 import com.example.marvelmyhero.login.model.User
 import com.squareup.picasso.Picasso
 
-
 class UserFragment(
     private val _user: User
 ) : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +33,5 @@ class UserFragment(
         Picasso.get().load(_user.imageUrl).into(userImage)
         userName.text = _user.nickName
         totalCard.text = _user.deck.size.toString()
-        
     }
 }

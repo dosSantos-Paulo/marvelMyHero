@@ -9,7 +9,6 @@
     tools:background="@color/colorPrimary"
     tools:context=".login.view.LoginFragment">
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editText_email_login"
         android:layout_width="match_parent"
@@ -28,7 +27,6 @@
             android:textColor="@color/textPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editText_password_login"
@@ -52,7 +50,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login_login"
         android:layout_width="match_parent"
@@ -65,7 +62,6 @@
         app:cornerRadius="@dimen/defaultRadius"
         app:strokeColor="@color/textPrimary"
         app:strokeWidth="1dp" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,7 +95,6 @@
 
     </LinearLayout>
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_googleLogin_login"
         android:layout_width="match_parent"
@@ -127,4 +122,3 @@
         app:strokeWidth="1dp" />
 
 </LinearLayout>
-
