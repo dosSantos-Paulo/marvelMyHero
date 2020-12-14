@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
     fun showNewCard(cardList: MutableList<Hero>) {
 
         for (i in 0..4) {
-            var getStars: String = ""
+            var getStars = ""
             val starValue = getString(R.string.classificationStar)
 
             when (cardList[i].classification) {

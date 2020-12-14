@@ -3,7 +3,7 @@ package com.example.marvelmyhero.utils
 import com.example.marvelmyhero.login.model.CardManager
 import com.example.marvelmyhero.card.model.CharacterModel
 
-class CardUtils() {
+class CardUtils {
 
     fun addCardOnManager(list: MutableList<CharacterModel>) {
 

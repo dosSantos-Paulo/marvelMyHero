@@ -55,7 +55,7 @@ class CardFrontFragment(private val _card: Hero) : Fragment() {
 
     companion object {
         fun getClassification(value: Double, view: View): String {
-            var getStars: String = ""
+            var getStars = ""
             val starValue = view.context.getString(R.string.classificationStar)
 
             when (value) {

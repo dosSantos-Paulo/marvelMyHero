@@ -19,7 +19,6 @@
     <string name="total_cards">Total cards</string>
     <string name="total_cards_count">12</string>
     <string name="heroname">Hero Name</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="commumCardColor" tools:ignore="ReferenceType">@color/commumCardColor</string>
     <string name="bronzeCardColor" tools:ignore="ReferenceType">@color/bronzeCardColor</string>
@@ -66,4 +65,6 @@
     <string name="curso_de">Curso de Programação Mobile</string>
     <string name="turma">Turma 2º Semestre de 2020</string>
     <string name="button_developers">Button Developers</string>
+    <string name="hero_image">Hero image</string>
+    <string name="favorite">Favorite</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.example.marvelmyhero.login.model
 
 import com.example.marvelmyhero.card.model.Hero
-import com.example.marvelmyhero.login.model.User
 
 class UserManager {
     private lateinit var _user: User

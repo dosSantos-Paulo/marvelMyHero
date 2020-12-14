@@ -83,6 +83,7 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/goldCardColor" />
+        app:tint="@color/goldCardColor"
+        android:contentDescription="@string/favorite"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
