@@ -51,6 +51,7 @@
     <string name="nameSignupError">Need a name</string>
     <string name="passwordLengthError">Must be 4 to 14 characters</string>
     <string name="repeatPasswordCompareError">Passwords must be the same</string>
+    <string name="facebook_app_id">876555076435573</string> <string name="fb_login_protocol_scheme">fb876555076435573</string>
     <string name="invalidLoginError">Invalid Login</string>
     <string name="backButton">Botão de voltar</string>
     <string name="developers">Developers</string>
