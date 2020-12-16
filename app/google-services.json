@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "306313505010",
+    "project_id": "marvelmyhero-fd389",
+    "storage_bucket": "marvelmyhero-fd389.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306313505010:android:8a6736028dcfec9cec886b",
+        "android_client_info": {
+          "package_name": "com.example.marvelmyhero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306313505010-b5412e1ra3n2osb30t8gr73e0glpd4f7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhAVdWea5zt_fcB51SyjDQmYRcCt8p18k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306313505010-b5412e1ra3n2osb30t8gr73e0glpd4f7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
