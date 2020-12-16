@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.view.MainActivity
+import com.example.marvelmyhero.main.view.MainActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 

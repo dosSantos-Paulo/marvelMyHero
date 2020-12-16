@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">MarvelMyHero</string>
+    <string name="app_name">Marvel My Hero</string>
     <string name="user_icon">User icon</string>
     <string name="logo_marvel_my_hero">Logo Marvel My Hero</string>
     <string name="exit_icon">exit icon</string>
@@ -10,7 +10,7 @@
     <string name="card_image">card image</string>
 
     <string name="exitDialog_title">Exit</string>
-    <string name="exitDialog_message">Would you like to exit ?</string>
+    <string name="exitDialog_message">Would you like to logout ?</string>
     <string name="exitDialog_negativeButton">No</string>
     <string name="exitDialog_positiveButton">Yes</string>
 
@@ -19,7 +19,6 @@
     <string name="total_cards">Total cards</string>
     <string name="total_cards_count">12</string>
     <string name="heroname">Hero Name</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="commumCardColor" tools:ignore="ReferenceType">@color/commumCardColor</string>
@@ -32,7 +31,7 @@
     <string name="durability">Durability</string>
     <string name="energy">Energy</string>
     <string name="fighting_skills">Fighting Skills</string>
-    <string name="inteligence">Inteligence</string>
+    <string name="inteligence">Intelligence</string>
     <string name="speed">Speed</string>
     <string name="strength">Strength</string>
     <string name="loremIpsum">Lorem ipsum pretium diam.</string>
@@ -54,5 +53,20 @@
     <string name="passwordLengthError">Must be 4 to 14 characters</string>
     <string name="repeatPasswordCompareError">Passwords must be the same</string>
     <string name="facebook_app_id">876555076435573</string> <string name="fb_login_protocol_scheme">fb876555076435573</string>
-
+    <string name="invalidLoginError">Invalid Login</string>
+    <string name="backButton">Botão de voltar</string>
+    <string name="developers">Developers</string>
+    <string name="beth_arley">Beth Arley Rodrigues de Araujo</string>
+    <string name="rafael_irineu">Rafael Irineu Costa Oliveira</string>
+    <string name="paulo_santos">Paulo Leonardo Lima dos Santos</string>
+    <string name="gabriel_henrique">Gabriel Henrique Marrani N. Segantini</string>
+    <string name="professores">Teachers</string>
+    <string name="felipe_medeiros">Felipe Medeiros</string>
+    <string name="lucas_gabriel">Lucas Gabriel</string>
+    <string name="escola_digital_house">Escola Digital House</string>
+    <string name="curso_de">Curso de Programação Mobile</string>
+    <string name="turma">Turma 2º Semestre de 2020</string>
+    <string name="button_developers">Button Developers</string>
+    <string name="hero_image">Hero image</string>
+    <string name="favorite">Favorite</string>
 </resources>

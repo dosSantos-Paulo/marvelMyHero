@@ -11,8 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.model.Hero
-import com.example.marvelmyhero.view.MainActivity
+import com.example.marvelmyhero.card.model.Hero
 import com.squareup.picasso.Picasso
 
 

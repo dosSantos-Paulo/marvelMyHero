@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MyDeckActivity"
+    tools:context=".deck.view.MyDeckActivity"
     android:paddingTop="@dimen/borderPadding"
     android:background="@drawable/shape_background">
 
@@ -20,8 +20,8 @@
             android:src="@drawable/ic_baseline_arrow_back_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/textPrimary" />
-
+            app:tint="@color/textPrimary"
+            android:contentDescription="@string/backButton"/>
 
         <TextView
             android:id="@+id/textView3"

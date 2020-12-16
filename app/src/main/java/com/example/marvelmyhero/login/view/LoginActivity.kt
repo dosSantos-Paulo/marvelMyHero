@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.login.viewmodel.IMudarTab
-import com.example.marvelmyhero.login.viewmodel.LoginAdapter
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 
 const val LOGIN_FRAGMENT = 0
