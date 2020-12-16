@@ -99,7 +99,7 @@ class LoginFragment : Fragment() {
 
     }
 
-    <<<<<<< Feature/LoginSocial
+
     private fun irParaHome(uiid: String) {
         startActivity(Intent(context, MainActivity::class.java))
     }
@@ -137,12 +137,12 @@ class LoginFragment : Fragment() {
 
     }
 
-    =======
+
 
     companion object {
         const val KEEP_CONNECTED_PREFS = "SAVE_LOGIN_PREFERENCES"
         const val EMAIL_PREFS = "EMAIL"
         const val PASS_PREFS = "PASSWORD"
     }
-    >>>>>>> develop
+
 }
