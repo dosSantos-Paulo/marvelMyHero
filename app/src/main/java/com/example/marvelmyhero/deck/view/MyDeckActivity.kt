@@ -17,7 +17,6 @@ class MyDeckActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_deck)
 
         val deck = NEW_USER.getDeck()
-
         val arrowBack = findViewById<ImageView>(R.id.img_arrowBack_myDeck)
         val materialCardView = findViewById<MaterialCardView>(R.id.materialCard_myDeck)
 
@@ -47,11 +46,9 @@ class MyDeckActivity : AppCompatActivity() {
             layoutManager = cardManager
             adapter = cardAdapter
         }
-
     }
 
     companion object {
         const val DECK_COLLUMN = 3
     }
-
 }

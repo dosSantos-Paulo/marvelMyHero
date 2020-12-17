@@ -8,7 +8,6 @@
     android:padding="@dimen/borderPadding"
     tools:context=".login.view.LoginActivity">
 
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="@dimen/logoWidthMed"
@@ -50,6 +49,7 @@
                 app:tabIndicatorFullWidth="false"
                 app:tabTextColor="@color/textPrimary" />
         </androidx.viewpager.widget.ViewPager>
+
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

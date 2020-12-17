@@ -11,9 +11,7 @@ import com.example.marvelmyhero.main.view.MainActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 
-
 class SignUpFragment : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,5 +62,4 @@ class SignUpFragment : Fragment() {
             }
         }
     }
-
 }

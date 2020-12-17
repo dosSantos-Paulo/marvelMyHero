@@ -17,7 +17,6 @@ class MyTeamAdapter(
             R.layout.fragment_mini_card,
             parent, false
         )
-
         return MyTeamViewHolder(view)
     }
 
@@ -25,7 +24,6 @@ class MyTeamAdapter(
         val item = _cardListMyTeam[position]
         holder.bind(item)
         holder.itemView.setOnClickListener { _listener(item) }
-
     }
 
     override fun getItemCount() = _cardListMyTeam.size

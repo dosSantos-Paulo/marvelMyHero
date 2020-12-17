@@ -11,13 +11,12 @@ class AllUsersManager {
         imageUrl: Int
     ) {
         val newUser = User(nickName, name, email, password, imageUrl)
-
         _listOfUsers.add(newUser)
     }
 
     fun getUser(user: User): User? {
         _listOfUsers.forEach {
-            if (user == it){
+            if (user == it) {
                 return it
             }
         }
@@ -31,8 +30,6 @@ class AllUsersManager {
         } else {
             testUser = User("", "", email, password, 0)
         }
-
-
 
         return testUser?.let { getUser(it) }
     }

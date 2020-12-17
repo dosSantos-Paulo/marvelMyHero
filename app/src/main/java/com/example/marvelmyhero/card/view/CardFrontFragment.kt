@@ -14,7 +14,6 @@ import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
 import com.squareup.picasso.Picasso
 
-
 class CardFrontFragment(private val _card: Hero) : Fragment() {
 
     override fun onCreateView(
@@ -51,13 +50,12 @@ class CardFrontFragment(private val _card: Hero) : Fragment() {
                 addToBackStack(null)
                 commit()
             }
-
         }
     }
 
     companion object {
-        fun getClassification(value: Double, view: View):String {
-            var getStars:String = ""
+        fun getClassification(value: Double, view: View): String {
+            var getStars = ""
             val starValue = view.context.getString(R.string.classificationStar)
 
             when (value) {
@@ -77,5 +75,4 @@ class CardFrontFragment(private val _card: Hero) : Fragment() {
             return getStars
         }
     }
-
 }

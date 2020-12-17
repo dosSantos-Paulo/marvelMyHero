@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
 
-class MyDeckAdapter (
+class MyDeckAdapter(
     private val _cardList: MutableList<Hero>,
     private val _listener: (Hero) -> Unit
-): RecyclerView.Adapter<MyDeckViewHolder>() {
+) : RecyclerView.Adapter<MyDeckViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyDeckViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.fragment_mini_card,
@@ -27,5 +27,4 @@ class MyDeckAdapter (
     }
 
     override fun getItemCount() = _cardList.size
-
 }
