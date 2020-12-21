@@ -12,8 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.MovieUtil.validateNameEmailPassword
 import com.example.marvelmyhero.R
+<<<<<<< HEAD
 import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
 import com.example.marvelmyhero.view.MainActivity
+=======
+import com.example.marvelmyhero.main.view.MainActivity
+>>>>>>> c9a8934b780df40060c0e1e428fc99951c838185
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout

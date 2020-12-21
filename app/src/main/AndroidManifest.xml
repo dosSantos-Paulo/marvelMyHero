@@ -14,16 +14,18 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".view.MyTeamActivity" />
-        <activity android:name=".view.MyDeckActivity" />
+        <activity android:name=".developers.view.DevelopersActivity" />
+        <activity android:name=".team.view.MyTeamActivity" />
+        <activity android:name=".deck.view.MyDeckActivity" />
         <activity android:name=".login.view.LoginActivity" />
-        <activity android:name=".view.SplashScreen">
+        <activity android:name=".splash.view.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".view.MainActivity" />
 
         <meta-data
@@ -45,6 +47,9 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
+
+        <activity android:name=".main.view.MainActivity" />
 
     </application>
 

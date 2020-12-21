@@ -1,9 +1,8 @@
 package com.example.marvelmyhero.data.repository
 
 import com.example.marvelmyhero.data.network.NetworkUtils
-import com.example.marvelmyhero.model.CharacterDataWrapper
+import com.example.marvelmyhero.card.model.CharacterDataWrapper
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface CharacterEndpoint {
