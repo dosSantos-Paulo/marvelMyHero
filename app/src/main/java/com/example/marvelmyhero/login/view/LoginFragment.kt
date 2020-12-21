@@ -2,8 +2,6 @@ package com.example.marvelmyhero.login.view
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +10,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.view.MainActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -23,13 +20,8 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import android.widget.Toast
-import com.example.marvelmyhero.R
 import com.example.marvelmyhero.main.view.MainActivity
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textfield.TextInputLayout
 import com.example.marvelmyhero.utils.UserUtils.Companion.USER_MANAGER
-
 
 class LoginFragment : Fragment() {
     private  lateinit var button: Button
