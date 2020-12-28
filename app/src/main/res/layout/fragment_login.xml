@@ -10,7 +10,6 @@
     tools:context=".login.view.LoginFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editText_email_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email"
@@ -20,6 +19,7 @@
         app:hintTextColor="@color/textPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_email_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/totalTranslucent"
@@ -29,7 +29,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editText_password_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginSmall"
@@ -42,6 +41,7 @@
         app:hintTextColor="@color/textPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_password_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/totalTranslucent"

@@ -1,31 +1,41 @@
 package com.example.marvelmyhero.login.view
 
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
+import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import com.example.marvelmyhero.MovieUtil
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textfield.TextInputLayout
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import android.widget.Toast
+import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.main.view.MainActivity
-import com.example.marvelmyhero.utils.UserUtils.Companion.USER_MANAGER
+import com.google.android.material.button.MaterialButton
+
 
 class LoginFragment : Fragment() {
     private  lateinit var button: Button
     private lateinit var callbackManager: CallbackManager
+    private val viewModel: AuthenticationViewModel by lazy {
+        ViewModelProvider(this).get(
+            AuthenticationViewModel::class.java
+        )
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,52 +58,43 @@ class LoginFragment : Fragment() {
         val googleLogin = view.findViewById<MaterialButton>(R.id.btn_googleLogin_login)
         val facebookLogin = view.findViewById<MaterialButton>(R.id.btn_facebookLogin_login)
 
-        val email = view.findViewById<TextInputLayout>(R.id.editText_email_login).editText
-        val password = view.findViewById<TextInputLayout>(R.id.editText_password_login).editText
+
 
         loginButton.setOnClickListener {
-            if (email?.text?.trim().isNullOrEmpty()) {
-                email?.error = getString(R.string.email_error)
-            }
-            if (password?.text?.trim().isNullOrEmpty()) {
-                password?.error = getString(R.string.password_error)
-            }
-            if (!email?.text?.trim().isNullOrEmpty() && !password?.text?.trim().isNullOrEmpty()) {
-
-                val newEmail = email!!.text.trim().toString()
-                val newPassword = password!!.text.trim().toString()
-                val userLogin = USER_MANAGER.login(newEmail, newPassword)
-
-                if (userLogin != null) {
-
-                    val keepConnectedPreference = view.context.getSharedPreferences(
-                        KEEP_CONNECTED_PREFS, MODE_PRIVATE
-                    )
-
-                    keepConnectedPreference.edit()
-                        .putString(EMAIL_PREFS, newEmail)
-                        .putString(PASS_PREFS, newPassword)
-                        .apply()
-
-                    val intent = Intent(view.context, MainActivity::class.java)
-                    startActivity(intent)
-
-                } else {
-                    Toast.makeText(
-                        view.context,
-                        getString(R.string.invalidLoginError),
-                        Toast.LENGTH_SHORT
-                    ).show()
+            val email = view.findViewById<EditText>(R.id.editText_email_login).text.toString()
+            val password = view.findViewById<EditText>(R.id.editText_password_login).text.toString()
+            when {
+                MovieUtil.validateEmailPassword(email, password) -> {
+                    viewModel.loginEmailPassword(email, password)
+                }
+                else -> {
+                    Snackbar.make(loginButton, "Login failed", Snackbar.LENGTH_LONG).show()
                 }
             }
+
+            initViewModel()
         }
+    }
 
+    private fun initViewModel(){
+        viewModel.stateLogin.observe(viewLifecycleOwner, { state ->
+            state?.let {
+                navigateToHome(it)
+            }
+        })
+    }
 
+    private fun navigateToHome(status: Boolean) {
+        when {
+            status -> {
+                startActivity(Intent(context, DevelopersActivity::class.java))
+            }
+        }
     }
 
 
     private fun irParaHome(uiid: String) {
-        startActivity(Intent(context, MainActivity::class.java))
+        startActivity(Intent(context, DevelopersActivity::class.java))
     }
 
 
