@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".main.view.UserFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/translucentBoxColorDark"
         app:cardCornerRadius="@dimen/boxRadius"
-        app:strokeWidth="@dimen/strokeWidth"
         app:strokeColor="@color/textPrimary"
-        app:cardBackgroundColor="@color/translucentBoxColorDark">
-
+        app:strokeWidth="@dimen/strokeWidth">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,24 +24,24 @@
                 android:id="@+id/img_user_fragmentUser"
                 android:layout_width="@dimen/userPic_userCard"
                 android:layout_height="@dimen/userPic_userCard"
-                android:src="@drawable/ic_launcher_background"
                 android:layout_marginTop="@dimen/marginExtraLarge"
+                android:contentDescription="@string/imageDescription_fragmentUser"
+                android:src="@drawable/ic_launcher_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/imageDescription_fragmentUser" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txt_userName_fragmentUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginMedium"
                 android:layout_weight="1"
                 android:fontFamily="@font/gobold_bold"
+                android:gravity="center"
                 android:text="@string/username"
                 android:textColor="@color/textPrimary"
                 android:textSize="@dimen/superText"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/marginMedium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_user_fragmentUser" />
@@ -73,10 +72,8 @@
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/txt_userName_fragmentUser" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
 
 </FrameLayout>

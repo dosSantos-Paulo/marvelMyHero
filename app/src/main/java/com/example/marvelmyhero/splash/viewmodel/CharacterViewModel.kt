@@ -26,14 +26,12 @@ class CharacterViewModel(
         } catch (ex: Exception) {
             println(ex.message)
         }
-
     }
 
-    class CharacterViewModelFactory(private val _repository: CharacterRepository):ViewModelProvider.Factory {
+    class CharacterViewModelFactory(private val _repository: CharacterRepository) :
+        ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return CharacterViewModel(_repository) as T
         }
-
     }
-
 }

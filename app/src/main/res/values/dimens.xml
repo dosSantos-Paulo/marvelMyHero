@@ -25,7 +25,6 @@
     <dimen name="cardBoxHeight">200dp</dimen>
     <dimen name="strokeWidth">1dp</dimen>
     <dimen name="boxRadius">12dp</dimen>
-
     <dimen name="buttonWidth">300dp</dimen>
     <dimen name="defaultRadius">25dp</dimen>
     <dimen name="userPic_userCard">200dp</dimen>
@@ -35,15 +34,11 @@
     <dimen name="textMin">12sp</dimen>
     <dimen name="textExtraMin">10sp</dimen>
     <dimen name="borderPaddinSmall">4dp</dimen>
-
     <dimen name="cardPadding">20dp</dimen>
     <dimen name="cardPaddingTop">45dp</dimen>
     <dimen name="cardPaddingPlus">28dp</dimen>
-
-
     <dimen name="textCardTitle">28sp</dimen>
     <dimen name="heroNameLimit">50dp</dimen>
     <dimen name="textCard">14sp</dimen>
-
     <dimen name="loginButtonHeight">55dp</dimen>
 </resources>

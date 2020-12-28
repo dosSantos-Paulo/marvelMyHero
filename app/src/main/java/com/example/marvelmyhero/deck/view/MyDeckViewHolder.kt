@@ -13,9 +13,7 @@ import com.example.marvelmyhero.card.view.MiniCardFragment.Companion.getColor
 import com.example.marvelmyhero.card.model.Hero
 import com.squareup.picasso.Picasso
 
-class MyDeckViewHolder(
-    private val _view: View
-): RecyclerView.ViewHolder(_view){
+class MyDeckViewHolder(private val _view: View) : RecyclerView.ViewHolder(_view) {
 
     private val _name = _view.findViewById<TextView>(R.id.txt_heroName_cardMini)
     private val _imageUrl = _view.findViewById<ImageView>(R.id.img_heroPic_cardMini)
@@ -24,14 +22,14 @@ class MyDeckViewHolder(
 
     fun bind(card: Hero) {
 
-        if (card.favorite){
+        if (card.favorite) {
             _favorite.visibility = VISIBLE
         } else if (!card.favorite) {
             _favorite.visibility = INVISIBLE
         }
 
         itemView.setOnLongClickListener { v: View ->
-            when (card.favorite){
+            when (card.favorite) {
                 true -> {
                     card.favorite = false
                     _favorite.visibility = INVISIBLE

@@ -34,14 +34,13 @@ class MiniCardFragment(
         val cardName = view.findViewById<TextView>(R.id.txt_heroName_cardMini)
         val cardImage = view.findViewById<ImageView>(R.id.img_heroPic_cardMini)
 
-
         cardColor.setBackgroundColor(Color.parseColor(getString(getColor(cardClassification))))
         cardName.text = name
         Picasso.get().load(imageUrl).into(cardImage)
     }
 
     companion object {
-        fun getColor (classification: Double): Int {
+        fun getColor(classification: Double): Int {
             var color = R.color.commumCardColor
 
             when (classification) {
@@ -54,5 +53,4 @@ class MiniCardFragment(
             return color
         }
     }
-
 }

@@ -14,6 +14,7 @@ import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTE
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
 import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.deck.view.MyDeckActivity
+import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.utils.CardUtils.Companion.CARD_MANAGER
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
@@ -33,16 +34,14 @@ class MainActivity : AppCompatActivity() {
         val exitButton = findViewById<ImageView>(R.id.ic_exit_main)
         val deckButton = findViewById<MaterialButton>(R.id.btn_myDeck_main)
         val materialCardView = findViewById<MaterialCardView>(R.id.materialCardView_main)
-
-        val keepConnectedPreferences =
-            getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
+        val keepConnectedPreferences = getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
         val user = getUser(keepConnectedPreferences)
+        val developers = findViewById<ImageView>(R.id.img_developers)
+
         toolBarItems(user)
 
         NEW_USER.setUser(user)
-
         NEW_USER.addOnDeck(CARD_MANAGER.getAllCards())
-
         showTeamCards(NEW_USER.getTeam())
 
         exitButton.setOnClickListener {
@@ -51,7 +50,11 @@ class MainActivity : AppCompatActivity() {
 
         deckButton.setOnClickListener {
             val intent = Intent(this, MyDeckActivity::class.java)
+            startActivity(intent)
+        }
 
+        developers.setOnClickListener {
+            val intent = Intent(this, DevelopersActivity::class.java)
             startActivity(intent)
         }
 
@@ -59,12 +62,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MyTeamActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
-
 
         for (i in team.indices) {
             var frameLayout = R.id.frameLayout_teamCard1_main
@@ -109,7 +109,6 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton("Yes") { _, _ ->
 
                 showNewCard(cardList)
-
             }
             .setNegativeButton("No") { _, _ ->
                 closeContextMenu()
@@ -117,11 +116,10 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-
     fun showNewCard(cardList: MutableList<Hero>) {
 
         for (i in 0..4) {
-            var getStars: String = ""
+            var getStars = ""
             val starValue = getString(R.string.classificationStar)
 
             when (cardList[i].classification) {
@@ -147,7 +145,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 .show()
         }
-
     }
 
     private fun miniCardFragment(

@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.utils.UserUtils
 import com.example.marvelmyhero.data.repository.CharacterRepository
@@ -36,17 +37,11 @@ class SplashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
 
         UserUtils().startListOfUsers()
-
         getViewModel()
-
         animation()
-
         Handler(Looper.getMainLooper()).postDelayed({
-
             preferencesLogin()
-
         }, HANDLER_TIME)
-
     }
 
     private fun getViewModel() {
@@ -73,7 +68,6 @@ class SplashScreen : AppCompatActivity() {
         viewModel.getCharacter(allCharId).observe(this) {
             CardUtils().addCardOnManager(it)
         }
-
     }
 
     private fun animation() {
@@ -81,7 +75,6 @@ class SplashScreen : AppCompatActivity() {
         val logoSplash = findViewById<ImageView>(R.id.img_splash_screen)
 
         Handler(Looper.getMainLooper()).postDelayed({
-
             gifSplash.animate().apply {
                 duration = 3000
                 alpha(0f)
@@ -93,9 +86,7 @@ class SplashScreen : AppCompatActivity() {
                 scaleX(0.80f)
                 scaleY(0.80f)
             }
-
         }, 5000)
-
     }
 
     private fun preferencesLogin() {
@@ -105,7 +96,6 @@ class SplashScreen : AppCompatActivity() {
         val userLogin = UserUtils.USER_MANAGER.login(email, password)
 
         if (userLogin == null) {
-
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
@@ -118,6 +108,5 @@ class SplashScreen : AppCompatActivity() {
 
     companion object {
         const val HANDLER_TIME: Long = 10000
-
     }
 }

@@ -15,7 +15,6 @@ interface CharacterEndpoint {
             @Query("apikey") apikey: String?
     ): CharacterDataWrapper
 
-
     companion object {
         val Endpoint: CharacterEndpoint by lazy {
             NetworkUtils.getRetrofitInstance().create(CharacterEndpoint::class.java)
