@@ -1,34 +1,45 @@
 package com.example.marvelmyhero.login.view
 
+import android.app.Activity.RESULT_OK
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.MovieUtil
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
+import com.example.marvelmyhero.main.view.MainActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.FacebookAuthProvider
-import com.google.firebase.auth.FirebaseAuth
-import android.widget.Toast
-import com.example.marvelmyhero.developers.view.DevelopersActivity
-import com.example.marvelmyhero.main.view.MainActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class LoginFragment : Fragment() {
+    private lateinit var auth: FirebaseAuth
+
     private  lateinit var button: Button
     private lateinit var callbackManager: CallbackManager
     private val viewModel: AuthenticationViewModel by lazy {
@@ -52,7 +63,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        auth = Firebase.auth
 
         val loginButton = view.findViewById<MaterialButton>(R.id.btn_login_login)
         val googleLogin = view.findViewById<MaterialButton>(R.id.btn_googleLogin_login)
@@ -74,6 +85,16 @@ class LoginFragment : Fragment() {
 
             initViewModel()
         }
+        googleLogin.setOnClickListener {
+            val gso =
+                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail()
+                    .build()
+            val cliente = GoogleSignIn.getClient(requireContext(), gso)
+            startActivityForResult(cliente.signInIntent, 1)
+        }
+
     }
 
     private fun initViewModel(){
@@ -97,6 +118,9 @@ class LoginFragment : Fragment() {
         startActivity(Intent(context, DevelopersActivity::class.java))
     }
 
+    private fun irParaHome2() {
+        startActivity(Intent(context, DevelopersActivity::class.java))
+    }
 
     private fun loginFacebook() {
         val instanceFirebase = LoginManager.getInstance()
@@ -123,14 +147,46 @@ class LoginFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         callbackManager.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == RESULT_OK && requestCode == 1) {
+            val contaGoogle = GoogleSignIn.getSignedInAccountFromIntent(data).result
+            Log.i(TAG, "onActivityResult: conta google autenticada $contaGoogle")
+
+        }
+
+        if (requestCode == 1) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)!!
+                Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                Log.w(TAG, "Google sign in failed", e)
+                // ...
+            }
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener() { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "signInWithCredential:success")
+                    val user = auth.currentUser
+                    irParaHome2()
+                } else {
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+
+                }
+
+            }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
-
-
 
     companion object {
         const val KEEP_CONNECTED_PREFS = "SAVE_LOGIN_PREFERENCES"
@@ -139,3 +195,5 @@ class LoginFragment : Fragment() {
     }
 
 }
+
+
