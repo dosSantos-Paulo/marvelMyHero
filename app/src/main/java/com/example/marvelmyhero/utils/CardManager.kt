@@ -17,13 +17,73 @@ class CardManager {
         BLACK_WIDOW,
         SPIDER_MAN,
         THOR,
-        LOKI
+        LOKI,
+        WOLVERINE,
+        PROF_XAVIER,
+        CYCLOPS
     )
 
     fun addCardsOnManager(list: MutableList<CharacterModel>) {
 
         for (i in list.indices) {
             when (list[i].id) {
+
+                CYCLOPS -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Scott Summers",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            3,
+                            7,
+                            3,
+                            5,
+                            4,
+                            4,
+                            list[i].description
+                        )
+                    )
+
+                }
+
+                PROF_XAVIER -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Charles Francis Xavier",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            7,
+                            4,
+                            7,
+                            2,
+                            4,
+                            list[i].description
+                        )
+                    )
+
+                }
+
+                WOLVERINE -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "James Howlett (Logan)",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            1,
+                            7,
+                            2,
+                            2,
+                            4,
+                            list[i].description
+                        )
+                    )
+
+                }
 
                 THANOS -> {
                     cardManager.add(
@@ -224,5 +284,8 @@ class CardManager {
         const val SPIDER_MAN = 1009610
         const val THOR = 1009664
         const val LOKI = 1009407
+        const val WOLVERINE = 1009718
+        const val PROF_XAVIER = 1009504
+        const val CYCLOPS = 1009257
     }
 }
