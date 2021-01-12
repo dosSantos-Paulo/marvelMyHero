@@ -20,13 +20,108 @@ class CardManager {
         LOKI,
         WOLVERINE,
         PROF_XAVIER,
-        CYCLOPS
+        CYCLOPS,
+        JEAN_GREY,
+        BEAST,
+        COLOSSUS,
+        NIGHTCRAWLER,
+        STORM
     )
 
     fun addCardsOnManager(list: MutableList<CharacterModel>) {
 
         for (i in list.indices) {
             when (list[i].id) {
+
+                STORM -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Ororo Munroe",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            2,
+                            5,
+                            4,
+                            2,
+                            3,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
+
+                NIGHTCRAWLER -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Kurt Wagner",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            5,
+                            7,
+                            7,
+                            5,
+                            7,
+                            4,
+                            list[i].description
+                        )
+                    )
+                }
+
+                COLOSSUS -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Piotr Nikolaievitch Rasputin",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            7,
+                            5,
+                            5,
+                            4,
+                            4,
+                            7,
+                            list[i].description
+                        )
+                    )
+                }
+
+                BEAST -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Henry P. Maccoy (Hank)",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            1,
+                            4,
+                            6,
+                            3,
+                            4,
+                            list[i].description
+                        )
+                    )
+                }
+
+                JEAN_GREY -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Jean Elaine Grey",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            3,
+                            6,
+                            6,
+                            4,
+                            3,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
 
                 CYCLOPS -> {
                     cardManager.add(
@@ -44,7 +139,6 @@ class CardManager {
                             list[i].description
                         )
                     )
-
                 }
 
                 PROF_XAVIER -> {
@@ -63,7 +157,6 @@ class CardManager {
                             list[i].description
                         )
                     )
-
                 }
 
                 WOLVERINE -> {
@@ -82,7 +175,6 @@ class CardManager {
                             list[i].description
                         )
                     )
-
                 }
 
                 THANOS -> {
@@ -101,7 +193,6 @@ class CardManager {
                             list[i].description
                         )
                     )
-
                 }
 
                 STRANGE -> {
@@ -287,5 +378,10 @@ class CardManager {
         const val WOLVERINE = 1009718
         const val PROF_XAVIER = 1009504
         const val CYCLOPS = 1009257
+        const val JEAN_GREY = 1009327
+        const val BEAST = 1009175
+        const val COLOSSUS = 1009243
+        const val NIGHTCRAWLER = 1009472
+        const val STORM = 1009629
     }
 }
