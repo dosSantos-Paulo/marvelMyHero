@@ -20,6 +20,7 @@ import com.example.marvelmyhero.R
 import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
 import com.example.marvelmyhero.main.view.MainActivity
+import com.example.marvelmyhero.register.RegisterActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -115,11 +116,11 @@ class LoginFragment : Fragment() {
 
 
     private fun irParaHome(uiid: String) {
-        startActivity(Intent(context, DevelopersActivity::class.java))
+        startActivity(Intent(context, RegisterActivity::class.java))
     }
 
     private fun irParaHome2() {
-        startActivity(Intent(context, DevelopersActivity::class.java))
+        startActivity(Intent(context, RegisterActivity::class.java))
     }
 
     private fun loginFacebook() {

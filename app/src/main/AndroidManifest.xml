@@ -16,17 +16,18 @@
         tools:targetApi="m">
         <activity android:name=".developers.view.DevelopersActivity" />
         <activity android:name=".team.view.MyTeamActivity" />
+        <activity android:name=".register.RegisterActivity" />
         <activity android:name=".deck.view.MyDeckActivity" />
         <activity android:name=".login.view.LoginActivity" />
+        <activity android:name=".main.view.MainActivity" />
+        
         <activity android:name=".splash.view.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".main.view.MainActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

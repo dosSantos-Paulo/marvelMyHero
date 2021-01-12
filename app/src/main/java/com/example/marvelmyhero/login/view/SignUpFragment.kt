@@ -14,6 +14,7 @@ import com.example.marvelmyhero.MovieUtil.validateNameEmailPassword
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
 import com.example.marvelmyhero.main.view.MainActivity
+import com.example.marvelmyhero.register.RegisterActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 
@@ -62,7 +63,7 @@ class SignUpFragment : Fragment() {
     private fun navigateToHome(status: Boolean) {
         when {
             status -> {
-                val intent = Intent(context, MainActivity::class.java)
+                val intent = Intent(context, RegisterActivity::class.java)
                 startActivity(intent)
             }
         }

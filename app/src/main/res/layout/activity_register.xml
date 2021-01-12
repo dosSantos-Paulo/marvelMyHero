@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_background"
+    android:padding="@dimen/borderPadding"
+    tools:context=".register.RegisterActivity">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/logoWidthMed"
+        android:layout_height="@dimen/logoHeightMed"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/marginSmall"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="@string/logo_marvel_my_hero"
+        android:src="@drawable/ic_my_hero_logo"
+        app:layout_constraintBottom_toTopOf="@+id/materialCardView_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView_register"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardBackgroundColor="@color/translucentBoxColor"
+        app:cardCornerRadius="@dimen/boxRadius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:strokeColor="@color/textPrimary"
+        app:strokeWidth="0.5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/image_userImage_register"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="@dimen/strokeWidth"
+                    android:contentDescription="@string/user_icon"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_perfil" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <ImageView
+                android:id="@+id/image_editIcon_register"
+                android:layout_width="@dimen/icon"
+                android:layout_height="@dimen/icon"
+                android:contentDescription="@string/edit_image_icon"
+                android:src="@drawable/ic_baseline_edit_24"
+                app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+                app:layout_constraintStart_toEndOf="@+id/materialCardView"
+                app:tint="@color/textPrimary" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginSmall"
+                android:layout_marginTop="@dimen/marginLarge"
+                android:layout_marginEnd="@dimen/marginSmall"
+                android:hint="@string/nickname"
+                android:textColorHint="@color/textPrimary"
+                app:boxBackgroundColor="@color/textPrimary"
+                app:boxStrokeColor="@color/textPrimary"
+                app:hintTextColor="@color/textPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_nickName_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/totalTranslucent"
+                    android:inputType="text"
+                    android:textColor="@color/textPrimary" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/marginSmall"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/name"
+                android:textColorHint="@color/textPrimary"
+                app:boxBackgroundColor="@color/textPrimary"
+                app:boxStrokeColor="@color/textPrimary"
+                app:hintTextColor="@color/textPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_name_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/totalTranslucent"
+                    android:inputType="text"
+                    android:textColor="@color/textPrimary" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_submit_register"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/loginButtonHeight"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/marginSmall"
+                android:backgroundTint="@color/totalTranslucent"
+                android:text="@string/submit"
+                app:cornerRadius="@dimen/defaultRadius"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                app:strokeColor="@color/textPrimary"
+                app:strokeWidth="1dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

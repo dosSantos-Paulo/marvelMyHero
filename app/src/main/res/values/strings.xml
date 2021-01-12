@@ -68,4 +68,7 @@
     <string name="button_developers">Button Developers</string>
     <string name="hero_image">Hero image</string>
     <string name="favorite">Favorite</string>
+    <string name="edit_image_icon">edit image icon</string>
+    <string name="nickname">NickName</string>
+    <string name="submit">Submit</string>
 </resources>

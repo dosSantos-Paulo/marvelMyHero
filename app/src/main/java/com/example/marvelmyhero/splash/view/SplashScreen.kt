@@ -28,6 +28,7 @@ import com.example.marvelmyhero.utils.CardUtils.Companion.THANOS
 import com.example.marvelmyhero.utils.CardUtils.Companion.THOR
 import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.main.view.MainActivity
+import com.example.marvelmyhero.register.RegisterActivity
 import pl.droidsonroids.gif.GifImageView
 
 class SplashScreen : AppCompatActivity() {

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.login.view.LoginActivity
@@ -34,9 +35,17 @@ class MainActivity : AppCompatActivity() {
         val exitButton = findViewById<ImageView>(R.id.ic_exit_main)
         val deckButton = findViewById<MaterialButton>(R.id.btn_myDeck_main)
         val materialCardView = findViewById<MaterialCardView>(R.id.materialCardView_main)
-        val keepConnectedPreferences = getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
-        val user = getUser(keepConnectedPreferences)
+//        val keepConnectedPreferences = getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
+//        val user = getUser(keepConnectedPreferences)
         val developers = findViewById<ImageView>(R.id.img_developers)
+
+        val user = User(
+            "Teste",
+            "Testando",
+            "Teste@Teste",
+            "123",
+            R.drawable.ic_perfil
+        )
 
         toolBarItems(user)
 
@@ -45,7 +54,8 @@ class MainActivity : AppCompatActivity() {
         showTeamCards(NEW_USER.getTeam())
 
         exitButton.setOnClickListener {
-            exitDialog(keepConnectedPreferences)
+            Toast.makeText(this, "try to exit!", Toast.LENGTH_LONG).show()
+//            exitDialog(keepConnectedPreferences)
         }
 
         deckButton.setOnClickListener {
