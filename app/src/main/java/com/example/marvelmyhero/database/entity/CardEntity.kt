@@ -1,4 +1,4 @@
-package com.example.marvelmyhero.database
+package com.example.marvelmyhero.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
