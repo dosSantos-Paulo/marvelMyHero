@@ -109,18 +109,18 @@ class LoginFragment : Fragment() {
     private fun navigateToHome(status: Boolean) {
         when {
             status -> {
-                startActivity(Intent(context, DevelopersActivity::class.java))
+                startActivity(Intent(context, MainActivity::class.java))
             }
         }
     }
 
 
     private fun irParaHome(uiid: String) {
-        startActivity(Intent(context, RegisterActivity::class.java))
+        startActivity(Intent(context, MainActivity::class.java))
     }
 
     private fun irParaHome2() {
-        startActivity(Intent(context, RegisterActivity::class.java))
+        startActivity(Intent(context, MainActivity::class.java))
     }
 
     private fun loginFacebook() {
