@@ -25,7 +25,23 @@ class CardManager {
         BEAST,
         COLOSSUS,
         NIGHTCRAWLER,
-        STORM
+        STORM,
+        VISION,
+        SCARLET_WITCH,
+        FALCON,
+        WINTER_SOLDIER,
+        ADAM_WARLOCK,
+        CAPTAIN_MARVEL,
+        GROOT,
+        GAMORA,
+        ROCKET_RACCOON,
+        STAR_LORD,
+        MARIA_HILL,
+        WAR_MACHINE,
+        HAWKEYE,
+        ANT_MAN,
+        BLADE,
+        GHOST_RIDER
     )
 
     fun addCardsOnManager(list: MutableList<CharacterModel>) {
@@ -356,6 +372,295 @@ class CardManager {
                         )
                     )
                 }
+
+                VISION -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Victor Shade",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            6,
+                            6,
+                            3,
+                            4,
+                            3,
+                            5,
+                            list[i].description
+                        )
+                    )
+                }
+
+                SCARLET_WITCH -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Wanda Maximoff",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            2,
+                            6,
+                            3,
+                            3,
+                            2,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
+
+                FALCON -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Sam Wilson",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            2,
+                            1,
+                            4,
+                            2,
+                            3,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
+
+                WINTER_SOLDIER -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Bucky Barnes",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            1,
+                            6,
+                            2,
+                            2,
+                            4,
+                            list[i].description
+                        )
+                    )
+                }
+
+                ADAM_WARLOCK -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Adam Warlock",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            6,
+                            6,
+                            2,
+                            3,
+                            7,
+                            5,
+                            list[i].description
+                        )
+                    )
+                }
+
+                CAPTAIN_MARVEL -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Carol Danvers",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            6,
+                            6,
+                            4,
+                            3,
+                            5,
+                            5,
+                            list[i].description
+                        )
+                    )
+                }
+
+                GROOT -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Groot",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            3,
+                            4,
+                            3,
+                            3,
+                            7,
+                            list[i].description
+                        )
+                    )
+                }
+
+                GAMORA -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Gamora",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            3,
+                            1,
+                            6,
+                            3,
+                            4,
+                            3,
+                            list[i].description
+                        )
+                    )
+                }
+
+                ROCKET_RACCOON -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Rocket Raccoon",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            2,
+                            1,
+                            4,
+                            3,
+                            2,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
+
+                STAR_LORD -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Rocket Raccoon",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            3,
+                            1,
+                            4,
+                            4,
+                            2,
+                            3,
+                            list[i].description
+                        )
+                    )
+                }
+
+                MARIA_HILL -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Maria Hill",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            2,
+                            1,
+                            4,
+                            4,
+                            2,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
+
+                WAR_MACHINE -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "James Rhodes",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            6,
+                            6,
+                            4,
+                            3,
+                            5,
+                            6,
+                            list[i].description
+                        )
+                    )
+                }
+
+                HAWKEYE -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Clint Barton",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            2,
+                            1,
+                            4,
+                            2,
+                            2,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
+
+                ANT_MAN -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Scott Lang",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            2,
+                            3,
+                            2,
+                            4,
+                            2,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
+
+                BLADE -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Eric Brooks",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            1,
+                            5,
+                            2,
+                            2,
+                            4,
+                            list[i].description
+                        )
+                    )
+                }
+
+                GHOST_RIDER -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Robbie Reyes",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            5,
+                            3,
+                            4,
+                            2,
+                            3,
+                            4,
+                            list[i].description
+                        )
+                    )
+                }
+
             }
         }
     }
@@ -383,5 +688,21 @@ class CardManager {
         const val COLOSSUS = 1009243
         const val NIGHTCRAWLER = 1009472
         const val STORM = 1009629
+        const val VISION = 1009697
+        const val SCARLET_WITCH = 1009562
+        const val FALCON = 1009297
+        const val WINTER_SOLDIER = 1010740
+        const val ADAM_WARLOCK = 1010354
+        const val CAPTAIN_MARVEL = 1010338
+        const val GROOT = 1010743
+        const val GAMORA = 1010763
+        const val ROCKET_RACCOON = 1010744
+        const val STAR_LORD = 1010733
+        const val MARIA_HILL = 1011335
+        const val WAR_MACHINE = 1017322
+        const val HAWKEYE = 1009338
+        const val ANT_MAN = 1010802
+        const val BLADE = 1009191
+        const val GHOST_RIDER = 1010925
     }
 }
