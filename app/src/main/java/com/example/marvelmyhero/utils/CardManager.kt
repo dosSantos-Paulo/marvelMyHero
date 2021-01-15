@@ -52,7 +52,12 @@ class CardManager {
         INVISIBLE_WOMAN,
         THE_THING,
         HUMAN_TORCH,
-        SANDMAN
+        SANDMAN,
+        DAREDEVIL,
+        VALKYRIE,
+        JESSICA_JONES,
+        LUKE_CAGE,
+        IRON_FIST
     )
 
     fun addCardsOnManager(list: MutableList<CharacterModel>) {
@@ -870,6 +875,95 @@ class CardManager {
                     )
                 }
 
+                DAREDEVIL -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Matt Murdock",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            2,
+                            4,
+                            5,
+                            3,
+                            2,
+                            3,
+                            list[i].description
+                        )
+                    )
+                }
+
+                VALKYRIE -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Samantha Parrington",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            1,
+                            5,
+                            3,
+                            2,
+                            5,
+                            list[i].description
+                        )
+                    )
+                }
+
+                JESSICA_JONES -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Jessica Jones",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            1,
+                            3,
+                            2,
+                            3,
+                            4,
+                            list[i].description
+                        )
+                    )
+                }
+
+                LUKE_CAGE -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Luke Cage",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            5,
+                            1,
+                            4,
+                            3,
+                            2,
+                            4,
+                            list[i].description
+                        )
+                    )
+                }
+
+                IRON_FIST -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Danny Rand",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            3,
+                            3,
+                            6,
+                            3,
+                            2,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
             }
         }
     }
@@ -924,5 +1018,10 @@ class CardManager {
         const val THE_THING = 1009662
         const val HUMAN_TORCH = 1009356
         const val SANDMAN = 1009558
+        const val DAREDEVIL = 1009262
+        const val VALKYRIE = 1010350
+        const val JESSICA_JONES = 1009378
+        const val LUKE_CAGE = 1009215
+        const val IRON_FIST = 1009367
     }
 }
