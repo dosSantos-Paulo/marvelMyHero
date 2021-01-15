@@ -41,7 +41,18 @@ class CardManager {
         HAWKEYE,
         ANT_MAN,
         BLADE,
-        GHOST_RIDER
+        GHOST_RIDER,
+        MANTIS,
+        SHANG_CHI,
+        DEADPOOL,
+        KITTY_PRYDE,
+        JUGGERNAUT,
+        MYSTIQUE,
+        MAGIK,
+        INVISIBLE_WOMAN,
+        THE_THING,
+        HUMAN_TORCH,
+        SANDMAN
     )
 
     fun addCardsOnManager(list: MutableList<CharacterModel>) {
@@ -661,6 +672,204 @@ class CardManager {
                     )
                 }
 
+                MANTIS -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "This One",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            7,
+                            3,
+                            6,
+                            3,
+                            7,
+                            3,
+                            list[i].description
+                        )
+                    )
+                }
+
+                SHANG_CHI -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Master of Kung Fu",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            3,
+                            7,
+                            4,
+                            4,
+                            3,
+                            list[i].description
+                        )
+                    )
+                }
+
+                DEADPOOL -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Wade Wilson",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            1,
+                            6,
+                            2,
+                            7,
+                            4,
+                            list[i].description
+                        )
+                    )
+                }
+
+                KITTY_PRYDE -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Anna Marie",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            3,
+                            2,
+                            4,
+                            4,
+                            2,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
+
+                JUGGERNAUT -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Cain Marko",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            7,
+                            1,
+                            3,
+                            2,
+                            4,
+                            7,
+                            list[i].description
+                        )
+                    )
+                }
+
+                MYSTIQUE -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Raven Darkhölme",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            0,
+                            5,
+                            4,
+                            2,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
+
+                MAGIK -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Illyana Rasputin(a)",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            2,
+                            7,
+                            4,
+                            7,
+                            3,
+                            2,
+                            list[i].description
+                        )
+                    )
+                }
+
+                INVISIBLE_WOMAN -> {
+                cardManager.add(
+                    CardEntity(
+                        list[i].id,
+                        list[i].name,
+                        "Susan S. Richards",
+                        "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                        6,
+                        7,
+                        5,
+                        5,
+                        5,
+                        4,
+                        list[i].description
+                    )
+                )
+            }
+
+                THE_THING -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Benjamin Ben Grimm",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            6,
+                            1,
+                            4,
+                            2,
+                            2,
+                            6,
+                            list[i].description
+                        )
+                    )
+                }
+
+                HUMAN_TORCH -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Jonathan J. Storm",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            4,
+                            6,
+                            4,
+                            4,
+                            5,
+                            4,
+                            list[i].description
+                        )
+                    )
+                }
+
+                SANDMAN -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "William Baker",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            7,
+                            4,
+                            5,
+                            4,
+                            4,
+                            5,
+                            list[i].description
+                        )
+                    )
+                }
+
             }
         }
     }
@@ -704,5 +913,16 @@ class CardManager {
         const val ANT_MAN = 1010802
         const val BLADE = 1009191
         const val GHOST_RIDER = 1010925
+        const val MANTIS = 1011026
+        const val SHANG_CHI = 1009577
+        const val DEADPOOL = 1009268
+        const val KITTY_PRYDE = 1009508
+        const val JUGGERNAUT = 1009382
+        const val MYSTIQUE = 1009465
+        const val MAGIK = 1009415
+        const val INVISIBLE_WOMAN = 1009366
+        const val THE_THING = 1009662
+        const val HUMAN_TORCH = 1009356
+        const val SANDMAN = 1009558
     }
 }
