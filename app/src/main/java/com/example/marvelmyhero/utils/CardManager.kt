@@ -52,12 +52,18 @@ class CardManager {
         INVISIBLE_WOMAN,
         THE_THING,
         HUMAN_TORCH,
-        SANDMAN,
         DAREDEVIL,
         VALKYRIE,
         JESSICA_JONES,
         LUKE_CAGE,
-        IRON_FIST
+        IRON_FIST,
+        HULK,
+        ROGUE,
+        GALACTUS,
+        ODIN,
+        SILVER_SURFER,
+        MISTER_FANTASTIC,
+        DOCTOR_DOOM
     )
 
     fun addCardsOnManager(list: MutableList<CharacterModel>) {
@@ -91,8 +97,8 @@ class CardManager {
                             "Kurt Wagner",
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
                             5,
-                            7,
-                            7,
+                            5,
+                            5,
                             5,
                             7,
                             4,
@@ -144,10 +150,10 @@ class CardManager {
                             list[i].name,
                             "Jean Elaine Grey",
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
-                            3,
-                            6,
-                            6,
                             4,
+                            6,
+                            6,
+                            6,
                             3,
                             2,
                             list[i].description
@@ -199,10 +205,10 @@ class CardManager {
                             "James Howlett (Logan)",
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
                             4,
-                            1,
+                            4,
                             7,
                             2,
-                            2,
+                            4,
                             4,
                             list[i].description
                         )
@@ -398,9 +404,9 @@ class CardManager {
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
                             6,
                             6,
-                            3,
-                            4,
-                            3,
+                            5,
+                            7,
+                            7,
                             5,
                             list[i].description
                         )
@@ -414,12 +420,12 @@ class CardManager {
                             list[i].name,
                             "Wanda Maximoff",
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
-                            2,
+                            5,
+                            7,
+                            7,
                             6,
-                            3,
-                            3,
-                            2,
-                            2,
+                            4,
+                            7,
                             list[i].description
                         )
                     )
@@ -470,8 +476,8 @@ class CardManager {
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
                             6,
                             6,
-                            2,
-                            3,
+                            4,
+                            4,
                             7,
                             5,
                             list[i].description
@@ -488,10 +494,10 @@ class CardManager {
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
                             6,
                             6,
-                            4,
+                            7,
                             3,
-                            5,
-                            5,
+                            7,
+                            7,
                             list[i].description
                         )
                     )
@@ -720,11 +726,11 @@ class CardManager {
                             list[i].name,
                             "Wade Wilson",
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
-                            4,
-                            1,
-                            6,
-                            2,
                             7,
+                            7,
+                            7,
+                            2,
+                            2,
                             4,
                             list[i].description
                         )
@@ -757,10 +763,10 @@ class CardManager {
                             "Cain Marko",
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
                             7,
-                            1,
-                            3,
                             2,
                             4,
+                            3,
+                            5,
                             7,
                             list[i].description
                         )
@@ -775,7 +781,7 @@ class CardManager {
                             "Raven Darkhölme",
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
                             4,
-                            0,
+                            1,
                             5,
                             4,
                             2,
@@ -852,24 +858,6 @@ class CardManager {
                             4,
                             5,
                             4,
-                            list[i].description
-                        )
-                    )
-                }
-
-                SANDMAN -> {
-                    cardManager.add(
-                        CardEntity(
-                            list[i].id,
-                            list[i].name,
-                            "William Baker",
-                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
-                            7,
-                            4,
-                            5,
-                            4,
-                            4,
-                            5,
                             list[i].description
                         )
                     )
@@ -964,6 +952,133 @@ class CardManager {
                         )
                     )
                 }
+
+                HULK -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Bruce Benner",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            7,
+                            6,
+                            5,
+                            6,
+                            5,
+                            7,
+                            list[i].description
+                        )
+                    )
+                }
+
+                ROGUE -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Anna Marie",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            6,
+                            6,
+                            6,
+                            6,
+                            6,
+                            6,
+                            list[i].description
+                        )
+                    )
+                }
+
+                GALACTUS -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Galan",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            7,
+                            6,
+                            7,
+                            7,
+                            6,
+                            7,
+                            list[i].description
+                        )
+                    )
+                }
+
+                ODIN -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Odin Borson",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            7,
+                            7,
+                            4,
+                            7,
+                            7,
+                            6,
+                            list[i].description
+                        )
+                    )
+                }
+
+                SILVER_SURFER -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Norrin Radd",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            7,
+                            7,
+                            5,
+                            4,
+                            7,
+                            6,
+                            list[i].description
+                        )
+                    )
+                }
+
+                MISTER_FANTASTIC -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Reed Richards",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            6,
+                            2,
+                            3,
+                            7,
+                            3,
+                            3,
+                            list[i].description
+                        )
+                    )
+                }
+
+                DOCTOR_DOOM -> {
+                    cardManager.add(
+                        CardEntity(
+                            list[i].id,
+                            list[i].name,
+                            "Victor Von Doom",
+                            "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
+                            6,
+                            6,
+                            4,
+                            6,
+                            5,
+                            4,
+                            list[i].description
+                        )
+                    )
+                }
+
             }
         }
     }
@@ -1017,11 +1132,17 @@ class CardManager {
         const val INVISIBLE_WOMAN = 1009366
         const val THE_THING = 1009662
         const val HUMAN_TORCH = 1009356
-        const val SANDMAN = 1009558
         const val DAREDEVIL = 1009262
         const val VALKYRIE = 1010350
         const val JESSICA_JONES = 1009378
         const val LUKE_CAGE = 1009215
         const val IRON_FIST = 1009367
+        const val HULK = 1009351
+        const val ROGUE = 1009546
+        const val GALACTUS = 1009312
+        const val ODIN = 1009480
+        const val SILVER_SURFER = 1009592
+        const val MISTER_FANTASTIC = 1009459
+        const val DOCTOR_DOOM = 1009281
     }
 }
