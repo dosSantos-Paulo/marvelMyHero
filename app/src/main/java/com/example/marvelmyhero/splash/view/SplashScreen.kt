@@ -29,6 +29,7 @@ import com.example.marvelmyhero.utils.CardUtils.Companion.THOR
 import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.register.RegisterActivity
+import com.example.marvelmyhero.utils.CardManager
 import pl.droidsonroids.gif.GifImageView
 
 class SplashScreen : AppCompatActivity() {
@@ -52,19 +53,8 @@ class SplashScreen : AppCompatActivity() {
             CharacterViewModel.CharacterViewModelFactory(CharacterRepository())
         ).get(CharacterViewModel::class.java)
 
-        val allCharId =
-            listOf(
-                THANOS,
-                STRANGE,
-                CAPTAIN,
-                NICK_FURY,
-                IRON_MAN,
-                BLACK_PANTHER,
-                BLACK_WIDOW,
-                SPIDER_MAN,
-                THOR,
-                LOKI
-            )
+
+        val allCharId = CardManager().getIdsList()
 
         viewModel.getCharacter(allCharId).observe(this) {
             CardUtils().addCardOnManager(it)
@@ -97,7 +87,7 @@ class SplashScreen : AppCompatActivity() {
         val userLogin = UserUtils.USER_MANAGER.login(email, password)
 
         if (userLogin == null) {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         } else {
@@ -108,6 +98,6 @@ class SplashScreen : AppCompatActivity() {
     }
 
     companion object {
-        const val HANDLER_TIME: Long = 10000
+        const val HANDLER_TIME: Long = 20000
     }
 }

@@ -11,13 +11,12 @@ import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.EMAIL_PREFS
-import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTED_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
 import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.deck.view.MyDeckActivity
 import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.login.model.User
-import com.example.marvelmyhero.utils.CardUtils.Companion.CARD_MANAGER
+import com.example.marvelmyhero.utils.CardUtils.Companion.cardManipulator
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.example.marvelmyhero.utils.UserUtils
 import com.example.marvelmyhero.team.view.MyTeamActivity
@@ -50,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         toolBarItems(user)
 
         NEW_USER.setUser(user)
-        NEW_USER.addOnDeck(CARD_MANAGER.getAllCards())
+        NEW_USER.addOnDeck(cardManipulator.getAllCards())
         showTeamCards(NEW_USER.getTeam())
 
         exitButton.setOnClickListener {
