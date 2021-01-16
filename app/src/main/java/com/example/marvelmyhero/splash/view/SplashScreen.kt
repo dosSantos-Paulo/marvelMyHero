@@ -5,30 +5,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.utils.UserUtils
 import com.example.marvelmyhero.data.repository.CharacterRepository
+import com.example.marvelmyhero.db.database.AppDataBase
+import com.example.marvelmyhero.db.entity.CardEntity
+import com.example.marvelmyhero.db.repository.CardRepository
+import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.EMAIL_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTED_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
-import com.example.marvelmyhero.utils.CardUtils
-import com.example.marvelmyhero.utils.CardUtils.Companion.BLACK_PANTHER
-import com.example.marvelmyhero.utils.CardUtils.Companion.BLACK_WIDOW
-import com.example.marvelmyhero.utils.CardUtils.Companion.CAPTAIN
-import com.example.marvelmyhero.utils.CardUtils.Companion.IRON_MAN
-import com.example.marvelmyhero.utils.CardUtils.Companion.LOKI
-import com.example.marvelmyhero.utils.CardUtils.Companion.NICK_FURY
-import com.example.marvelmyhero.utils.CardUtils.Companion.SPIDER_MAN
-import com.example.marvelmyhero.utils.CardUtils.Companion.STRANGE
-import com.example.marvelmyhero.utils.CardUtils.Companion.THANOS
-import com.example.marvelmyhero.utils.CardUtils.Companion.THOR
 import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.main.view.MainActivity
-import com.example.marvelmyhero.register.RegisterActivity
+import com.example.marvelmyhero.utils.CardManager
 import pl.droidsonroids.gif.GifImageView
 
 class SplashScreen : AppCompatActivity() {
@@ -37,37 +31,44 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        UserUtils().startListOfUsers()
-        getViewModel()
+        val cardMaster = CardManager()
+
+        getViewModel(cardMaster)
         animation()
         Handler(Looper.getMainLooper()).postDelayed({
             preferencesLogin()
         }, HANDLER_TIME)
     }
 
-    private fun getViewModel() {
+    private fun getViewModel(cardMaster: CardManager) {
 
         val viewModel = ViewModelProvider(
             this,
             CharacterViewModel.CharacterViewModelFactory(CharacterRepository())
         ).get(CharacterViewModel::class.java)
 
-        val allCharId =
-            listOf(
-                THANOS,
-                STRANGE,
-                CAPTAIN,
-                NICK_FURY,
-                IRON_MAN,
-                BLACK_PANTHER,
-                BLACK_WIDOW,
-                SPIDER_MAN,
-                THOR,
-                LOKI
-            )
+        val allCharId = cardMaster.getIdsList()
 
         viewModel.getCharacter(allCharId).observe(this) {
-            CardUtils().addCardOnManager(it)
+            cardMaster.addCardsOnManager(it)
+            dbViewModel(cardMaster.getCardList())
+        }
+    }
+
+    private fun dbViewModel(cardList: List<CardEntity>) {
+        val databaseViewModel = ViewModelProvider(
+            this,
+            CardViewModel.CardViewModelFactory(
+                CardRepository(
+                    AppDataBase.getDatabase(this).cardDao()
+                )
+            )
+        ).get(CardViewModel::class.java)
+
+        cardList.forEach {
+            databaseViewModel.addCard(it).observe(this) {
+                Log.i("DB_INSERT", "$it")
+            }
         }
     }
 

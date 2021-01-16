@@ -1,7 +1,7 @@
 package com.example.marvelmyhero.utils
 
 import com.example.marvelmyhero.card.model.CharacterModel
-import com.example.marvelmyhero.database.entity.CardEntity
+import com.example.marvelmyhero.db.entity.CardEntity
 
 class CardManager {
 
