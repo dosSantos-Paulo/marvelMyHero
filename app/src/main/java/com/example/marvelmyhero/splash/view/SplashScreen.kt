@@ -16,6 +16,7 @@ import com.example.marvelmyhero.db.database.AppDataBase
 import com.example.marvelmyhero.db.entity.CardEntity
 import com.example.marvelmyhero.db.repository.CardRepository
 import com.example.marvelmyhero.db.viewmodel.CardViewModel
+import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.EMAIL_PREFS
 import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTED_PREFS
@@ -98,17 +99,17 @@ class SplashScreen : AppCompatActivity() {
         val userLogin = UserUtils.USER_MANAGER.login(email, password)
 
         if (userLogin == null) {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, DevelopersActivity::class.java)
             startActivity(intent)
             finish()
         } else {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, DevelopersActivity::class.java)
             startActivity(intent)
             finish()
         }
     }
 
     companion object {
-        const val HANDLER_TIME: Long = 10000
+        const val HANDLER_TIME: Long = 20000
     }
 }
