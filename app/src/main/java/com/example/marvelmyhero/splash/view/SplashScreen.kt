@@ -126,7 +126,6 @@ class SplashScreen : AppCompatActivity() {
 
         val gifSplash = findViewById<GifImageView>(R.id.gif_marvel)
         val logoSplash = findViewById<ImageView>(R.id.img_splash_screen)
-        val loading = findViewById<TextView>(R.id.txt_loading_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({
             gifSplash.animate().apply {
@@ -142,11 +141,6 @@ class SplashScreen : AppCompatActivity() {
             }
 
             progressBar.animate().apply {
-                duration = 3000
-                alpha(1f)
-            }
-
-            loading.animate().apply {
                 duration = 3000
                 alpha(1f)
             }
