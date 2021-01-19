@@ -1,7 +1,6 @@
 package com.example.marvelmyhero.splash.view
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -9,8 +8,6 @@ import android.os.Looper
 import android.util.Log
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
@@ -19,7 +16,7 @@ import com.example.marvelmyhero.db.database.AppDataBase
 import com.example.marvelmyhero.db.entity.CardEntity
 import com.example.marvelmyhero.db.repository.CardRepository
 import com.example.marvelmyhero.db.viewmodel.CardViewModel
-import com.example.marvelmyhero.developers.view.DevelopersActivity
+import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.utils.CardManager
 import pl.droidsonroids.gif.GifImageView
@@ -84,22 +81,22 @@ class SplashScreen : AppCompatActivity() {
         }
     }
 
-    private fun getApiCharacters(cardMaster: CardManager) {
+    private fun getApiCharacters(cardManager: CardManager) {
 
-        val allCharId = cardMaster.getIdsList()
+        val allCharId = cardManager.getIdsList()
 
         viewModel.getCharacter(allCharId).observe(this) {
 
-            cardMaster.addCardsOnManager(it)
+            cardManager.addCardsOnManager(it)
 
-            createDatabase(cardMaster.getCardList())
+            createDatabase(cardManager.getCardList())
 
             var validator = false
 
             do {
 
-                val cardsListCount = cardMaster.getCardList().size
-                val idsListCount = cardMaster.getIdsList().size
+                val cardsListCount = cardManager.getCardList().size
+                val idsListCount = cardManager.getIdsList().size
 
                 if (cardsListCount == idsListCount) {
                     validator = true
@@ -151,7 +148,7 @@ class SplashScreen : AppCompatActivity() {
 
     private fun callNextPage() {
 
-        val intent = Intent(this, DevelopersActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
 

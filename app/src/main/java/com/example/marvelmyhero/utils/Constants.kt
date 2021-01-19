@@ -1,4 +1,4 @@
-package com.example.marvelmyhero
+package com.example.marvelmyhero.utils
 
 object Constants {
     const val LANGUAGE_PT_BR = "PT-BR"

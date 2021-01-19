@@ -3,7 +3,7 @@ package com.example.marvelmyhero.login.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.marvelmyhero.MovieUtil
+import com.example.marvelmyhero.utils.MovieUtil
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
