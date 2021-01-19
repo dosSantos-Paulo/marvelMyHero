@@ -18,20 +18,24 @@ import com.example.marvelmyhero.deck.view.MyDeckActivity
 import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.team.view.MyTeamActivity
+import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var databaseViewModel: CardViewModel
+
+    private var cardAlert = AlertManager(this)
 
     private val cardManager = CardManager()
 
     private lateinit var user: User
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -118,7 +122,9 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
-            val randomCards = newCardAlert(cardManager, cardList)
+
+
+            val randomCards = cardAlert.newCardAlert(cardManager, cardList)
 
             NEW_USER.setUser(user)
             NEW_USER.addOnDeck(randomCards)
@@ -126,70 +132,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-    }
-
-
-    private fun newCardAlert(cardManager: CardManager, fullList: MutableList<Hero>): MutableList<Hero> {
-        val randomList = mutableListOf<Hero>()
-
-//        Implementar lógica de validação de dias
-        val todayIsAnotherDay: Boolean = true
-
-        if (todayIsAnotherDay) {
-            cardManager.random5(fullList).forEach {
-                randomList.add(it)
-            }
-        } else if (!todayIsAnotherDay) {
-            cardManager.random3(fullList).forEach{
-                randomList.add(it)
-            }
-        }
-
-        MaterialAlertDialogBuilder(this)
-            .setTitle("New Cards")
-            .setMessage("You won a new cards, would you like to see them?")
-            .setPositiveButton("Yes") { _, _ ->
-
-                showNewCard(randomList)
-            }
-            .setNegativeButton("No") { _, _ ->
-                closeContextMenu()
-            }
-            .show()
-
-        return randomList
-    }
-
-    private fun showNewCard(cardList: MutableList<Hero>) {
-
-        for (i in 0..4) {
-            var getStars = ""
-            val starValue = getString(R.string.classificationStar)
-
-            when (cardList[i].classification) {
-                in 0.1..2.9 -> {
-                    getStars = starValue
-                }
-                in 3.0..4.5 -> {
-                    getStars = "$starValue $starValue"
-                }
-                in 4.6..5.9 -> {
-                    getStars = "$starValue $starValue $starValue"
-                }
-                in 6.0..7.0 -> {
-                    getStars = "$starValue $starValue $starValue $starValue"
-                }
-            }
-
-
-            MaterialAlertDialogBuilder(this)
-
-                .setMessage("Name : ${cardList[i].heroName} \n Classification: $getStars ")
-                .setNeutralButton("OK") { _, _ ->
-                    closeContextMenu()
-                }
-                .show()
-        }
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
