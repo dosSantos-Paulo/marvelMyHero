@@ -7,4 +7,10 @@ class CardRepository(private val cardDao: CardDao) {
 
     suspend fun addCard(card: CardEntity) = cardDao.addCard(card)
 
+    suspend fun count () = cardDao.count()
+
+    suspend fun getCard(id: Int) = cardDao.getCard(id)
+
+    suspend fun getAllCards() = cardDao.getAllCards()
+
 }

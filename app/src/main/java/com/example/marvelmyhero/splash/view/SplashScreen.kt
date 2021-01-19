@@ -24,9 +24,15 @@ import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
 import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.utils.CardManager
+import com.google.firebase.auth.FirebaseAuth
 import pl.droidsonroids.gif.GifImageView
 
 class SplashScreen : AppCompatActivity() {
+
+    private lateinit var databaseViewModel: CardViewModel
+
+    private lateinit var viewModel: CharacterViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,25 +40,73 @@ class SplashScreen : AppCompatActivity() {
 
         val cardMaster = CardManager()
 
-        getViewModel(cardMaster)
-        animation()
-        Handler(Looper.getMainLooper()).postDelayed({
-            preferencesLogin()
-        }, HANDLER_TIME)
-    }
 
-    private fun getViewModel(cardMaster: CardManager) {
+        databaseViewModel = ViewModelProvider(
+            this,
+            CardViewModel.CardViewModelFactory(
+                CardRepository(
+                    AppDataBase.getDatabase(this).cardDao()
+                )
+            )
+        ).get(CardViewModel::class.java)
 
-        val viewModel = ViewModelProvider(
+        viewModel = ViewModelProvider(
             this,
             CharacterViewModel.CharacterViewModelFactory(CharacterRepository())
         ).get(CharacterViewModel::class.java)
+
+        dbCount(cardMaster)
+
+        animation()
+
+    }
+
+    private fun dbCount(cardManager: CardManager) {
+
+        val size = cardManager.getIdsList()
+
+        databaseViewModel.count().observe(this) {
+            val count = it.toString().toInt()
+
+            if (count == size.size) {
+
+                Log.d("DB_COUNT:", it.toString())
+
+                Handler(Looper.getMainLooper()).postDelayed({
+
+                    preferencesLogin()
+
+                }, HANDLER_TIME)
+
+
+            } else {
+
+                getViewModel(cardManager)
+
+            }
+        }
+    }
+
+    private fun getViewModel(cardMaster: CardManager) {
 
         val allCharId = cardMaster.getIdsList()
 
         viewModel.getCharacter(allCharId).observe(this) {
             cardMaster.addCardsOnManager(it)
             dbViewModel(cardMaster.getCardList())
+
+            var validator = false
+
+            do {
+
+                if (cardMaster.getCardList().size == cardMaster.getIdsList().size) {
+                    validator = true
+                }
+
+            } while (!validator)
+
+            preferencesLogin()
+
         }
     }
 
@@ -74,6 +128,7 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun animation() {
+
         val gifSplash = findViewById<GifImageView>(R.id.gif_marvel)
         val logoSplash = findViewById<ImageView>(R.id.img_splash_screen)
 
@@ -89,27 +144,22 @@ class SplashScreen : AppCompatActivity() {
                 scaleX(0.80f)
                 scaleY(0.80f)
             }
-        }, 5000)
+        }, HANDLER_TIME_ANIMATION)
+
     }
 
     private fun preferencesLogin() {
-        val keepConnectedPreferences = getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
-        val email = keepConnectedPreferences.getString(EMAIL_PREFS, "")
-        val password = keepConnectedPreferences.getString(PASS_PREFS, "")
-        val userLogin = UserUtils.USER_MANAGER.login(email, password)
 
-        if (userLogin == null) {
-            val intent = Intent(this, DevelopersActivity::class.java)
-            startActivity(intent)
-            finish()
-        } else {
-            val intent = Intent(this, DevelopersActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        val intent = Intent(this, DevelopersActivity::class.java)
+        startActivity(intent)
+        finish()
+
     }
 
     companion object {
-        const val HANDLER_TIME: Long = 20000
+        const val HANDLER_TIME: Long = 9000
+        const val HANDLER_TIME_ANIMATION: Long = 5000
+
     }
+
 }
