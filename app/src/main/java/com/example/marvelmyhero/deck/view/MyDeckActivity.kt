@@ -1,5 +1,6 @@
 package com.example.marvelmyhero.deck.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -18,10 +19,16 @@ class MyDeckActivity : AppCompatActivity() {
 
         val deck = NEW_USER.getDeck()
         val arrowBack = findViewById<ImageView>(R.id.img_arrowBack_myDeck)
+        val info = findViewById<ImageView>(R.id.ic_info)
         val materialCardView = findViewById<MaterialCardView>(R.id.materialCard_myDeck)
 
         arrowBack.setOnClickListener {
             finish()
+        }
+
+        info.setOnClickListener {
+            val intent = Intent(this, InfoMyDeckActivity::class.java)
+            startActivity(intent)
         }
 
         val cardRecyclerView = findViewById<RecyclerView>(R.id.recyclerView_myDeck)

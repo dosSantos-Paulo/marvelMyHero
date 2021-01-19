@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_background"
+    android:paddingTop="@dimen/borderPadding"
+    tools:context=".deck.view.InfoMyDeckActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-144dp"
+        tools:layout_editor_absoluteY="119dp">
+
+        <ImageView
+            android:id="@+id/img_arrowBack_Info"
+            android:layout_width="@dimen/icon"
+            android:layout_height="@dimen/icon"
+            android:layout_marginStart="@dimen/marginSmall"
+            android:contentDescription="@string/backButton"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/textPrimary" />
+
+        <TextView
+            android:id="@+id/textViewInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/gobold_bold"
+            android:gravity="center"
+            android:text="@string/info"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/titleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.09"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/the_cards_classification"
+                android:textColor="@color/textPrimary"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="5dp"
+                android:justificationMode="inter_word"
+                android:text="@string/info_of_classification_cards"
+                android:textColor="@color/textPrimary"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/InfoCardView1"
+            android:layout_width="@dimen/cardMini_width"
+            android:layout_height="@dimen/cardMini_height"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+            <FrameLayout
+                android:id="@+id/frameLayout_info_card1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/card_image" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/InfoCardView2"
+            android:layout_width="@dimen/cardMini_width"
+            android:layout_height="@dimen/cardMini_height"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="45dp"
+            android:foregroundGravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+            <FrameLayout
+                android:id="@+id/frameLayout_info_card2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/card_image" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/InfoCardView1">
+
+            <TextView
+                android:id="@+id/txtInfoBronze"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/bronze"
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/InfoCardView1" />
+
+            <TextView
+                android:id="@+id/txtInfoSilver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/silver"
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/InfoCardView3"
+            android:layout_width="@dimen/cardMini_width"
+            android:layout_height="@dimen/cardMini_height"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/InfoCardView1">
+
+            <FrameLayout
+                android:id="@+id/frameLayout_info_card3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/card_image" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/InfoCardView4"
+            android:layout_width="@dimen/cardMini_width"
+            android:layout_height="@dimen/cardMini_height"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="45dp"
+            android:foregroundGravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/InfoCardView2">
+
+            <FrameLayout
+                android:id="@+id/frameLayout_info_card4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/card_image" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/InfoCardView3">
+
+            <TextView
+                android:id="@+id/txtInfoGold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="85dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/gold"
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/InfoCardView1" />
+
+            <TextView
+                android:id="@+id/txtInfoDiamond"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/diamond"
+                android:textColor="@color/textPrimary"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
