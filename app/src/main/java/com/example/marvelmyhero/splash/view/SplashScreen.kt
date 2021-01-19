@@ -16,12 +16,15 @@ import com.example.marvelmyhero.db.database.AppDataBase
 import com.example.marvelmyhero.db.entity.CardEntity
 import com.example.marvelmyhero.db.repository.CardRepository
 import com.example.marvelmyhero.db.viewmodel.CardViewModel
+import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION_2
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import pl.droidsonroids.gif.GifImageView
 
 @Suppress("COMPATIBILITY_WARNING")
@@ -156,9 +159,17 @@ class SplashScreen : AppCompatActivity() {
 
     private fun callNextPage() {
 
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+
+        if (firebaseUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        } else {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
+
 
     }
 

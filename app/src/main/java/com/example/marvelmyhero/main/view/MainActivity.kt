@@ -23,6 +23,7 @@ import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
@@ -54,13 +55,14 @@ class MainActivity : AppCompatActivity() {
             )
         ).get(CardViewModel::class.java)
 
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+
 
         user = toolBarItems(User(
-            "Teste",
-            "Testando",
-            "Teste@Teste",
-            "123",
-            R.drawable.ic_perfil)
+            firebaseUser?.displayName.toString(),
+            "",
+            firebaseUser?.email.toString(),
+            firebaseUser?.photoUrl.toString())
         )
 
 
@@ -121,7 +123,6 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             }
-
 
 
             val randomCards = cardAlert.newCardAlert(cardManager, cardList)
