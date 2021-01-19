@@ -7,4 +7,11 @@ object Constants {
     const val APP_KEY = "APP"
     const val UIID_KEY = "UIID"
     const val EMPTY_STRING = ""
+
+//    Handler Time
+
+    const val HANDLER_TIME: Long = 9000
+    const val HANDLER_TIME_ANIMATION: Long = 5000
+    const val HANDLER_TIME_ANIMATION_2: Long = 2000
+
 }

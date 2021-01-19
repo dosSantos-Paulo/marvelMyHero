@@ -19,6 +19,9 @@ import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.utils.CardManager
+import com.example.marvelmyhero.utils.Constants.HANDLER_TIME
+import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION
+import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION_2
 import pl.droidsonroids.gif.GifImageView
 
 @Suppress("COMPATIBILITY_WARNING")
@@ -112,7 +115,7 @@ class SplashScreen : AppCompatActivity() {
     private fun createDatabase(cardList: List<CardEntity>) {
 
         cardList.forEach {
-            databaseViewModel.addCard(it).observe(this) {isAdd ->
+            databaseViewModel.addCard(it).observe(this) { isAdd ->
                 Log.i("DB_INSERT", "$isAdd")
             }
         }
@@ -125,6 +128,7 @@ class SplashScreen : AppCompatActivity() {
         val logoSplash = findViewById<ImageView>(R.id.img_splash_screen)
 
         Handler(Looper.getMainLooper()).postDelayed({
+
             gifSplash.animate().apply {
                 duration = 3000
                 alpha(0f)
@@ -137,10 +141,14 @@ class SplashScreen : AppCompatActivity() {
                 scaleY(0.80f)
             }
 
-            progressBar.animate().apply {
-                duration = 3000
-                alpha(1f)
-            }
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                progressBar.animate().apply {
+                    duration = 3000
+                    alpha(1f)
+                }
+
+            }, HANDLER_TIME_ANIMATION_2)
 
         }, HANDLER_TIME_ANIMATION)
 
@@ -151,12 +159,6 @@ class SplashScreen : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
-
-    }
-
-    companion object {
-        const val HANDLER_TIME: Long = 9000
-        const val HANDLER_TIME_ANIMATION: Long = 5000
 
     }
 
