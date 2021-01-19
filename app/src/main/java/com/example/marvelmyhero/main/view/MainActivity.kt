@@ -58,12 +58,7 @@ class MainActivity : AppCompatActivity() {
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
 
-        user = toolBarItems(User(
-            firebaseUser?.displayName.toString(),
-            "",
-            firebaseUser?.email.toString(),
-            firebaseUser?.photoUrl.toString())
-        )
+        user = toolBarItems(User("nick", "name", "http://i.annihil.us/u/prod/marvel/i/mg/5/03/528d31a791308.jpg"))
 
 
         getAllCardsFromDB(user)

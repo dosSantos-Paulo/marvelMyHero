@@ -16,4 +16,8 @@ object Constants {
     const val HANDLER_TIME_ANIMATION: Long = 5000
     const val HANDLER_TIME_ANIMATION_2: Long = 2000
 
+//    References
+
+    const val NAME = "NAME"
+
 }

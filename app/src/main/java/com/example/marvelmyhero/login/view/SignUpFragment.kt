@@ -14,6 +14,7 @@ import com.example.marvelmyhero.utils.MovieUtil.validateNameEmailPassword
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
 import com.example.marvelmyhero.register.RegisterActivity
+import com.example.marvelmyhero.utils.Constants.NAME
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 
@@ -47,22 +48,23 @@ class SignUpFragment : Fragment() {
                     viewModel.registerUser(email, password)
                 }
             }
-            initViewModel()
+            initViewModel(name)
         }
     }
 
-    private fun initViewModel(){
+    private fun initViewModel(name: String) {
         viewModel.stateRegister.observe(viewLifecycleOwner, {state ->
             state?.let{
-                navigateToHome(it)
+                navigateToHome(it, name)
             }
         })
     }
 
-    private fun navigateToHome(status: Boolean) {
+    private fun navigateToHome(status: Boolean, name: String) {
         when {
             status -> {
                 val intent = Intent(context, RegisterActivity::class.java)
+                intent.putExtra(NAME, name)
                 startActivity(intent)
             }
         }

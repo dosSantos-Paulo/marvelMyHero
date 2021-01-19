@@ -1,13 +1,13 @@
 package com.example.marvelmyhero.utils
 
+import android.app.Activity
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
-import com.example.marvelmyhero.main.view.MainActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class AlertManager(val view: MainActivity) {
+class AlertManager(val view: Activity) {
 
-     fun newCardAlert(cardManager: CardManager, fullList: MutableList<Hero>): MutableList<Hero> {
+    fun newCardAlert(cardManager: CardManager, fullList: MutableList<Hero>): MutableList<Hero> {
         val randomList = mutableListOf<Hero>()
 
 //        Implementar lógica de validação de dias
@@ -18,7 +18,7 @@ class AlertManager(val view: MainActivity) {
                 randomList.add(it)
             }
         } else if (!todayIsAnotherDay) {
-            cardManager.random3(fullList).forEach{
+            cardManager.random3(fullList).forEach {
                 randomList.add(it)
             }
         }
@@ -31,7 +31,7 @@ class AlertManager(val view: MainActivity) {
                 showNewCard(randomList)
             }
             .setNegativeButton("No") { _, _ ->
-                    view.closeContextMenu()
+                view.closeContextMenu()
             }
             .show()
 

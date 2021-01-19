@@ -1,16 +1,33 @@
 package com.example.marvelmyhero.register
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.VideoView
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.card.model.CardFirebase
+import com.example.marvelmyhero.card.model.Hero
+import com.example.marvelmyhero.db.database.AppDataBase
+import com.example.marvelmyhero.db.entity.CardEntity
+import com.example.marvelmyhero.db.repository.CardRepository
+import com.example.marvelmyhero.db.viewmodel.CardViewModel
+import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.main.view.MainActivity
+import com.example.marvelmyhero.utils.AlertManager
+import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.CONTEXT_RESQUEST_CODE
+import com.example.marvelmyhero.utils.Constants.NAME
+import com.example.marvelmyhero.utils.UserCardUtils
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -26,12 +43,35 @@ class RegisterActivity : AppCompatActivity() {
 
     private val changeImageButton: ImageView by lazy { findViewById(R.id.image_editIcon_register) }
 
+    private val firebaseUser = FirebaseAuth.getInstance().currentUser
+
+    private val firebaseDatabase = FirebaseDatabase.getInstance()
+
+    private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
+
+    private val cardManager = CardManager()
+
+    private lateinit var databaseViewModel: CardViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        val intentName = intent.getStringExtra(NAME)!!
+
+        name.setText(intentName)
+
+        databaseViewModel = ViewModelProvider(
+            this,
+            CardViewModel.CardViewModelFactory(
+                CardRepository(
+                    AppDataBase.getDatabase(this).cardDao()
+                )
+            )
+        ).get(CardViewModel::class.java)
+
         submitButton.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java ))
+            setUser()
         }
 
         changeImageButton.setOnClickListener {
@@ -46,7 +86,29 @@ class RegisterActivity : AppCompatActivity() {
             imageUri = data?.data
             userImage.setImageURI(imageUri)
         }
-        
+
+    }
+
+    private fun setUser() {
+
+        getAllCardsFromDB()
+
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                Toast.makeText(this@RegisterActivity, "Submit", Toast.LENGTH_LONG).show()
+
+                val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@RegisterActivity,
+                    "Error :(  Try again latter",
+                    Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     private fun findFile() {
@@ -55,6 +117,63 @@ class RegisterActivity : AppCompatActivity() {
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(intent, CONTEXT_RESQUEST_CODE)
+
+    }
+
+    private fun getAllCardsFromDB() {
+
+        val cardList = mutableListOf<Hero>()
+
+        databaseViewModel.getAllCards().observe(this) { cardlist ->
+            val _cardList = cardlist as List<CardEntity>
+            _cardList.forEach {
+                cardList.add(
+                    Hero(
+                        it.id,
+                        it.heroName,
+                        it.name,
+                        it.imageUrl,
+                        it.durability,
+                        it.energy,
+                        it.fightingSkills,
+                        it.inteligence,
+                        it.speed,
+                        it.strength,
+                        it.description
+                    )
+                )
+            }
+
+
+            val randomCards = cardManager.random5(cardList)
+
+            val randomFirebaseCards = addOnDeck(randomCards)
+            val randomFirebaseCardsTeam = addOnDeck(mutableListOf(randomCards[0],randomCards[1], randomCards[2]))
+
+            myRef.setValue(User(nickname.text.toString(),
+                name.text.toString(),
+                firebaseUser?.uid.toString()))
+
+            myRef.child("deck").setValue(randomFirebaseCards)
+
+            myRef.child("team").setValue(randomFirebaseCardsTeam)
+
+        }
+
+    }
+
+    private fun addOnDeck(list: MutableList<Hero>): MutableList<CardFirebase> {
+
+        val cardFirebase = mutableListOf<CardFirebase>()
+
+        list.forEach {
+            cardFirebase.add(CardFirebase(
+                it.id,
+                it.favorite
+            ))
+        }
+
+        return cardFirebase
 
     }
 }
