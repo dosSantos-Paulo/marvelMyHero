@@ -1,15 +1,15 @@
 package com.example.marvelmyhero.main.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.card.model.Hero
+import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.db.database.AppDataBase
 import com.example.marvelmyhero.db.entity.CardEntity
 import com.example.marvelmyhero.db.repository.CardRepository
@@ -17,10 +17,9 @@ import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.deck.view.MyDeckActivity
 import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.login.model.User
-import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.example.marvelmyhero.utils.CardManager
-import com.facebook.internal.Mutable
+import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     private val cardManager = CardManager()
 
     private lateinit var user: User
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -98,12 +96,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun getAllCardsFromDB(user: User) {
 
-        val cardManager = mutableListOf<Hero>()
+        val cardList = mutableListOf<Hero>()
 
         databaseViewModel.getAllCards().observe(this) { cardlist ->
             val _cardList = cardlist as List<CardEntity>
             _cardList.forEach {
-                cardManager.add(
+                cardList.add(
                     Hero(
                         it.id,
                         it.heroName,
@@ -120,52 +118,49 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
+            val randomCards = newCardAlert(cardManager, cardList)
+
             NEW_USER.setUser(user)
-            NEW_USER.addOnDeck(cardManager)
+            NEW_USER.addOnDeck(randomCards)
             showTeamCards(NEW_USER.getTeam())
 
         }
 
     }
 
-    private fun showTeamCards(team: MutableList<Hero>) {
 
-        for (i in team.indices) {
-            var frameLayout = R.id.frameLayout_teamCard1_main
-            when (i) {
-                1 -> frameLayout = R.id.frameLayout_teamCard2_main
+    private fun newCardAlert(cardManager: CardManager, fullList: MutableList<Hero>): MutableList<Hero> {
+        val randomList = mutableListOf<Hero>()
 
-                2 -> frameLayout = R.id.frameLayout_teamCard3_main
+//        Implementar lógica de validação de dias
+        val todayIsAnotherDay: Boolean = true
+
+        if (todayIsAnotherDay) {
+            cardManager.random5(fullList).forEach {
+                randomList.add(it)
             }
-
-            miniCardFragment(
-                team[i].heroName,
-                team[i].imageUrl,
-                team[i].classification,
-                frameLayout
-            )
+        } else if (!todayIsAnotherDay) {
+            cardManager.random3(fullList).forEach{
+                randomList.add(it)
+            }
         }
-    }
-
-
-
-
-    private fun newCardAlert(cardList: MutableList<Hero>) {
 
         MaterialAlertDialogBuilder(this)
             .setTitle("New Cards")
             .setMessage("You won a new cards, would you like to see them?")
             .setPositiveButton("Yes") { _, _ ->
 
-                showNewCard(cardList)
+                showNewCard(randomList)
             }
             .setNegativeButton("No") { _, _ ->
                 closeContextMenu()
             }
             .show()
+
+        return randomList
     }
 
-    fun showNewCard(cardList: MutableList<Hero>) {
+    private fun showNewCard(cardList: MutableList<Hero>) {
 
         for (i in 0..4) {
             var getStars = ""
@@ -186,6 +181,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+
             MaterialAlertDialogBuilder(this)
 
                 .setMessage("Name : ${cardList[i].heroName} \n Classification: $getStars ")
@@ -193,6 +189,25 @@ class MainActivity : AppCompatActivity() {
                     closeContextMenu()
                 }
                 .show()
+        }
+    }
+
+    private fun showTeamCards(team: MutableList<Hero>) {
+
+        for (i in team.indices) {
+            var frameLayout = R.id.frameLayout_teamCard1_main
+            when (i) {
+                1 -> frameLayout = R.id.frameLayout_teamCard2_main
+
+                2 -> frameLayout = R.id.frameLayout_teamCard3_main
+            }
+
+            miniCardFragment(
+                team[i].heroName,
+                team[i].imageUrl,
+                team[i].classification,
+                frameLayout
+            )
         }
     }
 

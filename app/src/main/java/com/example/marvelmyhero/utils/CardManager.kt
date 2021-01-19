@@ -1131,26 +1131,7 @@ class CardManager {
 
         }
 
-        for (i in 1..2) {
-
-            var validator: Boolean
-            var card: Hero
-
-            do {
-
-                validator = true
-
-                card = silverCards.random()
-                list.forEach {
-                    if (card.id == it.id) {
-                        validator = false
-                    }
-                }
-
-            } while (!validator)
-
-            list.add(card)
-        }
+        list.add(silverCards.random())
 
         list.add(goldCards.random())
 
