@@ -1,10 +1,10 @@
-package com.example.marvelmyhero
+package com.example.marvelmyhero.utils
 
 import android.content.Context
 import android.util.Patterns
-import com.example.marvelmyhero.Constants.APP_KEY
-import com.example.marvelmyhero.Constants.EMPTY_STRING
-import com.example.marvelmyhero.Constants.UIID_KEY
+import com.example.marvelmyhero.utils.Constants.APP_KEY
+import com.example.marvelmyhero.utils.Constants.EMPTY_STRING
+import com.example.marvelmyhero.utils.Constants.UIID_KEY
 
 object MovieUtil {
     fun saveUserId(context: Context, uiid: String?) {

@@ -7,39 +7,38 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.utils.UserUtils
 import com.example.marvelmyhero.data.repository.CharacterRepository
 import com.example.marvelmyhero.db.database.AppDataBase
 import com.example.marvelmyhero.db.entity.CardEntity
 import com.example.marvelmyhero.db.repository.CardRepository
 import com.example.marvelmyhero.db.viewmodel.CardViewModel
-import com.example.marvelmyhero.developers.view.DevelopersActivity
-import com.example.marvelmyhero.login.view.LoginActivity
-import com.example.marvelmyhero.login.view.LoginFragment.Companion.EMAIL_PREFS
-import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTED_PREFS
-import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
-import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.main.view.MainActivity
+import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.utils.CardManager
-import com.google.firebase.auth.FirebaseAuth
+import com.example.marvelmyhero.utils.Constants.HANDLER_TIME
+import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION
+import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION_2
 import pl.droidsonroids.gif.GifImageView
 
+@Suppress("COMPATIBILITY_WARNING")
 class SplashScreen : AppCompatActivity() {
 
     private lateinit var databaseViewModel: CardViewModel
 
     private lateinit var viewModel: CharacterViewModel
 
+    private val cardManager = CardManager()
+
+    val progressBar: ProgressBar by lazy { findViewById(R.id.progressBar_splash) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-
-        val cardMaster = CardManager()
-
 
         databaseViewModel = ViewModelProvider(
             this,
@@ -55,13 +54,14 @@ class SplashScreen : AppCompatActivity() {
             CharacterViewModel.CharacterViewModelFactory(CharacterRepository())
         ).get(CharacterViewModel::class.java)
 
-        dbCount(cardMaster)
+        dataBaseCheck(cardManager)
 
         animation()
 
     }
 
-    private fun dbCount(cardManager: CardManager) {
+
+    private fun dataBaseCheck(cardManager: CardManager) {
 
         val size = cardManager.getIdsList()
 
@@ -74,57 +74,52 @@ class SplashScreen : AppCompatActivity() {
 
                 Handler(Looper.getMainLooper()).postDelayed({
 
-                    preferencesLogin()
+                    callNextPage()
 
                 }, HANDLER_TIME)
 
-
             } else {
-
-                getViewModel(cardManager)
-
+                getApiCharacters(cardManager)
             }
         }
     }
 
-    private fun getViewModel(cardMaster: CardManager) {
+    private fun getApiCharacters(cardManager: CardManager) {
 
-        val allCharId = cardMaster.getIdsList()
+        val allCharId = cardManager.getIdsList()
 
         viewModel.getCharacter(allCharId).observe(this) {
-            cardMaster.addCardsOnManager(it)
-            dbViewModel(cardMaster.getCardList())
+
+            cardManager.addCardsOnManager(it)
+
+            createDatabase(cardManager.getCardList())
 
             var validator = false
 
             do {
 
-                if (cardMaster.getCardList().size == cardMaster.getIdsList().size) {
+                val cardsListCount = cardManager.getCardList().size
+                val idsListCount = cardManager.getIdsList().size
+
+                if (cardsListCount == idsListCount) {
                     validator = true
                 }
 
             } while (!validator)
 
-            preferencesLogin()
+            callNextPage()
 
         }
     }
 
-    private fun dbViewModel(cardList: List<CardEntity>) {
-        val databaseViewModel = ViewModelProvider(
-            this,
-            CardViewModel.CardViewModelFactory(
-                CardRepository(
-                    AppDataBase.getDatabase(this).cardDao()
-                )
-            )
-        ).get(CardViewModel::class.java)
+    private fun createDatabase(cardList: List<CardEntity>) {
 
         cardList.forEach {
-            databaseViewModel.addCard(it).observe(this) {
-                Log.i("DB_INSERT", "$it")
+            databaseViewModel.addCard(it).observe(this) { isAdd ->
+                Log.i("DB_INSERT", "$isAdd")
             }
         }
+
     }
 
     private fun animation() {
@@ -133,6 +128,7 @@ class SplashScreen : AppCompatActivity() {
         val logoSplash = findViewById<ImageView>(R.id.img_splash_screen)
 
         Handler(Looper.getMainLooper()).postDelayed({
+
             gifSplash.animate().apply {
                 duration = 3000
                 alpha(0f)
@@ -144,21 +140,25 @@ class SplashScreen : AppCompatActivity() {
                 scaleX(0.80f)
                 scaleY(0.80f)
             }
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                progressBar.animate().apply {
+                    duration = 3000
+                    alpha(1f)
+                }
+
+            }, HANDLER_TIME_ANIMATION_2)
+
         }, HANDLER_TIME_ANIMATION)
 
     }
 
-    private fun preferencesLogin() {
+    private fun callNextPage() {
 
-        val intent = Intent(this, DevelopersActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
-
-    }
-
-    companion object {
-        const val HANDLER_TIME: Long = 9000
-        const val HANDLER_TIME_ANIMATION: Long = 5000
 
     }
 

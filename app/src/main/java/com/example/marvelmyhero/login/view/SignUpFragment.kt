@@ -10,10 +10,9 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import com.example.marvelmyhero.MovieUtil.validateNameEmailPassword
+import com.example.marvelmyhero.utils.MovieUtil.validateNameEmailPassword
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
-import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.register.RegisterActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
