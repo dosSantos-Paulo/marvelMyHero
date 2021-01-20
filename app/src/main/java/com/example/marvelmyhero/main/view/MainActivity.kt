@@ -3,6 +3,7 @@ package com.example.marvelmyhero.main.view
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -34,12 +35,17 @@ import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
 
+    data class DatabaseCard(
+        val favorite: Boolean = false,
+        val id: Int = 0
+    )
+
     data class DatabaseUser(
         val name: String = "",
-        val nickname: String = "",
+        val nickName: String = "",
         val imageUrl: String = "",
-        val deck: MutableList<CardFirebase> = mutableListOf(),
-        val team: MutableList<CardFirebase> = mutableListOf(),
+        val deck: MutableList<DatabaseCard>? = null,
+        val team: MutableList<DatabaseCard>? = null
     )
 
     val exitButton: ImageView by lazy { findViewById(R.id.ic_exit_main) }
@@ -73,16 +79,21 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-//        myRef.child("deck").addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                val value = dataSnapshot.getValue()
-//                Toast.makeText(this@MainActivity, value?.toString(), Toast.LENGTH_LONG).show()
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                // Failed to read value
-//            }
-//        })
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot.getValue(DatabaseUser::class.java)
+
+                Log.i("FIREBASE", "NICKNAME: ${value?.nickName}")
+                Log.i("FIREBASE", "NAME: ${value?.name}")
+                Log.i("FIREBASE", "IMAGE: ${value?.imageUrl}")
+                Log.i("FIREBASE", "DECK: ${value?.deck}")
+                Log.i("FIREBASE", "TEAM: ${value?.team}")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+            }
+        })
 
     }
 
@@ -91,7 +102,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        user = toolBarItems(User("", "", ""))
+        user = toolBarItems(User("teste", "teste", "teste"))
 
         databaseViewModel = ViewModelProvider(
             this,
