@@ -2,7 +2,6 @@ package com.example.marvelmyhero.main.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
@@ -10,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.card.model.CardFirebase
 import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.db.database.AppDataBase
@@ -37,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     data class DatabaseCard(
         val favorite: Boolean = false,
-        val id: Int = 0
+        val id: Int = 0,
     )
 
     data class DatabaseUser(
@@ -45,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         val nickName: String = "",
         val imageUrl: String = "",
         val deck: MutableList<DatabaseCard>? = null,
-        val team: MutableList<DatabaseCard>? = null
+        val team: MutableList<DatabaseCard>? = null,
     )
 
     val exitButton: ImageView by lazy { findViewById(R.id.ic_exit_main) }
@@ -62,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var databaseViewModel: CardViewModel
 
-    private lateinit var user: User
+    private var user = User("", "", "")
 
     private var cardAlert = AlertManager(this)
 
@@ -74,35 +72,54 @@ class MainActivity : AppCompatActivity() {
 
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
 
-//    private lateinit var databaseUser: DatabaseUser
+    private val myDeck: MutableList<DatabaseCard> = mutableListOf()
 
-    override fun onStart() {
-        super.onStart()
-
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.getValue(DatabaseUser::class.java)
-
-                Log.i("FIREBASE", "NICKNAME: ${value?.nickName}")
-                Log.i("FIREBASE", "NAME: ${value?.name}")
-                Log.i("FIREBASE", "IMAGE: ${value?.imageUrl}")
-                Log.i("FIREBASE", "DECK: ${value?.deck}")
-                Log.i("FIREBASE", "TEAM: ${value?.team}")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-            }
-        })
-
-    }
-
+    private val myTeam: MutableList<DatabaseCard> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        user = toolBarItems(User("teste", "teste", "teste"))
+
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot.getValue(DatabaseUser::class.java)
+
+                user.nickName = value?.nickName.toString()
+                user.name = value?.name.toString()
+                user.imageUrl = value?.imageUrl.toString()
+
+                value?.deck?.forEach {
+                    myDeck.add(it)
+                }
+                value?.team?.forEach {
+                    myTeam.add(it)
+                }
+
+
+
+
+                Log.i("FIREBASE", "NICKNAME: ${value?.nickName}")
+                Log.i("FIREBASE", "NAME: ${value?.name}")
+                Log.i("FIREBASE", "IMAGE: ${value?.imageUrl}")
+                Log.i("FIREBASE", "DECK: ${myDeck}")
+                Log.i("FIREBASE", "TEAM: ${myTeam}")
+                Log.i("FIREBASE", "USER: ${user}")
+
+//                toolBarItems(User("teste", "teste", "teste"))
+
+                toolBarItems(user)
+                getAllCardsFromDB(user, myDeck, myTeam)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@MainActivity, "ERROR: INTERNET", Toast.LENGTH_LONG).show()
+            }
+        })
+
+
+
+
 
         databaseViewModel = ViewModelProvider(
             this,
@@ -113,9 +130,6 @@ class MainActivity : AppCompatActivity() {
             )
         ).get(CardViewModel::class.java)
 
-
-
-        getAllCardsFromDB(user)
 
         exitButton.setOnClickListener {
             Toast.makeText(this, "try to exit!", Toast.LENGTH_LONG).show()
@@ -147,7 +161,11 @@ class MainActivity : AppCompatActivity() {
         return user
     }
 
-    private fun getAllCardsFromDB(user: User) {
+    private fun getAllCardsFromDB(
+        user: User,
+        myDeck: MutableList<DatabaseCard>,
+        myTeam: MutableList<DatabaseCard>,
+    ) {
 
         val cardList = mutableListOf<Hero>()
 
@@ -171,15 +189,56 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
+            val deck = getDeck(myDeck, cardList)
+            val team = getTeam(myTeam, deck)
+
+
 //          Deve mostrar somente a primeira vez que o usuário logar.. a segunda deve adicionar novos cards ao Deck
-//            cardAlert.showNewCard(user.deck)
-//
+            cardAlert.newCardAlert(cardManager, deck, false)
+
             NEW_USER.setUser(user)
-            NEW_USER.addOnDeck(mutableListOf(cardList[0], cardList[1], cardList[2]))
-            showTeamCards(mutableListOf(cardList[0], cardList[1], cardList[2]))
+            NEW_USER.addOnDeck(deck)
+            showTeamCards(team)
 
         }
 
+    }
+
+    private fun getTeam(
+        myTeam: MutableList<DatabaseCard>,
+        deck: MutableList<Hero>,
+    ): MutableList<Hero> {
+
+        val team = mutableListOf<Hero>()
+
+        myTeam.forEach {
+            deck.forEach { hero ->
+                if (it.id == hero.id) {
+                    team.add(hero)
+                }
+            }
+        }
+
+        return team
+    }
+
+    private fun getDeck(
+        myDeck: MutableList<DatabaseCard>,
+        cardList: MutableList<Hero>,
+    ): MutableList<Hero> {
+
+        val deck = mutableListOf<Hero>()
+
+        myDeck.forEach { databaseCard ->
+            cardList.forEach { hero ->
+                if (hero.id == databaseCard.id) {
+                    hero.favorite = databaseCard.favorite
+                    deck.add(hero)
+                }
+            }
+        }
+
+        return deck
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
