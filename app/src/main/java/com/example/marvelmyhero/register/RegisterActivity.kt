@@ -71,7 +71,16 @@ class RegisterActivity : AppCompatActivity() {
         ).get(CardViewModel::class.java)
 
         submitButton.setOnClickListener {
-            setUser()
+
+            if (nickname.text.isNullOrEmpty()) {
+                nickname.error = getString(R.string.nickName_error)
+            }
+            if (name.text.isNullOrEmpty()) {
+                name.error = getString(R.string.name_error)
+            }
+            if (!name.text.isNullOrEmpty() && !nickname.text.isNullOrEmpty()) {
+                setUser()
+            }
         }
 
         changeImageButton.setOnClickListener {
