@@ -29,6 +29,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
@@ -66,15 +67,19 @@ class MainActivity : AppCompatActivity() {
 
     private val cardManager = CardManager()
 
+    private val myDeck: MutableList<DatabaseCard> = mutableListOf()
+
+    private val myTeam: MutableList<DatabaseCard> = mutableListOf()
+
+//    Firebase
+
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
 
     private val firebaseDatabase = FirebaseDatabase.getInstance()
 
+    private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
+
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
-
-    private val myDeck: MutableList<DatabaseCard> = mutableListOf()
-
-    private val myTeam: MutableList<DatabaseCard> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +92,6 @@ class MainActivity : AppCompatActivity() {
 
                 user.nickName = value?.nickName.toString()
                 user.name = value?.name.toString()
-                user.imageUrl = value?.imageUrl.toString()
 
                 value?.deck?.forEach {
                     myDeck.add(it)
@@ -96,8 +100,13 @@ class MainActivity : AppCompatActivity() {
                     myTeam.add(it)
                 }
 
+                storageRef.downloadUrl.addOnSuccessListener {
 
+                    user.imageUrl = it.toString()
+                    toolBarItems(user)
 
+                }
+                
 
                 Log.i("FIREBASE", "NICKNAME: ${value?.nickName}")
                 Log.i("FIREBASE", "NAME: ${value?.name}")
@@ -106,9 +115,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i("FIREBASE", "TEAM: ${myTeam}")
                 Log.i("FIREBASE", "USER: ${user}")
 
-//                toolBarItems(User("teste", "teste", "teste"))
 
-                toolBarItems(user)
                 getAllCardsFromDB(user, myDeck, myTeam)
             }
 
