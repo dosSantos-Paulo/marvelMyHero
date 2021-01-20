@@ -75,10 +75,12 @@
     <string name="loading">Loading</string>
 
     <string name="info_of_classification_cards">The cards have four classifications: bronze, silver, gold and diamond. Where bronze is the weaker and diamond is stronger. They are indicated according to the images below:</string>
-    <string name="the_cards_classification">The cards classification</string>
+    <string name="the_cards_classification">CARDS CLASSIFICATION</string>
     <string name="info">Info</string>
     <string name="bronze">Bronze</string>
     <string name="silver">Silver</string>
     <string name="gold">Gold</string>
     <string name="diamond">Diamond</string>
+    <string name="linkedin">LinkedIn</string>
+    <string name="github">GitHub</string>
 </resources>
