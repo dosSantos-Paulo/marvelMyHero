@@ -6,9 +6,12 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
+import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.marvelmyhero.R
@@ -28,6 +31,7 @@ import com.example.marvelmyhero.utils.UserCardUtils
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -43,15 +47,19 @@ class RegisterActivity : AppCompatActivity() {
 
     private val changeImageButton: ImageView by lazy { findViewById(R.id.image_editIcon_register) }
 
+    private val cardManager = CardManager()
+
+    private lateinit var databaseViewModel: CardViewModel
+
+//    Firebase
+
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
 
     private val firebaseDatabase = FirebaseDatabase.getInstance()
 
+    private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
+
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
-
-    private val cardManager = CardManager()
-
-    private lateinit var databaseViewModel: CardViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,6 +110,8 @@ class RegisterActivity : AppCompatActivity() {
 
         getAllCardsFromDB()
 
+        sendImage()
+
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
@@ -118,6 +128,22 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    private fun sendImage() {
+        imageUri?.run {
+
+            val extension = MimeTypeMap.getSingleton()
+                .getExtensionFromMimeType(contentResolver.getType(imageUri!!))
+
+            storageRef.putFile(this)
+                .addOnSuccessListener {
+                    Log.d("FIREBASE_PIC", storageRef.toString())
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this@RegisterActivity, "ERROR: Upload Picture!!", Toast.LENGTH_LONG).show()
+                }
+        }
     }
 
     private fun findFile() {
