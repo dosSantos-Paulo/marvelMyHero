@@ -2,12 +2,14 @@ package com.example.marvelmyhero.main.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.card.model.CardFirebase
 import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.db.database.AppDataBase
@@ -24,27 +26,72 @@ import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
 
+    data class DatabaseUser(
+        val name: String = "",
+        val nickname: String = "",
+        val imageUrl: String = "",
+        val deck: MutableList<CardFirebase> = mutableListOf(),
+        val team: MutableList<CardFirebase> = mutableListOf(),
+    )
+
+    val exitButton: ImageView by lazy { findViewById(R.id.ic_exit_main) }
+
+    val deckButton: MaterialButton by lazy { findViewById(R.id.btn_myDeck_main) }
+
+    val materialCardView: MaterialCardView by lazy { findViewById(R.id.materialCardView_main) }
+
+    val developers: ImageView by lazy { findViewById(R.id.img_developers) }
+
+    val userImage: ImageView by lazy { findViewById(R.id.img_userIcon_main) }
+
+    val userName: TextView by lazy { findViewById(R.id.txt_userName_main) }
 
     private lateinit var databaseViewModel: CardViewModel
+
+    private lateinit var user: User
 
     private var cardAlert = AlertManager(this)
 
     private val cardManager = CardManager()
 
-    private lateinit var user: User
+    private val firebaseUser = FirebaseAuth.getInstance().currentUser
+
+    private val firebaseDatabase = FirebaseDatabase.getInstance()
+
+    private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
+
+//    private lateinit var databaseUser: DatabaseUser
+
+    override fun onStart() {
+        super.onStart()
+
+//        myRef.child("deck").addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                val value = dataSnapshot.getValue()
+//                Toast.makeText(this@MainActivity, value?.toString(), Toast.LENGTH_LONG).show()
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                // Failed to read value
+//            }
+//        })
+
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val exitButton = findViewById<ImageView>(R.id.ic_exit_main)
-        val deckButton = findViewById<MaterialButton>(R.id.btn_myDeck_main)
-        val materialCardView = findViewById<MaterialCardView>(R.id.materialCardView_main)
-        val developers = findViewById<ImageView>(R.id.img_developers)
+        user = toolBarItems(User("", "", ""))
 
         databaseViewModel = ViewModelProvider(
             this,
@@ -55,14 +102,9 @@ class MainActivity : AppCompatActivity() {
             )
         ).get(CardViewModel::class.java)
 
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
-
-
-        user = toolBarItems(User("nick", "name", "http://i.annihil.us/u/prod/marvel/i/mg/5/03/528d31a791308.jpg"))
 
 
         getAllCardsFromDB(user)
-
 
         exitButton.setOnClickListener {
             Toast.makeText(this, "try to exit!", Toast.LENGTH_LONG).show()
@@ -82,8 +124,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toolBarItems(user: User): User {
-        val userImage = findViewById<ImageView>(R.id.img_userIcon_main)
-        val userName = findViewById<TextView>(R.id.txt_userName_main)
+
 
         Picasso.get().load(user.imageUrl).into(userImage)
         userName.text = user.nickName
@@ -119,12 +160,12 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
-
-            val randomCards = cardAlert.newCardAlert(cardManager, cardList)
-
+//          Deve mostrar somente a primeira vez que o usuário logar.. a segunda deve adicionar novos cards ao Deck
+//            cardAlert.showNewCard(user.deck)
+//
             NEW_USER.setUser(user)
-            NEW_USER.addOnDeck(randomCards)
-            showTeamCards(NEW_USER.getTeam())
+            NEW_USER.addOnDeck(mutableListOf(cardList[0], cardList[1], cardList[2]))
+            showTeamCards(mutableListOf(cardList[0], cardList[1], cardList[2]))
 
         }
 

@@ -4,7 +4,7 @@ import com.example.marvelmyhero.card.model.Hero
 
 data class User(
     var nickName: String,
-    val name: String,
+    var name: String,
     var imageUrl: String
 ) {
     var team: MutableList<Hero> = mutableListOf()

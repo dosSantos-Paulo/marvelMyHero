@@ -20,7 +20,6 @@
         <activity android:name=".deck.view.MyDeckActivity" />
         <activity android:name=".login.view.LoginActivity" />
         <activity android:name=".main.view.MainActivity" />
-        
         <activity android:name=".splash.view.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

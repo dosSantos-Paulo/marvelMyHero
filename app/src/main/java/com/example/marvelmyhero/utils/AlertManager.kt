@@ -38,7 +38,7 @@ class AlertManager(val view: Activity) {
         return randomList
     }
 
-    private fun showNewCard(cardList: MutableList<Hero>) {
+    fun showNewCard(cardList: MutableList<Hero>) {
 
         for (i in 0..4) {
             var getStars = ""
