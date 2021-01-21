@@ -19,5 +19,6 @@ object Constants {
 //    References
 
     const val NAME = "NAME"
+    const val IMAGE = "IMAGE"
 
 }

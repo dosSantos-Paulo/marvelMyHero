@@ -26,6 +26,7 @@ import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.CONTEXT_RESQUEST_CODE
+import com.example.marvelmyhero.utils.Constants.IMAGE
 import com.example.marvelmyhero.utils.Constants.NAME
 import com.example.marvelmyhero.utils.UserCardUtils
 import com.google.android.material.textfield.TextInputEditText
@@ -102,6 +103,8 @@ class RegisterActivity : AppCompatActivity() {
         if (requestCode == CONTEXT_RESQUEST_CODE && resultCode == RESULT_OK) {
             imageUri = data?.data
             userImage.setImageURI(imageUri)
+
+            sendImage()
         }
 
     }
@@ -110,14 +113,15 @@ class RegisterActivity : AppCompatActivity() {
 
         getAllCardsFromDB()
 
-        sendImage()
-
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 Toast.makeText(this@RegisterActivity, "Submit", Toast.LENGTH_LONG).show()
 
                 val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+
+                intent.putExtra(IMAGE, imageUri.toString())
+
                 startActivity(intent)
                 finish()
             }
@@ -183,6 +187,7 @@ class RegisterActivity : AppCompatActivity() {
             val randomCards = cardManager.random5(cardList)
 
             val randomFirebaseCards = addOnDeck(randomCards)
+
             val randomFirebaseCardsTeam = addOnDeck(mutableListOf(randomCards[0],randomCards[1], randomCards[2]))
 
             myRef.setValue(User(nickname.text.toString(),

@@ -1,6 +1,7 @@
 package com.example.marvelmyhero.main.view
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -18,9 +19,11 @@ import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.deck.view.MyDeckActivity
 import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.login.model.User
+import com.example.marvelmyhero.register.RegisterActivity
 import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
+import com.example.marvelmyhero.utils.Constants.IMAGE
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -61,6 +64,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var databaseViewModel: CardViewModel
 
+    private var imageUri: Uri? = null
+
     private var user = User("", "", "")
 
     private var cardAlert = AlertManager(this)
@@ -77,7 +82,8 @@ class MainActivity : AppCompatActivity() {
 
     private val firebaseDatabase = FirebaseDatabase.getInstance()
 
-    private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
+    private val storageRef =
+        FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
 
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
 
@@ -85,6 +91,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        storageRef.downloadUrl.addOnSuccessListener {
+            imageUri = it
+        }
 
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -100,21 +109,13 @@ class MainActivity : AppCompatActivity() {
                     myTeam.add(it)
                 }
 
-                storageRef.downloadUrl.addOnSuccessListener {
-
-                    user.imageUrl = it.toString()
-                    toolBarItems(user)
-
+                if (imageUri == null) {
+                    user.imageUrl = intent.getStringExtra(IMAGE).toString()
+                } else {
+                    user.imageUrl = imageUri.toString()
                 }
-                
 
-                Log.i("FIREBASE", "NICKNAME: ${value?.nickName}")
-                Log.i("FIREBASE", "NAME: ${value?.name}")
-                Log.i("FIREBASE", "IMAGE: ${value?.imageUrl}")
-                Log.i("FIREBASE", "DECK: ${myDeck}")
-                Log.i("FIREBASE", "TEAM: ${myTeam}")
-                Log.i("FIREBASE", "USER: ${user}")
-
+                toolBarItems(user)
 
                 getAllCardsFromDB(user, myDeck, myTeam)
             }
@@ -123,10 +124,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "ERROR: INTERNET", Toast.LENGTH_LONG).show()
             }
         })
-
-
-
-
 
         databaseViewModel = ViewModelProvider(
             this,
