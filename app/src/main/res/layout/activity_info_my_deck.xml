@@ -107,7 +107,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/txtInfoBronze"
+                android:id="@+id/txtInfoCard1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -119,9 +119,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/InfoCardView1" />
 
             <TextView
-                android:id="@+id/txtInfoSilver"
+                android:id="@+id/txtInfoCard2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="@string/silver"
                 android:textColor="@color/textPrimary"
                 android:textStyle="bold"
@@ -165,7 +166,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/txtInfoGold"
+                android:id="@+id/txtInfoCard3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -177,9 +178,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/InfoCardView3" />
 
             <TextView
-                android:id="@+id/txtInfoDiamond"
+                android:id="@+id/txtInfoCard4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="@string/diamond"
                 android:textColor="@color/textPrimary"
                 android:textStyle="bold"
