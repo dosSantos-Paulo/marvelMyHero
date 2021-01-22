@@ -27,12 +27,12 @@ class CardFrontFragment(private val _card: Hero) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val _cardName = view.findViewById<TextView>(R.id.txt_heroName_cardFront)
+        val cardName = view.findViewById<TextView>(R.id.txt_heroName_cardFront)
         val cardRealName = view.findViewById<TextView>(R.id.txt_heroRealName_cardFront)
         val cardClassification = view.findViewById<TextView>(R.id.txt_classification_cardFront)
         val cardImage = view.findViewById<ImageView>(R.id.img_heroPic_cardFront)
 
-        _cardName.text = _card.heroName
+        cardName.text = _card.heroName
         cardRealName.text = _card.name
         cardClassification.text = getClassification(_card.classification, view)
         Picasso.get().load(_card.imageUrl).into(cardImage)

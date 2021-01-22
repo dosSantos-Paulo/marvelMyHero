@@ -1128,7 +1128,6 @@ class CardManager {
             } while (!validator)
 
             list.add(card)
-
         }
 
         list.add(silverCards.random())
@@ -1136,7 +1135,6 @@ class CardManager {
         list.add(goldCards.random())
 
         return list
-
     }
 
     fun random3(cardManager: MutableList<Hero>): MutableList<Hero> {
@@ -1195,7 +1193,6 @@ class CardManager {
         }
 
         return listOf3
-
     }
 
     companion object {

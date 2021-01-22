@@ -20,13 +20,12 @@ class CardViewModel(private val repository: CardRepository) : ViewModel() {
             Log.e("DB_ERROR:", ex.message.toString())
             emit(false)
         }
-
     }
 
     fun count() = liveData(Dispatchers.IO) {
         try {
             val count = repository.count()
-            emit(count.toInt())
+            emit(count)
         } catch (ex: Exception) {
             println("Error when count object from database")
             println("erro: ${ex.message}")
@@ -63,6 +62,5 @@ class CardViewModel(private val repository: CardRepository) : ViewModel() {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return CardViewModel(repository) as T
         }
-
     }
 }

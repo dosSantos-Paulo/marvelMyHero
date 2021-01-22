@@ -19,7 +19,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 
 class SignUpFragment : Fragment() {
-    private  lateinit var signupButton: Button
+    private lateinit var signupButton: Button
     private val viewModel: AuthenticationViewModel by lazy {
         ViewModelProvider(this).get(
             AuthenticationViewModel::class.java
@@ -28,7 +28,7 @@ class SignUpFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }
@@ -38,11 +38,11 @@ class SignUpFragment : Fragment() {
 
         signupButton = view.findViewById<MaterialButton>(R.id.btn_signup_signup)
 
-
         signupButton.setOnClickListener {
             val name = view.findViewById<EditText>(R.id.editText_name_signUp).text.toString()
             val email = view.findViewById<EditText>(R.id.editText_email_signUp).text.toString()
-            val password = view.findViewById<EditText>(R.id.editText_password_signUp).text.toString()
+            val password =
+                view.findViewById<EditText>(R.id.editText_password_signUp).text.toString()
             when {
                 validateNameEmailPassword(name, email, password) -> {
                     viewModel.registerUser(email, password)
@@ -53,8 +53,8 @@ class SignUpFragment : Fragment() {
     }
 
     private fun initViewModel(name: String) {
-        viewModel.stateRegister.observe(viewLifecycleOwner, {state ->
-            state?.let{
+        viewModel.stateRegister.observe(viewLifecycleOwner, { state ->
+            state?.let {
                 navigateToHome(it, name)
             }
         })
@@ -73,6 +73,4 @@ class SignUpFragment : Fragment() {
     private fun showErrorMessage(message: String) {
         Snackbar.make(signupButton, message, Snackbar.LENGTH_LONG).show()
     }
-
-
 }

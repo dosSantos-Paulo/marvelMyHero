@@ -15,19 +15,12 @@ import com.google.android.material.card.MaterialCardView
 class MyDeckActivity : AppCompatActivity() {
 
     private val deck = NEW_USER.getDeck()
-
     private val arrowBack: ImageView by lazy { findViewById(R.id.img_arrowBack_myDeck) }
-
-    private val info: ImageView by lazy { findViewById(R.id.ic_info)}
-
-    private val materialCardView: MaterialCardView by lazy { findViewById(R.id.materialCard_myDeck) }
-
+    private val info: ImageView by lazy { findViewById(R.id.ic_info) }
     private val cardRecyclerView: RecyclerView by lazy { findViewById(R.id.recyclerView_myDeck) }
-
     private val cardManager = GridLayoutManager(this, DECK_COLLUMN)
 
     private val cardAdapter = MyDeckAdapter(deck) {
-
         supportFragmentManager.beginTransaction().apply {
             setCustomAnimations(
                 R.anim.show_card,
@@ -45,34 +38,14 @@ class MyDeckActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_deck)
 
-
         arrowBack.setOnClickListener {
             finish()
         }
-
 
         info.setOnClickListener {
             val intent = Intent(this, InfoMyDeckActivity::class.java)
             startActivity(intent)
         }
-
-        val cardRecyclerView = findViewById<RecyclerView>(R.id.recyclerView_myDeck)
-        val cardManager = GridLayoutManager(this, DECK_COLLUMN)
-        val cardAdapter = MyDeckAdapter(deck) {
-
-            supportFragmentManager.beginTransaction().apply {
-                setCustomAnimations(
-                    R.anim.show_card,
-                    R.anim.hide_card,
-                    R.anim.show_card,
-                    R.anim.hide_card,
-                )
-                replace(R.id.frameLayout_myDeck, CardFrontFragment(it))
-                addToBackStack(null)
-                commit()
-            }
-        }
-
 
         cardRecyclerView.apply {
             setHasFixedSize(true)

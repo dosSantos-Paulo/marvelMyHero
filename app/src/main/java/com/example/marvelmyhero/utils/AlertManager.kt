@@ -58,7 +58,6 @@ class AlertManager(val view: Activity) {
                 }
             }
 
-
             MaterialAlertDialogBuilder(view)
 
                 .setMessage("Name : ${it.heroName} \n Classification: $getStars ")
@@ -68,5 +67,4 @@ class AlertManager(val view: Activity) {
                 .show()
         }
     }
-
 }

@@ -4,6 +4,7 @@ package com.example.marvelmyhero.main.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -55,56 +56,36 @@ class MainActivity : AppCompatActivity() {
     )
 
     private val exitButton: ImageView by lazy { findViewById(R.id.ic_exit_main) }
-
     private val deckButton: MaterialButton by lazy { findViewById(R.id.btn_myDeck_main) }
-
     private val materialCardView: MaterialCardView by lazy { findViewById(R.id.materialCardView_main) }
-
     private val developers: ImageView by lazy { findViewById(R.id.img_developers) }
-
     private val userImage: ImageView by lazy { findViewById(R.id.img_userIcon_main) }
-
     private val userName: TextView by lazy { findViewById(R.id.txt_userName_main) }
-
     private lateinit var databaseViewModel: CardViewModel
-
     private var imageUri: Uri? = null
-
     private var user = User("", "", "")
-
     private var cardAlert = AlertManager(this)
-
     private val cardManager = CardManager()
-
     private val myDeck: MutableList<DatabaseCard> = mutableListOf()
-
     private val myTeam: MutableList<DatabaseCard> = mutableListOf()
 
-//    Firebase
-
+    //    Firebase
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
-
     private val firebaseDatabase = FirebaseDatabase.getInstance()
-
-    private val storageRef =
-        FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
-
+    private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
-
     private var isFirstTimeOnApp = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//      Comparador - Deve ser atualizado por método que verifica se o usuário já logoun anteriormente
-
-        isFirstTimeOnApp =
-            intent.toString() != "Intent { cmp=com.example.marvelmyhero/.main.view.MainActivity }"
-
         storageRef.downloadUrl.addOnSuccessListener {
             imageUri = it
+            isFirstTimeOnApp = false
         }
+
+//      Comparador - Deve ser atualizado por método que verifica se o usuário já logoun anteriormente
 
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -165,14 +146,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun toolBarItems(user: User): User {
 
-
         Picasso.get().load(user.imageUrl).into(userImage)
         userName.text = user.nickName
 
         userImage.setOnClickListener {
             newUserFragment(user)
         }
-
         return user
     }
 
@@ -207,8 +186,6 @@ class MainActivity : AppCompatActivity() {
             val deck = getDeck(myDeck, cardList)
             val team = getTeam(myTeam, deck)
 
-
-
             if (isFirstTimeOnApp) {
                 cardAlert.newCardAlert(cardManager, deck, false)
             }
@@ -216,9 +193,7 @@ class MainActivity : AppCompatActivity() {
             NEW_USER.setUser(user)
             NEW_USER.addOnDeck(deck)
             showTeamCards(team)
-
         }
-
     }
 
     private fun getTeam(
@@ -235,7 +210,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
         return team
     }
 
@@ -254,7 +228,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
         return deck
     }
 
@@ -323,5 +296,4 @@ class MainActivity : AppCompatActivity() {
             }
             .show()
     }
-
 }

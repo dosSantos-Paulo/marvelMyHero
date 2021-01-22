@@ -19,5 +19,4 @@ interface CardDao {
 
     @Query("SELECT * FROM Card")
     suspend fun getAllCards(): List<CardEntity>
-
 }

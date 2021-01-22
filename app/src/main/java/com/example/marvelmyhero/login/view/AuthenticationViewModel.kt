@@ -51,9 +51,7 @@ class AuthenticationViewModel(application: Application) : AndroidViewModel(appli
                         stateLogin.value = false
                         loading.value = false
                     }
-
                 }
-
             }
     }
 

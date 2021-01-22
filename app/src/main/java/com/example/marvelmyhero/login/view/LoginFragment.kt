@@ -32,24 +32,25 @@ import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-
 class LoginFragment : Fragment() {
-    private lateinit var auth: FirebaseAuth
 
-    private  lateinit var button: Button
+    private lateinit var auth: FirebaseAuth
+    private lateinit var button: Button
     private lateinit var callbackManager: CallbackManager
+
     private val viewModel: AuthenticationViewModel by lazy {
         ViewModelProvider(this).get(
             AuthenticationViewModel::class.java
         )
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-        button = view.findViewById<Button>(R.id.btn_facebookLogin_login)
+        button = view.findViewById(R.id.btn_facebookLogin_login)
         // button.setFragment(this)
         callbackManager = CallbackManager.Factory.create()
         button.setOnClickListener { loginFacebook() }
@@ -64,8 +65,6 @@ class LoginFragment : Fragment() {
         val loginButton = view.findViewById<MaterialButton>(R.id.btn_login_login)
         val googleLogin = view.findViewById<MaterialButton>(R.id.btn_googleLogin_login)
         val facebookLogin = view.findViewById<MaterialButton>(R.id.btn_facebookLogin_login)
-
-
 
         loginButton.setOnClickListener {
             val email = view.findViewById<EditText>(R.id.editText_email_login).text.toString()
@@ -93,7 +92,7 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun initViewModel(){
+    private fun initViewModel() {
         viewModel.stateLogin.observe(viewLifecycleOwner, { state ->
             state?.let {
                 navigateToHome(it)
@@ -108,7 +107,6 @@ class LoginFragment : Fragment() {
             }
         }
     }
-
 
     private fun irParaHome(uiid: String) {
         startActivity(Intent(context, MainActivity::class.java))
@@ -126,8 +124,10 @@ class LoginFragment : Fragment() {
             FacebookCallback<LoginResult> {
 
             override fun onSuccess(loginResult: LoginResult) {
-                val credential: AuthCredential = FacebookAuthProvider.getCredential(loginResult.accessToken.token)
-                FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener { irParaHome(loginResult.accessToken.userId) }
+                val credential: AuthCredential =
+                    FacebookAuthProvider.getCredential(loginResult.accessToken.token)
+                FirebaseAuth.getInstance().signInWithCredential(credential)
+                    .addOnCompleteListener { irParaHome(loginResult.accessToken.userId) }
             }
 
             override fun onCancel() {
@@ -147,7 +147,6 @@ class LoginFragment : Fragment() {
         if (resultCode == RESULT_OK && requestCode == 1) {
             val contaGoogle = GoogleSignIn.getSignedInAccountFromIntent(data).result
             Log.i(TAG, "onActivityResult: conta google autenticada $contaGoogle")
-
         }
 
         if (requestCode == 1) {
@@ -175,21 +174,12 @@ class LoginFragment : Fragment() {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
 
                 }
-
             }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
-
-    companion object {
-        const val KEEP_CONNECTED_PREFS = "SAVE_LOGIN_PREFERENCES"
-        const val EMAIL_PREFS = "EMAIL"
-        const val PASS_PREFS = "PASSWORD"
-    }
-
 }
 
 

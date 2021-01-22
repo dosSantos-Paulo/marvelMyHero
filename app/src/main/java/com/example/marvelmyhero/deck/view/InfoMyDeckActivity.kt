@@ -68,7 +68,6 @@ class InfoMyDeckActivity : AppCompatActivity() {
             "Thanos")
 
         showTeamCards(mutableListOf(bronzeHero, silverHero, goldHero, diamondHero))
-
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
@@ -79,11 +78,8 @@ class InfoMyDeckActivity : AppCompatActivity() {
 
             when (i) {
                 0 -> frameLayout = R.id.frameLayout_info_card1
-
                 1 -> frameLayout = R.id.frameLayout_info_card2
-
                 2 -> frameLayout = R.id.frameLayout_info_card3
-
                 3 -> frameLayout = R.id.frameLayout_info_card4
             }
 
@@ -91,11 +87,8 @@ class InfoMyDeckActivity : AppCompatActivity() {
 
             when (i) {
                 0 -> txtCard = findViewById(R.id.txtInfoCard1)
-
                 1 -> txtCard = findViewById(R.id.txtInfoCard2)
-
                 2 -> txtCard = findViewById(R.id.txtInfoCard3)
-
                 3 -> txtCard = findViewById(R.id.txtInfoCard4)
             }
 

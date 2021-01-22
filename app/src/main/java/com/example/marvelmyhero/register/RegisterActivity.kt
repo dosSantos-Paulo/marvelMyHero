@@ -37,29 +37,18 @@ import com.google.firebase.storage.FirebaseStorage
 class RegisterActivity : AppCompatActivity() {
 
     private var imageUri: Uri? = null
-
     private val userImage: ImageView by lazy { findViewById(R.id.image_userImage_register) }
-
     private val nickname: TextInputEditText by lazy { findViewById(R.id.editText_nickName_register) }
-
     private val name: TextInputEditText by lazy { findViewById(R.id.editText_name_register) }
-
     private val submitButton: Button by lazy { findViewById(R.id.btn_submit_register) }
-
     private val changeImageButton: ImageView by lazy { findViewById(R.id.image_editIcon_register) }
-
     private val cardManager = CardManager()
-
     private lateinit var databaseViewModel: CardViewModel
 
-//    Firebase
-
+    //    Firebase
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
-
     private val firebaseDatabase = FirebaseDatabase.getInstance()
-
     private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
-
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,7 +95,6 @@ class RegisterActivity : AppCompatActivity() {
 
             sendImage()
         }
-
     }
 
     private fun setUser() {
@@ -145,7 +133,9 @@ class RegisterActivity : AppCompatActivity() {
                     Log.d("FIREBASE_PIC", storageRef.toString())
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this@RegisterActivity, "ERROR: Upload Picture!!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@RegisterActivity,
+                        "ERROR: Upload Picture!!",
+                        Toast.LENGTH_LONG).show()
                 }
         }
     }
@@ -156,7 +146,6 @@ class RegisterActivity : AppCompatActivity() {
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(intent, CONTEXT_RESQUEST_CODE)
-
     }
 
     private fun getAllCardsFromDB() {
@@ -188,7 +177,8 @@ class RegisterActivity : AppCompatActivity() {
 
             val randomFirebaseCards = addOnDeck(randomCards)
 
-            val randomFirebaseCardsTeam = addOnDeck(mutableListOf(randomCards[0],randomCards[1], randomCards[2]))
+            val randomFirebaseCardsTeam =
+                addOnDeck(mutableListOf(randomCards[0], randomCards[1], randomCards[2]))
 
             myRef.setValue(User(nickname.text.toString(),
                 name.text.toString(),
@@ -199,7 +189,6 @@ class RegisterActivity : AppCompatActivity() {
             myRef.child("team").setValue(randomFirebaseCardsTeam)
 
         }
-
     }
 
     private fun addOnDeck(list: MutableList<Hero>): MutableList<CardFirebase> {
@@ -214,6 +203,5 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         return cardFirebase
-
     }
 }

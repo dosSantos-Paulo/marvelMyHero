@@ -18,13 +18,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 
-
 private val firebaseUser = FirebaseAuth.getInstance().currentUser
-
 private val firebaseDatabase = FirebaseDatabase.getInstance()
-
 private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
-
 
 class MyDeckViewHolder(private val _view: View) : RecyclerView.ViewHolder(_view) {
 
@@ -73,7 +69,6 @@ data class DatabaseCard(
     val favorite: Boolean = false,
     val id: Int = 0,
 )
-
 
 private fun upDateFavorite(card: Hero) {
 }

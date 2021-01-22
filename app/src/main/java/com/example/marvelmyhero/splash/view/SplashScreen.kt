@@ -22,22 +22,17 @@ import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION
-import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION_2
+import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION_PROGRESS_BAR
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import pl.droidsonroids.gif.GifImageView
 
 @Suppress("COMPATIBILITY_WARNING")
 class SplashScreen : AppCompatActivity() {
 
     private lateinit var databaseViewModel: CardViewModel
-
     private lateinit var viewModel: CharacterViewModel
-
     private val cardManager = CardManager()
-
-    val progressBar: ProgressBar by lazy { findViewById(R.id.progressBar_splash) }
-
+    private val progressBar: ProgressBar by lazy { findViewById(R.id.progressBar_splash) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,9 +55,7 @@ class SplashScreen : AppCompatActivity() {
         dataBaseCheck(cardManager)
 
         animation()
-
     }
-
 
     private fun dataBaseCheck(cardManager: CardManager) {
 
@@ -73,15 +66,15 @@ class SplashScreen : AppCompatActivity() {
 
             if (count == size.size) {
 
-                Log.d("DB_COUNT:", it.toString())
+                Log.d("DATA_BASE","Requisitando info do DB")
+                Log.d("DATA_BASE_COUNT", it.toString())
 
                 Handler(Looper.getMainLooper()).postDelayed({
-
                     callNextPage()
-
                 }, HANDLER_TIME)
 
             } else {
+                Log.d("DATA_BASE","Baixando info da API")
                 getApiCharacters(cardManager)
             }
         }
@@ -92,15 +85,13 @@ class SplashScreen : AppCompatActivity() {
         val allCharId = cardManager.getIdsList()
 
         viewModel.getCharacter(allCharId).observe(this) {
-
             cardManager.addCardsOnManager(it)
-
             createDatabase(cardManager.getCardList())
+            Log.d("DATA_BASE","Inserindo dados no BD")
 
             var validator = false
 
             do {
-
                 val cardsListCount = cardManager.getCardList().size
                 val idsListCount = cardManager.getIdsList().size
 
@@ -111,7 +102,6 @@ class SplashScreen : AppCompatActivity() {
             } while (!validator)
 
             callNextPage()
-
         }
     }
 
@@ -119,10 +109,9 @@ class SplashScreen : AppCompatActivity() {
 
         cardList.forEach {
             databaseViewModel.addCard(it).observe(this) { isAdd ->
-                Log.i("DB_INSERT", "$isAdd")
+                Log.i("DATA_BASE", "Insert item: $isAdd")
             }
         }
-
     }
 
     private fun animation() {
@@ -151,7 +140,7 @@ class SplashScreen : AppCompatActivity() {
                     alpha(1f)
                 }
 
-            }, HANDLER_TIME_ANIMATION_2)
+            }, HANDLER_TIME_ANIMATION_PROGRESS_BAR)
 
         }, HANDLER_TIME_ANIMATION)
 
@@ -168,9 +157,5 @@ class SplashScreen : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
-
-
-
     }
-
 }

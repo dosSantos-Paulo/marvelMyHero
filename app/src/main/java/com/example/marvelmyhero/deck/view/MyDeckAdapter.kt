@@ -10,6 +10,7 @@ class MyDeckAdapter(
     private val _cardList: MutableList<Hero>,
     private val _listener: (Hero) -> Unit,
 ) : RecyclerView.Adapter<MyDeckViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyDeckViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.fragment_mini_card,

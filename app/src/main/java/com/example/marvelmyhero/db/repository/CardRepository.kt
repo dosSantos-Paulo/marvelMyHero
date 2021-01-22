@@ -12,5 +12,4 @@ class CardRepository(private val cardDao: CardDao) {
     suspend fun getCard(id: Int) = cardDao.getCard(id)
 
     suspend fun getAllCards() = cardDao.getAllCards()
-
 }
