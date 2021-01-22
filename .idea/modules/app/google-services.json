@@ -1,0 +1,64 @@
+{
+  "project_info": {
+    "project_number": "306313505010",
+    "firebase_url": "https://marvelmyhero-fd389-default-rtdb.firebaseio.com",
+    "project_id": "marvelmyhero-fd389",
+    "storage_bucket": "marvelmyhero-fd389.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306313505010:android:8a6736028dcfec9cec886b",
+        "android_client_info": {
+          "package_name": "com.example.marvelmyhero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306313505010-5g5mv6jv7gmvnsdnbisnkk5n5kg0kfh5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.marvelmyhero",
+            "certificate_hash": "26f818d19c106926a849c424b85b55a812864430"
+          }
+        },
+        {
+          "client_id": "306313505010-9h8u26jksmu7gkh9ogjejjsiqgml9u9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.marvelmyhero",
+            "certificate_hash": "d0d61afbb8391d1a4da48109b1ce5f61959e9f3b"
+          }
+        },
+        {
+          "client_id": "306313505010-st8015gc8hf7sgekaujvotbirv3ge1kd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.marvelmyhero",
+            "certificate_hash": "81ad4b9fc0db506093528e4437366016a9b29e60"
+          }
+        },
+        {
+          "client_id": "306313505010-b5412e1ra3n2osb30t8gr73e0glpd4f7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhAVdWea5zt_fcB51SyjDQmYRcCt8p18k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306313505010-b5412e1ra3n2osb30t8gr73e0glpd4f7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
