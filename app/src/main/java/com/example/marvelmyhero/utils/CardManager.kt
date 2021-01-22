@@ -8,7 +8,7 @@ class CardManager {
 
     private var cardManager = mutableListOf<CardEntity>()
 
-    private var listOfIds = listOf<Int>(
+    private var listOfIds = listOf(
         THANOS,
         STRANGE,
         CAPTAIN,

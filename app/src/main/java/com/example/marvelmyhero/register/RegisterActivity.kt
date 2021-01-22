@@ -1,17 +1,13 @@
 package com.example.marvelmyhero.register
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
 import android.util.Log
-import android.view.View
 import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.marvelmyhero.R
@@ -23,12 +19,10 @@ import com.example.marvelmyhero.db.repository.CardRepository
 import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.main.view.MainActivity
-import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.CONTEXT_RESQUEST_CODE
 import com.example.marvelmyhero.utils.Constants.IMAGE
 import com.example.marvelmyhero.utils.Constants.NAME
-import com.example.marvelmyhero.utils.UserCardUtils
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
