@@ -18,6 +18,8 @@ class MyDeckActivity : AppCompatActivity() {
 
     private val arrowBack: ImageView by lazy { findViewById(R.id.img_arrowBack_myDeck) }
 
+    private val info: ImageView by lazy { findViewById(R.id.ic_info)}
+
     private val materialCardView: MaterialCardView by lazy { findViewById(R.id.materialCard_myDeck) }
 
     private val cardRecyclerView: RecyclerView by lazy { findViewById(R.id.recyclerView_myDeck) }
