@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/ic_exit_main"
+            android:id="@+id/ic_info"
             android:layout_width="@dimen/icon"
             android:layout_height="@dimen/icon"
             android:layout_marginStart="230dp"

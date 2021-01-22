@@ -31,6 +31,7 @@
                     android:id="@+id/img_userIcon_main"
                     android:layout_width="@dimen/userIconPic"
                     android:layout_height="@dimen/userIconPic"
+                    android:scaleType="centerCrop"
                     android:background="@color/backGroundIcon"
                     android:contentDescription="@string/user_icon" />
 
@@ -215,16 +216,15 @@
 
                 <ImageView
                     android:id="@+id/img_developers"
-                    android:layout_width="60dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_height="70dp"
+                    android:layout_width="120dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="90dp"
                     android:contentDescription="@string/button_developers"
                     android:src="@mipmap/ic_developers_foreground"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_myDeck_main"
-                    app:tint="@color/textPrimary" />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_myDeck_main"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -236,9 +236,9 @@
         android:id="@+id/frameLayout_userDetail_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="-20dp"
+        android:layout_marginStart="-20dp"
         android:layout_marginTop="@dimen/marginSmall"
-        android:layout_marginRight="@dimen/marginLarge"
+        android:layout_marginEnd="@dimen/marginLarge"
         android:layout_marginBottom="@dimen/marginLarge"
         app:layout_constraintTop_toTopOf="parent" />
 

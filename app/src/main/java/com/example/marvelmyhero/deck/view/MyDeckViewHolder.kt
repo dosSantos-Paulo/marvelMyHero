@@ -9,9 +9,15 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.card.view.MiniCardFragment.Companion.getColor
 import com.example.marvelmyhero.card.model.Hero
+import com.example.marvelmyhero.card.view.MiniCardFragment.Companion.getColor
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
+
+private val firebaseUser = FirebaseAuth.getInstance().currentUser
+private val firebaseDatabase = FirebaseDatabase.getInstance()
+private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
 
 class MyDeckViewHolder(private val _view: View) : RecyclerView.ViewHolder(_view) {
 
@@ -29,6 +35,7 @@ class MyDeckViewHolder(private val _view: View) : RecyclerView.ViewHolder(_view)
         }
 
         itemView.setOnLongClickListener { v: View ->
+
             when (card.favorite) {
                 true -> {
                     card.favorite = false
@@ -39,6 +46,9 @@ class MyDeckViewHolder(private val _view: View) : RecyclerView.ViewHolder(_view)
                     _favorite.visibility = VISIBLE
                 }
             }
+
+            upDateFavorite(card)
+
             true
         }
 
@@ -50,4 +60,12 @@ class MyDeckViewHolder(private val _view: View) : RecyclerView.ViewHolder(_view)
             .load(card.imageUrl)
             .into(_imageUrl)
     }
+}
+
+data class DatabaseCard(
+    val favorite: Boolean = false,
+    val id: Int = 0,
+)
+
+private fun upDateFavorite(card: Hero) {
 }

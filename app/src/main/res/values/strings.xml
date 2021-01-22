@@ -51,7 +51,8 @@
     <string name="nameSignupError">Need a name</string>
     <string name="passwordLengthError">Must be 4 to 14 characters</string>
     <string name="repeatPasswordCompareError">Passwords must be the same</string>
-    <string name="facebook_app_id">876555076435573</string> <string name="fb_login_protocol_scheme">fb876555076435573</string>
+    <string name="facebook_app_id">876555076435573</string>
+    <string name="fb_login_protocol_scheme">fb876555076435573</string>
     <string name="invalidLoginError">Invalid Login</string>
     <string name="backButton">Botão de voltar</string>
     <string name="developers">Developers</string>
@@ -68,4 +69,22 @@
     <string name="button_developers">Button Developers</string>
     <string name="hero_image">Hero image</string>
     <string name="favorite">Favorite</string>
+    <string name="edit_image_icon">edit image icon</string>
+    <string name="nickname">NickName</string>
+    <string name="submit">Submit</string>
+    <string name="loading">Loading</string>
+
+    <string name="info_of_classification_cards">A color of the card edge defines the classification. We have four classifications, bronze, silver and diamond. Where bronze is the weaker and diamond is stronger. They are indicated according to the images below:</string>
+    <string name="the_cards_classification">CARDS CLASSIFICATION</string>
+    <string name="info">Info</string>
+    <string name="bronze">Bronze</string>
+    <string name="silver">Silver</string>
+    <string name="gold">Gold</string>
+    <string name="diamond">Diamond</string>
+    <string name="linkedin">LinkedIn</string>
+    <string name="github">GitHub</string>
+
+    <string name="nickName_error">Need a NickName</string>
+    <string name="name_error">Need a Name</string>
+    <string name="animation_bar">Animation Bar</string>
 </resources>

@@ -5,76 +5,122 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.utils.UserUtils
 import com.example.marvelmyhero.data.repository.CharacterRepository
+import com.example.marvelmyhero.db.database.AppDataBase
+import com.example.marvelmyhero.db.entity.CardEntity
+import com.example.marvelmyhero.db.repository.CardRepository
+import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.login.view.LoginActivity
-import com.example.marvelmyhero.login.view.LoginFragment.Companion.EMAIL_PREFS
-import com.example.marvelmyhero.login.view.LoginFragment.Companion.KEEP_CONNECTED_PREFS
-import com.example.marvelmyhero.login.view.LoginFragment.Companion.PASS_PREFS
-import com.example.marvelmyhero.utils.CardUtils
-import com.example.marvelmyhero.utils.CardUtils.Companion.BLACK_PANTHER
-import com.example.marvelmyhero.utils.CardUtils.Companion.BLACK_WIDOW
-import com.example.marvelmyhero.utils.CardUtils.Companion.CAPTAIN
-import com.example.marvelmyhero.utils.CardUtils.Companion.IRON_MAN
-import com.example.marvelmyhero.utils.CardUtils.Companion.LOKI
-import com.example.marvelmyhero.utils.CardUtils.Companion.NICK_FURY
-import com.example.marvelmyhero.utils.CardUtils.Companion.SPIDER_MAN
-import com.example.marvelmyhero.utils.CardUtils.Companion.STRANGE
-import com.example.marvelmyhero.utils.CardUtils.Companion.THANOS
-import com.example.marvelmyhero.utils.CardUtils.Companion.THOR
-import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.main.view.MainActivity
+import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
+import com.example.marvelmyhero.utils.CardManager
+import com.example.marvelmyhero.utils.Constants.HANDLER_TIME
+import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION
+import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION_PROGRESS_BAR
+import com.google.firebase.auth.FirebaseAuth
 import pl.droidsonroids.gif.GifImageView
 
+@Suppress("COMPATIBILITY_WARNING")
 class SplashScreen : AppCompatActivity() {
+
+    private lateinit var databaseViewModel: CardViewModel
+    private lateinit var viewModel: CharacterViewModel
+    private val cardManager = CardManager()
+    private val progressBar: ProgressBar by lazy { findViewById(R.id.progressBar_splash) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        UserUtils().startListOfUsers()
-        getViewModel()
-        animation()
-        Handler(Looper.getMainLooper()).postDelayed({
-            preferencesLogin()
-        }, HANDLER_TIME)
-    }
+        databaseViewModel = ViewModelProvider(
+            this,
+            CardViewModel.CardViewModelFactory(
+                CardRepository(
+                    AppDataBase.getDatabase(this).cardDao()
+                )
+            )
+        ).get(CardViewModel::class.java)
 
-    private fun getViewModel() {
-
-        val viewModel = ViewModelProvider(
+        viewModel = ViewModelProvider(
             this,
             CharacterViewModel.CharacterViewModelFactory(CharacterRepository())
         ).get(CharacterViewModel::class.java)
 
-        val allCharId =
-            listOf(
-                THANOS,
-                STRANGE,
-                CAPTAIN,
-                NICK_FURY,
-                IRON_MAN,
-                BLACK_PANTHER,
-                BLACK_WIDOW,
-                SPIDER_MAN,
-                THOR,
-                LOKI
-            )
+        dataBaseCheck(cardManager)
+
+        animation()
+    }
+
+    private fun dataBaseCheck(cardManager: CardManager) {
+
+        val size = cardManager.getIdsList()
+
+        databaseViewModel.count().observe(this) {
+            val count = it.toString().toInt()
+
+            if (count == size.size) {
+
+                Log.d("DATA_BASE","Requisitando info do DB")
+                Log.d("DATA_BASE_COUNT", it.toString())
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    callNextPage()
+                }, HANDLER_TIME)
+
+            } else {
+                Log.d("DATA_BASE","Baixando info da API")
+                getApiCharacters(cardManager)
+            }
+        }
+    }
+
+    private fun getApiCharacters(cardManager: CardManager) {
+
+        val allCharId = cardManager.getIdsList()
 
         viewModel.getCharacter(allCharId).observe(this) {
-            CardUtils().addCardOnManager(it)
+            cardManager.addCardsOnManager(it)
+            createDatabase(cardManager.getCardList())
+            Log.d("DATA_BASE","Inserindo dados no BD")
+
+            var validator = false
+
+            do {
+                val cardsListCount = cardManager.getCardList().size
+                val idsListCount = cardManager.getIdsList().size
+
+                if (cardsListCount == idsListCount) {
+                    validator = true
+                }
+
+            } while (!validator)
+
+            callNextPage()
+        }
+    }
+
+    private fun createDatabase(cardList: List<CardEntity>) {
+
+        cardList.forEach {
+            databaseViewModel.addCard(it).observe(this) { isAdd ->
+                Log.i("DATA_BASE", "Insert item: $isAdd")
+            }
         }
     }
 
     private fun animation() {
+
         val gifSplash = findViewById<GifImageView>(R.id.gif_marvel)
         val logoSplash = findViewById<ImageView>(R.id.img_splash_screen)
 
         Handler(Looper.getMainLooper()).postDelayed({
+
             gifSplash.animate().apply {
                 duration = 3000
                 alpha(0f)
@@ -86,27 +132,30 @@ class SplashScreen : AppCompatActivity() {
                 scaleX(0.80f)
                 scaleY(0.80f)
             }
-        }, 5000)
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                progressBar.animate().apply {
+                    duration = 3000
+                    alpha(1f)
+                }
+
+            }, HANDLER_TIME_ANIMATION_PROGRESS_BAR)
+
+        }, HANDLER_TIME_ANIMATION)
+
     }
 
-    private fun preferencesLogin() {
-        val keepConnectedPreferences = getSharedPreferences(KEEP_CONNECTED_PREFS, MODE_PRIVATE)
-        val email = keepConnectedPreferences.getString(EMAIL_PREFS, "")
-        val password = keepConnectedPreferences.getString(PASS_PREFS, "")
-        val userLogin = UserUtils.USER_MANAGER.login(email, password)
+    private fun callNextPage() {
 
-        if (userLogin == null) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+
+        if (firebaseUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
-    }
-
-    companion object {
-        const val HANDLER_TIME: Long = 10000
     }
 }

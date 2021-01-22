@@ -39,12 +39,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView_Beth"
+            android:id="@+id/textView_Gabriel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/beth_arley"
+            android:layout_marginTop="30dp"
+            android:text="@string/gabriel_henrique"
             android:textColor="@color/textPrimary"
             android:textSize="19sp"
             android:textStyle="bold"
@@ -52,53 +52,106 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_Developers" />
 
-        <TextView
-            android:id="@+id/textView_Gabriel"
-            android:layout_width="match_parent"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Linkedin_Gabriel"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/gabriel_henrique"
-            android:textColor="@color/textPrimary"
-            android:textSize="19sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_Beth" />
+            android:gravity="start"
+            android:text="@string/linkedin"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="@+id/textView_Gabriel"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Gabriel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Github_Gabriel"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:gravity="start"
+            android:text="@string/github"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toEndOf="@+id/btn_Linkedin_Gabriel"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Gabriel" />
 
         <TextView
             android:id="@+id/textView_Paulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
             android:text="@string/paulo_santos"
             android:textColor="@color/textPrimary"
             android:textSize="19sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_Gabriel" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_Linkedin_Gabriel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Linkedin_Paulo"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/linkedin"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="@+id/textView_Paulo"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Paulo" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Github_Paulo"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:gravity="start"
+            android:text="@string/github"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toEndOf="@+id/btn_Linkedin_Paulo"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Paulo" />
 
         <TextView
             android:id="@+id/textView_Rafael"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
             android:text="@string/rafael_irineu"
             android:textColor="@color/textPrimary"
             android:textSize="19sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_Paulo" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_Linkedin_Paulo" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Linkedin_Rafael"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/linkedin"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="@+id/textView_Rafael"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Rafael" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_Github_Rafael"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:gravity="start"
+            android:text="@string/github"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toEndOf="@+id/btn_Linkedin_Rafael"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Rafael" />
 
         <TextView
             android:id="@+id/textView_Professores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/gobold_bold"
             android:gravity="center"
             android:text="@string/professores"
@@ -106,14 +159,14 @@
             android:textSize="@dimen/titleText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView_Rafael" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_Github_Rafael" />
 
         <TextView
             android:id="@+id/textView_Felipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:text="@string/felipe_medeiros"
             android:textColor="@color/textPrimary"
             android:textSize="19sp"
@@ -140,7 +193,7 @@
             android:id="@+id/textView_Escola"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/gobold_bold"
             android:gravity="center"
             android:text="@string/escola_digital_house"
@@ -155,7 +208,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:text="@string/curso_de"
             android:textColor="@color/textPrimary"
             android:textSize="19sp"
