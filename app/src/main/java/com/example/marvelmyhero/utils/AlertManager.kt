@@ -1,26 +1,25 @@
 package com.example.marvelmyhero.utils
 
+import android.app.Activity
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
-import com.example.marvelmyhero.main.view.MainActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class AlertManager(val view: MainActivity) {
+class AlertManager(val view: Activity) {
 
-     fun newCardAlert(cardManager: CardManager, fullList: MutableList<Hero>): MutableList<Hero> {
+    fun newCardAlert(
+        cardManager: CardManager,
+        fullList: MutableList<Hero>,
+        isRandom: Boolean
+    ): MutableList<Hero> {
         val randomList = mutableListOf<Hero>()
 
-//        Implementar lógica de validação de dias
-        val todayIsAnotherDay: Boolean = true
-
-        if (todayIsAnotherDay) {
-            cardManager.random5(fullList).forEach {
+        if (isRandom) {
+            cardManager.random3(fullList).forEach {
                 randomList.add(it)
             }
-        } else if (!todayIsAnotherDay) {
-            cardManager.random3(fullList).forEach{
-                randomList.add(it)
-            }
+        } else if (!isRandom) {
+            randomList.addAll(fullList)
         }
 
         MaterialAlertDialogBuilder(view)
@@ -31,7 +30,7 @@ class AlertManager(val view: MainActivity) {
                 showNewCard(randomList)
             }
             .setNegativeButton("No") { _, _ ->
-                    view.closeContextMenu()
+                view.closeContextMenu()
             }
             .show()
 
@@ -40,11 +39,11 @@ class AlertManager(val view: MainActivity) {
 
     private fun showNewCard(cardList: MutableList<Hero>) {
 
-        for (i in 0..4) {
+        cardList.forEach {
             var getStars = ""
             val starValue = view.getString(R.string.classificationStar)
 
-            when (cardList[i].classification) {
+            when (it.classification) {
                 in 0.1..2.9 -> {
                     getStars = starValue
                 }
@@ -62,7 +61,7 @@ class AlertManager(val view: MainActivity) {
 
             MaterialAlertDialogBuilder(view)
 
-                .setMessage("Name : ${cardList[i].heroName} \n Classification: $getStars ")
+                .setMessage("Name : ${it.heroName} \n Classification: $getStars ")
                 .setPositiveButton("OK") { _, _ ->
                     view.closeContextMenu()
                 }

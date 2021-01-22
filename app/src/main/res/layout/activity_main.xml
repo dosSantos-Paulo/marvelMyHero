@@ -31,6 +31,7 @@
                     android:id="@+id/img_userIcon_main"
                     android:layout_width="@dimen/userIconPic"
                     android:layout_height="@dimen/userIconPic"
+                    android:scaleType="centerCrop"
                     android:background="@color/backGroundIcon"
                     android:contentDescription="@string/user_icon" />
 

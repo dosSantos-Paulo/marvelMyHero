@@ -122,30 +122,17 @@
                 android:textStyle="bold"
                 tools:ignore="MissingConstraints" />
 
-            <HorizontalScrollView
-                android:id="@+id/horizontal_scroll_myTeam"
-                style="@android:style/Widget.Material.Light.HorizontalScrollView"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_myTeam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fadeScrollbars="false"
-                android:scrollbarSize="8dp"
-                android:scrollbarStyle="outsideInset"
+
+                android:layout_marginTop="140dp"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/textView_dragCards_myTeam"
                 app:layout_constraintStart_toStartOf="@+id/textView_dragCards_myTeam"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_myTeam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="140dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="@+id/textView_dragCards_myTeam"
-                    app:layout_constraintStart_toStartOf="@+id/textView_dragCards_myTeam"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView2"
-                    tools:listitem="@layout/fragment_mini_card" />
-
-            </HorizontalScrollView>
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView2"
+                tools:listitem="@layout/fragment_mini_card" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
