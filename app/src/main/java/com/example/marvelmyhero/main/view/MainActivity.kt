@@ -1,9 +1,9 @@
 package com.example.marvelmyhero.main.view
 
+
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -19,7 +19,7 @@ import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.deck.view.MyDeckActivity
 import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.login.model.User
-import com.example.marvelmyhero.register.RegisterActivity
+import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
@@ -27,11 +27,14 @@ import com.example.marvelmyhero.utils.Constants.IMAGE
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 
@@ -50,17 +53,17 @@ class MainActivity : AppCompatActivity() {
         val team: MutableList<DatabaseCard>? = null,
     )
 
-    val exitButton: ImageView by lazy { findViewById(R.id.ic_exit_main) }
+    private val exitButton: ImageView by lazy { findViewById(R.id.ic_exit_main) }
 
-    val deckButton: MaterialButton by lazy { findViewById(R.id.btn_myDeck_main) }
+    private val deckButton: MaterialButton by lazy { findViewById(R.id.btn_myDeck_main) }
 
-    val materialCardView: MaterialCardView by lazy { findViewById(R.id.materialCardView_main) }
+    private val materialCardView: MaterialCardView by lazy { findViewById(R.id.materialCardView_main) }
 
-    val developers: ImageView by lazy { findViewById(R.id.img_developers) }
+    private val developers: ImageView by lazy { findViewById(R.id.img_developers) }
 
-    val userImage: ImageView by lazy { findViewById(R.id.img_userIcon_main) }
+    private val userImage: ImageView by lazy { findViewById(R.id.img_userIcon_main) }
 
-    val userName: TextView by lazy { findViewById(R.id.txt_userName_main) }
+    private val userName: TextView by lazy { findViewById(R.id.txt_userName_main) }
 
     private lateinit var databaseViewModel: CardViewModel
 
@@ -87,9 +90,16 @@ class MainActivity : AppCompatActivity() {
 
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
 
+    private var isFirstTimeOnApp = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//      Comparador - Deve ser atualizado por método que verifica se o usuário já logoun anteriormente
+
+        isFirstTimeOnApp =
+            intent.toString() != "Intent { cmp=com.example.marvelmyhero/.main.view.MainActivity }"
 
         storageRef.downloadUrl.addOnSuccessListener {
             imageUri = it
@@ -136,7 +146,7 @@ class MainActivity : AppCompatActivity() {
 
 
         exitButton.setOnClickListener {
-            Toast.makeText(this, "try to exit!", Toast.LENGTH_LONG).show()
+            exitDialog()
         }
 
         deckButton.setOnClickListener {
@@ -197,8 +207,10 @@ class MainActivity : AppCompatActivity() {
             val team = getTeam(myTeam, deck)
 
 
-//          Deve mostrar somente a primeira vez que o usuário logar.. a segunda deve adicionar novos cards ao Deck
-            cardAlert.newCardAlert(cardManager, deck, false)
+
+            if (isFirstTimeOnApp) {
+                cardAlert.newCardAlert(cardManager, deck, false)
+            }
 
             NEW_USER.setUser(user)
             NEW_USER.addOnDeck(deck)
@@ -290,6 +302,25 @@ class MainActivity : AppCompatActivity() {
             addToBackStack(null)
             commit()
         }
+    }
+
+    private fun exitDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.exitDialog_title))
+            .setMessage(getString(R.string.exitDialog_message))
+            .setNegativeButton(getString(R.string.exitDialog_negativeButton)) { _, _ ->
+                closeContextMenu()
+            }
+            .setPositiveButton(getString(R.string.exitDialog_positiveButton)) { _, _ ->
+
+                Firebase.auth.signOut()
+
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+
+                finish()
+            }
+            .show()
     }
 
 }
