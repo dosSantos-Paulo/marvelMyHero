@@ -3,6 +3,7 @@ package com.example.marvelmyhero.login.view
 import android.app.Activity.RESULT_OK
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,8 @@ import com.example.marvelmyhero.utils.MovieUtil
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
 import com.example.marvelmyhero.main.view.MainActivity
+import com.example.marvelmyhero.register.RegisterActivity
+import com.example.marvelmyhero.utils.Constants.NAME
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -30,13 +33,22 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 
 class LoginFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var button: Button
     private lateinit var callbackManager: CallbackManager
+
+    private val firebaseUser = FirebaseAuth.getInstance().currentUser
+    private val firebaseDatabase = FirebaseDatabase.getInstance()
+    private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
+    private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
+    private var isCurrentUser = false
+    private var imageUri: Uri? = null
 
     private val viewModel: AuthenticationViewModel by lazy {
         ViewModelProvider(this).get(
@@ -65,6 +77,11 @@ class LoginFragment : Fragment() {
         val loginButton = view.findViewById<MaterialButton>(R.id.btn_login_login)
         val googleLogin = view.findViewById<MaterialButton>(R.id.btn_googleLogin_login)
         val facebookLogin = view.findViewById<MaterialButton>(R.id.btn_facebookLogin_login)
+
+        storageRef.downloadUrl.addOnSuccessListener {
+            imageUri = it
+            isCurrentUser = true
+        }
 
         loginButton.setOnClickListener {
             val email = view.findViewById<EditText>(R.id.editText_email_login).text.toString()
@@ -109,11 +126,21 @@ class LoginFragment : Fragment() {
     }
 
     private fun irParaHome(uiid: String) {
-        startActivity(Intent(context, MainActivity::class.java))
+        if (isCurrentUser) startActivity(Intent(context, MainActivity::class.java))
+
+        else startActivity(Intent(context, RegisterActivity::class.java))
     }
 
     private fun irParaHome2() {
-        startActivity(Intent(context, MainActivity::class.java))
+        if (isCurrentUser) startActivity(Intent(context, MainActivity::class.java))
+
+        else {
+            val intent = Intent(context, RegisterActivity::class.java)
+
+            intent.putExtra(NAME, firebaseUser?.displayName.toString())
+            startActivity(intent)
+
+        }
     }
 
     private fun loginFacebook() {
