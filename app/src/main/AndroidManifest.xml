@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".deck.view.InfoMyDeckActivity"></activity>
+        <activity android:name=".bridge.BridgeActivity"></activity>
+        <activity android:name=".deck.view.InfoMyDeckActivity" />
         <activity android:name=".developers.view.DevelopersActivity" />
         <activity android:name=".team.view.MyTeamActivity" />
         <activity android:name=".register.RegisterActivity" />

@@ -20,10 +20,11 @@
             android:orientation="vertical"
             android:padding="@dimen/borderPadding">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_user_fragmentUser"
                 android:layout_width="@dimen/userPic_userCard"
                 android:layout_height="@dimen/userPic_userCard"
+                android:scaleType="centerCrop"
                 android:layout_marginTop="@dimen/marginExtraLarge"
                 android:contentDescription="@string/imageDescription_fragmentUser"
                 android:src="@drawable/ic_launcher_background"
