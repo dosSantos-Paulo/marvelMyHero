@@ -117,14 +117,18 @@ class LoginFragment : Fragment() {
     private fun navigateToHome(status: Boolean) {
         when {
             status -> {
+
+
                 val intent = Intent(view?.context, RegisterActivity::class.java)
                 intent.putExtra(NAME, "")
                 startActivity(intent)
+
             }
         }
     }
 
     private fun irParaHome(uiid: String) {
+
         val intent = Intent(view?.context, RegisterActivity::class.java)
         intent.putExtra(NAME, "")
         startActivity(intent)
@@ -135,6 +139,7 @@ class LoginFragment : Fragment() {
         val intent = Intent(view?.context, RegisterActivity::class.java)
         intent.putExtra(NAME, "")
         startActivity(intent)
+
     }
 
     private fun loginFacebook() {

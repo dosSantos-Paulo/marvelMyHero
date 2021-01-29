@@ -61,6 +61,7 @@ class SplashScreen : AppCompatActivity() {
         val team: MutableList<MainActivity.DatabaseCard>? = null,
     )
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -187,7 +188,5 @@ class SplashScreen : AppCompatActivity() {
             finish()
         }
     }
-
-
 
 }
