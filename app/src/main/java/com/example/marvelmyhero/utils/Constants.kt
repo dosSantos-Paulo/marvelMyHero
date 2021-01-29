@@ -15,10 +15,15 @@ object Constants {
     const val HANDLER_TIME: Long = 9000
     const val HANDLER_TIME_ANIMATION: Long = 5000
     const val HANDLER_TIME_ANIMATION_PROGRESS_BAR: Long = 2000
+    const val HANDLER_TIME_BRIDGE: Long = 3500
+    const val HANDLER_TIME_BRIDGE_2: Long = 1500
+    const val HANDLER_1000: Long = 1000
 
 //    References
 
     const val NAME = "NAME"
     const val IMAGE = "IMAGE"
+
+    var IS_NEW_USER = true
 
 }

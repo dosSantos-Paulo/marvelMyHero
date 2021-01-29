@@ -27,6 +27,7 @@
         android:id="@+id/materialCardView_register"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:alpha="0"
         app:cardBackgroundColor="@color/translucentBoxColor"
         app:cardCornerRadius="@dimen/boxRadius"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -142,6 +143,25 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/circle_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintCircleRadius="50dp"
+        android:alpha="1"
+        android:src="@drawable/minigroot"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

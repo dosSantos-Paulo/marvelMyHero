@@ -1,6 +1,7 @@
 package com.example.marvelmyhero.splash.view
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -18,12 +19,21 @@ import com.example.marvelmyhero.db.repository.CardRepository
 import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.main.view.MainActivity
+import com.example.marvelmyhero.register.RegisterActivity
 import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION_PROGRESS_BAR
+import com.example.marvelmyhero.utils.Constants.IMAGE
+import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
+import com.example.marvelmyhero.utils.Constants.NAME
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import pl.droidsonroids.gif.GifImageView
 
 @Suppress("COMPATIBILITY_WARNING")
@@ -33,6 +43,24 @@ class SplashScreen : AppCompatActivity() {
     private lateinit var viewModel: CharacterViewModel
     private val cardManager = CardManager()
     private val progressBar: ProgressBar by lazy { findViewById<ProgressBar>(R.id.progressBar_splash) }
+
+    private val firebaseUser = FirebaseAuth.getInstance().currentUser
+    private val firebaseDatabase = FirebaseDatabase.getInstance()
+    private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
+    private val storageRef =
+        FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
+    private var isCurrentUser = false
+    private var imageUri: Uri? = null
+
+
+    data class DatabaseUser(
+        val name: String = "",
+        val nickName: String = "",
+        val imageUrl: String = "",
+        val deck: MutableList<MainActivity.DatabaseCard>? = null,
+        val team: MutableList<MainActivity.DatabaseCard>? = null,
+    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +94,7 @@ class SplashScreen : AppCompatActivity() {
 
             if (count == size.size) {
 
-                Log.d("DATA_BASE","Requisitando info do DB")
+                Log.d("DATA_BASE", "Requisitando info do DB")
                 Log.d("DATA_BASE_COUNT", it.toString())
 
                 Handler(Looper.getMainLooper()).postDelayed({
@@ -74,7 +102,7 @@ class SplashScreen : AppCompatActivity() {
                 }, HANDLER_TIME)
 
             } else {
-                Log.d("DATA_BASE","Baixando info da API")
+                Log.d("DATA_BASE", "Baixando info da API")
                 getApiCharacters(cardManager)
             }
         }
@@ -87,7 +115,7 @@ class SplashScreen : AppCompatActivity() {
         viewModel.getCharacter(allCharId).observe(this) {
             cardManager.addCardsOnManager(it)
             createDatabase(cardManager.getCardList())
-            Log.d("DATA_BASE","Inserindo dados no BD")
+            Log.d("DATA_BASE", "Inserindo dados no BD")
 
             var validator = false
 
@@ -151,7 +179,9 @@ class SplashScreen : AppCompatActivity() {
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
         if (firebaseUser != null) {
-            startActivity(Intent(this, MainActivity::class.java))
+            val intent = Intent(this, RegisterActivity::class.java)
+            intent.putExtra(NAME, "")
+            startActivity(intent)
             finish()
         } else {
             startActivity(Intent(this, LoginActivity::class.java))
