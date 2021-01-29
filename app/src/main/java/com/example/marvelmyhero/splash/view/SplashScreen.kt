@@ -170,21 +170,6 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun callNextPage() {
-
-        isNewUser()
-
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
-
-        if (firebaseUser != null) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        } else {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
-    }
-
-    private fun isNewUser() {
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue(DatabaseUser::class.java)
@@ -197,6 +182,9 @@ class SplashScreen : AppCompatActivity() {
                         val intent = Intent(this@SplashScreen, MainActivity::class.java)
                         intent.putExtra(IMAGE, imageUri.toString())
                         startActivity(intent)
+                        finish()
+                    } else if(IS_NEW_USER) {
+                        startActivity(Intent(this@SplashScreen, LoginActivity::class.java))
                         finish()
                     }
                 }
