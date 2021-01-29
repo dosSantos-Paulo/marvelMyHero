@@ -42,7 +42,7 @@ class SplashScreen : AppCompatActivity() {
     private lateinit var databaseViewModel: CardViewModel
     private lateinit var viewModel: CharacterViewModel
     private val cardManager = CardManager()
-    private val progressBar: ProgressBar by lazy { findViewById(R.id.progressBar_splash) }
+    private val progressBar: ProgressBar by lazy { findViewById<ProgressBar>(R.id.progressBar_splash) }
 
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private val firebaseDatabase = FirebaseDatabase.getInstance()
@@ -175,8 +175,6 @@ class SplashScreen : AppCompatActivity() {
 
     private fun callNextPage() {
 
-//        isNewUser()
-
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
         if (firebaseUser != null) {
@@ -190,27 +188,6 @@ class SplashScreen : AppCompatActivity() {
         }
     }
 
-    //
-    private fun isNewUser() {
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.getValue(DatabaseUser::class.java)
-                IS_NEW_USER = value == null
-                storageRef.downloadUrl.addOnSuccessListener {
-                    imageUri = it
-                    if (!IS_NEW_USER) {
-                        val intent = Intent(this@SplashScreen, MainActivity::class.java)
-                        intent.putExtra(IMAGE, imageUri.toString())
-                        startActivity(intent)
-                        finish()
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
-    }
 
 
 }
