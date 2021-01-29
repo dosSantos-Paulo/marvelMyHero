@@ -78,10 +78,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        storageRef.downloadUrl.addOnSuccessListener {
-            imageUri = it
-            isFirstTimeOnApp = false
-        }
+
 
 //      Comparador - Deve ser atualizado por método que verifica se o usuário já logoun anteriormente
 

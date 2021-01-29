@@ -20,6 +20,7 @@ import com.example.marvelmyhero.R
 import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
 import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.register.RegisterActivity
+import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
 import com.example.marvelmyhero.utils.Constants.NAME
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -33,11 +34,15 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 
 class LoginFragment : Fragment() {
+
 
     private lateinit var auth: FirebaseAuth
     private lateinit var button: Button
@@ -120,27 +125,20 @@ class LoginFragment : Fragment() {
     private fun navigateToHome(status: Boolean) {
         when {
             status -> {
-                startActivity(Intent(context, MainActivity::class.java))
+                startActivity(Intent(context, RegisterActivity::class.java))
             }
         }
     }
 
     private fun irParaHome(uiid: String) {
-        if (isCurrentUser) startActivity(Intent(context, MainActivity::class.java))
-
-        else startActivity(Intent(context, RegisterActivity::class.java))
+        startActivity(Intent(context, RegisterActivity::class.java))
     }
 
     private fun irParaHome2() {
-        if (isCurrentUser) startActivity(Intent(context, MainActivity::class.java))
-
-        else {
-            val intent = Intent(context, RegisterActivity::class.java)
-
-            intent.putExtra(NAME, firebaseUser?.displayName.toString())
-            startActivity(intent)
-
-        }
+//        Login pelo Google
+        val intent = Intent(context, RegisterActivity::class.java)
+        intent.putExtra(NAME, firebaseUser?.displayName.toString())
+        startActivity(intent)
     }
 
     private fun loginFacebook() {

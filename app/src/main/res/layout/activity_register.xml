@@ -27,6 +27,7 @@
         android:id="@+id/materialCardView_register"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:alpha="0"
         app:cardBackgroundColor="@color/translucentBoxColor"
         app:cardCornerRadius="@dimen/boxRadius"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -142,6 +143,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <ProgressBar
+        android:id="@+id/progressBar_register"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:alpha="1"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
