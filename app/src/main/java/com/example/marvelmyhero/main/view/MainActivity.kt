@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.card.view.MiniCardFragment
@@ -24,6 +25,7 @@ import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.IMAGE
+import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -72,15 +74,11 @@ class MainActivity : AppCompatActivity() {
     private val firebaseDatabase = FirebaseDatabase.getInstance()
     private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
-    private var isFirstTimeOnApp = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
-//      Comparador - Deve ser atualizado por método que verifica se o usuário já logoun anteriormente
 
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -181,7 +179,7 @@ class MainActivity : AppCompatActivity() {
             val deck = getDeck(myDeck, cardList)
             val team = getTeam(myTeam, deck)
 
-            if (isFirstTimeOnApp) {
+            if (IS_NEW_USER) {
                 cardAlert.newCardAlert(cardManager, deck, false)
             }
 
