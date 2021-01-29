@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.card.view.MiniCardFragment
@@ -73,16 +74,17 @@ class MainActivity : AppCompatActivity() {
     private val firebaseDatabase = FirebaseDatabase.getInstance()
     private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
-    private var isFirstTimeOnApp = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         storageRef.downloadUrl.addOnSuccessListener {
             imageUri = it
         }
         isFirstTimeOnApp = IS_NEW_USER
+
 
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -183,7 +185,7 @@ class MainActivity : AppCompatActivity() {
             val deck = getDeck(myDeck, cardList)
             val team = getTeam(myTeam, deck)
 
-            if (isFirstTimeOnApp) {
+            if (IS_NEW_USER) {
                 cardAlert.newCardAlert(cardManager, deck, false)
             }
 

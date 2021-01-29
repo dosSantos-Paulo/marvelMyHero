@@ -40,6 +40,7 @@ class SplashScreen : AppCompatActivity() {
     private lateinit var viewModel: CharacterViewModel
     private val cardManager = CardManager()
     private val progressBar: ProgressBar by lazy { findViewById<ProgressBar>(R.id.progressBar_splash) }
+
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private val firebaseDatabase = FirebaseDatabase.getInstance()
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
@@ -47,6 +48,7 @@ class SplashScreen : AppCompatActivity() {
         FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private var isCurrentUser = false
     private var imageUri: Uri? = null
+
     data class DatabaseUser(
         val name: String = "",
         val nickName: String = "",
@@ -54,6 +56,7 @@ class SplashScreen : AppCompatActivity() {
         val deck: MutableList<MainActivity.DatabaseCard>? = null,
         val team: MutableList<MainActivity.DatabaseCard>? = null,
     )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -77,6 +80,7 @@ class SplashScreen : AppCompatActivity() {
         databaseViewModel.count().observe(this) {
             val count = it.toString().toInt()
             if (count == size.size) {
+
                 Log.d("DATA_BASE", "Requisitando info do DB")
                 Log.d("DATA_BASE_COUNT", it.toString())
                 Handler(Looper.getMainLooper()).postDelayed({
@@ -94,6 +98,7 @@ class SplashScreen : AppCompatActivity() {
             cardManager.addCardsOnManager(it)
             createDatabase(cardManager.getCardList())
             Log.d("DATA_BASE", "Inserindo dados no BD")
+
             var validator = false
             do {
                 val cardsListCount = cardManager.getCardList().size

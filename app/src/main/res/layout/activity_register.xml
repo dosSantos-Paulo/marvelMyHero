@@ -126,6 +126,7 @@
                 app:strokeWidth="1dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/circle_image"
         android:layout_width="match_parent"
@@ -133,7 +134,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+
         android:scaleType="centerCrop"
+
         android:layout_marginBottom="16dp"
         app:layout_constraintCircleRadius="50dp"
         android:alpha="1"
@@ -142,4 +145,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

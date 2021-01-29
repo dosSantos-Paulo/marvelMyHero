@@ -37,8 +37,10 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+
 import pl.droidsonroids.gif.GifImageView
 class RegisterActivity : AppCompatActivity() {
+
     data class DatabaseUser(
         val name: String = "",
         val nickName: String = "",
@@ -46,6 +48,7 @@ class RegisterActivity : AppCompatActivity() {
         val deck: MutableList<MainActivity.DatabaseCard>? = null,
         val team: MutableList<MainActivity.DatabaseCard>? = null,
     )
+
     private var imageUri: Uri? = null
     private val userImage: ImageView by lazy { findViewById(R.id.image_userImage_register) }
     private val nickname: TextInputEditText by lazy { findViewById(R.id.editText_nickName_register) }
@@ -56,6 +59,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var databaseViewModel: CardViewModel
     private val materialCardView by lazy { findViewById<MaterialCardView>(R.id.materialCardView_register) }
     private val progressBar by lazy { findViewById<GifImageView>(R.id.circle_image) }
+
     //    Firebase
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private val firebaseDatabase = FirebaseDatabase.getInstance()
@@ -63,8 +67,10 @@ class RegisterActivity : AppCompatActivity() {
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
     override fun onCreate(savedInstanceState: Bundle?) {
         isNewUser()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
         Handler(Looper.getMainLooper()).postDelayed({
             materialCardView.animate().apply {
                 duration = 500
@@ -75,10 +81,12 @@ class RegisterActivity : AppCompatActivity() {
                 alpha(0f)
             }
         }, HANDLER_TIME_BRIDGE)
+
         var intentName = intent.getStringExtra(NAME)!!
         if (intentName.equals("null")){
             intentName = ""
         }
+
         name.setText(intentName)
         databaseViewModel = ViewModelProvider(
             this,
@@ -191,13 +199,16 @@ class RegisterActivity : AppCompatActivity() {
         }
         return cardFirebase
     }
+
     private fun isNewUser() {
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue(DatabaseUser::class.java)
                 IS_NEW_USER = value == null
+
                 storageRef.downloadUrl.addOnSuccessListener {
                     imageUri = it
+
                     if (!IS_NEW_USER){
                         Handler(Looper.getMainLooper()).postDelayed({
                             val intent = Intent(this@RegisterActivity, MainActivity::class.java)
@@ -205,11 +216,13 @@ class RegisterActivity : AppCompatActivity() {
                             startActivity(intent)
                             finish()
                         }, HANDLER_TIME_BRIDGE_2)
+
                     }
                 }
             }
             override fun onCancelled(error: DatabaseError) {
             }
         })
+
     }
 }
