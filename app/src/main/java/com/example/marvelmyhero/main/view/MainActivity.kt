@@ -24,6 +24,7 @@ import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.IMAGE
+import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -80,10 +81,8 @@ class MainActivity : AppCompatActivity() {
 
         storageRef.downloadUrl.addOnSuccessListener {
             imageUri = it
-            isFirstTimeOnApp = false
         }
-
-//      Comparador - Deve ser atualizado por método que verifica se o usuário já logoun anteriormente
+        isFirstTimeOnApp = IS_NEW_USER
 
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
