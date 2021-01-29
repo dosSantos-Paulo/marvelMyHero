@@ -47,13 +47,7 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var button: Button
     private lateinit var callbackManager: CallbackManager
-
-    private val firebaseUser = FirebaseAuth.getInstance().currentUser
-    private val firebaseDatabase = FirebaseDatabase.getInstance()
-    private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
-    private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
-    private var isCurrentUser = false
-    private var imageUri: Uri? = null
+    private lateinit var myView: View
 
     private val viewModel: AuthenticationViewModel by lazy {
         ViewModelProvider(this).get(
@@ -72,6 +66,8 @@ class LoginFragment : Fragment() {
         callbackManager = CallbackManager.Factory.create()
         button.setOnClickListener { loginFacebook() }
 
+        myView = view
+
         return view
     }
 
@@ -83,10 +79,6 @@ class LoginFragment : Fragment() {
         val googleLogin = view.findViewById<MaterialButton>(R.id.btn_googleLogin_login)
         val facebookLogin = view.findViewById<MaterialButton>(R.id.btn_facebookLogin_login)
 
-        storageRef.downloadUrl.addOnSuccessListener {
-            imageUri = it
-            isCurrentUser = true
-        }
 
         loginButton.setOnClickListener {
             val email = view.findViewById<EditText>(R.id.editText_email_login).text.toString()
@@ -115,29 +107,33 @@ class LoginFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        viewModel.stateLogin.observe(viewLifecycleOwner, { state ->
+        viewModel.stateLogin.observe(viewLifecycleOwner) { state ->
             state?.let {
                 navigateToHome(it)
             }
-        })
+        }
     }
 
     private fun navigateToHome(status: Boolean) {
         when {
             status -> {
-                startActivity(Intent(context, RegisterActivity::class.java))
+                val intent = Intent(view?.context, RegisterActivity::class.java)
+                intent.putExtra(NAME, "")
+                startActivity(intent)
             }
         }
     }
 
     private fun irParaHome(uiid: String) {
-        startActivity(Intent(context, RegisterActivity::class.java))
+        val intent = Intent(view?.context, RegisterActivity::class.java)
+        intent.putExtra(NAME, "")
+        startActivity(intent)
     }
 
     private fun irParaHome2() {
 //        Login pelo Google
-        val intent = Intent(context, RegisterActivity::class.java)
-        intent.putExtra(NAME, firebaseUser?.displayName.toString())
+        val intent = Intent(view?.context, RegisterActivity::class.java)
+        intent.putExtra(NAME, "")
         startActivity(intent)
     }
 
