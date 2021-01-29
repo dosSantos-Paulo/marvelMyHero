@@ -21,4 +21,6 @@ object Constants {
     const val NAME = "NAME"
     const val IMAGE = "IMAGE"
 
+    var IS_NEW_USER = true
+
 }
