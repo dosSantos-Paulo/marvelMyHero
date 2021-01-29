@@ -1,6 +1,7 @@
 package com.example.marvelmyhero.splash.view
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -23,7 +24,14 @@ import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION_PROGRESS_BAR
+import com.example.marvelmyhero.utils.Constants.IMAGE
+import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import pl.droidsonroids.gif.GifImageView
 
 @Suppress("COMPATIBILITY_WARNING")
@@ -33,6 +41,21 @@ class SplashScreen : AppCompatActivity() {
     private lateinit var viewModel: CharacterViewModel
     private val cardManager = CardManager()
     private val progressBar: ProgressBar by lazy { findViewById(R.id.progressBar_splash) }
+
+    private val firebaseUser = FirebaseAuth.getInstance().currentUser
+    private val firebaseDatabase = FirebaseDatabase.getInstance()
+    private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
+    private var isCurrentUser = false
+    private var imageUri: Uri? = null
+    private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
+
+    data class DatabaseUser(
+        val name: String = "",
+        val nickName: String = "",
+        val imageUrl: String = "",
+        val deck: MutableList<MainActivity.DatabaseCard>? = null,
+        val team: MutableList<MainActivity.DatabaseCard>? = null,
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -148,6 +171,8 @@ class SplashScreen : AppCompatActivity() {
 
     private fun callNextPage() {
 
+        isNewUser()
+
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
         if (firebaseUser != null) {
@@ -157,5 +182,29 @@ class SplashScreen : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
+
+    private fun isNewUser() {
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot.getValue(DatabaseUser::class.java)
+                IS_NEW_USER = value == null
+
+                storageRef.downloadUrl.addOnSuccessListener {
+                    imageUri = it
+
+                    if (!IS_NEW_USER){
+                        val intent = Intent(this@SplashScreen, MainActivity::class.java)
+                        intent.putExtra(IMAGE, imageUri.toString())
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 }
