@@ -1,5 +1,4 @@
 package com.example.marvelmyhero.splash.view
-
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -35,10 +34,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import pl.droidsonroids.gif.GifImageView
-
 @Suppress("COMPATIBILITY_WARNING")
 class SplashScreen : AppCompatActivity() {
-
     private lateinit var databaseViewModel: CardViewModel
     private lateinit var viewModel: CharacterViewModel
     private val cardManager = CardManager()
@@ -52,7 +49,6 @@ class SplashScreen : AppCompatActivity() {
     private var isCurrentUser = false
     private var imageUri: Uri? = null
 
-
     data class DatabaseUser(
         val name: String = "",
         val nickName: String = "",
@@ -61,11 +57,9 @@ class SplashScreen : AppCompatActivity() {
         val team: MutableList<MainActivity.DatabaseCard>? = null,
     )
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-
         databaseViewModel = ViewModelProvider(
             this,
             CardViewModel.CardViewModelFactory(
@@ -74,110 +68,79 @@ class SplashScreen : AppCompatActivity() {
                 )
             )
         ).get(CardViewModel::class.java)
-
         viewModel = ViewModelProvider(
             this,
             CharacterViewModel.CharacterViewModelFactory(CharacterRepository())
         ).get(CharacterViewModel::class.java)
-
         dataBaseCheck(cardManager)
-
         animation()
     }
-
     private fun dataBaseCheck(cardManager: CardManager) {
-
         val size = cardManager.getIdsList()
-
         databaseViewModel.count().observe(this) {
             val count = it.toString().toInt()
-
             if (count == size.size) {
 
                 Log.d("DATA_BASE", "Requisitando info do DB")
                 Log.d("DATA_BASE_COUNT", it.toString())
-
                 Handler(Looper.getMainLooper()).postDelayed({
                     callNextPage()
                 }, HANDLER_TIME)
-
             } else {
                 Log.d("DATA_BASE", "Baixando info da API")
                 getApiCharacters(cardManager)
             }
         }
     }
-
     private fun getApiCharacters(cardManager: CardManager) {
-
         val allCharId = cardManager.getIdsList()
-
         viewModel.getCharacter(allCharId).observe(this) {
             cardManager.addCardsOnManager(it)
             createDatabase(cardManager.getCardList())
             Log.d("DATA_BASE", "Inserindo dados no BD")
 
             var validator = false
-
             do {
                 val cardsListCount = cardManager.getCardList().size
                 val idsListCount = cardManager.getIdsList().size
-
                 if (cardsListCount == idsListCount) {
                     validator = true
                 }
-
             } while (!validator)
-
             callNextPage()
         }
     }
-
     private fun createDatabase(cardList: List<CardEntity>) {
-
         cardList.forEach {
             databaseViewModel.addCard(it).observe(this) { isAdd ->
                 Log.i("DATA_BASE", "Insert item: $isAdd")
             }
         }
     }
-
     private fun animation() {
-
         val gifSplash = findViewById<GifImageView>(R.id.gif_marvel)
         val logoSplash = findViewById<ImageView>(R.id.img_splash_screen)
-
         Handler(Looper.getMainLooper()).postDelayed({
-
             gifSplash.animate().apply {
                 duration = 3000
                 alpha(0f)
             }
-
             logoSplash.animate().apply {
                 duration = 3000
                 alpha(1f)
                 scaleX(0.80f)
                 scaleY(0.80f)
             }
-
             Handler(Looper.getMainLooper()).postDelayed({
-
                 progressBar.animate().apply {
                     duration = 3000
                     alpha(1f)
                 }
-
             }, HANDLER_TIME_ANIMATION_PROGRESS_BAR)
-
         }, HANDLER_TIME_ANIMATION)
-
     }
-
     private fun callNextPage() {
-
         val firebaseUser = FirebaseAuth.getInstance().currentUser
-
         if (firebaseUser != null) {
             val intent = Intent(this, RegisterActivity::class.java)
             intent.putExtra(NAME, "")
@@ -188,5 +151,4 @@ class SplashScreen : AppCompatActivity() {
             finish()
         }
     }
-
 }

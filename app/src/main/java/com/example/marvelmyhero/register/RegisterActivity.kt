@@ -1,5 +1,4 @@
 package com.example.marvelmyhero.register
-
 import android.content.Intent
 import android.graphics.Color.alpha
 import android.net.Uri
@@ -38,9 +37,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
-import de.hdodenhof.circleimageview.CircleImageView
-import pl.droidsonroids.gif.GifImageView
 
+import pl.droidsonroids.gif.GifImageView
 class RegisterActivity : AppCompatActivity() {
 
     data class DatabaseUser(
@@ -67,7 +65,6 @@ class RegisterActivity : AppCompatActivity() {
     private val firebaseDatabase = FirebaseDatabase.getInstance()
     private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
-
     override fun onCreate(savedInstanceState: Bundle?) {
         isNewUser()
 
@@ -85,15 +82,12 @@ class RegisterActivity : AppCompatActivity() {
             }
         }, HANDLER_TIME_BRIDGE)
 
-
         var intentName = intent.getStringExtra(NAME)!!
-
         if (intentName.equals("null")){
             intentName = ""
         }
 
         name.setText(intentName)
-
         databaseViewModel = ViewModelProvider(
             this,
             CardViewModel.CardViewModelFactory(
@@ -102,9 +96,7 @@ class RegisterActivity : AppCompatActivity() {
                 )
             )
         ).get(CardViewModel::class.java)
-
         submitButton.setOnClickListener {
-
             if (nickname.text.isNullOrEmpty()) {
                 nickname.error = getString(R.string.nickName_error)
             }
@@ -115,40 +107,28 @@ class RegisterActivity : AppCompatActivity() {
                 setUser()
             }
         }
-
         changeImageButton.setOnClickListener {
             findFile()
         }
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == CONTEXT_RESQUEST_CODE && resultCode == RESULT_OK) {
             imageUri = data?.data
             userImage.setImageURI(imageUri)
-
             sendImage()
         }
     }
-
     private fun setUser() {
-
         getAllCardsFromDB()
-
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                 Toast.makeText(this@RegisterActivity, "Submit", Toast.LENGTH_LONG).show()
-
                 val intent = Intent(this@RegisterActivity, MainActivity::class.java)
-
                 intent.putExtra(IMAGE, imageUri.toString())
-
                 startActivity(intent)
                 finish()
             }
-
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(this@RegisterActivity,
                     "Error :(  Try again latter",
@@ -156,13 +136,10 @@ class RegisterActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun sendImage() {
         imageUri?.run {
-
             val extension = MimeTypeMap.getSingleton()
                 .getExtensionFromMimeType(contentResolver.getType(imageUri!!))
-
             storageRef.putFile(this)
                 .addOnSuccessListener {
                     Log.d("FIREBASE_PIC", storageRef.toString())
@@ -174,19 +151,14 @@ class RegisterActivity : AppCompatActivity() {
                 }
         }
     }
-
     private fun findFile() {
-
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(intent, CONTEXT_RESQUEST_CODE)
     }
-
     private fun getAllCardsFromDB() {
-
         val cardList = mutableListOf<Hero>()
-
         databaseViewModel.getAllCards().observe(this) { cardlist ->
             val _cardList = cardlist as List<CardEntity>
             _cardList.forEach {
@@ -206,37 +178,25 @@ class RegisterActivity : AppCompatActivity() {
                     )
                 )
             }
-
-
             val randomCards = cardManager.random5(cardList)
-
             val randomFirebaseCards = addOnDeck(randomCards)
-
             val randomFirebaseCardsTeam =
                 addOnDeck(mutableListOf(randomCards[0], randomCards[1], randomCards[2]))
-
             myRef.setValue(User(nickname.text.toString(),
                 name.text.toString(),
                 firebaseUser?.uid.toString()))
-
             myRef.child("deck").setValue(randomFirebaseCards)
-
             myRef.child("team").setValue(randomFirebaseCardsTeam)
-
         }
     }
-
     private fun addOnDeck(list: MutableList<Hero>): MutableList<CardFirebase> {
-
         val cardFirebase = mutableListOf<CardFirebase>()
-
         list.forEach {
             cardFirebase.add(CardFirebase(
                 it.id,
                 it.favorite
             ))
         }
-
         return cardFirebase
     }
 
@@ -259,16 +219,10 @@ class RegisterActivity : AppCompatActivity() {
 
                     }
                 }
-
-
-
             }
-
             override fun onCancelled(error: DatabaseError) {
-
             }
         })
-
 
     }
 }

@@ -80,6 +80,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+        storageRef.downloadUrl.addOnSuccessListener {
+            imageUri = it
+        }
+        isFirstTimeOnApp = IS_NEW_USER
+
+
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue(DatabaseUser::class.java)
