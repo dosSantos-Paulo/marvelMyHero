@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.CardFirebase
 import com.example.marvelmyhero.card.model.Hero

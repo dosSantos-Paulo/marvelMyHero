@@ -32,7 +32,7 @@ class SplashScreen : AppCompatActivity() {
     private lateinit var databaseViewModel: CardViewModel
     private lateinit var viewModel: CharacterViewModel
     private val cardManager = CardManager()
-    private val progressBar: ProgressBar by lazy { findViewById(R.id.progressBar_splash) }
+    private val progressBar: ProgressBar by lazy { findViewById<ProgressBar>(R.id.progressBar_splash) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -158,4 +158,5 @@ class SplashScreen : AppCompatActivity() {
             finish()
         }
     }
+
 }

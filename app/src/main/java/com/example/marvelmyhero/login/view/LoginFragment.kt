@@ -18,6 +18,8 @@ import com.example.marvelmyhero.utils.MovieUtil
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
 import com.example.marvelmyhero.main.view.MainActivity
+import com.example.marvelmyhero.register.RegisterActivity
+import com.example.marvelmyhero.utils.Constants.NAME
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -37,6 +39,7 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var button: Button
     private lateinit var callbackManager: CallbackManager
+    private lateinit var myView: View
 
     private val viewModel: AuthenticationViewModel by lazy {
         ViewModelProvider(this).get(
@@ -54,6 +57,8 @@ class LoginFragment : Fragment() {
         // button.setFragment(this)
         callbackManager = CallbackManager.Factory.create()
         button.setOnClickListener { loginFacebook() }
+
+        myView = view
 
         return view
     }
@@ -93,27 +98,38 @@ class LoginFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        viewModel.stateLogin.observe(viewLifecycleOwner, { state ->
+        viewModel.stateLogin.observe(viewLifecycleOwner) { state ->
             state?.let {
                 navigateToHome(it)
             }
-        })
+        }
     }
 
     private fun navigateToHome(status: Boolean) {
         when {
             status -> {
-                startActivity(Intent(context, MainActivity::class.java))
+
+                val intent = Intent(view?.context, RegisterActivity::class.java)
+                intent.putExtra(NAME, "")
+                startActivity(intent)
+
             }
         }
     }
 
     private fun irParaHome(uiid: String) {
-        startActivity(Intent(context, MainActivity::class.java))
+
+        val intent = Intent(view?.context, RegisterActivity::class.java)
+        intent.putExtra(NAME, "")
+        startActivity(intent)
     }
 
     private fun irParaHome2() {
-        startActivity(Intent(context, MainActivity::class.java))
+//        Login pelo Google
+        val intent = Intent(view?.context, RegisterActivity::class.java)
+        intent.putExtra(NAME, "")
+        startActivity(intent)
+
     }
 
     private fun loginFacebook() {
