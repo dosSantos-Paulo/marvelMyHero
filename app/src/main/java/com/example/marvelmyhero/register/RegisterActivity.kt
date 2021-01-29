@@ -38,6 +38,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import de.hdodenhof.circleimageview.CircleImageView
+import pl.droidsonroids.gif.GifImageView
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -58,7 +60,7 @@ class RegisterActivity : AppCompatActivity() {
     private val cardManager = CardManager()
     private lateinit var databaseViewModel: CardViewModel
     private val materialCardView by lazy { findViewById<MaterialCardView>(R.id.materialCardView_register) }
-    private val progressBar by lazy { findViewById<ProgressBar>(R.id.progressBar_register) }
+    private val progressBar by lazy { findViewById<GifImageView>(R.id.circle_image) }
 
     //    Firebase
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
@@ -84,7 +86,11 @@ class RegisterActivity : AppCompatActivity() {
         }, HANDLER_TIME_BRIDGE)
 
 
-        val intentName = intent.getStringExtra(NAME)!!
+        var intentName = intent.getStringExtra(NAME)!!
+
+        if (intentName.equals("null")){
+            intentName = ""
+        }
 
         name.setText(intentName)
 
