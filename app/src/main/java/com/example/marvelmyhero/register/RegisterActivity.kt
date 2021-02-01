@@ -119,7 +119,7 @@ class RegisterActivity : AppCompatActivity() {
         getAllCardsFromDB()
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Toast.makeText(this@RegisterActivity, "Submit", Toast.LENGTH_LONG).show()
+                Log.d("CARDS_FROM_DB","Cards carregados")
                 val intent = Intent(this@RegisterActivity, MainActivity::class.java)
                 intent.putExtra(IMAGE, imageUri.toString())
                 startActivity(intent)
