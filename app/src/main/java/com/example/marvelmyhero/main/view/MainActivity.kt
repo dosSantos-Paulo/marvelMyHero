@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         ).get(CardViewModel::class.java)
-        
+
         exitButton.setOnClickListener {
             exitDialog()
         }

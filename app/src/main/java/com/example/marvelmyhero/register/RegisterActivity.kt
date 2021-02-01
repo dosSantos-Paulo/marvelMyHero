@@ -99,9 +99,13 @@ class RegisterActivity : AppCompatActivity() {
             if (name.text.isNullOrEmpty()) {
                 name.error = getString(R.string.name_error)
             }
+//            if (imageUri!! == null){
+//                userImage.error = getString(R.string.nickName_error)
+//            }
             if (!name.text.isNullOrEmpty() && !nickname.text.isNullOrEmpty()) {
                 setUser()
             }
+
         }
         changeImageButton.setOnClickListener {
             findFile()

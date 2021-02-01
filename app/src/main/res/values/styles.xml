@@ -4,11 +4,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
-    </style>
-
-    <style name="SelectableItemBackground">
-        <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
     <style name="Input" parent="Theme.MaterialComponents.DayNight.NoActionBar">
