@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/marginLarge"
+    android:paddingTop="@dimen/marginExtraLarge"
+    android:paddingBottom="@dimen/marginExtraLarge"
+    android:paddingStart="@dimen/marginLarge"
+    android:paddingEnd="@dimen/marginLarge"
     android:background="@color/totalTranslucent"
     tools:context=".card.view.CardFrontFragment">
 
@@ -14,8 +17,8 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="304dp"
-            android:layout_height="504dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:cardBackgroundColor="@color/totalTranslucent"
             app:cardCornerRadius="@dimen/boxRadius">
 
