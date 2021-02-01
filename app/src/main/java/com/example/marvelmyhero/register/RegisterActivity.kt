@@ -1,6 +1,5 @@
 package com.example.marvelmyhero.register
 import android.content.Intent
-import android.graphics.Color.alpha
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,8 +9,8 @@ import android.util.Log
 import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
@@ -22,10 +21,8 @@ import com.example.marvelmyhero.db.entity.CardEntity
 import com.example.marvelmyhero.db.repository.CardRepository
 import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.login.model.User
-import com.example.marvelmyhero.login.view.LoginFragment
 import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.utils.CardManager
-import com.example.marvelmyhero.utils.Constants
 import com.example.marvelmyhero.utils.Constants.CONTEXT_RESQUEST_CODE
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_BRIDGE
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_BRIDGE_2
@@ -38,7 +35,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 
-import pl.droidsonroids.gif.GifImageView
 class RegisterActivity : AppCompatActivity() {
 
     data class DatabaseUser(
@@ -58,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
     private val cardManager = CardManager()
     private lateinit var databaseViewModel: CardViewModel
     private val materialCardView by lazy { findViewById<MaterialCardView>(R.id.materialCardView_register) }
-    private val progressBar by lazy { findViewById<GifImageView>(R.id.circle_image) }
+    private val loadingImage by lazy { findViewById<ConstraintLayout>(R.id.circle_image) }
 
     //    Firebase
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
@@ -76,7 +72,7 @@ class RegisterActivity : AppCompatActivity() {
                 duration = 500
                 alpha(1f)
             }
-            progressBar.animate().apply {
+            loadingImage.animate().apply {
                 duration = 500
                 alpha(0f)
             }
