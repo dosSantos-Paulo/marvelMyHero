@@ -1,5 +1,6 @@
 package com.example.marvelmyhero.deck.view
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,23 +14,26 @@ import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 class MyDeckActivity : AppCompatActivity() {
 
     private val deck = NEW_USER.getDeck()
-    private val arrowBack: ImageView by lazy { findViewById(R.id.img_arrowBack_myDeck) }
-    private val info: ImageView by lazy { findViewById(R.id.ic_info) }
-    private val cardRecyclerView: RecyclerView by lazy { findViewById(R.id.recyclerView_myDeck) }
+    private val arrowBack: ImageView by lazy { findViewById<ImageView>(R.id.img_arrowBack_myDeck) }
+    private val info: ImageView by lazy { findViewById<ImageView>(R.id.ic_info) }
+    private val cardRecyclerView: RecyclerView by lazy { findViewById<RecyclerView>(R.id.recyclerView_myDeck) }
     private val cardManager = GridLayoutManager(this, DECK_COLLUMN)
+    private var validadorRecycler = true
 
     private val cardAdapter = MyDeckAdapter(deck) {
-        supportFragmentManager.beginTransaction().apply {
-            setCustomAnimations(
-                R.anim.show_card,
-                R.anim.hide_card,
-                R.anim.show_card,
-                R.anim.hide_card,
-            )
-            replace(R.id.frameLayout_myDeck, CardFrontFragment(it))
-            addToBackStack(null)
-            commit()
-        }
+            supportFragmentManager.beginTransaction().apply {
+                setCustomAnimations(
+                    R.anim.show_card,
+                    R.anim.hide_card,
+                    R.anim.show_card,
+                    R.anim.hide_card,
+                )
+
+                replace(R.id.frameLayout_myDeck, CardFrontFragment(it))
+                addToBackStack(null)
+                commit()
+            }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +49,15 @@ class MyDeckActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        recyclerView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        validadorRecycler = true
+    }
+
+    private fun recyclerView() {
         cardRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = cardManager

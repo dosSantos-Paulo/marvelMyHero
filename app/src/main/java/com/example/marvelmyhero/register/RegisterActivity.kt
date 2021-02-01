@@ -50,11 +50,11 @@ class RegisterActivity : AppCompatActivity() {
     )
 
     private var imageUri: Uri? = null
-    private val userImage: ImageView by lazy { findViewById(R.id.image_userImage_register) }
-    private val nickname: TextInputEditText by lazy { findViewById(R.id.editText_nickName_register) }
-    private val name: TextInputEditText by lazy { findViewById(R.id.editText_name_register) }
-    private val submitButton: Button by lazy { findViewById(R.id.btn_submit_register) }
-    private val changeImageButton: ImageView by lazy { findViewById(R.id.image_editIcon_register) }
+    private val userImage: ImageView by lazy { findViewById<ImageView>(R.id.image_userImage_register) }
+    private val nickname: TextInputEditText by lazy { findViewById<TextInputEditText>(R.id.editText_nickName_register) }
+    private val name: TextInputEditText by lazy { findViewById<TextInputEditText>(R.id.editText_name_register) }
+    private val submitButton: Button by lazy { findViewById<Button>(R.id.btn_submit_register) }
+    private val changeImageButton: ImageView by lazy { findViewById<ImageView>(R.id.image_editIcon_register) }
     private val cardManager = CardManager()
     private lateinit var databaseViewModel: CardViewModel
     private val materialCardView by lazy { findViewById<MaterialCardView>(R.id.materialCardView_register) }

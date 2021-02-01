@@ -1,5 +1,6 @@
 package com.example.marvelmyhero.card.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,8 +20,14 @@ class CardBackFragment(private val _card: Hero) : Fragment() {
         return inflater.inflate(R.layout.fragment_card_back, container, false)
     }
 
+    @SuppressLint("ClickableViewAccessibility", "UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
+        requireView().setOnTouchListener { view, motionEvent ->
+            return@setOnTouchListener true
+        }
+
 
         val cardName = view.findViewById<TextView>(R.id.txt_heroName_cardBack)
         val cardRealName = view.findViewById<TextView>(R.id.txt_heroRealName_cardBack)

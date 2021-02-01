@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         storageRef.downloadUrl.addOnSuccessListener {
             imageUri = it
         }
-        isFirstTimeOnApp = IS_NEW_USER
+
 
 
         myRef.addValueEventListener(object : ValueEventListener {
