@@ -1,5 +1,6 @@
 package com.example.marvelmyhero.main.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,8 +24,12 @@ class UserFragment(
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
 
+    @SuppressLint("ClickableViewAccessibility", "UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
+        requireView().setOnTouchListener { view, motionEvent -> return@setOnTouchListener true
+        }
 
         val userImage = view.findViewById<ImageView>(R.id.img_user_fragmentUser)
         val userName = view.findViewById<TextView>(R.id.txt_userName_fragmentUser)
