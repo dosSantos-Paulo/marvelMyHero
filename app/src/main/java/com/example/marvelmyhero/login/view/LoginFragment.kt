@@ -198,7 +198,6 @@ class LoginFragment : Fragment() {
                     irParaHome2()
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
-
                 }
             }
     }

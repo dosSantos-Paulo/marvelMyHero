@@ -84,8 +84,6 @@ class MainActivity : AppCompatActivity() {
             imageUri = it
         }
 
-
-
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue(DatabaseUser::class.java)
@@ -124,8 +122,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         ).get(CardViewModel::class.java)
-
-
+        
         exitButton.setOnClickListener {
             exitDialog()
         }
