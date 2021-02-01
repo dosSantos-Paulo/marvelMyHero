@@ -2,11 +2,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout_userFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="@dimen/marginSmall"
+    android:paddingEnd="@dimen/marginExtraLarge"
+    android:paddingBottom="@dimen/marginLarge"
     tools:context=".main.view.UserFragment">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView_userFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardBackgroundColor="@color/translucentBoxColorDark"
