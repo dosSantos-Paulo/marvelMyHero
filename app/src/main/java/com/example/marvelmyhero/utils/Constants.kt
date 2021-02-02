@@ -1,4 +1,7 @@
 package com.example.marvelmyhero.utils
+
+import com.example.marvelmyhero.R
+
 object Constants {
     const val LANGUAGE_PT_BR = "PT-BR"
     const val FAVORITES_PATH = "/favorites"
@@ -7,6 +10,7 @@ object Constants {
     const val UIID_KEY = "UIID"
     const val EMPTY_STRING = ""
     const val CONTEXT_RESQUEST_CODE = 1
+
     //    Handler Time
     const val HANDLER_TIME: Long = 9000
     const val HANDLER_TIME_ANIMATION: Long = 5000
@@ -19,5 +23,12 @@ object Constants {
     const val NAME = "NAME"
     const val IMAGE = "IMAGE"
     var IS_NEW_USER = true
+
+    //    Community Variable || CardFront CardBack
+    var enterAnim = R.anim.card_flip_left_in
+    var exitAnim = R.anim.card_flip_left_out
+    var popEnterAnim = R.anim.card_flip_left_in
+    var popExitAnim = R.anim.card_flip_left_out
+    var isDoubleBackPressed = false
 
 }
