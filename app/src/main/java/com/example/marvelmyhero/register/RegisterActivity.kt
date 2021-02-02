@@ -34,6 +34,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -66,6 +67,11 @@ class RegisterActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+         if (firebaseUser?.photoUrl != null) {
+             imageUri = firebaseUser?.photoUrl
+             Picasso.get().load(imageUri).into(userImage)
+         }
 
         Handler(Looper.getMainLooper()).postDelayed({
             materialCardView.animate().apply {
