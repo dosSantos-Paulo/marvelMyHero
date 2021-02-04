@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
     private val cardManager = CardManager()
     private lateinit var databaseViewModel: CardViewModel
     private val materialCardView by lazy { findViewById<MaterialCardView>(R.id.materialCardView_register) }
-    private val loadingImage by lazy { findViewById<ConstraintLayout>(R.id.circle_image) }
+    private val loadingImage by lazy { findViewById<ConstraintLayout>(R.id.loadingRegister) }
 
     //    Firebase
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
