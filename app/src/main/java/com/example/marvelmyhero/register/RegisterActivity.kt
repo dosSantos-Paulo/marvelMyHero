@@ -99,9 +99,6 @@ class RegisterActivity : AppCompatActivity() {
             if (name.text.isNullOrEmpty()) {
                 name.error = getString(R.string.name_error)
             }
-//            if (imageUri!! == null){
-//                Toast.makeText(this, "Insert a Picture", Toast.LENGTH_LONG).show()
-//            }
             if (!name.text.isNullOrEmpty() && !nickname.text.isNullOrEmpty()) {
                 setUser()
             }

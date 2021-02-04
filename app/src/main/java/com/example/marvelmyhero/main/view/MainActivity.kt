@@ -1,13 +1,24 @@
 package com.example.marvelmyhero.main.view
 
 
-import android.content.Intent
+import android.Manifest
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.*
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
@@ -39,6 +50,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
+import java.io.ByteArrayOutputStream
+import java.io.OutputStream
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,12 +68,14 @@ class MainActivity : AppCompatActivity() {
         val team: MutableList<DatabaseCard>? = null,
     )
 
-    private val exitButton: ImageView by lazy { findViewById(R.id.ic_exit_main) }
-    private val deckButton: MaterialButton by lazy { findViewById(R.id.btn_myDeck_main) }
-    private val materialCardView: MaterialCardView by lazy { findViewById(R.id.materialCardView_main) }
-    private val developers: ImageView by lazy { findViewById(R.id.img_developers) }
-    private val userImage: ImageView by lazy { findViewById(R.id.img_userIcon_main) }
-    private val userName: TextView by lazy { findViewById(R.id.txt_userName_main) }
+    private val exitButton: ImageView by lazy { findViewById<ImageView>(R.id.ic_exit_main) }
+    private val deckButton: MaterialButton by lazy { findViewById<MaterialButton>(R.id.btn_myDeck_main) }
+    private val materialCardView: MaterialCardView by lazy { findViewById<MaterialCardView>(R.id.materialCardView_main) }
+    private val developers: ImageView by lazy { findViewById<ImageView>(R.id.img_developers) }
+    private val userImage: ImageView by lazy { findViewById<ImageView>(R.id.img_userIcon_main) }
+    private val userName: TextView by lazy { findViewById<TextView>(R.id.txt_userName_main) }
+    private val cardViewMain by lazy { findViewById<MaterialCardView>(R.id.materialCardView_main) }
+    private val shareButton by lazy { findViewById<MaterialButton>(R.id.btn_share_main) }
     private lateinit var databaseViewModel: CardViewModel
     private var imageUri: Uri? = null
     private var user = User("", "", "")
@@ -69,10 +84,12 @@ class MainActivity : AppCompatActivity() {
     private val myDeck: MutableList<DatabaseCard> = mutableListOf()
     private val myTeam: MutableList<DatabaseCard> = mutableListOf()
 
+
     //    Firebase
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private val firebaseDatabase = FirebaseDatabase.getInstance()
-    private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
+    private val storageRef =
+        FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -135,9 +152,107 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, DevelopersActivity::class.java))
         }
 
+        checkPermissionREAD_EXTERNAL_STORAGE(this)
+
         materialCardView.setOnClickListener {
             startActivity(Intent(this, MyTeamActivity::class.java))
         }
+
+        shareButton.setOnClickListener {
+            share()
+        }
+    }
+
+    val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123
+
+    private fun share() {
+        val bitmap = getBitmapFromView(cardViewMain)
+
+        val icon: Bitmap = bitmap!!
+        val share = Intent(Intent.ACTION_SEND)
+        share.type = "image/jpeg"
+
+
+        try {
+            val pm = packageManager
+            val bytes = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+            val path = MediaStore.Images.Media.insertImage(
+                this.contentResolver,
+                bitmap,
+                "qualquer coisa",
+                null
+            )
+            val imageUri = Uri.parse(path)
+
+
+            val outstream: OutputStream?
+            outstream = contentResolver.openOutputStream(imageUri!!)
+            icon.compress(Bitmap.CompressFormat.JPEG, 100, outstream)
+            outstream?.close()
+            share.putExtra(Intent.EXTRA_STREAM, imageUri)
+            startActivity(Intent.createChooser(share, "Share Image"))
+        } catch (e: Exception) {
+            System.err.println(e.toString())
+        }
+    }
+
+    fun checkPermissionREAD_EXTERNAL_STORAGE(
+        context: Context?
+    ): Boolean {
+        val currentAPIVersion = Build.VERSION.SDK_INT
+        return if (currentAPIVersion >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) !== PackageManager.PERMISSION_GRANTED
+            ) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )
+                ) {
+                    showDialog(
+                        "External storage", context,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )
+                } else {
+                    ActivityCompat
+                        .requestPermissions(
+                            this,
+                            arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                            MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
+                        )
+                }
+                false
+            } else {
+                true
+            }
+        } else {
+            true
+        }
+    }
+
+    fun showDialog(
+        msg: String, context: Context?,
+        permission: String
+    ) {
+        val alertBuilder: AlertDialog.Builder = AlertDialog.Builder(context)
+        alertBuilder.setCancelable(true)
+        alertBuilder.setTitle("Permission necessary")
+        alertBuilder.setMessage("$msg permission is necessary")
+        alertBuilder.setPositiveButton(android.R.string.yes,
+            object : DialogInterface.OnClickListener {
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    ActivityCompat.requestPermissions(
+                        (context as Activity?)!!, arrayOf(permission),
+                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
+                    )
+                }
+
+            })
+        val alert: AlertDialog = alertBuilder.create()
+        alert.show()
     }
 
     private fun toolBarItems(user: User): User {
@@ -244,7 +359,17 @@ class MainActivity : AppCompatActivity() {
                 frameLayout
             )
         }
+
     }
+
+    open fun getBitmapFromView(view: View): Bitmap? {
+        var bitmap =
+            Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        var canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
+    }
+
 
     private fun miniCardFragment(
         name: String,
