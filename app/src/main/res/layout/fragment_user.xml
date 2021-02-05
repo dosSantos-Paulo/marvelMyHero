@@ -37,6 +37,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/imgEdit_UserFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_edit_24"
+                app:layout_constraintBottom_toBottomOf="@+id/img_user_fragmentUser"
+                app:layout_constraintEnd_toEndOf="@+id/img_user_fragmentUser" />
+
             <TextView
                 android:id="@+id/txt_userName_fragmentUser"
                 android:layout_width="match_parent"
@@ -77,6 +85,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/txt_userName_fragmentUser" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSalvar"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/salvar"
+                android:layout_marginTop="100dp"
+                android:textColor="@color/textPrimary"
+                app:cornerRadius="@dimen/defaultRadius"
+                app:layout_constraintEnd_toEndOf="@+id/txt_userName_fragmentUser"
+                app:layout_constraintStart_toStartOf="@+id/txt_userName_fragmentUser"
+                app:layout_constraintTop_toBottomOf="@+id/txt_userName_fragmentUser"
+                app:strokeColor="@color/textPrimary" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
