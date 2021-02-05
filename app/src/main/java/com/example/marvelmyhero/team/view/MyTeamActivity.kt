@@ -7,22 +7,26 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 
 class MyTeamActivity : AppCompatActivity() {
+    private val deck = NEW_USER.getDeck()
+    private val team = mutableListOf<Hero>()
+    private val viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    private val adapterMyTeam = MyTeamAdapter(deck) {
+        Toast.makeText(this, getString(R.string.text_inserir_cards), Toast.LENGTH_LONG).show()
+        moveItem(it)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_team)
 
         val backArrowButton = findViewById<ImageView>(R.id.img_arrowBack_myTeam)
-        val deck = NEW_USER.getDeck()
         val recyclerViewMyTeam = findViewById<RecyclerView>(R.id.recyclerView_myTeam)
-        val viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val adapterMyTeam = MyTeamAdapter(deck) {
-            Toast.makeText(this, getString(R.string.text_inserir_cards), Toast.LENGTH_LONG).show()
-        }
+
+
 
         recyclerViewMyTeam.apply {
             setHasFixedSize(true)
@@ -30,11 +34,27 @@ class MyTeamActivity : AppCompatActivity() {
             adapter = adapterMyTeam
         }
 
-        showTeamCards(NEW_USER.getTeam())
+
 
         backArrowButton.setOnClickListener {
             finish()
         }
+    }
+
+    fun moveItem(hero: Hero) {
+        val indexTeam = team.indexOf(hero)
+        val indexDeck = deck.indexOf(hero)
+
+        if (indexDeck == -1) {
+            deck.add(team.removeAt(indexTeam))
+        } else {
+            if (team.size < 3) {
+                team.add(deck.removeAt(indexDeck))
+            }
+        }
+
+        showTeamCards(team)
+        adapterMyTeam.notifyDataSetChanged()
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
@@ -48,24 +68,23 @@ class MyTeamActivity : AppCompatActivity() {
             }
 
             miniCardFragment(
-                team[i].heroName,
-                team[i].imageUrl,
-                team[i].classification,
+                this,
+                team[i],
                 frameLayout
             )
         }
     }
 
     private fun miniCardFragment(
-        name: String,
-        imageUrl: String,
-        classification: Double,
+        activity: MyTeamActivity,
+        hero: Hero,
         frame: Int
     ) {
-        val newCard = MiniCardFragment(name, imageUrl, classification)
+        val newCard = MiniCardMyTeam(hero, activity)
         supportFragmentManager.beginTransaction().apply {
             replace(frame, newCard)
             commit()
         }
     }
 }
+
