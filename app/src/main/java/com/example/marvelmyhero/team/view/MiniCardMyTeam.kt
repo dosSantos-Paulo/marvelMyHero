@@ -37,7 +37,9 @@ class MiniCardMyTeam(
         val card = view.findViewById<MaterialCardView>(R.id.materialCardView4)
 
         card.setOnClickListener {
-            myActivity.moveItem(hero)
+            if (hero.id != 0){
+                myActivity.moveItem(hero)
+            }
         }
 
         cardColor.setBackgroundColor(Color.parseColor(getString(getColor(hero.classification))))
