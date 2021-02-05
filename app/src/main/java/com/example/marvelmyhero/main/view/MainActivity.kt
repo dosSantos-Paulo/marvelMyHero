@@ -166,11 +166,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        showTeamCards(CURRENT_USER.team)
-    }
-
     val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123
 
     private fun share() {
@@ -301,30 +296,18 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             }
-            CURRENT_USER.deck
+            val deck = getDeck(myDeck, cardList)
+            val team = getTeam(myTeam, deck)
 
-            if (CURRENT_USER.deck.size == 0){
-                val deck = getDeck(myDeck, cardList)
-                val team = getTeam(myTeam, deck)
-                val index_01 = deck.indexOf(team[0])
-                deck.removeAt(index_01)
-                val index_02 = deck.indexOf(team[1])
-                deck.removeAt(index_02)
-                val index_03 = deck.indexOf(team[2])
-                deck.removeAt(index_03)
-
-
-                CURRENT_USER.deck = deck
-                CURRENT_USER.team = team
-
-                if (IS_NEW_USER) {
-                    cardAlert.newCardAlert(cardManager, deck, false)
-                }
+            if (IS_NEW_USER) {
+                cardAlert.newCardAlert(cardManager, deck, false)
             }
 
+            NEW_USER.setUser(user)
+            NEW_USER.addOnDeck(deck)
 
-
-            showTeamCards(CURRENT_USER.team)
+            CURRENT_USER.deck = NEW_USER.getDeck()
+            showTeamCards(team)
         }
     }
 
