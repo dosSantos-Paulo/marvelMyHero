@@ -22,6 +22,7 @@ class MyTeamActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_team)
+        showTeamCards(team)
 
         val backArrowButton = findViewById<ImageView>(R.id.img_arrowBack_myTeam)
         val recyclerViewMyTeam = findViewById<RecyclerView>(R.id.recyclerView_myTeam)
@@ -59,20 +60,76 @@ class MyTeamActivity : AppCompatActivity() {
 
     private fun showTeamCards(team: MutableList<Hero>) {
 
-        for (i in team.indices) {
-            var frameLayout = R.id.frameLayout_teamCard1_myTeam
-            when (i) {
-                1 -> frameLayout = R.id.frameLayout_teamCard2_myTeam
+        if (team.size == 3) {
+            for (i in team.indices) {
+                var frameLayout = R.id.frameLayout_teamCard1_myTeam
+                when (i) {
+                    1 -> frameLayout = R.id.frameLayout_teamCard2_myTeam
 
-                2 -> frameLayout = R.id.frameLayout_teamCard3_myTeam
+                    2 -> frameLayout = R.id.frameLayout_teamCard3_myTeam
+                }
+
+                miniCardFragment(
+                    this,
+                    team[i],
+                    frameLayout
+                )
+            }
+        } else if (team.size == 2) {
+            for (i in team.indices) {
+                var frameLayout = R.id.frameLayout_teamCard1_myTeam
+                when (i) {
+                    1 -> frameLayout = R.id.frameLayout_teamCard2_myTeam
+                }
+
+                miniCardFragment(
+                    this,
+                    team[i],
+                    frameLayout
+                )
             }
 
             miniCardFragment(
                 this,
-                team[i],
-                frameLayout
+                chooseYourHero(),
+                R.id.frameLayout_teamCard3_myTeam
+            )
+        } else if (team.size == 1) {
+
+            miniCardFragment(
+                this,
+                team[0],
+                R.id.frameLayout_teamCard1_myTeam
+            )
+            miniCardFragment(
+                this,
+                chooseYourHero(),
+                R.id.frameLayout_teamCard2_myTeam
+            )
+            miniCardFragment(
+                this,
+                chooseYourHero(),
+                R.id.frameLayout_teamCard3_myTeam
+            )
+        } else {
+            miniCardFragment(
+                this,
+                chooseYourHero(),
+                R.id.frameLayout_teamCard1_myTeam
+            )
+            miniCardFragment(
+                this,
+                chooseYourHero(),
+                R.id.frameLayout_teamCard2_myTeam
+            )
+            miniCardFragment(
+                this,
+                chooseYourHero(),
+                R.id.frameLayout_teamCard3_myTeam
             )
         }
+
+
     }
 
     private fun miniCardFragment(
@@ -85,6 +142,22 @@ class MyTeamActivity : AppCompatActivity() {
             replace(frame, newCard)
             commit()
         }
+    }
+
+    private fun chooseYourHero(): Hero {
+        return Hero(
+            0,
+            "Your Hero",
+            "",
+            "https://fsb.zobj.net/crop.php?r=UtAvNNW2KH8H1Rq8zkxlMZxuS_9Vvm6fC6wRGLSLfpTUzkSFrHca7yhQz50fzuWaeM_iAy75YBGMgci2hwY6pnVYXWE9McCvVF-QqJwBOeEis6cOhIP7zadqRZXL2gRk3ksxIZXOEbRt229ymqKVgqzpMi7xA6SvwhBrUorYJEQJvyF-Cs0bRDTrHYw",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            ""
+        )
     }
 }
 
