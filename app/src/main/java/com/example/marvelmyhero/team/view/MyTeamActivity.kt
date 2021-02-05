@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
+import com.example.marvelmyhero.utils.Constants.CURRENT_USER
+import com.example.marvelmyhero.utils.Constants.isDeckChange
+import com.example.marvelmyhero.utils.UserCardUtils
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 
 class MyTeamActivity : AppCompatActivity() {
-    private val deck = NEW_USER.getDeck()
-    private val team = mutableListOf<Hero>()
     private val viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-    private val adapterMyTeam = MyTeamAdapter(deck) {
+    private val adapterMyTeam = MyTeamAdapter(CURRENT_USER.deck) {
         Toast.makeText(this, getString(R.string.text_inserir_cards), Toast.LENGTH_LONG).show()
         moveItem(it)
     }
@@ -22,7 +23,7 @@ class MyTeamActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_team)
-        showTeamCards(team)
+        showTeamCards(CURRENT_USER.team)
 
         val backArrowButton = findViewById<ImageView>(R.id.img_arrowBack_myTeam)
         val recyclerViewMyTeam = findViewById<RecyclerView>(R.id.recyclerView_myTeam)
@@ -38,24 +39,31 @@ class MyTeamActivity : AppCompatActivity() {
 
 
         backArrowButton.setOnClickListener {
-            finish()
+            onBackPressed()
         }
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     fun moveItem(hero: Hero) {
-        val indexTeam = team.indexOf(hero)
-        val indexDeck = deck.indexOf(hero)
+        val indexTeam = CURRENT_USER.team.indexOf(hero)
+        val indexDeck = CURRENT_USER.deck.indexOf(hero)
 
         if (indexDeck == -1) {
-            deck.add(team.removeAt(indexTeam))
+            CURRENT_USER.deck.add(CURRENT_USER.team.removeAt(indexTeam))
         } else {
-            if (team.size < 3) {
-                team.add(deck.removeAt(indexDeck))
+            if (CURRENT_USER.team.size < 3) {
+                CURRENT_USER.team.add(CURRENT_USER.deck.removeAt(indexDeck))
             }
         }
 
-        showTeamCards(team)
+        showTeamCards(CURRENT_USER.team)
         adapterMyTeam.notifyDataSetChanged()
+
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
