@@ -16,7 +16,7 @@ import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
 class MyTeamActivity : AppCompatActivity() {
     private val viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     private val adapterMyTeam = MyTeamAdapter(CURRENT_USER.deck) {
-        Toast.makeText(this, getString(R.string.text_inserir_cards), Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, getString(R.string.text_inserir_cards), Toast.LENGTH_LONG).show()
         moveItem(it)
     }
 
