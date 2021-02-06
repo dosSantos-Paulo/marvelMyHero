@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.utils.Constants
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -36,6 +37,7 @@ class UserFragment(
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private val user = Firebase.auth.currentUser
+    private var validador = true
     private lateinit var _view: View
 
     override fun onCreateView(
@@ -51,10 +53,13 @@ class UserFragment(
 
         val frameLayout = view.findViewById<FrameLayout>(R.id.frameLayout_userFragment)
         val cardView = view.findViewById<MaterialCardView>(R.id.cardView_userFragment)
-        val userImage = view.findViewById<ImageView>(R.id.img_user_fragmentUser)
+        //val userImage = view.findViewById<ImageView>(R.id.img_user_fragmentUser)
+        userImage =  view.findViewById<ImageView>(R.id.img_user_fragmentUser)
+
         val userName = view.findViewById<TextView>(R.id.txt_userName_fragmentUser)
         val totalCard = view.findViewById<TextView>(R.id.txt_totalCards_fragmentUser)
         val btnImageChange = view.findViewById<ImageView>(R.id.imgEdit_UserFragment)
+        val btnSalvar = view.findViewById<MaterialButton>(R.id.btnSalvar)
 
         _view = view
 
@@ -67,7 +72,17 @@ class UserFragment(
         }
 
         btnImageChange.setOnClickListener{
+            validador = true
             findFile()
+        }
+
+        btnSalvar.setOnClickListener {
+            if (validador) {
+                Picasso.get().load(imageUri).into(userImage)
+                val intent = Intent(context, MainActivity::class.java)
+                intent.putExtra(Constants.IMAGE, imageUri.toString())
+                startActivity(intent)
+            }
         }
 
         Picasso.get().load(_user.imageUrl).into(userImage)
@@ -110,7 +125,7 @@ class UserFragment(
 
         sendImage()
 
-        val newName = view?.findViewById<TextInputEditText>(R.id.txt_userName_fragmentUser).text.toString()
+        val newName = view?.findViewById<TextInputEditText>(R.id.txt_userName_fragmentUser)!!.text.toString()
 
         val profileUpdates = userProfileChangeRequest {
             displayName = newName
@@ -119,7 +134,7 @@ class UserFragment(
         user!!.updateProfile(profileUpdates)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(view.context, "Dados salvos com sucesso", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, "Dados salvos com sucesso", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
