@@ -275,6 +275,7 @@ class MainActivity : AppCompatActivity() {
         myTeam: MutableList<DatabaseCard>,
     ) {
 
+        
         val cardList = mutableListOf<Hero>()
 
         databaseViewModel.getAllCards().observe(this) { cardlist ->
