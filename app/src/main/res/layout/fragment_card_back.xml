@@ -1,414 +1,428 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frameLayout_cardBack"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="320dp"
-    android:layout_height="530dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/marginExtraLarge"
+    android:paddingBottom="@dimen/marginExtraLarge"
+    android:paddingStart="@dimen/marginLarge"
+    android:paddingEnd="@dimen/marginLarge"
     android:background="@color/totalTranslucent"
     tools:context=".card.view.CardFrontFragment">
 
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/totalTranslucent"
-        app:cardCornerRadius="@dimen/boxRadius">
+        android:gravity="center">
 
-        <LinearLayout
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background_card"
-            android:padding="@dimen/cardPadding">
+            android:id="@+id/cardView_cardBack"
+            app:cardBackgroundColor="@color/totalTranslucent"
+            app:cardCornerRadius="@dimen/boxRadius">
 
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="@dimen/boxRadius">
+                android:background="@color/background_card"
+                android:padding="@dimen/cardPadding">
 
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="@dimen/cardPadding">
+                    app:cardCornerRadius="@dimen/boxRadius">
 
-                    <TextView
-                        android:id="@+id/txt_heroName_cardBack"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/gobold_bold"
-                        android:textSize="@dimen/textCardTitle"
-                        tools:text="Name" />
-
-                    <TextView
-                        android:id="@+id/txt_heroRealName_cardBack"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/marginSmall"
-                        android:layout_marginBottom="@dimen/marginSmall"
-                        android:fontFamily="@font/gobold_bold"
-                        android:textSize="@dimen/textCard"
-                        tools:text="Name" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/cardPadding">
 
                         <TextView
-                            android:id="@+id/textView4"
-                            android:layout_width="90dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/durability"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_durability_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView4"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/durabilityColor" />
-
-                        <ImageView
-                            android:id="@+id/bar_durability_cardBack"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_durability_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView4"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/txt_durability_cardBack"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="5" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView5"
-                            android:layout_width="90dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/energy"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_energy_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView5"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/energyColor" />
-
-                        <ImageView
-                            android:id="@+id/bar_energy_cardBack"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_energy_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView5"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/txt_energy_cardBack"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="5" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView6"
-                            android:layout_width="90dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/fighting_skills"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_fightingSkills_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView6"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/FightingColor" />
-
-                        <ImageView
-                            android:id="@+id/bar_fightingSkills_cardBack"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_fightingSkills_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView6"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/txt_fightingSkills_cardBack"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="5" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView7"
-                            android:layout_width="90dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/inteligence"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_inteligence_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView7"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/IntelligenceColor" />
-
-                        <ImageView
-                            android:id="@+id/bar_inteligence_cardBack"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_inteligence_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView7"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/txt_inteligence_cardBack"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="5" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView8"
-                            android:layout_width="90dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/speed"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_speed_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView8"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/speedColor" />
-
-                        <ImageView
-                            android:id="@+id/bar_speed_cardBack"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_speed_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView8"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/txt_speed_cardBack"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="5" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView9"
-                            android:layout_width="90dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/strength"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_strength_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView9"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/stregnthColor" />
-
-                        <ImageView
-                            android:id="@+id/bar_strength_cardBack"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/animation_bar"
-                            android:src="@drawable/shape_card_atribute"
-                            app:layout_constraintEnd_toStartOf="@+id/txt_strength_cardBack"
-                            app:layout_constraintStart_toEndOf="@+id/textView9"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/cardview_light_background" />
-
-                        <TextView
-                            android:id="@+id/txt_strength_cardBack"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:textSize="@dimen/textCard"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="5" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/marginSmall">
-
-                        <TextView
-                            android:id="@+id/txt_history_cardBack"
+                            android:id="@+id/txt_heroName_cardBack"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            tools:text="@string/loremIpsum" />
+                            android:fontFamily="@font/gobold_bold"
+                            android:textSize="@dimen/textCardTitle"
+                            tools:text="Name" />
 
-                    </ScrollView>
+                        <TextView
+                            android:id="@+id/txt_heroRealName_cardBack"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginSmall"
+                            android:layout_marginBottom="@dimen/marginSmall"
+                            android:fontFamily="@font/gobold_bold"
+                            android:textSize="@dimen/textCard"
+                            tools:text="Name" />
 
-                </LinearLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-            </com.google.android.material.card.MaterialCardView>
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/durability"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_durability_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView4"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/durabilityColor" />
 
-    </com.google.android.material.card.MaterialCardView>
+                            <ImageView
+                                android:id="@+id/bar_durability_cardBack"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_durability_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView4"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/cardview_light_background" />
+
+                            <TextView
+                                android:id="@+id/txt_durability_cardBack"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="5" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textView5"
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/energy"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_energy_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView5"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/energyColor" />
+
+                            <ImageView
+                                android:id="@+id/bar_energy_cardBack"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_energy_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView5"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/cardview_light_background" />
+
+                            <TextView
+                                android:id="@+id/txt_energy_cardBack"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="5" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textView6"
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fighting_skills"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_fightingSkills_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView6"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/FightingColor" />
+
+                            <ImageView
+                                android:id="@+id/bar_fightingSkills_cardBack"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_fightingSkills_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView6"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/cardview_light_background" />
+
+                            <TextView
+                                android:id="@+id/txt_fightingSkills_cardBack"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="5" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textView7"
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/inteligence"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_inteligence_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView7"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/IntelligenceColor" />
+
+                            <ImageView
+                                android:id="@+id/bar_inteligence_cardBack"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_inteligence_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView7"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/cardview_light_background" />
+
+                            <TextView
+                                android:id="@+id/txt_inteligence_cardBack"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="5" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textView8"
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/speed"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_speed_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView8"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/speedColor" />
+
+                            <ImageView
+                                android:id="@+id/bar_speed_cardBack"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_speed_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView8"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/cardview_light_background" />
+
+                            <TextView
+                                android:id="@+id/txt_speed_cardBack"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="5" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textView9"
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/strength"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_strength_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView9"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/stregnthColor" />
+
+                            <ImageView
+                                android:id="@+id/bar_strength_cardBack"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:contentDescription="@string/animation_bar"
+                                android:src="@drawable/shape_card_atribute"
+                                app:layout_constraintEnd_toStartOf="@+id/txt_strength_cardBack"
+                                app:layout_constraintStart_toEndOf="@+id/textView9"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/cardview_light_background" />
+
+                            <TextView
+                                android:id="@+id/txt_strength_cardBack"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textSize="@dimen/textCard"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="5" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/marginSmall">
+
+                            <TextView
+                                android:id="@+id/txt_history_cardBack"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:text="@string/loremIpsum" />
+
+                        </ScrollView>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
 
 </FrameLayout>

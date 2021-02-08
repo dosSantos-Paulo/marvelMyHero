@@ -21,6 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView_register"
         android:layout_width="match_parent"
@@ -34,10 +35,12 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:strokeColor="@color/textPrimary"
         app:strokeWidth="0.5dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
                 android:layout_width="wrap_content"
@@ -47,6 +50,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <ImageView
                     android:id="@+id/image_userImage_register"
                     android:layout_width="100dp"
@@ -56,6 +60,7 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_perfil" />
             </com.google.android.material.card.MaterialCardView>
+
             <ImageView
                 android:id="@+id/image_editIcon_register"
                 android:layout_width="@dimen/icon"
@@ -65,6 +70,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
                 app:layout_constraintStart_toEndOf="@+id/materialCardView"
                 app:tint="@color/textPrimary" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
                 android:layout_width="match_parent"
@@ -80,6 +86,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_nickName_register"
                     android:layout_width="match_parent"
@@ -88,6 +95,7 @@
                     android:inputType="text"
                     android:textColor="@color/textPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout2"
                 android:layout_width="match_parent"
@@ -103,6 +111,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_name_register"
                     android:layout_width="match_parent"
@@ -111,6 +120,7 @@
                     android:inputType="text"
                     android:textColor="@color/textPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_submit_register"
                 android:layout_width="match_parent"
@@ -127,23 +137,43 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <pl.droidsonroids.gif.GifImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/circle_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-
-        android:scaleType="centerCrop"
-
-        android:layout_marginBottom="16dp"
-        app:layout_constraintCircleRadius="50dp"
         android:alpha="1"
-        android:src="@drawable/minigroot"
+        android:orientation="vertical"
+        android:background="@color/background_card"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <pl.droidsonroids.gif.GifImageView
+
+            android:id="@+id/gifImageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/ironman"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <pl.droidsonroids.gif.GifImageView
+
+            android:id="@+id/gifImageView2"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/loading"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gifImageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

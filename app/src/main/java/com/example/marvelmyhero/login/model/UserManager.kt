@@ -22,6 +22,11 @@ class UserManager {
         _user.team = mutableListOf(card1, card2, card3)
     }
 
+    fun updateDeck(deck: MutableList<Hero>, team: MutableList<Hero>){
+        _user.deck = deck
+        _user.team = team
+    }
+
     fun getDeck() = _user.deck
     fun getTeam() = _user.team
 }

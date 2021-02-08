@@ -56,7 +56,6 @@
     <string name="invalidLoginError">Invalid Login</string>
     <string name="backButton">Botão de voltar</string>
     <string name="developers">Developers</string>
-    <string name="beth_arley">Beth Arley Rodrigues de Araujo</string>
     <string name="rafael_irineu">Rafael Irineu Costa Oliveira</string>
     <string name="paulo_santos">Paulo Leonardo Lima dos Santos</string>
     <string name="gabriel_henrique">Gabriel Henrique Marrani N. Segantini</string>
@@ -87,4 +86,5 @@
     <string name="nickName_error">Need a NickName</string>
     <string name="name_error">Need a Name</string>
     <string name="animation_bar">Animation Bar</string>
+    <string name="salvar">Salvar</string>
 </resources>

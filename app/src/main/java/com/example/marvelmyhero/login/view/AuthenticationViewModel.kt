@@ -29,7 +29,6 @@ class AuthenticationViewModel(application: Application) : AndroidViewModel(appli
                     else -> {
                         errorMessage("Authentication Failed!")
                     }
-
                 }
             }
     }
@@ -58,5 +57,4 @@ class AuthenticationViewModel(application: Application) : AndroidViewModel(appli
     private fun errorMessage(message: String){
         error.value = message
     }
-
 }
