@@ -35,6 +35,7 @@ import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
+import com.example.marvelmyhero.utils.Constants.CURRENT_USER
 import com.example.marvelmyhero.utils.Constants.IMAGE
 import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
 import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
@@ -120,10 +121,12 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     user.imageUrl = imageUri.toString()
                 }
-
+                NEW_USER.setUser(user)
                 toolBarItems(user)
 
+
                 getAllCardsFromDB(user, myDeck, myTeam)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -145,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         deckButton.setOnClickListener {
-            startActivity(Intent(this, MyDeckActivity::class.java))
+            startActivityForResult(Intent(this, MyDeckActivity::class.java), 15)
         }
 
         developers.setOnClickListener {
@@ -293,7 +296,6 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             }
-
             val deck = getDeck(myDeck, cardList)
             val team = getTeam(myTeam, deck)
 
@@ -303,6 +305,8 @@ class MainActivity : AppCompatActivity() {
 
             NEW_USER.setUser(user)
             NEW_USER.addOnDeck(deck)
+
+            CURRENT_USER.deck = NEW_USER.getDeck()
             showTeamCards(team)
         }
     }
@@ -321,6 +325,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
         return team
     }
 

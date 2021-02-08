@@ -1,6 +1,7 @@
 package com.example.marvelmyhero.utils
 
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.login.model.User
 
 object Constants {
     const val LANGUAGE_PT_BR = "PT-BR"
@@ -30,5 +31,9 @@ object Constants {
     var popEnterAnim = R.anim.card_flip_left_in
     var popExitAnim = R.anim.card_flip_left_out
     var isDoubleBackPressed = false
+    var isDeckChange = false
+
+    //    User Variables
+    var CURRENT_USER = User("","","")
 
 }
