@@ -138,7 +138,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/circle_image"
+        android:id="@+id/loadingRegister"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="1"

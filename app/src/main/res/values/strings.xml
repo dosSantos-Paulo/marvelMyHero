@@ -86,5 +86,7 @@
     <string name="nickName_error">Need a NickName</string>
     <string name="name_error">Need a Name</string>
     <string name="animation_bar">Animation Bar</string>
-    <string name="salvar">Salvar</string>
+
+    <string name="salvar">salvar</string>
+
 </resources>
