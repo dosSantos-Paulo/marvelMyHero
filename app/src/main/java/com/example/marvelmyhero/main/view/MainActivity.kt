@@ -2,16 +2,23 @@ package com.example.marvelmyhero.main.view
 
 
 
+import android.Manifest
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.*
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
@@ -26,6 +33,7 @@ import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
+import com.example.marvelmyhero.utils.Constants.DEFAULT_STATUS_CODE
 import com.example.marvelmyhero.utils.UserVariables.IS_MY_FIRST_TIME_ON_APP
 import com.example.marvelmyhero.utils.UserVariables.MY_USER
 import com.google.android.material.button.MaterialButton
@@ -89,9 +97,7 @@ class MainActivity : AppCompatActivity() {
             cardAlert.newCardAlert(cardManager, MY_USER!!.deck, false)
         }
 
-        val team = mutableListOf(MY_USER!!.deck[0], MY_USER!!.deck[1], MY_USER!!.deck[2])
-
-        showTeamCards(team)
+        showTeamCards(mutableListOf(MY_USER!!.deck[0], MY_USER!!.deck[1], MY_USER!!.deck[2]))
 
         exitButton.setOnClickListener {
             exitDialog()
@@ -106,12 +112,78 @@ class MainActivity : AppCompatActivity() {
         }
 
         materialCardView.setOnClickListener {
-            startActivity(Intent(this, MyTeamActivity::class.java))
+            startActivityForResult(Intent(this, MyTeamActivity::class.java), DEFAULT_STATUS_CODE)
         }
 
         shareButton.setOnClickListener {
+            checkPermissionREAD_EXTERNAL_STORAGE(this)
             share()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showTeamCards(mutableListOf(MY_USER!!.deck[0], MY_USER!!.deck[1], MY_USER!!.deck[2]))
+    }
+
+    val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123
+
+    fun checkPermissionREAD_EXTERNAL_STORAGE(
+        context: Context?
+    ): Boolean {
+        val currentAPIVersion = Build.VERSION.SDK_INT
+        return if (currentAPIVersion >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) !== PackageManager.PERMISSION_GRANTED
+            ) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )
+                ) {
+                    showDialog(
+                        "External storage", context,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )
+                } else {
+                    ActivityCompat
+                        .requestPermissions(
+                            this,
+                            arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                            MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
+                        )
+                }
+                false
+            } else {
+                true
+            }
+        } else {
+            true
+        }
+    }
+
+    fun showDialog(
+        msg: String, context: Context?,
+        permission: String
+    ) {
+        val alertBuilder: AlertDialog.Builder = AlertDialog.Builder(context)
+        alertBuilder.setCancelable(true)
+        alertBuilder.setTitle("Permission necessary")
+        alertBuilder.setMessage("$msg permission is necessary")
+        alertBuilder.setPositiveButton(android.R.string.yes,
+            object : DialogInterface.OnClickListener {
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    ActivityCompat.requestPermissions(
+                        (context as Activity?)!!, arrayOf(permission),
+                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
+                    )
+                }
+
+            })
+        val alert: AlertDialog = alertBuilder.create()
+        alert.show()
     }
 
     private fun initDbViewModel() {

@@ -126,7 +126,6 @@
                 android:id="@+id/recyclerView_myTeam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="140dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/textView_dragCards_myTeam"

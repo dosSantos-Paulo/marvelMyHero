@@ -179,10 +179,6 @@ class SplashScreen : AppCompatActivity() {
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
         if (firebaseUser != null) {
-            MY_USER = User(
-                firebaseUser.displayName.toString(),
-                firebaseUser.photoUrl.toString()
-            )
             val intent = Intent(this, VerificationsActivity::class.java)
             startActivity(intent)
             finish()

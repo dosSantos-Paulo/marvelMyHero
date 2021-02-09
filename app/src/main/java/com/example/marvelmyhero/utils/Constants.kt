@@ -1,7 +1,6 @@
 package com.example.marvelmyhero.utils
 
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.login.model.User
 
 object Constants {
     const val LANGUAGE_PT_BR = "PT-BR"
@@ -12,6 +11,7 @@ object Constants {
     const val EMPTY_STRING = ""
     const val CONTEXT_RESQUEST_CODE = 1
     const val DECK_COLLUMN = 3
+    const val DEFAULT_STATUS_CODE = 1000
 
     //    Handler Time
     const val HANDLER_TIME: Long = 9000

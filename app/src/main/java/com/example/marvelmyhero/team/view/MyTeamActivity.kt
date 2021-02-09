@@ -3,6 +3,7 @@ package com.example.marvelmyhero.team.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
@@ -11,19 +12,22 @@ import com.example.marvelmyhero.utils.UserVariables.MY_USER
 
 class MyTeamActivity : AppCompatActivity() {
     private val viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-    private val recyclerViewMyTeam = findViewById<RecyclerView>(R.id.recyclerView_myTeam)
-    private val backArrowButton by lazy { findViewById<ImageView>(R.id.img_arrowBack_myTeam) }
-    private var _deck = MY_USER!!.deck
-    private lateinit var _team: MutableList<Hero>
-    private val adapterMyTeam = MyTeamAdapter(_deck) {
+    private val adapterMyTeam = MyTeamAdapter(MY_USER!!.deck) {
+//        Toast.makeText(this, getString(R.string.text_inserir_cards), Toast.LENGTH_LONG).show()
         moveItem(it)
     }
+    private val localTeam = mutableListOf<Hero>()
+    private val updateDeck = mutableListOf<Hero>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_team)
+        showTeamCards(localTeam)
 
-        getTeam()
+        val backArrowButton = findViewById<ImageView>(R.id.img_arrowBack_myTeam)
+        val recyclerViewMyTeam = findViewById<RecyclerView>(R.id.recyclerView_myTeam)
+
+
 
         recyclerViewMyTeam.apply {
             setHasFixedSize(true)
@@ -32,44 +36,52 @@ class MyTeamActivity : AppCompatActivity() {
         }
 
 
+
         backArrowButton.setOnClickListener {
             onBackPressed()
         }
 
     }
 
-    fun getTeam() {
-        _team.add(_deck.removeAt(0))
-        _team.add(_deck.removeAt(0))
-        _team.add(_deck.removeAt(0))
-    }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-    }
-
-    fun moveItem(hero: Hero) {
-        val indexTeam = _team.indexOf(hero)
-        val indexDeck = _deck.indexOf(hero)
-
-        if (indexDeck == -1) {
-            _deck.add(_team.removeAt(indexTeam))
-        } else {
-            if (_team.size < 3) {
-                _team.add(_deck.removeAt(indexDeck))
+        when (localTeam.size) {
+            3 -> {
+                MY_USER!!.deck = updateDeck
+                super.onBackPressed()
+                finish()
+            }
+            0 -> {
+                super.onBackPressed()
+                finish()
+            }
+            else -> {
+                Toast.makeText(this, "Your team needs to have 3 heroes", Toast.LENGTH_LONG).show()
             }
         }
 
-        showTeamCards(_team)
+    }
+
+    fun moveItem(hero: Hero) {
+        val indexTeam = localTeam.indexOf(hero)
+        val indexDeck = MY_USER!!.deck.indexOf(hero)
+
+        if (indexDeck == -1) {
+            MY_USER!!.deck.add(localTeam.removeAt(indexTeam))
+        } else {
+            if (localTeam.size < 3) {
+                localTeam.add(MY_USER!!.deck.removeAt(indexDeck))
+            }
+        }
+
+        showTeamCards(localTeam)
         adapterMyTeam.notifyDataSetChanged()
         updateDeck()
     }
-
-    private fun updateDeck() {
-        MY_USER!!.deck.clear()
-        MY_USER!!.deck.addAll(_team)
-        MY_USER!!.deck.addAll(_deck)
+    private fun updateDeck(){
+        updateDeck.clear()
+        updateDeck.addAll(localTeam)
+        updateDeck.addAll(MY_USER!!.deck)
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
@@ -174,4 +186,3 @@ class MyTeamActivity : AppCompatActivity() {
         )
     }
 }
-

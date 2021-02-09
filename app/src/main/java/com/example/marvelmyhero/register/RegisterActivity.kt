@@ -59,12 +59,12 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        var intentName = intent.getStringExtra(NAME)!!
-        if (intentName.equals("null")){
-            intentName = ""
-        }
-
-        nickname.setText(intentName)
+//        var intentName = intent.getStringExtra(NAME)!!
+//        if (intentName.equals("null")){
+//            intentName = ""
+//        }
+//
+//        nickname.setText(intentName)
         databaseViewModel = ViewModelProvider(
             this,
             CardViewModel.CardViewModelFactory(
