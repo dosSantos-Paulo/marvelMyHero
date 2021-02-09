@@ -48,13 +48,10 @@ class RegisterActivity : AppCompatActivity() {
     private var imageUri: Uri? = null
     private val userImage: ImageView by lazy { findViewById<ImageView>(R.id.image_userImage_register) }
     private val nickname: TextInputEditText by lazy { findViewById<TextInputEditText>(R.id.editText_nickName_register) }
-    private val name: TextInputEditText by lazy { findViewById<TextInputEditText>(R.id.editText_name_register) }
     private val submitButton: Button by lazy { findViewById<Button>(R.id.btn_submit_register) }
     private val changeImageButton: ImageView by lazy { findViewById<ImageView>(R.id.image_editIcon_register) }
     private val cardManager = CardManager()
     private lateinit var databaseViewModel: CardViewModel
-    private val materialCardView by lazy { findViewById<MaterialCardView>(R.id.materialCardView_register) }
-    private val loadingImage by lazy { findViewById<ConstraintLayout>(R.id.loadingRegister) }
 
     //    Firebase
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
@@ -62,28 +59,16 @@ class RegisterActivity : AppCompatActivity() {
     private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
     override fun onCreate(savedInstanceState: Bundle?) {
-        isNewUser()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            materialCardView.animate().apply {
-                duration = 500
-                alpha(1f)
-            }
-            loadingImage.animate().apply {
-                duration = 500
-                alpha(0f)
-            }
-        }, HANDLER_TIME_BRIDGE)
 
         var intentName = intent.getStringExtra(NAME)!!
         if (intentName.equals("null")){
             intentName = ""
         }
 
-        name.setText(intentName)
+        nickname.setText(intentName)
         databaseViewModel = ViewModelProvider(
             this,
             CardViewModel.CardViewModelFactory(
@@ -96,13 +81,7 @@ class RegisterActivity : AppCompatActivity() {
             if (nickname.text.isNullOrEmpty()) {
                 nickname.error = getString(R.string.nickName_error)
             }
-            if (name.text.isNullOrEmpty()) {
-                name.error = getString(R.string.name_error)
-            }
-            if (!name.text.isNullOrEmpty() && !nickname.text.isNullOrEmpty()) {
-                setUser()
-            }
-
+            else setUser()
         }
         changeImageButton.setOnClickListener {
             findFile()
@@ -180,7 +159,7 @@ class RegisterActivity : AppCompatActivity() {
             val randomFirebaseCardsTeam =
                 addOnDeck(mutableListOf(randomCards[0], randomCards[1], randomCards[2]))
             myRef.setValue(User(nickname.text.toString(),
-                name.text.toString(),
+                nickname.text.toString(),
                 firebaseUser?.uid.toString()))
             myRef.child("deck").setValue(randomFirebaseCards)
             myRef.child("team").setValue(randomFirebaseCardsTeam)
@@ -195,31 +174,5 @@ class RegisterActivity : AppCompatActivity() {
             ))
         }
         return cardFirebase
-    }
-
-    private fun isNewUser() {
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.getValue(DatabaseUser::class.java)
-                IS_NEW_USER = value == null
-
-                storageRef.downloadUrl.addOnSuccessListener {
-                    imageUri = it
-
-                    if (!IS_NEW_USER){
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            val intent = Intent(this@RegisterActivity, MainActivity::class.java)
-                            intent.putExtra(IMAGE, imageUri.toString())
-                            startActivity(intent)
-                            finish()
-                        }, HANDLER_TIME_BRIDGE_2)
-
-                    }
-                }
-            }
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
-
     }
 }

@@ -26,7 +26,6 @@
         android:id="@+id/materialCardView_register"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:alpha="0"
         app:cardBackgroundColor="@color/translucentBoxColor"
         app:cardCornerRadius="@dimen/boxRadius"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -96,31 +95,6 @@
                     android:textColor="@color/textPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/marginSmall"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:hint="@string/name"
-                android:textColorHint="@color/textPrimary"
-                app:boxBackgroundColor="@color/textPrimary"
-                app:boxStrokeColor="@color/textPrimary"
-                app:hintTextColor="@color/textPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editText_name_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/totalTranslucent"
-                    android:inputType="text"
-                    android:textColor="@color/textPrimary" />
-            </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_submit_register"
                 android:layout_width="match_parent"
@@ -131,49 +105,12 @@
                 android:text="@string/submit"
                 app:cornerRadius="@dimen/defaultRadius"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
                 app:strokeColor="@color/textPrimary"
                 app:strokeWidth="1dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.card.MaterialCardView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/loadingRegister"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="1"
-        android:orientation="vertical"
-        android:background="@color/background_card"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <pl.droidsonroids.gif.GifImageView
-
-            android:id="@+id/gifImageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginBottom="24dp"
-            android:src="@drawable/ironman"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25" />
-
-        <pl.droidsonroids.gif.GifImageView
-
-            android:id="@+id/gifImageView2"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/loading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gifImageView" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

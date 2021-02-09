@@ -27,6 +27,7 @@ import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION_PROGRESS_
 import com.example.marvelmyhero.utils.Constants.IMAGE
 import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
 import com.example.marvelmyhero.utils.Constants.NAME
+import com.example.marvelmyhero.verifications.VerificationsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -142,7 +143,7 @@ class SplashScreen : AppCompatActivity() {
     private fun callNextPage() {
         val firebaseUser = FirebaseAuth.getInstance().currentUser
         if (firebaseUser != null) {
-            val intent = Intent(this, RegisterActivity::class.java)
+            val intent = Intent(this, VerificationsActivity::class.java)
             intent.putExtra(NAME, "")
             startActivity(intent)
             finish()
