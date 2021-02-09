@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.utils.MovieUtil
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
+import com.example.marvelmyhero.login.view.AuthenticationViewModel
 import com.example.marvelmyhero.verifications.VerificationsActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
             val email = view.findViewById<EditText>(R.id.editText_email_login).text.toString()
             val password = view.findViewById<EditText>(R.id.editText_password_login).text.toString()
             when {
-                MovieUtil.validateEmailPassword(email, password) -> {
+                MovieUtil.validateEmailPassword(email) -> {
                     viewModel.loginEmailPassword(email, password)
                 }
                 else -> {

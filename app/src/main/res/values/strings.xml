@@ -88,5 +88,9 @@
     <string name="animation_bar">Animation Bar</string>
 
     <string name="salvar">salvar</string>
+    <string name="campo_vazio">Campo vazio!</string>
+    <string name="numero_caracteres">Mínimo 6 caracteres!</string>
+    <string name="senha_diferente">Senhas divergentes!</string>
+    <string name="email_invalido">Email inválido!</string>
 
 </resources>
