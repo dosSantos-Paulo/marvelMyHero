@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.marvelmyhero.R
@@ -38,10 +39,23 @@ private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser
 private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
 
 class VerificationsActivity : AppCompatActivity() {
+
+    data class DatabaseCard(
+        val favorite: Boolean = false,
+        val id: Int = 0,
+    )
+
+    data class DatabaseUser(
+        val nickName: String = "",
+        val imageUrl: String = "",
+        val deck: MutableList<DatabaseCard>? = null
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verifications)
 
+        Log.d("USER_FLUX", "-> verification")
 
         isNewUser()
     }
@@ -50,13 +64,18 @@ class VerificationsActivity : AppCompatActivity() {
     private fun isNewUser() {
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.getValue(RegisterActivity.DatabaseUser::class.java)
+                val value = dataSnapshot.getValue(DatabaseUser::class.java)
                 IS_MY_FIRST_TIME_ON_APP = value == null
+
+                Log.d("USER_FLUX", "-> is first time on app ? $IS_MY_FIRST_TIME_ON_APP")
 
                 if (!IS_MY_FIRST_TIME_ON_APP) {
                     storageRef.downloadUrl.addOnSuccessListener {
                         imageUri = it
+                        Log.d("USER_FLUX", "-> imageUri $imageUri")
+                        Log.d("USER_FLUX", "-> control deck ${MY_USER!!.deck}")
                         Handler(Looper.getMainLooper()).postDelayed({
+                            Log.d("USER_FLUX", "-> mainactivity")
                             val intent =
                                 Intent(this@VerificationsActivity, MainActivity::class.java)
                             intent.putExtra(Constants.IMAGE, imageUri.toString())
@@ -65,14 +84,16 @@ class VerificationsActivity : AppCompatActivity() {
                         }, Constants.HANDLER_TIME_BRIDGE_2)
                     }
                 } else {
+                    Log.d("USER_FLUX", "-> novo usuario -> $MY_USER")
                     if (MY_USER == null){
                         MY_USER = User(
                             firebaseUser?.displayName.toString(),
-                            firebaseUser?.photoUrl.toString()
+                            firebaseUser?.uid.toString()
                         )
                     }
 
                     Handler(Looper.getMainLooper()).postDelayed({
+                        Log.d("USER_FLUX", "-> registeractivity")
                         val intent = Intent(this@VerificationsActivity, RegisterActivity::class.java)
                         if (firebaseUser!!.displayName.isNullOrEmpty()){
                             intent.putExtra(NAME, userNameFromSignup)

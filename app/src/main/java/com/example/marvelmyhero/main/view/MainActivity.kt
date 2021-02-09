@@ -13,6 +13,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -34,6 +35,7 @@ import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.DEFAULT_STATUS_CODE
+import com.example.marvelmyhero.utils.Constants.IMAGE
 import com.example.marvelmyhero.utils.UserVariables.IS_MY_FIRST_TIME_ON_APP
 import com.example.marvelmyhero.utils.UserVariables.MY_USER
 import com.google.android.material.button.MaterialButton
@@ -85,19 +87,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Log.d("USER_FLUX", "-> MaiActivity")
         initDbViewModel()
-
-        storageRef.downloadUrl.addOnSuccessListener {
-            imageUri = it
-            toolBarItems(MY_USER!!)
+        try {
+            val oldImage = intent.getStringExtra(IMAGE)
+            MY_USER!!.imageUrl == oldImage
+        }catch (ex: java.lang.Exception){
+            Log.d("USER_FLUX", "-> exeption ${ex.message}")
         }
 
+        storageRef.downloadUrl.addOnSuccessListener {
+            Log.d("USER_FLUX", "-> pegando imagem Uri")
+            imageUri = it
+            MY_USER!!.imageUrl = imageUri.toString()
+        }
+
+        toolBarItems(MY_USER!!)
+
+        Log.d("USER_FLUX", "-> first time ? $IS_MY_FIRST_TIME_ON_APP")
         if (IS_MY_FIRST_TIME_ON_APP) {
             cardAlert.newCardAlert(cardManager, MY_USER!!.deck, false)
         }
-
-        showTeamCards(mutableListOf(MY_USER!!.deck[0], MY_USER!!.deck[1], MY_USER!!.deck[2]))
 
         exitButton.setOnClickListener {
             exitDialog()
@@ -123,6 +133,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        Log.d("USER_FLUX", "-> onResume()")
         showTeamCards(mutableListOf(MY_USER!!.deck[0], MY_USER!!.deck[1], MY_USER!!.deck[2]))
     }
 
@@ -175,6 +186,7 @@ class MainActivity : AppCompatActivity() {
         alertBuilder.setPositiveButton(android.R.string.yes,
             object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface?, which: Int) {
+                    share()
                     ActivityCompat.requestPermissions(
                         (context as Activity?)!!, arrayOf(permission),
                         MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
@@ -208,6 +220,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
+
+        Log.d("USER_FLUX", "-> showTeamCards()")
 
         for (i in team.indices) {
             var frameLayout = R.id.frameLayout_teamCard1_main

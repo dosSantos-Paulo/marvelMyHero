@@ -51,6 +51,8 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
 
+        Log.d("USER_FLUX", "-> Login")
+
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         button = view.findViewById(R.id.btn_facebookLogin_login)
         // button.setFragment(this)
@@ -106,6 +108,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToHome(status: Boolean) {
+        Log.d("USER_FLUX", "-> login firebase")
 //        Login com Firebase
         when {
             status -> {
@@ -119,6 +122,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun irParaHome(uiid: String?) {
+        Log.d("USER_FLUX", "-> login social")
 //      Login pelo Facebook e Google
         val intent = Intent(view?.context, VerificationsActivity::class.java)
         startActivity(intent)

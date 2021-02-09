@@ -90,13 +90,12 @@ class SplashScreen : AppCompatActivity() {
             val count = it.toString().toInt()
             if (count == size.size) {
 
-                Log.d("DATA_BASE", "Requisitando info do DB")
-                Log.d("DATA_BASE_COUNT", it.toString())
+                Log.d("USER_FLUX", "-> pegando cards do banco de dados")
                 Handler(Looper.getMainLooper()).postDelayed({
                     firebaseVerification()
                 }, HANDLER_TIME)
             } else {
-                Log.d("DATA_BASE", "Baixando info da API")
+                Log.d("USER_FLUX", "-> baixando dados da api")
                 getApiCharacters(cardManager)
             }
         }
@@ -106,7 +105,6 @@ class SplashScreen : AppCompatActivity() {
         viewModel.getCharacter(allCharId).observe(this) {
             cardManager.addCardsOnManager(it)
             createDatabase(cardManager.getCardList())
-            Log.d("DATA_BASE", "Inserindo dados no BD")
 
             var validator = false
             do {
@@ -149,21 +147,24 @@ class SplashScreen : AppCompatActivity() {
         }, HANDLER_TIME_ANIMATION)
     }
     private fun firebaseVerification() {
+        Log.d("USER_FLUX", "-> firebaseVerification()")
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue(DatabaseUser::class.java)
                 IS_MY_FIRST_TIME_ON_APP = value == null
+                Log.d("USER_FLUX", "-> is my first? $IS_MY_FIRST_TIME_ON_APP")
                 if (!IS_MY_FIRST_TIME_ON_APP) {
                     storageRef.downloadUrl.addOnSuccessListener {
                         imageUri = it
+                        Log.d("USER_FLUX", "-> imageUri $imageUri")
                         MY_USER = User(
                             value?.nickName.toString(),
                             imageUri.toString()
                         )
                         getDeckFromDb(value!!.deck)
-                        callNextPage()
                     }
                 }else {
+                    Log.d("USER_FLUX", "-> sem usuário cadastrado")
                     callNextPage()
                 }
             }
@@ -175,20 +176,25 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun callNextPage() {
+        Log.d("USER_FLUX", "-> callNextPage()")
 
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
         if (firebaseUser != null) {
+            Log.d("USER_FLUX", "-> firebaseUser -> VerificationsActivity")
             val intent = Intent(this, VerificationsActivity::class.java)
             startActivity(intent)
             finish()
         } else {
+            Log.d("USER_FLUX", "-> sem firebaseUser -> LoginActivity")
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }
 
     private fun getDeckFromDb(deck: MutableList<DatabaseCard>?) {
+
+        Log.d("USER_FLUX", "-> sincronizando cards com banco de dados")
 
         val cardList = mutableListOf<Hero>()
 
@@ -219,6 +225,7 @@ class SplashScreen : AppCompatActivity() {
         myDeck: MutableList<DatabaseCard>?,
         cardList: MutableList<Hero>,
     ){
+        Log.d("USER_FLUX", "-> inserindo cards ao Deck")
 
         val deck = mutableListOf<Hero>()
 
@@ -231,6 +238,9 @@ class SplashScreen : AppCompatActivity() {
             }
         }
         MY_USER!!.deck.addAll(deck)
+
+
+        callNextPage()
     }
 
 
