@@ -11,18 +11,20 @@ import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.utils.UserVariables.MY_USER
 
 class MyTeamActivity : AppCompatActivity() {
+
+    private val deck = MY_USER!!.deck
+    private val team = mutableListOf(deck.removeAt(0), deck.removeAt(0), deck.removeAt(0))
+
     private val viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-    private val adapterMyTeam = MyTeamAdapter(MY_USER!!.deck) {
-//        Toast.makeText(this, getString(R.string.text_inserir_cards), Toast.LENGTH_LONG).show()
+    private val adapterMyTeam = MyTeamAdapter(deck) {
         moveItem(it)
     }
-    private val localTeam = mutableListOf<Hero>()
     private val updateDeck = mutableListOf<Hero>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_team)
-        showTeamCards(localTeam)
+        showTeamCards(team)
 
         val backArrowButton = findViewById<ImageView>(R.id.img_arrowBack_myTeam)
         val recyclerViewMyTeam = findViewById<RecyclerView>(R.id.recyclerView_myTeam)
@@ -45,7 +47,7 @@ class MyTeamActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        when (localTeam.size) {
+        when (team.size) {
             3 -> {
                 MY_USER!!.deck = updateDeck
                 super.onBackPressed()
@@ -63,28 +65,31 @@ class MyTeamActivity : AppCompatActivity() {
     }
 
     fun moveItem(hero: Hero) {
-        val indexTeam = localTeam.indexOf(hero)
-        val indexDeck = MY_USER!!.deck.indexOf(hero)
+        val indexTeam = team.indexOf(hero)
+        val indexDeck = deck.indexOf(hero)
 
         if (indexDeck == -1) {
-            MY_USER!!.deck.add(localTeam.removeAt(indexTeam))
+            deck.add(team.removeAt(indexTeam))
         } else {
-            if (localTeam.size < 3) {
-                localTeam.add(MY_USER!!.deck.removeAt(indexDeck))
+            if (team.size < 3) {
+                team.add(deck.removeAt(indexDeck))
             }
         }
 
-        showTeamCards(localTeam)
+        showTeamCards(team)
         adapterMyTeam.notifyDataSetChanged()
-        updateDeck()
+
     }
-    private fun updateDeck(){
+
+    private fun updateDeck() {
         updateDeck.clear()
-        updateDeck.addAll(localTeam)
-        updateDeck.addAll(MY_USER!!.deck)
+        updateDeck.addAll(team)
+        updateDeck.addAll(deck)
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
+
+        updateDeck()
 
         if (team.size == 3) {
             for (i in team.indices) {
