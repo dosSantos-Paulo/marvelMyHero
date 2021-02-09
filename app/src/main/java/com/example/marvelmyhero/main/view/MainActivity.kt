@@ -1,31 +1,22 @@
 package com.example.marvelmyhero.main.view
 
 
-import android.Manifest
-import android.app.Activity
-import android.app.AlertDialog
+
 import android.content.*
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.db.database.AppDataBase
-import com.example.marvelmyhero.db.entity.CardEntity
 import com.example.marvelmyhero.db.repository.CardRepository
 import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.deck.view.MyDeckActivity
@@ -35,19 +26,14 @@ import com.example.marvelmyhero.login.view.LoginActivity
 import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
-import com.example.marvelmyhero.utils.Constants.CURRENT_USER
-import com.example.marvelmyhero.utils.Constants.IMAGE
-import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
-import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
+import com.example.marvelmyhero.utils.UserVariables.IS_MY_FIRST_TIME_ON_APP
+import com.example.marvelmyhero.utils.UserVariables.MY_USER
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
@@ -62,11 +48,9 @@ class MainActivity : AppCompatActivity() {
     )
 
     data class DatabaseUser(
-        val name: String = "",
         val nickName: String = "",
         val imageUrl: String = "",
-        val deck: MutableList<DatabaseCard>? = null,
-        val team: MutableList<DatabaseCard>? = null,
+        val deck: MutableList<DatabaseCard>? = null
     )
 
     private val exitButton: ImageView by lazy { findViewById<ImageView>(R.id.ic_exit_main) }
@@ -79,11 +63,8 @@ class MainActivity : AppCompatActivity() {
     private val shareButton by lazy { findViewById<MaterialButton>(R.id.btn_share_main) }
     private lateinit var databaseViewModel: CardViewModel
     private var imageUri: Uri? = null
-    private var user = User("", "", "")
     private var cardAlert = AlertManager(this)
     private val cardManager = CardManager()
-    private val myDeck: MutableList<DatabaseCard> = mutableListOf()
-    private val myTeam: MutableList<DatabaseCard> = mutableListOf()
 
 
     //    Firebase
@@ -97,65 +78,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initDbViewModel()
 
         storageRef.downloadUrl.addOnSuccessListener {
             imageUri = it
+            toolBarItems(MY_USER!!)
         }
 
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.getValue(DatabaseUser::class.java)
+        if (IS_MY_FIRST_TIME_ON_APP) {
+            cardAlert.newCardAlert(cardManager, MY_USER!!.deck, false)
+        }
 
-                user.nickName = value?.nickName.toString()
-                user.name = value?.name.toString()
+        val team = mutableListOf(MY_USER!!.deck[0], MY_USER!!.deck[1], MY_USER!!.deck[2])
 
-                value?.deck?.forEach {
-                    myDeck.add(it)
-                }
-                value?.team?.forEach {
-                    myTeam.add(it)
-                }
-
-                if (imageUri == null) {
-                    user.imageUrl = intent.getStringExtra(IMAGE).toString()
-                } else {
-                    user.imageUrl = imageUri.toString()
-                }
-                NEW_USER.setUser(user)
-                toolBarItems(user)
-
-
-                getAllCardsFromDB(user, myDeck, myTeam)
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@MainActivity, "ERROR: INTERNET", Toast.LENGTH_LONG).show()
-            }
-        })
-
-        databaseViewModel = ViewModelProvider(
-            this,
-            CardViewModel.CardViewModelFactory(
-                CardRepository(
-                    AppDataBase.getDatabase(this).cardDao()
-                )
-            )
-        ).get(CardViewModel::class.java)
+        showTeamCards(team)
 
         exitButton.setOnClickListener {
             exitDialog()
         }
 
         deckButton.setOnClickListener {
-            startActivityForResult(Intent(this, MyDeckActivity::class.java), 15)
+            startActivity(Intent(this, MyDeckActivity::class.java))
         }
 
         developers.setOnClickListener {
             startActivity(Intent(this, DevelopersActivity::class.java))
         }
-
-        checkPermissionREAD_EXTERNAL_STORAGE(this)
 
         materialCardView.setOnClickListener {
             startActivity(Intent(this, MyTeamActivity::class.java))
@@ -166,7 +114,46 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123
+    private fun initDbViewModel() {
+        databaseViewModel = ViewModelProvider(
+            this,
+            CardViewModel.CardViewModelFactory(
+                CardRepository(
+                    AppDataBase.getDatabase(this).cardDao()
+                )
+            )
+        ).get(CardViewModel::class.java)
+    }
+
+    private fun toolBarItems(user: User) {
+
+        Picasso.get().load(imageUri).into(userImage)
+        userName.text = user.nickName
+
+        userImage.setOnClickListener {
+            newUserFragment(user)
+        }
+    }
+
+    private fun showTeamCards(team: MutableList<Hero>) {
+
+        for (i in team.indices) {
+            var frameLayout = R.id.frameLayout_teamCard1_main
+            when (i) {
+                1 -> frameLayout = R.id.frameLayout_teamCard2_main
+
+                2 -> frameLayout = R.id.frameLayout_teamCard3_main
+            }
+
+            miniCardFragment(
+                team[i].heroName,
+                team[i].imageUrl,
+                team[i].classification,
+                frameLayout
+            )
+        }
+
+    }
 
     private fun share() {
         val bitmap = getBitmapFromView(cardViewMain)
@@ -200,174 +187,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun checkPermissionREAD_EXTERNAL_STORAGE(
-        context: Context?
-    ): Boolean {
-        val currentAPIVersion = Build.VERSION.SDK_INT
-        return if (currentAPIVersion >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ) !== PackageManager.PERMISSION_GRANTED
-            ) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(
-                        this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    )
-                ) {
-                    showDialog(
-                        "External storage", context,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    )
-                } else {
-                    ActivityCompat
-                        .requestPermissions(
-                            this,
-                            arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                            MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
-                        )
-                }
-                false
-            } else {
-                true
-            }
-        } else {
-            true
-        }
-    }
-
-    fun showDialog(
-        msg: String, context: Context?,
-        permission: String
-    ) {
-        val alertBuilder: AlertDialog.Builder = AlertDialog.Builder(context)
-        alertBuilder.setCancelable(true)
-        alertBuilder.setTitle("Permission necessary")
-        alertBuilder.setMessage("$msg permission is necessary")
-        alertBuilder.setPositiveButton(android.R.string.yes,
-            object : DialogInterface.OnClickListener {
-                override fun onClick(dialog: DialogInterface?, which: Int) {
-                    ActivityCompat.requestPermissions(
-                        (context as Activity?)!!, arrayOf(permission),
-                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
-                    )
-                }
-
-            })
-        val alert: AlertDialog = alertBuilder.create()
-        alert.show()
-    }
-
-    private fun toolBarItems(user: User): User {
-
-        Picasso.get().load(user.imageUrl).into(userImage)
-        userName.text = user.nickName
-
-        userImage.setOnClickListener {
-            newUserFragment(user)
-        }
-        return user
-    }
-
-    private fun getAllCardsFromDB(
-        user: User,
-        myDeck: MutableList<DatabaseCard>,
-        myTeam: MutableList<DatabaseCard>,
-    ) {
-
-        
-        val cardList = mutableListOf<Hero>()
-
-        databaseViewModel.getAllCards().observe(this) { cardlist ->
-            val _cardList = cardlist as List<CardEntity>
-            _cardList.forEach {
-                cardList.add(
-                    Hero(
-                        it.id,
-                        it.heroName,
-                        it.name,
-                        it.imageUrl,
-                        it.durability,
-                        it.energy,
-                        it.fightingSkills,
-                        it.inteligence,
-                        it.speed,
-                        it.strength,
-                        it.description
-                    )
-                )
-            }
-            val deck = getDeck(myDeck, cardList)
-            val team = getTeam(myTeam, deck)
-
-            if (IS_NEW_USER) {
-                cardAlert.newCardAlert(cardManager, deck, false)
-            }
-
-            NEW_USER.setUser(user)
-            NEW_USER.addOnDeck(deck)
-
-            CURRENT_USER.deck = NEW_USER.getDeck()
-            showTeamCards(team)
-        }
-    }
-
-    private fun getTeam(
-        myTeam: MutableList<DatabaseCard>,
-        deck: MutableList<Hero>,
-    ): MutableList<Hero> {
-
-        val team = mutableListOf<Hero>()
-
-        myTeam.forEach {
-            deck.forEach { hero ->
-                if (it.id == hero.id) {
-                    team.add(hero)
-                }
-            }
-        }
-
-        return team
-    }
-
-    private fun getDeck(
-        myDeck: MutableList<DatabaseCard>,
-        cardList: MutableList<Hero>,
-    ): MutableList<Hero> {
-
-        val deck = mutableListOf<Hero>()
-
-        myDeck.forEach { databaseCard ->
-            cardList.forEach { hero ->
-                if (hero.id == databaseCard.id) {
-                    hero.favorite = databaseCard.favorite
-                    deck.add(hero)
-                }
-            }
-        }
-        return deck
-    }
-
-    private fun showTeamCards(team: MutableList<Hero>) {
-
-        for (i in team.indices) {
-            var frameLayout = R.id.frameLayout_teamCard1_main
-            when (i) {
-                1 -> frameLayout = R.id.frameLayout_teamCard2_main
-
-                2 -> frameLayout = R.id.frameLayout_teamCard3_main
-            }
-
-            miniCardFragment(
-                team[i].heroName,
-                team[i].imageUrl,
-                team[i].classification,
-                frameLayout
-            )
-        }
-
-    }
-
     open fun getBitmapFromView(view: View): Bitmap? {
         var bitmap =
             Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
@@ -375,7 +194,6 @@ class MainActivity : AppCompatActivity() {
         view.draw(canvas)
         return bitmap
     }
-
 
     private fun miniCardFragment(
         name: String,
@@ -415,11 +233,11 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton(getString(R.string.exitDialog_positiveButton)) { _, _ ->
 
                 Firebase.auth.signOut()
-
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
-
+                MY_USER = null
                 finish()
+
             }
             .show()
     }

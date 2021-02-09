@@ -8,26 +8,26 @@ import android.os.Looper
 import android.util.Log
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.data.repository.CharacterRepository
 import com.example.marvelmyhero.db.database.AppDataBase
 import com.example.marvelmyhero.db.entity.CardEntity
 import com.example.marvelmyhero.db.repository.CardRepository
 import com.example.marvelmyhero.db.viewmodel.CardViewModel
+import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.login.view.LoginActivity
-import com.example.marvelmyhero.main.view.MainActivity
-import com.example.marvelmyhero.register.RegisterActivity
 import com.example.marvelmyhero.splash.viewmodel.CharacterViewModel
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION
 import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_ANIMATION_PROGRESS_BAR
-import com.example.marvelmyhero.utils.Constants.IMAGE
-import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
-import com.example.marvelmyhero.utils.Constants.NAME
+import com.example.marvelmyhero.utils.UserVariables.IS_MY_FIRST_TIME_ON_APP
 import com.example.marvelmyhero.verifications.VerificationsActivity
+import com.example.marvelmyhero.utils.UserVariables.MY_USER
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -35,8 +35,22 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import pl.droidsonroids.gif.GifImageView
+
 @Suppress("COMPATIBILITY_WARNING")
 class SplashScreen : AppCompatActivity() {
+
+    data class DatabaseCard(
+        val favorite: Boolean = false,
+        val id: Int = 0,
+    )
+
+    data class DatabaseUser(
+        val nickName: String = "",
+        val imageUrl: String = "",
+        val deck: MutableList<DatabaseCard>? = null
+    )
+
+
     private lateinit var databaseViewModel: CardViewModel
     private lateinit var viewModel: CharacterViewModel
     private val cardManager = CardManager()
@@ -50,13 +64,7 @@ class SplashScreen : AppCompatActivity() {
     private var isCurrentUser = false
     private var imageUri: Uri? = null
 
-    data class DatabaseUser(
-        val name: String = "",
-        val nickName: String = "",
-        val imageUrl: String = "",
-        val deck: MutableList<MainActivity.DatabaseCard>? = null,
-        val team: MutableList<MainActivity.DatabaseCard>? = null,
-    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +93,7 @@ class SplashScreen : AppCompatActivity() {
                 Log.d("DATA_BASE", "Requisitando info do DB")
                 Log.d("DATA_BASE_COUNT", it.toString())
                 Handler(Looper.getMainLooper()).postDelayed({
-                    callNextPage()
+                    firebaseVerification()
                 }, HANDLER_TIME)
             } else {
                 Log.d("DATA_BASE", "Baixando info da API")
@@ -108,7 +116,7 @@ class SplashScreen : AppCompatActivity() {
                     validator = true
                 }
             } while (!validator)
-            callNextPage()
+            firebaseVerification()
         }
     }
     private fun createDatabase(cardList: List<CardEntity>) {
@@ -140,11 +148,42 @@ class SplashScreen : AppCompatActivity() {
             }, HANDLER_TIME_ANIMATION_PROGRESS_BAR)
         }, HANDLER_TIME_ANIMATION)
     }
+    private fun firebaseVerification() {
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot.getValue(DatabaseUser::class.java)
+                IS_MY_FIRST_TIME_ON_APP = value == null
+                if (!IS_MY_FIRST_TIME_ON_APP) {
+                    storageRef.downloadUrl.addOnSuccessListener {
+                        imageUri = it
+                        MY_USER = User(
+                            value?.nickName.toString(),
+                            imageUri.toString()
+                        )
+                        getDeckFromDb(value!!.deck)
+                        callNextPage()
+                    }
+                }else {
+                    callNextPage()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@SplashScreen, "ERROR: INTERNET", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
     private fun callNextPage() {
+
         val firebaseUser = FirebaseAuth.getInstance().currentUser
+
         if (firebaseUser != null) {
+            MY_USER = User(
+                firebaseUser.displayName.toString(),
+                firebaseUser.photoUrl.toString()
+            )
             val intent = Intent(this, VerificationsActivity::class.java)
-            intent.putExtra(NAME, "")
             startActivity(intent)
             finish()
         } else {
@@ -152,4 +191,51 @@ class SplashScreen : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun getDeckFromDb(deck: MutableList<DatabaseCard>?) {
+
+        val cardList = mutableListOf<Hero>()
+
+        databaseViewModel.getAllCards().observe(this) { cardlist ->
+            val _cardList = cardlist as List<CardEntity>
+            _cardList.forEach {
+                cardList.add(
+                    Hero(
+                        it.id,
+                        it.heroName,
+                        it.name,
+                        it.imageUrl,
+                        it.durability,
+                        it.energy,
+                        it.fightingSkills,
+                        it.inteligence,
+                        it.speed,
+                        it.strength,
+                        it.description
+                    )
+                )
+            }
+            getDeck(deck, cardList)
+        }
+    }
+
+    private fun getDeck(
+        myDeck: MutableList<DatabaseCard>?,
+        cardList: MutableList<Hero>,
+    ){
+
+        val deck = mutableListOf<Hero>()
+
+        myDeck?.forEach { databaseCard ->
+            cardList.forEach { hero ->
+                if (hero.id == databaseCard.id) {
+                    hero.favorite = databaseCard.favorite
+                    deck.add(hero)
+                }
+            }
+        }
+        MY_USER!!.deck.addAll(deck)
+    }
+
+
 }

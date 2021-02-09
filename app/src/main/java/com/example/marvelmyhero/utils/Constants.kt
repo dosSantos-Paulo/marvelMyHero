@@ -11,6 +11,7 @@ object Constants {
     const val UIID_KEY = "UIID"
     const val EMPTY_STRING = ""
     const val CONTEXT_RESQUEST_CODE = 1
+    const val DECK_COLLUMN = 3
 
     //    Handler Time
     const val HANDLER_TIME: Long = 9000
@@ -23,7 +24,6 @@ object Constants {
     //    References
     const val NAME = "NAME"
     const val IMAGE = "IMAGE"
-    var IS_NEW_USER = true
 
     //    Community Variable || CardFront CardBack
     var enterAnim = R.anim.card_flip_left_in
@@ -32,8 +32,6 @@ object Constants {
     var popExitAnim = R.anim.card_flip_left_out
     var isDoubleBackPressed = false
     var isDeckChange = false
-
-    //    User Variables
-    var CURRENT_USER = User("","","")
+    var userNameFromSignup : String = ""
 
 }

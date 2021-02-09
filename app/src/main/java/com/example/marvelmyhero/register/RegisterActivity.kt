@@ -3,14 +3,11 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
@@ -24,25 +21,24 @@ import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.CONTEXT_RESQUEST_CODE
-import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_BRIDGE
-import com.example.marvelmyhero.utils.Constants.HANDLER_TIME_BRIDGE_2
 import com.example.marvelmyhero.utils.Constants.IMAGE
-import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
 import com.example.marvelmyhero.utils.Constants.NAME
-import com.google.android.material.card.MaterialCardView
+import com.example.marvelmyhero.utils.UserVariables.MY_USER
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 
 class RegisterActivity : AppCompatActivity() {
+    data class DatabaseCard(
+        val favorite: Boolean = false,
+        val id: Int = 0,
+    )
 
     data class DatabaseUser(
-        val name: String = "",
         val nickName: String = "",
         val imageUrl: String = "",
-        val deck: MutableList<MainActivity.DatabaseCard>? = null,
-        val team: MutableList<MainActivity.DatabaseCard>? = null,
+        val deck: MutableList<DatabaseCard>? = null
     )
 
     private var imageUri: Uri? = null
@@ -113,7 +109,12 @@ class RegisterActivity : AppCompatActivity() {
         })
     }
     private fun sendImage() {
-        imageUri?.run {
+        if (imageUri == null && firebaseUser?.photoUrl != null) {
+            imageUri = firebaseUser.photoUrl
+        }else if (imageUri == null && firebaseUser?.photoUrl == null){
+            imageUri = Uri.parse("https://cdn.dribbble.com/users/1063314/screenshots/3229288/stanlee.png?compress=1&resize=400x300")
+        }
+        imageUri!!.run {
             val extension = MimeTypeMap.getSingleton()
                 .getExtensionFromMimeType(contentResolver.getType(imageUri!!))
             storageRef.putFile(this)
@@ -155,14 +156,15 @@ class RegisterActivity : AppCompatActivity() {
                 )
             }
             val randomCards = cardManager.random5(cardList)
+            MY_USER!!.deck.addAll(randomCards)
+
             val randomFirebaseCards = addOnDeck(randomCards)
-            val randomFirebaseCardsTeam =
-                addOnDeck(mutableListOf(randomCards[0], randomCards[1], randomCards[2]))
-            myRef.setValue(User(nickname.text.toString(),
+
+            myRef.setValue(User(
                 nickname.text.toString(),
-                firebaseUser?.uid.toString()))
+                firebaseUser!!.uid
+            ))
             myRef.child("deck").setValue(randomFirebaseCards)
-            myRef.child("team").setValue(randomFirebaseCardsTeam)
         }
     }
     private fun addOnDeck(list: MutableList<Hero>): MutableList<CardFirebase> {

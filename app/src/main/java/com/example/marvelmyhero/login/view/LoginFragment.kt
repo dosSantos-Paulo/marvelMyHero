@@ -3,7 +3,6 @@ package com.example.marvelmyhero.login.view
 import android.app.Activity.RESULT_OK
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,10 +17,7 @@ import androidx.lifecycle.observe
 import com.example.marvelmyhero.utils.MovieUtil
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
-import com.example.marvelmyhero.main.view.MainActivity
-import com.example.marvelmyhero.register.RegisterActivity
-import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
-import com.example.marvelmyhero.utils.Constants.NAME
+import com.example.marvelmyhero.verifications.VerificationsActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -34,12 +30,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 
 class LoginFragment : Fragment() {
 
@@ -115,31 +106,22 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToHome(status: Boolean) {
+//        Login com Firebase
         when {
             status -> {
-
-
-                val intent = Intent(view?.context, RegisterActivity::class.java)
-                intent.putExtra(NAME, "")
+                val intent = Intent(view?.context, VerificationsActivity::class.java)
                 startActivity(intent)
-
+            }
+            else -> {
+                Toast.makeText(myView.context, "Something Wrong", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun irParaHome(uiid: String) {
-
-        val intent = Intent(view?.context, RegisterActivity::class.java)
-        intent.putExtra(NAME, "")
+    private fun irParaHome(uiid: String?) {
+//      Login pelo Facebook e Google
+        val intent = Intent(view?.context, VerificationsActivity::class.java)
         startActivity(intent)
-    }
-
-    private fun irParaHome2() {
-//        Login pelo Google
-        val intent = Intent(view?.context, RegisterActivity::class.java)
-        intent.putExtra(NAME, "")
-        startActivity(intent)
-
     }
 
     private fun loginFacebook() {
@@ -195,7 +177,7 @@ class LoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
-                    irParaHome2()
+                    irParaHome(null)
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
