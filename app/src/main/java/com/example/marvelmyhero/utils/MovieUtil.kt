@@ -33,12 +33,37 @@ object MovieUtil {
         }
     }
 
-    fun validateEmailPassword(email: String): Boolean {
+    fun validateEmailPasswordLogin(email: String, password: String): Boolean {
+
         return when {
-            Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+            email.isEmpty() || password.isEmpty() -> {
+                false
+            }
+            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                false
+            }
+            password.length < 6 -> {
                 false
             }
             else -> true
+
+        }
+    }
+
+    fun validateEmailPassword(email: String, password: String): Boolean {
+
+        return when {
+            email.isEmpty() || password.isEmpty() -> {
+                false
+            }
+            Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                false
+            }
+            password.length < 6 -> {
+                false
+            }
+            else -> true
+
         }
     }
 }

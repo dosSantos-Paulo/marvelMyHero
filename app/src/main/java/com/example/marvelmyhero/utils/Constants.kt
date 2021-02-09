@@ -30,8 +30,8 @@ object Constants {
     var exitAnim = R.anim.card_flip_left_out
     var popEnterAnim = R.anim.card_flip_left_in
     var popExitAnim = R.anim.card_flip_left_out
-    var isDoubleBackPressed = false
-    var isDeckChange = false
+
     var userNameFromSignup : String = ""
+    var isAble = true
 
 }

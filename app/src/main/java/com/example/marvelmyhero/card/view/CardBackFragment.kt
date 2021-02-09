@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
-import com.example.marvelmyhero.utils.Constants.isDoubleBackPressed
 import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.fragment_user.*
 

@@ -121,7 +121,8 @@ class SignUpFragment : Fragment() {
 
     private fun validaEmail(): Boolean {
         var resultado = true
-        if (MovieUtil.validateEmailPassword(email.text.toString())) {
+        if (
+            MovieUtil.validateEmailPassword(email.text.toString(), password.text.toString())) {
             _view.findViewById<TextInputEditText>(R.id.editText_email_signUp).error =
                 getString(R.string.email_invalido)
             resultado = false

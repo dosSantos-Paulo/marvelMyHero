@@ -1,4 +1,5 @@
 package com.example.marvelmyhero.register
+
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.CONTEXT_RESQUEST_CODE
 import com.example.marvelmyhero.utils.Constants.IMAGE
 import com.example.marvelmyhero.utils.Constants.NAME
+import com.example.marvelmyhero.utils.Constants.isAble
 import com.example.marvelmyhero.utils.UserVariables.IS_MY_FIRST_TIME_ON_APP
 import com.example.marvelmyhero.utils.UserVariables.MY_USER
 import com.google.android.material.textfield.TextInputEditText
@@ -53,13 +55,14 @@ class RegisterActivity : AppCompatActivity() {
     //    Firebase
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private val firebaseDatabase = FirebaseDatabase.getInstance()
-    private val storageRef = FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
+    private val storageRef =
+        FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         Log.d("USER_FLUX", "-> RegisterActivity")
-        IS_MY_FIRST_TIME_ON_APP = true
+        isAble = false
 
 //        var intentName = intent.getStringExtra(NAME)!!
 //        if (intentName.equals("null")){
@@ -74,8 +77,7 @@ class RegisterActivity : AppCompatActivity() {
             Log.d("USER_FLUX", "-> submit button")
             if (nickname.text.isNullOrEmpty()) {
                 nickname.error = getString(R.string.nickName_error)
-            }
-            else getAllCardsFromDB()
+            } else getAllCardsFromDB()
         }
         changeImageButton.setOnClickListener {
             Log.d("USER_FLUX", "-> changeImageButton")
@@ -102,7 +104,8 @@ class RegisterActivity : AppCompatActivity() {
             userImage.setImageURI(imageUri)
         }
     }
-//    private fun setUser() {
+
+    //    private fun setUser() {
 //
 //        myRef.addValueEventListener(object : ValueEventListener {
 //            override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -120,13 +123,14 @@ class RegisterActivity : AppCompatActivity() {
 //        })
 //    }
     private fun sendImage() {
-    Log.d("USER_FLUX", "-> sendImage()")
+        Log.d("USER_FLUX", "-> sendImage()")
         if (imageUri == null && firebaseUser?.photoUrl != null) {
             imageUri = Uri.parse(firebaseUser.photoUrl.toString())
-        }else if (imageUri == null && firebaseUser?.photoUrl == null){
-            imageUri = Uri.parse("https://cdn.dribbble.com/users/1063314/screenshots/3229288/stanlee.png")
+        } else if (imageUri == null && firebaseUser?.photoUrl == null) {
+            imageUri =
+                Uri.parse("https://cdn.dribbble.com/users/1063314/screenshots/3229288/stanlee.png")
         }
-    MY_USER!!.imageUrl = imageUri.toString()
+        MY_USER!!.imageUrl = imageUri.toString()
 
         Log.d("USER_FLUX", "-> imageUri $imageUri")
 
@@ -136,12 +140,15 @@ class RegisterActivity : AppCompatActivity() {
                     Log.d("FIREBASE_PIC", storageRef.toString())
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this@RegisterActivity,
+                    Toast.makeText(
+                        this@RegisterActivity,
                         "ERROR: Upload Picture!!",
-                        Toast.LENGTH_LONG).show()
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
         }
     }
+
     private fun findFile() {
         Log.d("USER_FLUX", "-> findFile()")
         val intent = Intent()
@@ -149,6 +156,7 @@ class RegisterActivity : AppCompatActivity() {
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(intent, CONTEXT_RESQUEST_CODE)
     }
+
     private fun getAllCardsFromDB() {
         Log.d("USER_FLUX", "-> getAllCardsFromDB()")
         val cardList = mutableListOf<Hero>()
@@ -176,15 +184,16 @@ class RegisterActivity : AppCompatActivity() {
             Log.d("USER_FLUX", "-> deck ${MY_USER!!.deck}")
 
 
-
             val randomFirebaseCards = addOnDeck(randomCards)
 
             Log.d("USER_FLUX", "-> armazenando nome")
             MY_USER!!.nickName = nickname.text.toString()
-            myRef.setValue(User(
-                nickname.text.toString(),
-                firebaseUser!!.uid
-            ))
+            myRef.setValue(
+                User(
+                    nickname.text.toString(),
+                    firebaseUser!!.uid
+                )
+            )
 
             Log.d("USER_FLUX", "-> armazenando cards")
             myRef.child("deck").setValue(randomFirebaseCards)
@@ -196,13 +205,16 @@ class RegisterActivity : AppCompatActivity() {
 
         }
     }
+
     private fun addOnDeck(list: MutableList<Hero>): MutableList<CardFirebase> {
         val cardFirebase = mutableListOf<CardFirebase>()
         list.forEach {
-            cardFirebase.add(CardFirebase(
-                it.id,
-                it.favorite
-            ))
+            cardFirebase.add(
+                CardFirebase(
+                    it.id,
+                    it.favorite
+                )
+            )
         }
         return cardFirebase
     }

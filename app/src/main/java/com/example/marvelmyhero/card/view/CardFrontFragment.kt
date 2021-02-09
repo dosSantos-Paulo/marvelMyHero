@@ -15,7 +15,6 @@ import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.utils.Constants.enterAnim
 import com.example.marvelmyhero.utils.Constants.exitAnim
-import com.example.marvelmyhero.utils.Constants.isDoubleBackPressed
 import com.example.marvelmyhero.utils.Constants.popEnterAnim
 import com.example.marvelmyhero.utils.Constants.popExitAnim
 import com.google.android.material.card.MaterialCardView

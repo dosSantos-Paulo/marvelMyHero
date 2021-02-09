@@ -77,7 +77,7 @@ class LoginFragment : Fragment() {
             val email = view.findViewById<EditText>(R.id.editText_email_login).text.toString()
             val password = view.findViewById<EditText>(R.id.editText_password_login).text.toString()
             when {
-                MovieUtil.validateEmailPassword(email) -> {
+                MovieUtil.validateEmailPasswordLogin(email, password) -> {
                     viewModel.loginEmailPassword(email, password)
                 }
                 else -> {

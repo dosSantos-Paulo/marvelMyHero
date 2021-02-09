@@ -36,6 +36,7 @@ import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.DEFAULT_STATUS_CODE
 import com.example.marvelmyhero.utils.Constants.IMAGE
+import com.example.marvelmyhero.utils.Constants.isAble
 import com.example.marvelmyhero.utils.UserVariables.IS_MY_FIRST_TIME_ON_APP
 import com.example.marvelmyhero.utils.UserVariables.MY_USER
 import com.google.android.material.button.MaterialButton
@@ -89,18 +90,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Log.d("USER_FLUX", "-> MaiActivity")
         initDbViewModel()
-        try {
-            val oldImage = intent.getStringExtra(IMAGE)
-            MY_USER!!.imageUrl == oldImage
-        }catch (ex: java.lang.Exception){
-            Log.d("USER_FLUX", "-> exeption ${ex.message}")
-        }
-
-        storageRef.downloadUrl.addOnSuccessListener {
-            Log.d("USER_FLUX", "-> pegando imagem Uri")
-            imageUri = it
-            MY_USER!!.imageUrl = imageUri.toString()
-        }
 
         toolBarItems(MY_USER!!)
 
@@ -211,7 +200,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun toolBarItems(user: User) {
 
-        Picasso.get().load(imageUri).into(userImage)
+        Picasso.get().load(user.imageUrl).into(userImage)
         userName.text = user.nickName
 
         userImage.setOnClickListener {
@@ -317,13 +306,12 @@ class MainActivity : AppCompatActivity() {
                 closeContextMenu()
             }
             .setPositiveButton(getString(R.string.exitDialog_positiveButton)) { _, _ ->
-
+                MY_USER = null
+                isAble = true
                 Firebase.auth.signOut()
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
-                MY_USER = null
                 finish()
-
             }
             .show()
     }
