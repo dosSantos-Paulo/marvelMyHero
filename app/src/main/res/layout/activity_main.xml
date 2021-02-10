@@ -59,168 +59,168 @@
 
         </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="@dimen/logoWidth"
-                    android:layout_height="@dimen/logoHeight"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/logo_marvel_my_hero"
-                    android:src="@drawable/ic_my_hero_logo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/logoWidth"
+                android:layout_height="@dimen/logoHeight"
+                android:layout_gravity="center"
+                android:contentDescription="@string/logo_marvel_my_hero"
+                android:src="@drawable/ic_my_hero_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:fontFamily="@font/gobold_bold"
-                    android:gravity="center"
-                    android:text="@string/my_team"
-                    android:textAllCaps="true"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/materialCardView_main"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/gobold_bold"
+                android:gravity="center"
+                android:text="@string/my_team"
+                android:textAllCaps="true"
+                android:textColor="@color/textPrimary"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/materialCardView_main"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView_main"
-                    android:layout_width="@dimen/cardBoxWidth"
-                    android:layout_height="@dimen/cardBoxHeight"
-                    app:cardBackgroundColor="@color/translucentBoxColor"
-                    app:cardCornerRadius="@dimen/boxRadius"
-                    app:layout_constraintBottom_toTopOf="@+id/img_developers"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView"
-                    app:strokeColor="@color/textPrimary"
-                    app:strokeWidth="@dimen/strokeWidth">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView_main"
+                android:layout_width="@dimen/cardBoxWidth"
+                android:layout_height="@dimen/cardBoxHeight"
+                app:cardBackgroundColor="@color/translucentBoxColor"
+                app:cardCornerRadius="@dimen/boxRadius"
+                app:layout_constraintBottom_toTopOf="@+id/img_developers"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView"
+                app:strokeColor="@color/textPrimary"
+                app:strokeWidth="@dimen/strokeWidth">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="0dp">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            tools:layout_editor_absoluteX="0dp"
-                            tools:layout_editor_absoluteY="0dp">
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="@dimen/cardMini_width"
+                            android:layout_height="@dimen/cardMini_height"
+                            android:rotation="5"
+                            app:cardBackgroundColor="@color/textPrimary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.915"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.68"
+                            app:strokeColor="@color/textPrimary"
+                            app:strokeWidth="@dimen/strokeWidth">
 
-                            <com.google.android.material.card.MaterialCardView
+                            <FrameLayout
+                                android:id="@+id/frameLayout_teamCard3_main"
                                 android:layout_width="@dimen/cardMini_width"
                                 android:layout_height="@dimen/cardMini_height"
-                                android:rotation="5"
-                                app:cardBackgroundColor="@color/textPrimary"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.915"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.68"
-                                app:strokeColor="@color/textPrimary"
-                                app:strokeWidth="@dimen/strokeWidth">
+                                android:contentDescription="@string/card_image" />
 
-                                <FrameLayout
-                                    android:id="@+id/frameLayout_teamCard3_main"
-                                    android:layout_width="@dimen/cardMini_width"
-                                    android:layout_height="@dimen/cardMini_height"
-                                    android:contentDescription="@string/card_image" />
+                        </com.google.android.material.card.MaterialCardView>
 
-                            </com.google.android.material.card.MaterialCardView>
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="@dimen/cardMini_width"
+                            android:layout_height="@dimen/cardMini_height"
+                            android:layout_marginStart="16dp"
+                            android:rotation="-5"
+                            app:cardBackgroundColor="@color/textPrimary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.68"
+                            app:strokeColor="@color/textPrimary"
+                            app:strokeWidth="@dimen/strokeWidth">
 
-                            <com.google.android.material.card.MaterialCardView
+                            <FrameLayout
+                                android:id="@+id/frameLayout_teamCard1_main"
                                 android:layout_width="@dimen/cardMini_width"
                                 android:layout_height="@dimen/cardMini_height"
-                                android:layout_marginStart="16dp"
-                                android:rotation="-5"
-                                app:cardBackgroundColor="@color/textPrimary"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.68"
-                                app:strokeColor="@color/textPrimary"
-                                app:strokeWidth="@dimen/strokeWidth">
+                                android:contentDescription="@string/card_image" />
 
-                                <FrameLayout
-                                    android:id="@+id/frameLayout_teamCard1_main"
-                                    android:layout_width="@dimen/cardMini_width"
-                                    android:layout_height="@dimen/cardMini_height"
-                                    android:contentDescription="@string/card_image" />
+                        </com.google.android.material.card.MaterialCardView>
 
-                            </com.google.android.material.card.MaterialCardView>
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/materialCardView3"
+                            android:layout_width="@dimen/cardMini_width"
+                            android:layout_height="@dimen/cardMini_height"
+                            app:cardBackgroundColor="@color/textPrimary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:strokeColor="@color/textPrimary"
+                            app:strokeWidth="@dimen/strokeWidth">
 
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/materialCardView3"
+                            <FrameLayout
+                                android:id="@+id/frameLayout_teamCard2_main"
                                 android:layout_width="@dimen/cardMini_width"
                                 android:layout_height="@dimen/cardMini_height"
-                                app:cardBackgroundColor="@color/textPrimary"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:strokeColor="@color/textPrimary"
-                                app:strokeWidth="@dimen/strokeWidth">
+                                android:contentDescription="@string/card_image" />
 
-                                <FrameLayout
-                                    android:id="@+id/frameLayout_teamCard2_main"
-                                    android:layout_width="@dimen/cardMini_width"
-                                    android:layout_height="@dimen/cardMini_height"
-                                    android:contentDescription="@string/card_image" />
-
-                            </com.google.android.material.card.MaterialCardView>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_myDeck_main"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="@dimen/buttonWidth"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="@string/my_deck"
-                    android:textColor="@color/textPrimary"
-                    app:cornerRadius="@dimen/defaultRadius"
-                    app:layout_constraintBottom_toTopOf="@+id/img_developers"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView_main"
-                    app:strokeColor="@color/textPrimary" />
+            </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_share_main"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/icon"
-                    android:layout_height="@dimen/icon"
-                    android:background="@drawable/ic_baseline_share_24"
-                    android:contentDescription="@string/share_icon"
-                    app:backgroundTint="@color/textPrimary"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.07"
-                    app:layout_constraintStart_toEndOf="@+id/textView2"
-                    app:layout_constraintTop_toTopOf="@+id/textView2" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_myDeck_main"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="@dimen/buttonWidth"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/my_deck"
+                android:textColor="@color/textPrimary"
+                app:cornerRadius="@dimen/defaultRadius"
+                app:layout_constraintBottom_toTopOf="@+id/img_developers"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView_main"
+                app:strokeColor="@color/textPrimary" />
 
-                <ImageView
-                    android:id="@+id/img_developers"
-                    android:layout_width="120dp"
-                    android:layout_height="90dp"
-                    android:contentDescription="@string/button_developers"
-                    android:src="@mipmap/ic_developers_foreground"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_share_main"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/icon"
+                android:layout_height="@dimen/icon"
+                android:background="@drawable/ic_baseline_share_24"
+                android:contentDescription="@string/share_icon"
+                app:backgroundTint="@color/textPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.07"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/img_developers"
+                android:layout_width="120dp"
+                android:layout_height="90dp"
+                android:contentDescription="@string/button_developers"
+                android:src="@mipmap/ic_developers_foreground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

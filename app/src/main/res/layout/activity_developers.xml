@@ -17,16 +17,18 @@
             android:id="@+id/img_arrowBack_Developers"
             android:layout_width="@dimen/icon"
             android:layout_height="@dimen/icon"
-            android:layout_marginStart="@dimen/marginSmall"
             android:contentDescription="@string/backButton"
             android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_Developers"
+            app:layout_constraintEnd_toStartOf="@+id/textView_Developers"
+            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView_Developers"
             app:tint="@color/textPrimary" />
 
         <TextView
             android:id="@+id/textView_Developers"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/gobold_bold"

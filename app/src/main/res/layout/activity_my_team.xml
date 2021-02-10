@@ -17,14 +17,13 @@
             android:id="@+id/img_arrowBack_myTeam"
             android:layout_width="@dimen/icon"
             android:layout_height="@dimen/icon"
-            android:layout_marginStart="@dimen/marginSmall"
             android:contentDescription="@string/backButton"
             android:src="@drawable/ic_baseline_arrow_back_24"
             app:layout_constraintBottom_toBottomOf="@+id/textView_MyTeam"
             app:layout_constraintEnd_toStartOf="@+id/textView_MyTeam"
             app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView_MyTeam"
             app:tint="@color/textPrimary" />
 
         <TextView
