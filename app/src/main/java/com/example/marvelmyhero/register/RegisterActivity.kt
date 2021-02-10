@@ -2,13 +2,12 @@ package com.example.marvelmyhero.register
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
@@ -22,15 +21,14 @@ import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.utils.CardManager
 import com.example.marvelmyhero.utils.Constants.CONTEXT_RESQUEST_CODE
-import com.example.marvelmyhero.utils.Constants.IMAGE
-import com.example.marvelmyhero.utils.Constants.NAME
 import com.example.marvelmyhero.utils.Constants.isAble
-import com.example.marvelmyhero.utils.UserVariables.IS_MY_FIRST_TIME_ON_APP
 import com.example.marvelmyhero.utils.UserVariables.MY_USER
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import java.io.InputStream
+
 
 class RegisterActivity : AppCompatActivity() {
     data class DatabaseCard(
@@ -106,12 +104,13 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun sendImage() {
+
+        val baseUri =
+            Uri.parse("android.resource://" + packageName + "/" + R.drawable.ic_perfil)
+
         Log.d("USER_FLUX", "-> sendImage()")
-        if (imageUri == null && firebaseUser?.photoUrl != null) {
-            imageUri = Uri.parse(firebaseUser.photoUrl.toString())
-        } else if (imageUri == null && firebaseUser?.photoUrl == null) {
-            imageUri =
-                Uri.parse("https://cdn.dribbble.com/users/1063314/screenshots/3229288/stanlee.png")
+        if (imageUri == null) {
+            imageUri = baseUri
         }
         MY_USER!!.imageUrl = imageUri.toString()
 
