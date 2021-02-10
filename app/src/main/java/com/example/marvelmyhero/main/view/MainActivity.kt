@@ -297,7 +297,7 @@ class MainActivity : AppCompatActivity() {
                     .apply()
 
 //                Toast.makeText(this, "Usuário ganha novas cartas", Toast.LENGTH_LONG).show()
-//                getDeckFromDb()
+                getDeckFromDb()
 
             }
         } else {
@@ -307,34 +307,86 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    private fun getDeckFromDb() {
-//
-//        Log.d("USER_FLUX", "-> sincronizando cards com banco de dados")
-//
-//        val cardList = mutableListOf<Hero>()
-//
-//        databaseViewModel.getAllCards().observe(this) { cardlist ->
-//            val _cardList = cardlist as List<CardEntity>
-//            _cardList.forEach {
-//                cardList.add(
-//                    Hero(
-//                        it.id,
-//                        it.heroName,
-//                        it.name,
-//                        it.imageUrl,
-//                        it.durability,
-//                        it.energy,
-//                        it.fightingSkills,
-//                        it.inteligence,
-//                        it.speed,
-//                        it.strength,
-//                        it.description
-//                    )
-//                )
-//            }
-//            MY_USER!!.deck.addAll(CardManager().random3(cardList))
-//        }
-//    }
+    private fun getDeckFromDb() {
+
+        Log.d("USER_FLUX", "-> sincronizando cards com banco de dados")
+
+        val cardList = mutableListOf<Hero>()
+
+        databaseViewModel.getAllCards().observe(this) { cardlist ->
+            val _cardList = cardlist as List<CardEntity>
+            _cardList.forEach {
+                cardList.add(
+                    Hero(
+                        it.id,
+                        it.heroName,
+                        it.name,
+                        it.imageUrl,
+                        it.durability,
+                        it.energy,
+                        it.fightingSkills,
+                        it.inteligence,
+                        it.speed,
+                        it.strength,
+                        it.description
+                    )
+                )
+            }
+
+
+            val randomCards = CardManager().random3(cardList)
+
+            showRandom3Cards(randomCards)
+
+            MY_USER!!.deck.addAll(CardManager().random3(cardList))
+        }
+    }
+
+    fun showRandom3Cards(randomList: MutableList<Hero>){
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Welcome Back")
+            .setMessage("You won a 3 new cards, would you like to see them?")
+            .setPositiveButton("Yes") { _, _ ->
+                showNewCard(randomList)
+            }
+            .setNegativeButton("No") { _, _ ->
+                closeContextMenu()
+            }
+            .show()
+
+    }
+
+    private fun showNewCard(cardList: MutableList<Hero>) {
+
+        cardList.forEach {
+            var getStars = ""
+            val starValue = getString(R.string.classificationStar)
+
+            when (it.classification) {
+                in 0.1..2.9 -> {
+                    getStars = starValue
+                }
+                in 3.0..4.5 -> {
+                    getStars = "$starValue $starValue"
+                }
+                in 4.6..5.9 -> {
+                    getStars = "$starValue $starValue $starValue"
+                }
+                in 6.0..7.0 -> {
+                    getStars = "$starValue $starValue $starValue $starValue"
+                }
+            }
+
+            MaterialAlertDialogBuilder(this)
+
+                .setMessage("Name : ${it.heroName} \n Classification: $getStars ")
+                .setPositiveButton("OK") { _, _ ->
+                    closeContextMenu()
+                }
+                .show()
+        }
+    }
 
     companion object {
         const val DATE_PREFS = "DATE"
