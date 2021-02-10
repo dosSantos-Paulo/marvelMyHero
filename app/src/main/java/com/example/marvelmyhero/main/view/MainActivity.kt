@@ -135,18 +135,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-
-
-
         super.onResume()
         Log.d("USER_FLUX", "-> onResume()")
         val team = mutableListOf(MY_USER!!.deck[0], MY_USER!!.deck[1], MY_USER!!.deck[2])
         showTeamCards(team)
         Log.d("USER_FLUX", "-> update deck")
         myRef.child("deck").setValue(transformToFirebaseFormat(MY_USER!!.deck))
-
-
-
     }
 
     private fun transformToFirebaseFormat(list: MutableList<Hero>): MutableList<CardFirebase> {

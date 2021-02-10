@@ -75,7 +75,7 @@ class VerificationsActivity : AppCompatActivity() {
 
     private fun isNewUser() {
 
-        myRef.addValueEventListener(object : ValueEventListener {
+        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue(DatabaseUser::class.java)
 

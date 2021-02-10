@@ -159,7 +159,7 @@ class SplashScreen : AppCompatActivity() {
     }
     private fun firebaseVerification() {
         Log.d("USER_FLUX", "-> firebaseVerification()")
-        myRef.addValueEventListener(object : ValueEventListener {
+        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue(DatabaseUser::class.java)
                 IS_MY_FIRST_TIME_ON_APP = value == null
