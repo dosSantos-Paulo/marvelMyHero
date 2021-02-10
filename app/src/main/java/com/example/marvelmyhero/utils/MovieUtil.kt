@@ -39,7 +39,7 @@ object MovieUtil {
             email.isEmpty() || password.isEmpty() -> {
                 false
             }
-            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+            Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
                 false
             }
             password.length < 6 -> {

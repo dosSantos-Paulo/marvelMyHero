@@ -9,14 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.utils.MovieUtil
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.login.view.AuthenticationViewModel
 import com.example.marvelmyhero.verifications.VerificationsActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -28,17 +26,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class LoginFragment : Fragment() {
 
-
     private lateinit var auth: FirebaseAuth
     private lateinit var button: Button
     private lateinit var callbackManager: CallbackManager
     private lateinit var myView: View
+    lateinit var email: TextInputEditText
+    lateinit var password: TextInputEditText
 
     private val viewModel: AuthenticationViewModel by lazy {
         ViewModelProvider(this).get(
@@ -72,21 +72,21 @@ class LoginFragment : Fragment() {
         val googleLogin = view.findViewById<MaterialButton>(R.id.btn_googleLogin_login)
         val facebookLogin = view.findViewById<MaterialButton>(R.id.btn_facebookLogin_login)
 
+        email = myView.findViewById(R.id.editText_email_login)
+        password = myView.findViewById(R.id.editText_password_login)
 
         loginButton.setOnClickListener {
-            val email = view.findViewById<EditText>(R.id.editText_email_login).text.toString()
-            val password = view.findViewById<EditText>(R.id.editText_password_login).text.toString()
-            when {
-                MovieUtil.validateEmailPasswordLogin(email, password) -> {
-                    viewModel.loginEmailPassword(email, password)
+            if(validaCamposLogin()) {
+                if (validaEmail()) {
+                    viewModel.loginEmailPassword(email.text.toString(), password.text.toString())
                 }
-                else -> {
+                else {
                     Snackbar.make(loginButton, "Login failed", Snackbar.LENGTH_LONG).show()
                 }
             }
-
             initViewModel()
         }
+
         googleLogin.setOnClickListener {
             val gso =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -96,7 +96,6 @@ class LoginFragment : Fragment() {
             val cliente = GoogleSignIn.getClient(requireContext(), gso)
             startActivityForResult(cliente.signInIntent, 1)
         }
-
     }
 
     private fun initViewModel() {
@@ -186,6 +185,32 @@ class LoginFragment : Fragment() {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
             }
+    }
+
+    private fun validaCamposLogin(): Boolean {
+        var resultado = true
+
+        if (email.text.toString().isBlank()) {
+            myView.findViewById<TextInputEditText>(R.id.editText_email_login).error =
+                getString(R.string.campo_vazio)
+            resultado = false
+        }
+        if (password.text.toString().isBlank()) {
+            myView.findViewById<TextInputEditText>(R.id.editText_password_login).error =
+                getString(R.string.campo_vazio)
+            resultado = false
+        }
+        return resultado
+    }
+
+    private fun validaEmail(): Boolean {
+        var resultado = true
+        if (MovieUtil.validateEmailPasswordLogin(email.text.toString(), password.text.toString())) {
+            myView.findViewById<TextInputEditText>(R.id.editText_email_login).error =
+                getString(R.string.email_invalido)
+            resultado = false
+        }
+        return resultado
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

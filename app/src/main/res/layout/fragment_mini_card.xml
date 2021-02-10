@@ -79,11 +79,12 @@
         android:id="@+id/ic_fav_cardMini"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_marginEnd="2dp"
+        android:contentDescription="@string/favorite"
         android:src="@drawable/ic_baseline_stars_24"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/goldCardColor"
-        android:contentDescription="@string/favorite"/>
+        app:tint="@color/goldCardColor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
