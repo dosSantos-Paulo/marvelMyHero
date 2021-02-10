@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.utils.Constants.userNameFromSignup
 import com.example.marvelmyhero.utils.MovieUtil
 import com.example.marvelmyhero.verifications.VerificationsActivity
 import com.google.android.material.button.MaterialButton
@@ -69,6 +70,7 @@ class SignUpFragment : Fragment() {
         when {
             status -> {
                 val intent = Intent(context, VerificationsActivity::class.java)
+                userNameFromSignup = _view.findViewById<TextInputEditText>(R.id.editText_name_signUp).text.toString()
                 startActivity(intent)
             }
             else -> {

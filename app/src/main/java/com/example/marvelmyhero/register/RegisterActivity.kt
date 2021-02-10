@@ -20,8 +20,10 @@ import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.utils.CardManager
+import com.example.marvelmyhero.utils.Constants
 import com.example.marvelmyhero.utils.Constants.CONTEXT_RESQUEST_CODE
 import com.example.marvelmyhero.utils.Constants.isAble
+import com.example.marvelmyhero.utils.Constants.userNameFromSignup
 import com.example.marvelmyhero.utils.UserVariables.MY_USER
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -62,12 +64,16 @@ class RegisterActivity : AppCompatActivity() {
         Log.d("USER_FLUX", "-> RegisterActivity")
         isAble = false
 
-//        var intentName = intent.getStringExtra(NAME)!!
-//        if (intentName.equals("null")){
-//            intentName = ""
-//        }
-//
-//        nickname.setText(intentName)
+        val _nickName: String
+        if (!firebaseUser?.displayName.isNullOrEmpty()){
+            _nickName = firebaseUser?.displayName.toString()
+        }else if (!userNameFromSignup.isNullOrEmpty()){
+            _nickName = userNameFromSignup
+        }else {
+            _nickName = ""
+        }
+
+        nickname.setText(_nickName)
 
         initDBViewModel()
 
