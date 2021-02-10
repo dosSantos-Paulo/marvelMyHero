@@ -43,7 +43,7 @@ class MiniCardMyTeam(
         }
 
         cardColor.setBackgroundColor(Color.parseColor(getString(getColor(hero.classification))))
-        cardName.text = hero.name
+        cardName.text = hero.heroName
         Picasso.get().load(hero.imageUrl).into(cardImage)
     }
 
