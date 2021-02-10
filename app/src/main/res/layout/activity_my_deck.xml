@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toStartOf="@+id/textView3"
             app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView3"
             app:tint="@color/textPrimary" />
 
         <TextView
@@ -49,7 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintStart_toEndOf="@+id/textView3"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView3"
             app:tint="@color/textPrimary" />
 
         <com.google.android.material.card.MaterialCardView
