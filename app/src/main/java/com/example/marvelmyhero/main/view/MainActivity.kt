@@ -22,6 +22,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.marvelmyhero.R
+import com.example.marvelmyhero.card.model.CardFirebase
 import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.db.database.AppDataBase
@@ -88,6 +89,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        isAble = false
         Log.d("USER_FLUX", "-> MaiActivity")
         initDbViewModel()
 
@@ -111,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         materialCardView.setOnClickListener {
-            startActivityForResult(Intent(this, MyTeamActivity::class.java), DEFAULT_STATUS_CODE)
+            startActivity(Intent(this, MyTeamActivity::class.java))
         }
 
         shareButton.setOnClickListener {
@@ -123,7 +125,23 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("USER_FLUX", "-> onResume()")
-        showTeamCards(mutableListOf(MY_USER!!.deck[0], MY_USER!!.deck[1], MY_USER!!.deck[2]))
+        val team = mutableListOf(MY_USER!!.deck[0], MY_USER!!.deck[1], MY_USER!!.deck[2])
+        showTeamCards(team)
+        Log.d("USER_FLUX", "-> update deck")
+        myRef.child("deck").setValue(transformToFirebaseFormat(MY_USER!!.deck))
+    }
+
+    private fun transformToFirebaseFormat(list: MutableList<Hero>): MutableList<CardFirebase> {
+        val cardFirebase = mutableListOf<CardFirebase>()
+        list.forEach {
+            cardFirebase.add(
+                CardFirebase(
+                    it.id,
+                    it.favorite
+                )
+            )
+        }
+        return cardFirebase
     }
 
     val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123

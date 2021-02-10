@@ -11,33 +11,34 @@ import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.utils.UserVariables.MY_USER
 
 class MyTeamActivity : AppCompatActivity() {
-
-    private val deck = MY_USER!!.deck
-    private val team = mutableListOf(deck.removeAt(0), deck.removeAt(0), deck.removeAt(0))
-
-    private val viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-    private val adapterMyTeam = MyTeamAdapter(deck) {
-        moveItem(it)
-    }
-    private val updateDeck = mutableListOf<Hero>()
+    private lateinit var deck: MutableList<Hero>
+    private lateinit var team: MutableList<Hero>
+    private lateinit var updateDeck: MutableList<Hero>
+    private lateinit var adapterMyTeam: MyTeamAdapter
+    private lateinit var viewManagerMyTeam: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_team)
+
+        deck = MY_USER!!.deck
+        team = mutableListOf(deck.removeAt(0), deck.removeAt(0), deck.removeAt(0))
+        updateDeck = mutableListOf()
+        viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        adapterMyTeam = MyTeamAdapter(deck) {
+            moveItem(it)
+        }
+
         showTeamCards(team)
 
         val backArrowButton = findViewById<ImageView>(R.id.img_arrowBack_myTeam)
         val recyclerViewMyTeam = findViewById<RecyclerView>(R.id.recyclerView_myTeam)
-
-
 
         recyclerViewMyTeam.apply {
             setHasFixedSize(true)
             layoutManager = viewManagerMyTeam
             adapter = adapterMyTeam
         }
-
-
 
         backArrowButton.setOnClickListener {
             onBackPressed()

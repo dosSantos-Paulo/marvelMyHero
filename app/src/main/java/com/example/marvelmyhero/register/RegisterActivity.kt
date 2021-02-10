@@ -105,23 +105,6 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    //    private fun setUser() {
-//
-//        myRef.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                Log.d("CARDS_FROM_DB","Cards carregados")
-//                val intent = Intent(this@RegisterActivity, MainActivity::class.java)
-//                intent.putExtra(IMAGE, imageUri.toString())
-//                startActivity(intent)
-//                finish()
-//            }
-//            override fun onCancelled(error: DatabaseError) {
-//                Toast.makeText(this@RegisterActivity,
-//                    "Error :(  Try again latter",
-//                    Toast.LENGTH_LONG).show()
-//            }
-//        })
-//    }
     private fun sendImage() {
         Log.d("USER_FLUX", "-> sendImage()")
         if (imageUri == null && firebaseUser?.photoUrl != null) {
