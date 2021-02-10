@@ -11,6 +11,9 @@ import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.utils.UserVariables.MY_USER
 
 class MyTeamActivity : AppCompatActivity() {
+    private lateinit var repeatedCards: MutableList<Hero>
+    private lateinit var controlDeck: MutableList<Hero>
+    private lateinit var controlTeam: MutableList<Hero>
     private lateinit var deck: MutableList<Hero>
     private lateinit var team: MutableList<Hero>
     private lateinit var updateDeck: MutableList<Hero>
@@ -21,9 +24,21 @@ class MyTeamActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_team)
 
-        deck = MY_USER!!.deck
-        team = mutableListOf(deck.removeAt(0), deck.removeAt(0), deck.removeAt(0))
+        repeatedCards = mutableListOf()
+        controlDeck = mutableListOf()
         updateDeck = mutableListOf()
+
+        for (i in 0 until MY_USER!!.deck.size) {
+            val lastIndex = MY_USER!!.deck.lastIndexOf(MY_USER!!.deck[i])
+            if (i != lastIndex) {
+                repeatedCards.add(MY_USER!!.deck[i])
+            } else {
+                controlDeck.add(MY_USER!!.deck[i])
+            }
+        }
+
+        deck = controlDeck
+        team = mutableListOf(deck.removeAt(0), deck.removeAt(0), deck.removeAt(0))
         viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         adapterMyTeam = MyTeamAdapter(deck) {
             moveItem(it)
@@ -86,6 +101,7 @@ class MyTeamActivity : AppCompatActivity() {
         updateDeck.clear()
         updateDeck.addAll(team)
         updateDeck.addAll(deck)
+        updateDeck.addAll(repeatedCards)
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {

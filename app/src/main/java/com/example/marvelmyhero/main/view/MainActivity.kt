@@ -295,7 +295,10 @@ class MainActivity : AppCompatActivity() {
                 dayComparePreference.edit()
                     .putString(KEEP_CONNECTED_PREFS, isDay)
                     .apply()
-                Toast.makeText(this, "Usuário ganha novas cartas", Toast.LENGTH_LONG).show()
+
+//                Toast.makeText(this, "Usuário ganha novas cartas", Toast.LENGTH_LONG).show()
+//                getDeckFromDb()
+
             }
         } else {
             dayComparePreference.edit()
