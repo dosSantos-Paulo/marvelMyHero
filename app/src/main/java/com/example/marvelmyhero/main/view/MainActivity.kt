@@ -17,22 +17,26 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.CardFirebase
 import com.example.marvelmyhero.card.model.Hero
 import com.example.marvelmyhero.card.view.MiniCardFragment
 import com.example.marvelmyhero.db.database.AppDataBase
+import com.example.marvelmyhero.db.entity.CardEntity
 import com.example.marvelmyhero.db.repository.CardRepository
 import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.deck.view.MyDeckActivity
 import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.login.view.LoginActivity
+import com.example.marvelmyhero.splash.view.SplashScreen
 import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
@@ -52,6 +56,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import java.io.ByteArrayOutputStream
 import java.io.OutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -79,7 +85,6 @@ class MainActivity : AppCompatActivity() {
     private var cardAlert = AlertManager(this)
     private val cardManager = CardManager()
 
-
     //    Firebase
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private val firebaseDatabase = FirebaseDatabase.getInstance()
@@ -87,12 +92,19 @@ class MainActivity : AppCompatActivity() {
         FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
 
+    lateinit var isTomorrow: String
+    lateinit var today: String
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    private val calendar: Calendar = Calendar.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         isAble = false
         Log.d("USER_FLUX", "-> MaiActivity")
         initDbViewModel()
+
+        validateDay()
 
         toolBarItems(MY_USER!!)
 
@@ -123,12 +135,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
+
+
+
         super.onResume()
         Log.d("USER_FLUX", "-> onResume()")
         val team = mutableListOf(MY_USER!!.deck[0], MY_USER!!.deck[1], MY_USER!!.deck[2])
         showTeamCards(team)
         Log.d("USER_FLUX", "-> update deck")
         myRef.child("deck").setValue(transformToFirebaseFormat(MY_USER!!.deck))
+
+
+
     }
 
     private fun transformToFirebaseFormat(list: MutableList<Hero>): MutableList<CardFirebase> {
@@ -271,5 +289,58 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
             .show()
+    }
+
+    private fun validateDay(){
+        var dayComparePreference = getSharedPreferences(DATE_PREFS, MODE_PRIVATE)
+        today = dayComparePreference.getString(KEEP_CONNECTED_PREFS, "").toString()
+        val isDay = dateFormat.format(calendar.time)
+
+        if (!today.isNullOrEmpty()) {
+            if (isDay.compareTo(today) == 0) {
+                dayComparePreference.edit()
+                    .putString(KEEP_CONNECTED_PREFS, isDay)
+                    .apply()
+                Toast.makeText(this, "Usuário ganha novas cartas", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            dayComparePreference.edit()
+                .putString(KEEP_CONNECTED_PREFS, isDay)
+                .apply()
+        }
+    }
+
+//    private fun getDeckFromDb() {
+//
+//        Log.d("USER_FLUX", "-> sincronizando cards com banco de dados")
+//
+//        val cardList = mutableListOf<Hero>()
+//
+//        databaseViewModel.getAllCards().observe(this) { cardlist ->
+//            val _cardList = cardlist as List<CardEntity>
+//            _cardList.forEach {
+//                cardList.add(
+//                    Hero(
+//                        it.id,
+//                        it.heroName,
+//                        it.name,
+//                        it.imageUrl,
+//                        it.durability,
+//                        it.energy,
+//                        it.fightingSkills,
+//                        it.inteligence,
+//                        it.speed,
+//                        it.strength,
+//                        it.description
+//                    )
+//                )
+//            }
+//            MY_USER!!.deck.addAll(CardManager().random3(cardList))
+//        }
+//    }
+
+    companion object {
+        const val DATE_PREFS = "DATE"
+        const val KEEP_CONNECTED_PREFS = "GET_DATE_FIRST_LOGIN"
     }
 }
