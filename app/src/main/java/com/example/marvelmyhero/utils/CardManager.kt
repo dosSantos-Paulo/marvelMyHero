@@ -259,12 +259,12 @@ class CardManager {
                             list[i].name,
                             "Steve Rogers",
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
-                            3,
-                            1,
                             6,
+                            4,
+                            6,
+                            4,
                             3,
-                            2,
-                            3,
+                            4,
                             list[i].description
                         )
                     )
@@ -563,7 +563,7 @@ class CardManager {
                         CardEntity(
                             list[i].id,
                             list[i].name,
-                            "Rocket Raccoon",
+                            "Peter Quill",
                             "${list[i].thumbnail.path}.${list[i].thumbnail.extension}",
                             3,
                             1,

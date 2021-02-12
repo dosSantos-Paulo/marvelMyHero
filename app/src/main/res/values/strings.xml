@@ -3,7 +3,6 @@
     <string name="user_icon">User icon</string>
     <string name="logo_marvel_my_hero">Logo Marvel My Hero</string>
     <string name="exit_icon">exit icon</string>
-    <string name="collection">Collection</string>
     <string name="my_team">My Team</string>
     <string name="my_deck">My Deck</string>
     <string name="share_icon">Share icon</string>
@@ -20,7 +19,6 @@
     <string name="total_cards_count">12</string>
     <string name="heroname">Hero Name</string>
 
-    <string name="commumCardColor" tools:ignore="ReferenceType">@color/commumCardColor</string>
     <string name="bronzeCardColor" tools:ignore="ReferenceType">@color/bronzeCardColor</string>
     <string name="silverCardColor" tools:ignore="ReferenceType">@color/silverCardColor</string>
     <string name="goldCardColor" tools:ignore="ReferenceType">@color/goldCardColor</string>
@@ -34,9 +32,8 @@
     <string name="speed">Speed</string>
     <string name="strength">Strength</string>
     <string name="loremIpsum">Lorem ipsum pretium diam.</string>
-    <string name="drag_and_drop">DRAG AND DROP CARDS TO BUILD YOUR TEAM</string>
-    <string name="text_inserir_cards">Deve inserir cards no time</string>
-    <string name="scroll_to_the">SCROLL TO SEE YOUR CARDS</string>
+    <string name="select_to_build">SELECT CARDS TO BUILD YOUR TEAM</string>
+    <string name="scroll_to_the">SCROLL HORIZONTALLY TO SEE YOUR CARDS</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -46,14 +43,8 @@
     <string name="name">Name</string>
     <string name="repeat_password">Repeat password</string>
     <string name="sign_up">Sign Up</string>
-    <string name="email_error">Need an email</string>
-    <string name="password_error">Need a password</string>
-    <string name="nameSignupError">Need a name</string>
-    <string name="passwordLengthError">Must be 4 to 14 characters</string>
-    <string name="repeatPasswordCompareError">Passwords must be the same</string>
     <string name="facebook_app_id">876555076435573</string>
     <string name="fb_login_protocol_scheme">fb876555076435573</string>
-    <string name="invalidLoginError">Invalid Login</string>
     <string name="backButton">Botão de voltar</string>
     <string name="developers">Developers</string>
     <string name="rafael_irineu">Rafael Irineu Costa Oliveira</string>
@@ -71,7 +62,6 @@
     <string name="edit_image_icon">edit image icon</string>
     <string name="nickname">NickName</string>
     <string name="submit">Submit</string>
-    <string name="loading">Loading</string>
 
     <string name="info_of_classification_cards">A color of the card edge defines the classification. We have four classifications, bronze, silver and diamond. Where bronze is the weaker and diamond is stronger. They are indicated according to the images below:</string>
     <string name="the_cards_classification">CARDS CLASSIFICATION</string>
@@ -84,9 +74,13 @@
     <string name="github">GitHub</string>
 
     <string name="nickName_error">Need a NickName</string>
-    <string name="name_error">Need a Name</string>
     <string name="animation_bar">Animation Bar</string>
 
     <string name="salvar">salvar</string>
+    <string name="campo_vazio">Campo vazio!</string>
+    <string name="numero_caracteres">Mínimo 6 caracteres!</string>
+    <string name="senha_diferente">Senhas divergentes!</string>
+    <string name="email_invalido">Email inválido!</string>
+    <string name="edit_icon">Edit Icon</string>
 
 </resources>

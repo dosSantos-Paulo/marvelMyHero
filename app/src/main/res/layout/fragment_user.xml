@@ -42,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_edit_24"
+                android:contentDescription="@string/edit_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/img_user_fragmentUser"
                 app:layout_constraintEnd_toEndOf="@+id/img_user_fragmentUser" />
 

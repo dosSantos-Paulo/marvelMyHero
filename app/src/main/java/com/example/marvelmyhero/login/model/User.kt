@@ -4,9 +4,8 @@ import com.example.marvelmyhero.card.model.Hero
 
 data class User(
     var nickName: String,
-    var name: String,
     var imageUrl: String
 ) {
-    var team: MutableList<Hero> = mutableListOf()
+//    o team serão as 3 primeiras cartas do deck
     var deck: MutableList<Hero> = mutableListOf()
 }

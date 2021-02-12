@@ -3,25 +3,19 @@ package com.example.marvelmyhero.login.view
 import android.app.Activity.RESULT_OK
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.utils.MovieUtil
 import com.example.marvelmyhero.R
-import com.example.marvelmyhero.login.viewmodel.AuthenticationViewModel
-import com.example.marvelmyhero.main.view.MainActivity
-import com.example.marvelmyhero.register.RegisterActivity
-import com.example.marvelmyhero.utils.Constants.IS_NEW_USER
-import com.example.marvelmyhero.utils.Constants.NAME
+import com.example.marvelmyhero.verifications.VerificationsActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -32,22 +26,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 
 class LoginFragment : Fragment() {
-
 
     private lateinit var auth: FirebaseAuth
     private lateinit var button: Button
     private lateinit var callbackManager: CallbackManager
     private lateinit var myView: View
+    lateinit var email: TextInputEditText
+    lateinit var password: TextInputEditText
 
     private val viewModel: AuthenticationViewModel by lazy {
         ViewModelProvider(this).get(
@@ -59,6 +50,8 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+
+        Log.d("USER_FLUX", "-> Login")
 
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         button = view.findViewById(R.id.btn_facebookLogin_login)
@@ -79,21 +72,21 @@ class LoginFragment : Fragment() {
         val googleLogin = view.findViewById<MaterialButton>(R.id.btn_googleLogin_login)
         val facebookLogin = view.findViewById<MaterialButton>(R.id.btn_facebookLogin_login)
 
+        email = myView.findViewById(R.id.editText_email_login)
+        password = myView.findViewById(R.id.editText_password_login)
 
         loginButton.setOnClickListener {
-            val email = view.findViewById<EditText>(R.id.editText_email_login).text.toString()
-            val password = view.findViewById<EditText>(R.id.editText_password_login).text.toString()
-            when {
-                MovieUtil.validateEmailPassword(email, password) -> {
-                    viewModel.loginEmailPassword(email, password)
+            if(validaCamposLogin()) {
+                if (validaEmail()) {
+                    viewModel.loginEmailPassword(email.text.toString(), password.text.toString())
                 }
-                else -> {
+                else {
                     Snackbar.make(loginButton, "Login failed", Snackbar.LENGTH_LONG).show()
                 }
             }
-
             initViewModel()
         }
+
         googleLogin.setOnClickListener {
             val gso =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -103,7 +96,6 @@ class LoginFragment : Fragment() {
             val cliente = GoogleSignIn.getClient(requireContext(), gso)
             startActivityForResult(cliente.signInIntent, 1)
         }
-
     }
 
     private fun initViewModel() {
@@ -115,31 +107,24 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToHome(status: Boolean) {
+        Log.d("USER_FLUX", "-> login firebase")
+//        Login com Firebase
         when {
             status -> {
-
-
-                val intent = Intent(view?.context, RegisterActivity::class.java)
-                intent.putExtra(NAME, "")
+                val intent = Intent(view?.context, VerificationsActivity::class.java)
                 startActivity(intent)
-
+            }
+            else -> {
+                Toast.makeText(myView.context, "Something Wrong", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun irParaHome(uiid: String) {
-
-        val intent = Intent(view?.context, RegisterActivity::class.java)
-        intent.putExtra(NAME, "")
+    private fun irParaHome(uiid: String?) {
+        Log.d("USER_FLUX", "-> login social")
+//      Login pelo Facebook e Google
+        val intent = Intent(view?.context, VerificationsActivity::class.java)
         startActivity(intent)
-    }
-
-    private fun irParaHome2() {
-//        Login pelo Google
-        val intent = Intent(view?.context, RegisterActivity::class.java)
-        intent.putExtra(NAME, "")
-        startActivity(intent)
-
     }
 
     private fun loginFacebook() {
@@ -191,15 +176,41 @@ class LoginFragment : Fragment() {
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
-            .addOnCompleteListener() { task ->
+            .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
-                    irParaHome2()
+                    irParaHome(null)
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
             }
+    }
+
+    private fun validaCamposLogin(): Boolean {
+        var resultado = true
+
+        if (email.text.toString().isBlank()) {
+            myView.findViewById<TextInputEditText>(R.id.editText_email_login).error =
+                getString(R.string.campo_vazio)
+            resultado = false
+        }
+        if (password.text.toString().isBlank()) {
+            myView.findViewById<TextInputEditText>(R.id.editText_password_login).error =
+                getString(R.string.campo_vazio)
+            resultado = false
+        }
+        return resultado
+    }
+
+    private fun validaEmail(): Boolean {
+        var resultado = true
+        if (MovieUtil.validateEmailPasswordLogin(email.text.toString(), password.text.toString())) {
+            myView.findViewById<TextInputEditText>(R.id.editText_email_login).error =
+                getString(R.string.email_invalido)
+            resultado = false
+        }
+        return resultado
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

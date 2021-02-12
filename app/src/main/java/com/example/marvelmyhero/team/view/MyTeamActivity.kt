@@ -8,27 +8,46 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
-import com.example.marvelmyhero.utils.Constants.CURRENT_USER
-import com.example.marvelmyhero.utils.Constants.isDeckChange
-import com.example.marvelmyhero.utils.UserCardUtils
-import com.example.marvelmyhero.utils.UserCardUtils.Companion.NEW_USER
+import com.example.marvelmyhero.utils.UserVariables.MY_USER
 
 class MyTeamActivity : AppCompatActivity() {
-    private val viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-    private val adapterMyTeam = MyTeamAdapter(CURRENT_USER.deck) {
-//        Toast.makeText(this, getString(R.string.text_inserir_cards), Toast.LENGTH_LONG).show()
-        moveItem(it)
-    }
+    private lateinit var repeatedCards: MutableList<Hero>
+    private lateinit var controlDeck: MutableList<Hero>
+    private lateinit var controlTeam: MutableList<Hero>
+    private lateinit var deck: MutableList<Hero>
+    private lateinit var team: MutableList<Hero>
+    private lateinit var updateDeck: MutableList<Hero>
+    private lateinit var adapterMyTeam: MyTeamAdapter
+    private lateinit var viewManagerMyTeam: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_team)
-        showTeamCards(CURRENT_USER.team)
+
+        repeatedCards = mutableListOf()
+        controlDeck = mutableListOf()
+        updateDeck = mutableListOf()
+
+        for (i in 0 until MY_USER!!.deck.size) {
+            val lastIndex = MY_USER!!.deck.lastIndexOf(MY_USER!!.deck[i])
+            if (i != lastIndex) {
+                repeatedCards.add(MY_USER!!.deck[i])
+            } else {
+                controlDeck.add(MY_USER!!.deck[i])
+            }
+        }
+
+        deck = controlDeck
+        team = mutableListOf(deck.removeAt(0), deck.removeAt(0), deck.removeAt(0))
+        viewManagerMyTeam = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        adapterMyTeam = MyTeamAdapter(deck) {
+            moveItem(it)
+        }
+
+        showTeamCards(team)
 
         val backArrowButton = findViewById<ImageView>(R.id.img_arrowBack_myTeam)
         val recyclerViewMyTeam = findViewById<RecyclerView>(R.id.recyclerView_myTeam)
-
-
 
         recyclerViewMyTeam.apply {
             setHasFixedSize(true)
@@ -36,37 +55,53 @@ class MyTeamActivity : AppCompatActivity() {
             adapter = adapterMyTeam
         }
 
-
-
         backArrowButton.setOnClickListener {
             onBackPressed()
         }
-
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
+        when (team.size) {
+            3 -> {
+                MY_USER!!.deck = updateDeck
+                super.onBackPressed()
+                finish()
+            }
+            0 -> {
+                super.onBackPressed()
+                finish()
+            }
+            else -> {
+                Toast.makeText(this, "Your team needs to have 3 heroes", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     fun moveItem(hero: Hero) {
-        val indexTeam = CURRENT_USER.team.indexOf(hero)
-        val indexDeck = CURRENT_USER.deck.indexOf(hero)
+        val indexTeam = team.indexOf(hero)
+        val indexDeck = deck.indexOf(hero)
 
         if (indexDeck == -1) {
-            CURRENT_USER.deck.add(CURRENT_USER.team.removeAt(indexTeam))
+            deck.add(team.removeAt(indexTeam))
         } else {
-            if (CURRENT_USER.team.size < 3) {
-                CURRENT_USER.team.add(CURRENT_USER.deck.removeAt(indexDeck))
+            if (team.size < 3) {
+                team.add(deck.removeAt(indexDeck))
             }
         }
-
-        showTeamCards(CURRENT_USER.team)
+        showTeamCards(team)
         adapterMyTeam.notifyDataSetChanged()
+    }
 
+    private fun updateDeck() {
+        updateDeck.clear()
+        updateDeck.addAll(team)
+        updateDeck.addAll(deck)
+        updateDeck.addAll(repeatedCards)
     }
 
     private fun showTeamCards(team: MutableList<Hero>) {
+
+        updateDeck()
 
         if (team.size == 3) {
             for (i in team.indices) {
@@ -76,7 +111,6 @@ class MyTeamActivity : AppCompatActivity() {
 
                     2 -> frameLayout = R.id.frameLayout_teamCard3_myTeam
                 }
-
                 miniCardFragment(
                     this,
                     team[i],
@@ -136,8 +170,6 @@ class MyTeamActivity : AppCompatActivity() {
                 R.id.frameLayout_teamCard3_myTeam
             )
         }
-
-
     }
 
     private fun miniCardFragment(
@@ -168,4 +200,3 @@ class MyTeamActivity : AppCompatActivity() {
         )
     }
 }
-

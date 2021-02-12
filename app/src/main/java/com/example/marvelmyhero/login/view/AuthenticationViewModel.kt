@@ -1,4 +1,4 @@
-package com.example.marvelmyhero.login.viewmodel
+package com.example.marvelmyhero.login.view
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
