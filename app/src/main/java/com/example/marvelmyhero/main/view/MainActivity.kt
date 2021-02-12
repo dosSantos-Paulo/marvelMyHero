@@ -1,27 +1,16 @@
 package com.example.marvelmyhero.main.view
 
-
-
-import android.Manifest
-import android.app.Activity
-import android.app.AlertDialog
 import android.content.*
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelmyhero.R
@@ -36,12 +25,9 @@ import com.example.marvelmyhero.deck.view.MyDeckActivity
 import com.example.marvelmyhero.developers.view.DevelopersActivity
 import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.login.view.LoginActivity
-import com.example.marvelmyhero.splash.view.SplashScreen
 import com.example.marvelmyhero.team.view.MyTeamActivity
 import com.example.marvelmyhero.utils.AlertManager
 import com.example.marvelmyhero.utils.CardManager
-import com.example.marvelmyhero.utils.Constants.DEFAULT_STATUS_CODE
-import com.example.marvelmyhero.utils.Constants.IMAGE
 import com.example.marvelmyhero.utils.Constants.isAble
 import com.example.marvelmyhero.utils.UserVariables.IS_MY_FIRST_TIME_ON_APP
 import com.example.marvelmyhero.utils.UserVariables.MY_USER
@@ -72,12 +58,12 @@ class MainActivity : AppCompatActivity() {
         val deck: MutableList<DatabaseCard>? = null
     )
 
-    private val exitButton: ImageView by lazy { findViewById<ImageView>(R.id.ic_exit_main) }
-    private val deckButton: MaterialButton by lazy { findViewById<MaterialButton>(R.id.btn_myDeck_main) }
-    private val materialCardView: MaterialCardView by lazy { findViewById<MaterialCardView>(R.id.materialCardView_main) }
-    private val developers: ImageView by lazy { findViewById<ImageView>(R.id.img_developers) }
-    private val userImage: ImageView by lazy { findViewById<ImageView>(R.id.img_userIcon_main) }
-    private val userName: TextView by lazy { findViewById<TextView>(R.id.txt_userName_main) }
+    private val exitButton: ImageView by lazy { findViewById(R.id.ic_exit_main) }
+    private val deckButton: MaterialButton by lazy { findViewById(R.id.btn_myDeck_main) }
+    private val materialCardView: MaterialCardView by lazy { findViewById(R.id.materialCardView_main) }
+    private val developers: ImageView by lazy { findViewById(R.id.img_developers) }
+    private val userImage: ImageView by lazy { findViewById(R.id.img_userIcon_main) }
+    private val userName: TextView by lazy { findViewById(R.id.txt_userName_main) }
     private val cardViewMain by lazy { findViewById<MaterialCardView>(R.id.materialCardView_main) }
     private val shareButton by lazy { findViewById<MaterialButton>(R.id.btn_share_main) }
     private lateinit var databaseViewModel: CardViewModel
@@ -92,7 +78,6 @@ class MainActivity : AppCompatActivity() {
         FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private var myRef = firebaseDatabase.getReference(firebaseUser?.uid.toString())
 
-    lateinit var isTomorrow: String
     lateinit var today: String
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     private val calendar: Calendar = Calendar.getInstance()
@@ -291,14 +276,11 @@ class MainActivity : AppCompatActivity() {
         val isDay = dateFormat.format(calendar.time)
 
         if (!today.isNullOrEmpty()) {
-            if (isDay.compareTo(today) == 0) {
+            if (isDay.compareTo(today) == 1) {
                 dayComparePreference.edit()
                     .putString(KEEP_CONNECTED_PREFS, isDay)
                     .apply()
-
-//                Toast.makeText(this, "Usuário ganha novas cartas", Toast.LENGTH_LONG).show()
                 getDeckFromDb()
-
             }
         } else {
             dayComparePreference.edit()
@@ -387,7 +369,6 @@ class MainActivity : AppCompatActivity() {
                 .show()
         }
     }
-
     companion object {
         const val DATE_PREFS = "DATE"
         const val KEEP_CONNECTED_PREFS = "GET_DATE_FIRST_LOGIN"

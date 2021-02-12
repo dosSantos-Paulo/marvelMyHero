@@ -1,6 +1,5 @@
 package com.example.marvelmyhero.verifications
 
-
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -58,7 +57,6 @@ class VerificationsActivity : AppCompatActivity() {
 
         initDBViewModel()
         isNewUser()
-
     }
 
     private fun initDBViewModel() {
@@ -71,7 +69,6 @@ class VerificationsActivity : AppCompatActivity() {
             )
         ).get(CardViewModel::class.java)
     }
-
 
     private fun isNewUser() {
 
@@ -108,7 +105,6 @@ class VerificationsActivity : AppCompatActivity() {
             }
             override fun onCancelled(error: DatabaseError) { }
         })
-
     }
 
     private fun handlerToRegisterActivity() {
@@ -188,6 +184,5 @@ class VerificationsActivity : AppCompatActivity() {
             }
         }
         MY_USER!!.deck.addAll(deck)
-
     }
 }

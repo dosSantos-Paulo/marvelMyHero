@@ -1,6 +1,5 @@
 package com.example.marvelmyhero.main.view
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -54,7 +53,7 @@ class UserFragment(
         val frameLayout = view.findViewById<FrameLayout>(R.id.frameLayout_userFragment)
         val cardView = view.findViewById<MaterialCardView>(R.id.cardView_userFragment)
         //val userImage = view.findViewById<ImageView>(R.id.img_user_fragmentUser)
-        userImage =  view.findViewById<ImageView>(R.id.img_user_fragmentUser)
+        userImage =  view.findViewById(R.id.img_user_fragmentUser)
 
         val userName = view.findViewById<TextView>(R.id.txt_userName_fragmentUser)
         val totalCard = view.findViewById<TextView>(R.id.txt_totalCards_fragmentUser)

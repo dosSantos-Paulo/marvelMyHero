@@ -58,9 +58,7 @@ class MyTeamActivity : AppCompatActivity() {
         backArrowButton.setOnClickListener {
             onBackPressed()
         }
-
     }
-
 
     override fun onBackPressed() {
         when (team.size) {
@@ -77,7 +75,6 @@ class MyTeamActivity : AppCompatActivity() {
                 Toast.makeText(this, "Your team needs to have 3 heroes", Toast.LENGTH_LONG).show()
             }
         }
-
     }
 
     fun moveItem(hero: Hero) {
@@ -91,10 +88,8 @@ class MyTeamActivity : AppCompatActivity() {
                 team.add(deck.removeAt(indexDeck))
             }
         }
-
         showTeamCards(team)
         adapterMyTeam.notifyDataSetChanged()
-
     }
 
     private fun updateDeck() {
@@ -116,7 +111,6 @@ class MyTeamActivity : AppCompatActivity() {
 
                     2 -> frameLayout = R.id.frameLayout_teamCard3_myTeam
                 }
-
                 miniCardFragment(
                     this,
                     team[i],
@@ -176,8 +170,6 @@ class MyTeamActivity : AppCompatActivity() {
                 R.id.frameLayout_teamCard3_myTeam
             )
         }
-
-
     }
 
     private fun miniCardFragment(

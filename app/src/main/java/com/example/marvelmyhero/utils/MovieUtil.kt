@@ -2,7 +2,6 @@ package com.example.marvelmyhero.utils
 
 import android.content.Context
 import android.util.Patterns
-import android.widget.Toast
 import com.example.marvelmyhero.utils.Constants.APP_KEY
 import com.example.marvelmyhero.utils.Constants.EMPTY_STRING
 import com.example.marvelmyhero.utils.Constants.UIID_KEY
@@ -18,21 +17,6 @@ object MovieUtil {
         return preferences.getString(UIID_KEY, EMPTY_STRING)
     }
 
-    fun validateNameEmailPassword(name: String, email: String, password: String): Boolean {
-        return when {
-            name.isEmpty() || email.isEmpty() || password.isEmpty() -> {
-                false
-            }
-            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                false
-            }
-            password.length < 6 -> {
-                false
-            }
-            else -> true
-        }
-    }
-
     fun validateEmailPasswordLogin(email: String, password: String): Boolean {
 
         return when {
@@ -46,7 +30,6 @@ object MovieUtil {
                 false
             }
             else -> true
-
         }
     }
 
@@ -63,7 +46,6 @@ object MovieUtil {
                 false
             }
             else -> true
-
         }
     }
 }

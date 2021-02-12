@@ -14,9 +14,9 @@ import com.example.marvelmyhero.utils.UserVariables.MY_USER
 
 class MyDeckActivity : AppCompatActivity() {
 
-    private val arrowBack: ImageView by lazy { findViewById<ImageView>(R.id.img_arrowBack_myDeck) }
-    private val info: ImageView by lazy { findViewById<ImageView>(R.id.ic_info) }
-    private val cardRecyclerView: RecyclerView by lazy { findViewById<RecyclerView>(R.id.recyclerView_myDeck) }
+    private val arrowBack: ImageView by lazy { findViewById(R.id.img_arrowBack_myDeck) }
+    private val info: ImageView by lazy { findViewById(R.id.ic_info) }
+    private val cardRecyclerView: RecyclerView by lazy { findViewById(R.id.recyclerView_myDeck) }
     private val cardManager = GridLayoutManager(this, DECK_COLLUMN)
     private var validadorRecycler = true
 

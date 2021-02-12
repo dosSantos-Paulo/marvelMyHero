@@ -1,6 +1,5 @@
 package com.example.marvelmyhero.card.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,11 +8,9 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import com.example.marvelmyhero.R
 import com.example.marvelmyhero.card.model.Hero
 import com.google.android.material.card.MaterialCardView
-import kotlinx.android.synthetic.main.fragment_user.*
 
 class CardBackFragment(private val _card: Hero) : Fragment() {
 
@@ -24,11 +21,8 @@ class CardBackFragment(private val _card: Hero) : Fragment() {
         return inflater.inflate(R.layout.fragment_card_back, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
-
 
         val cardName = view.findViewById<TextView>(R.id.txt_heroName_cardBack)
         val cardRealName = view.findViewById<TextView>(R.id.txt_heroRealName_cardBack)

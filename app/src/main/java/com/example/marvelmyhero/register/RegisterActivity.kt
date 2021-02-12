@@ -20,7 +20,6 @@ import com.example.marvelmyhero.db.viewmodel.CardViewModel
 import com.example.marvelmyhero.login.model.User
 import com.example.marvelmyhero.main.view.MainActivity
 import com.example.marvelmyhero.utils.CardManager
-import com.example.marvelmyhero.utils.Constants
 import com.example.marvelmyhero.utils.Constants.CONTEXT_RESQUEST_CODE
 import com.example.marvelmyhero.utils.Constants.isAble
 import com.example.marvelmyhero.utils.Constants.userNameFromSignup
@@ -29,8 +28,6 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import java.io.InputStream
-
 
 class RegisterActivity : AppCompatActivity() {
     data class DatabaseCard(
@@ -45,10 +42,10 @@ class RegisterActivity : AppCompatActivity() {
     )
 
     private var imageUri: Uri? = null
-    private val userImage: ImageView by lazy { findViewById<ImageView>(R.id.image_userImage_register) }
-    private val nickname: TextInputEditText by lazy { findViewById<TextInputEditText>(R.id.editText_nickName_register) }
-    private val submitButton: Button by lazy { findViewById<Button>(R.id.btn_submit_register) }
-    private val changeImageButton: ImageView by lazy { findViewById<ImageView>(R.id.image_editIcon_register) }
+    private val userImage: ImageView by lazy { findViewById(R.id.image_userImage_register) }
+    private val nickname: TextInputEditText by lazy { findViewById(R.id.editText_nickName_register) }
+    private val submitButton: Button by lazy { findViewById(R.id.btn_submit_register) }
+    private val changeImageButton: ImageView by lazy { findViewById(R.id.image_editIcon_register) }
     private val cardManager = CardManager()
     private lateinit var databaseViewModel: CardViewModel
 
@@ -171,7 +168,6 @@ class RegisterActivity : AppCompatActivity() {
             MY_USER!!.deck.addAll(randomCards)
             Log.d("USER_FLUX", "-> deck ${MY_USER!!.deck}")
 
-
             val randomFirebaseCards = addOnDeck(randomCards)
 
             Log.d("USER_FLUX", "-> armazenando nome")
@@ -190,7 +186,6 @@ class RegisterActivity : AppCompatActivity() {
             Log.d("USER_FLUX", "-> mainactivity")
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-
         }
     }
 

@@ -63,7 +63,7 @@ class SplashScreen : AppCompatActivity() {
     private lateinit var databaseViewModel: CardViewModel
     private lateinit var viewModel: CharacterViewModel
     private val cardManager = CardManager()
-    private val progressBar: ProgressBar by lazy { findViewById<ProgressBar>(R.id.progressBar_splash) }
+    private val progressBar: ProgressBar by lazy { findViewById(R.id.progressBar_splash) }
 
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private val firebaseDatabase = FirebaseDatabase.getInstance()
@@ -72,8 +72,6 @@ class SplashScreen : AppCompatActivity() {
         FirebaseStorage.getInstance().getReference(firebaseUser?.uid.toString())
     private var isCurrentUser = false
     private var imageUri: Uri? = null
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +93,7 @@ class SplashScreen : AppCompatActivity() {
         dataBaseCheck(cardManager)
         animation()
     }
+
     private fun dataBaseCheck(cardManager: CardManager) {
         val size = cardManager.getIdsList()
         databaseViewModel.count().observe(this) {
@@ -111,6 +110,7 @@ class SplashScreen : AppCompatActivity() {
             }
         }
     }
+
     private fun getApiCharacters(cardManager: CardManager) {
         val allCharId = cardManager.getIdsList()
         viewModel.getCharacter(allCharId).observe(this) {
@@ -128,6 +128,7 @@ class SplashScreen : AppCompatActivity() {
             firebaseVerification()
         }
     }
+
     private fun createDatabase(cardList: List<CardEntity>) {
         cardList.forEach {
             databaseViewModel.addCard(it).observe(this) { isAdd ->
@@ -135,6 +136,7 @@ class SplashScreen : AppCompatActivity() {
             }
         }
     }
+
     private fun animation() {
         val gifSplash = findViewById<GifImageView>(R.id.gif_marvel)
         val logoSplash = findViewById<ImageView>(R.id.img_splash_screen)
@@ -157,6 +159,7 @@ class SplashScreen : AppCompatActivity() {
             }, HANDLER_TIME_ANIMATION_PROGRESS_BAR)
         }, HANDLER_TIME_ANIMATION)
     }
+
     private fun firebaseVerification() {
         Log.d("USER_FLUX", "-> firebaseVerification()")
         myRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -279,7 +282,7 @@ class SplashScreen : AppCompatActivity() {
                     ActivityCompat
                         .requestPermissions(
                             this,
-                            arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                             MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
                         )
                 }
@@ -308,11 +311,8 @@ class SplashScreen : AppCompatActivity() {
                         MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
                     )
                 }
-
             })
         val alert: AlertDialog = alertBuilder.create()
         alert.show()
     }
-
-
 }
